@@ -1,6 +1,12 @@
 Personal dotfiles
 ======================
 
+# Prerequisite
+
+- GNU Linux, macOS, Cygwin/MSYS/Mingw on Windows
+- git, zsh, curl
+- tmux (optional)
+
 # Quickstart
 
 Run this command in the console. All set, enjoy!
