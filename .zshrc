@@ -116,6 +116,7 @@ alias c='clear'
 alias cat='colorize'
 alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
 alias rmelc='rm -f ~/.emacs.d/lisp/*.elc'
+alias upgrade_dotfiles='cd ~/.dotfiles && git pull --rebase --stat origin master && popd'
 
 # proxy
 alias startproxy='/opt/XX-Net/start'
