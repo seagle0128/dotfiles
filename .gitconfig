@@ -1,0 +1,31 @@
+[user]
+	name = Vincent Zhang
+	email = seagle0128@gmail.com
+[core]
+	excludesfile = /Users/vincent/.gitignore_global
+	editor = emacs
+	pager = cat
+	autocrlf = input
+	ignorecase = false
+	safecrlf = warn
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/vincent/.stCommitMsg
+[g2 "panic"]
+	excludes = -e .classpath -e .settings -e *.iml
+[diff]
+	tool = sourcetree
+[merge]
+	tool = sourcetree
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+[push]
+	default = current
