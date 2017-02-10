@@ -19,9 +19,9 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 git clone https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
 
 # dotfiles
-git clone https://github.com/seagle0128/dotfiles.git ~/dotfiles
-ln -s -f ~/dotfiles/.zshrc ~/.zshrc
-ln -s -f ~/dotfiles/.tmux.conf.local ~/.tmux.conf.local
-ln -s -f ~/dotfiles/.gitconfig ~/.gitconfig
-ln -s -f ~/dotfiles/.gitignore_global ~/.gitignore_global
-ln -s -f ~/dotfiles/.hgignore_global ~/.hgignore_global
+git clone https://github.com/seagle0128/dotfiles.git ~/.dotfiles
+ln -s -f ~/.dotfiles/.zshrc ~/.zshrc
+ln -s -f ~/.dotfiles/.tmux.conf.local ~/.tmux.conf.local
+ln -s -f ~/.dotfiles/.gitconfig ~/.gitconfig
+ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
+ln -s -f ~/.dotfiles/.hgignore_global ~/.hgignore_global

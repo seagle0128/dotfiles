@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -56,7 +56,7 @@ plugins=(emacs git osx history-substring-search
          copydir copyfile colorize colored-man-pages
          python ruby sudo themes z zsh_reload)
 
-# Workaround for fixing the segment fault
+# Workaround for fixing the segment fault while reloading
 # https://github.com/zsh-users/zsh-autosuggestions/issues/126
 if [ -z "$_zsh_custom_scripts_loaded" ]; then
     _zsh_custom_scripts_loaded=1
@@ -97,7 +97,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$HOME/.rbenv/shims/:/usr/local/sbin:$PATH
 export PATH=/usr/local/opt/node@6/bin:$PATH
 export DEFAULT_USER=$USER
-# export EDITOR="eamcs"
+# export EDITOR="emacs"
 
 # Homebrew bottles
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
@@ -114,17 +114,18 @@ alias ohmyzsh='$EDITOR ~/.oh-my-zsh'
 alias h='history'
 alias c='clear'
 alias cat='colorize'
+alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
+alias rmelc='rm -f ~/.emacs.d/lisp/*.elc'
+
+# proxy
 alias startproxy='/opt/XX-Net/start'
 alias setproxy='export http_proxy=http://127.0.0.1:8087; export https_proxy=http://127.0.0.1:8087'
 alias unsetproxy='export http_proxy; export https_proxy'
 alias showproxy='echo "http_proxy=$http_proxy"; echo "https_proxy=$https_proxy"'
-alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
-alias rmelc='rm -f ~/.emacs.d/lisp/*.elc'
 
 # bind P and N for EMACS mode
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
-
 
 # Fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
