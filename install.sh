@@ -1,5 +1,5 @@
 #!/bin/sh
-# Install dotfiles and get all my configurations
+# Get dotfiles and set intial configurations
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"

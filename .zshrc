@@ -1,3 +1,6 @@
+# Get OS name
+sysOS=`uname -s`
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -52,7 +55,7 @@ ZSH_THEME="ys"                  # ys, dst, steef, wedisagree
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(emacs git osx history-substring-search
+plugins=(emacs git history-substring-search
          copydir copyfile colorize colored-man-pages
          python ruby sudo themes z zsh_reload)
 
@@ -61,6 +64,10 @@ plugins=(emacs git osx history-substring-search
 if [ -z "$_zsh_custom_scripts_loaded" ]; then
     _zsh_custom_scripts_loaded=1
     plugins+=(zsh-autosuggestions zsh-syntax-highlighting alias-tips)
+fi
+
+if [ $sysOS == "Darwin" ]; then
+    plugins+=(osx)
 fi
 
 source $ZSH/oh-my-zsh.sh
@@ -94,14 +101,20 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH=$HOME/.rbenv/shims/:/usr/local/sbin:$PATH
-export PATH=/usr/local/opt/node@6/bin:$PATH
+export PATH=/usr/local/sbin:$PATH
+export PATH=$HOME/.rbenv/shims:$PATH
+
 export DEFAULT_USER=$USER
 # export EDITOR="emacs"
 
-# Homebrew bottles
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
-# export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+if [ $sysOS == "Darwin" ]; then
+    # nodejs
+    export PATH=/usr/local/opt/node@6/bin:$PATH
+
+    # Homebrew bottles
+    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+    # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+fi
 
 # Golang
 export GOPATH=$HOME/goprojects
@@ -113,7 +126,6 @@ alias ohmyzsh='$EDITOR ~/.oh-my-zsh'
 # alias src='source ~/.zshrc'
 alias h='history'
 alias c='clear'
-alias cat='colorize'
 alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
 alias rmelc='rm -f ~/.emacs.d/lisp/*.elc'
 alias upgrade_dotfiles='cd ~/.dotfiles && git pull --rebase --stat origin master && popd'
