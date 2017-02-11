@@ -66,7 +66,7 @@ if [ -z "$_zsh_custom_scripts_loaded" ]; then
     plugins+=(zsh-autosuggestions zsh-syntax-highlighting alias-tips)
 fi
 
-if [ $sysOS == "Darwin" ]; then
+if [[ $sysOS == "Darwin" ]]; then
     plugins+=(osx)
 fi
 
@@ -107,7 +107,7 @@ export PATH=$HOME/.rbenv/shims:$PATH
 export DEFAULT_USER=$USER
 # export EDITOR="emacs"
 
-if [ $sysOS == "Darwin" ]; then
+if [[ $sysOS == "Darwin" ]]; then
     # nodejs
     export PATH=/usr/local/opt/node@6/bin:$PATH
 
