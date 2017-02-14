@@ -153,4 +153,4 @@ bindkey -M emacs '^N' history-substring-search-down
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Source customization
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+if [ -f ~/.zshrc.local ]; then source ~/.zshrc.local; fi
