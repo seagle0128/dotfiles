@@ -142,3 +142,6 @@ bindkey -M emacs '^N' history-substring-search-down
 
 # Fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Source customization
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
