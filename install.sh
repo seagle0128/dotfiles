@@ -54,17 +54,19 @@ promote_yn() {
     esac
 }
 
-promote_yn "Do you want to clean all configurations?" "continue"
-if [ $continue -eq $YES ]; then
-    clean_dotfiles
+if [ -d ~/.oh-my-zsh ] || [ -d ~/.tmux ] || [ -d ~/.fzf ] || [ -d ~/.emacs.d ]; then
+    promote_yn "Do you want to clean all configurations?" "continue"
+    if [ $continue -eq $YES ]; then
+        clean_dotfiles
+    fi
 fi
 
 # Brew
 if [ $sysOS == "Darwin" ] && not hash brew 2>/dev/null; then
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-# oh-my-zsh
+# Oh My Zsh
 printf "${BLUE}Installing Oh My Zsh...${NORMAL}\n"
 printf "${BLUE}You need to input password to change the default shell to zsh.${NORMAL}\n"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's/env zsh/ /g')" > /dev/null
@@ -72,7 +74,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$ZSH/cu
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/djui/alias-tips.git ${ZSH_CUSTOM1:-$ZSH/custom}/plugins/alias-tips
 
-# oh-my-tmux
+# Oh My Tmux
 printf "${BLUE}Installing Oh My Tmux...${NORMAL}\n"
 git clone https://github.com/gpakosz/.tmux.git ~/.tmux
 ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
@@ -81,13 +83,17 @@ ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
 # FZF
 printf "${BLUE}Installing FZF...${NORMAL}\n"
 if [ $sysOS == "Darwin" ]; then
-brew install fzf
+    brew install fzf
 else
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --all
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --all
 fi
 
-# dotfiles
+# Emacs
+printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"
+git clone https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
+
+# Dotfiles
 printf "${BLUE}Installing dotfiles...${NORMAL}\n"
 git clone https://github.com/seagle0128/dotfiles.git ~/.dotfiles
 ln -s -f ~/.dotfiles/.zshrc ~/.zshrc
@@ -95,10 +101,6 @@ ln -s -f ~/.dotfiles/.tmux.conf.local ~/.tmux.conf.local
 ln -s -f ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
 ln -s -f ~/.dotfiles/.hgignore_global ~/.hgignore_global
-
-# Emacs
-printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"
-git clone https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
 
 # Entering zsh
 printf "${BLUE}Done. Enjoy!${NORMAL}\n"
