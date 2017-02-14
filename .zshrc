@@ -101,29 +101,36 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH=/usr/local/sbin:$PATH
-export PATH=$HOME/.rbenv/shims:$PATH
-
 export DEFAULT_USER=$USER
-# export EDITOR="emacs"
+
+if hash rbenv 2> /dev/null; then
+    export PATH=$HOME/.rbenv/shims:$PATH
+fi
 
 if [[ $sysOS == "Darwin" ]]; then
+    export PATH=/usr/local/sbin:$PATH
+
     # nodejs
-    export PATH=/usr/local/opt/node@6/bin:$PATH
+    if hash node 2> /dev/null; then
+        export PATH=/usr/local/opt/node@6/bin:$PATH
+    fi
 
     # Homebrew bottles
-    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
-    # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+    if hash brew 2>/dev/null; then
+        export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+        # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+    fi
 fi
 
 # Golang
-export GOPATH=$HOME/goprojects
-export PATH=$PATH:$GOPATH/bin
+if hash go 2>/dev/null; then
+    export GOPATH=$HOME/goprojects
+    export PATH=$PATH:$GOPATH/bin
+fi
 
 # aliases
 alias zshconf='$EDITOR ~/.zshrc'
 alias ohmyzsh='$EDITOR ~/.oh-my-zsh'
-# alias src='source ~/.zshrc'
 alias h='history'
 alias c='clear'
 alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
@@ -131,10 +138,12 @@ alias rmelc='rm -f ~/.emacs.d/lisp/*.elc'
 alias upgrade_dotfiles='cd ~/.dotfiles && git pull --rebase --stat origin master && popd'
 
 # proxy
-alias startproxy='/opt/XX-Net/start'
-alias setproxy='export http_proxy=http://127.0.0.1:8087; export https_proxy=http://127.0.0.1:8087'
-alias unsetproxy='export http_proxy; export https_proxy'
-alias showproxy='echo "http_proxy=$http_proxy"; echo "https_proxy=$https_proxy"'
+if [ -f /opt/XX-Net/start ]; then
+    alias startproxy='/opt/XX-Net/start'
+    alias setproxy='export http_proxy=http://127.0.0.1:8087; export https_proxy=http://127.0.0.1:8087'
+    alias unsetproxy='export http_proxy; export https_proxy'
+    alias showproxy='echo "http_proxy=$http_proxy"; echo "https_proxy=$https_proxy"'
+fi
 
 # bind P and N for EMACS mode
 bindkey -M emacs '^P' history-substring-search-up
