@@ -1,6 +1,9 @@
 #!/bin/sh
 # Get dotfiles and set intial configurations
 
+# Get OS name
+sysOS=`uname -s`
+
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
 if which tput >/dev/null 2>&1; then
@@ -24,7 +27,7 @@ fi
 
 # Only enable exit-on-error after the non-critical colorization stuff,
 # which may fail on systems lacking tput or terminfo
-set -e
+# set -e
 
 # Check git
 hash git >/dev/null 2>&1 || {
@@ -52,11 +55,14 @@ promote_yn() {
 }
 
 promote_yn "Do you want to clean all configurations?" "continue"
-if [ $continue -eq $NO ]; then
-    exit
+if [ $continue -eq $YES ]; then
+    clean_dotfiles
 fi
 
-clean_dotfiles
+# Brew
+if [ $sysOS == "Darwin" ] && not hash brew 2>/dev/null; then
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 
 # oh-my-zsh
 printf "${BLUE}Installing Oh My Zsh...${NORMAL}\n"
@@ -73,8 +79,12 @@ ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
 
 # FZF
 printf "${BLUE}Installing FZF...${NORMAL}\n"
+if [ $sysOS == "Darwin" ]; then
+brew install fzf
+else
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
+fi
 
 # dotfiles
 printf "${BLUE}Installing dotfiles...${NORMAL}\n"
@@ -90,5 +100,5 @@ printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"
 git clone https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
 
 # Entering zsh
-printf "${BLUE}Entering ZSH...${NORMAL}\n"
+printf "${BLUE}Done. Enjoy!${NORMAL}\n"
 env zsh
