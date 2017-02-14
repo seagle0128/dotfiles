@@ -4,7 +4,7 @@
 
 - GNU Linux, macOS, Cygwin/MSYS/Mingw on Windows
 - git, zsh, curl
-- tmux (optional)
+- tmux, emacs (optional)
 
 ## Quickstart
 
