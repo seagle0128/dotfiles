@@ -91,7 +91,7 @@ else
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     fzf_install=~/.fzf/install
 fi
-[ -f $fzf_install ] && $fzf_install --all
+[ -f $fzf_install ] && $fzf_install --all >/dev/null
 
 # Emacs
 printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"
