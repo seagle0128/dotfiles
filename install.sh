@@ -83,11 +83,15 @@ ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
 # FZF
 printf "${BLUE}Installing FZF...${NORMAL}\n"
 if [ $sysOS == "Darwin" ]; then
-    brew install fzf
+    if hash brew 2>/dev/null && not hash fzf 2>/dev/null; then
+        brew install fzf
+    fi
+    fzf_install=/usr/local/opt/fzf/install
 else
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install --all
+    fzf_install=~/.fzf/install
 fi
+[ -f $fzf_install ] && $fzf_install --all
 
 # Emacs
 printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"
