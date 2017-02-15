@@ -70,9 +70,9 @@ fi
 printf "${BLUE}Installing Oh My Zsh...${NORMAL}\n"
 printf "${BLUE}You need to input password to change the default shell to zsh.${NORMAL}\n"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's/env zsh/ /g')" > /dev/null
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/djui/alias-tips.git ${ZSH_CUSTOM1:-$ZSH/custom}/plugins/alias-tips
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/alias-tips
 
 # Oh My Tmux
 printf "${BLUE}Installing Oh My Tmux...${NORMAL}\n"
@@ -108,4 +108,6 @@ ln -s -f ~/.dotfiles/.hgignore_global ~/.hgignore_global
 
 # Entering zsh
 printf "${BLUE}Done. Enjoy!${NORMAL}\n"
-env zsh
+if hash zsh 2> /dev/null; then
+    env zsh
+fi
