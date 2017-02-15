@@ -240,3 +240,10 @@ tmux_conf_theme_clock_style='24'
 
 # move status line to top
 #set -g status-position top
+
+# use defalut key-bindings to avoid compatibility issue with Emacs
+set -gu prefix2
+unbind C-a
+
+bind -r p previous-window # select previous window
+bind -r n next-window     # select next window
