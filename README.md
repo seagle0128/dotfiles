@@ -2,15 +2,22 @@
 
 ## Prerequisite
 
-- GNU Linux, macOS, Cygwin/MSYS/Mingw on Windows
+- GNU Linux, macOS, Cygwin
 - git, zsh, curl
-- tmux, emacs (optional)
+- tmux, emacs, wget (optional)
 
 ## Quickstart
 
 Run this command in the console.
-All set, enjoy!
 
 ```sh
 sh -c "$(curl -fsSL https://github.com/seagle0128/dotfiles/raw/master/install.sh)"
 ```
+
+or
+
+```
+sh -c "$(wget https://github.com/seagle0128/dotfiles/raw/master/install.sh)"
+```
+
+All set, enjoy!
