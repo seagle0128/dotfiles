@@ -35,10 +35,27 @@ hash git >/dev/null 2>&1 || {
     exit 1
 }
 
+# Sync repository
+sync_repo() {
+    local repo_uri="$1"
+    local repo_path="$2"
+
+    if [ ! -e "$repo_path" ]; then
+        mkdir -p "$repo_path"
+        git clone "$repo_uri" "$repo_path"
+    else
+        cd "$repo_path" && git pull && cd - >/dev/null
+    fi
+}
+
 # Clean all configurations
 clean_dotfiles() {
-    rm -rf ~/.oh-my-zsh ~/.tmux ~/.fzf ~/.emacs.d ~/.dotfiles
-    rm -f ~/.zshrc ~/.tmux.conf ~/.tmux.local ~/.fzf.*
+    [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.bak
+    [ -f ~/.vimrc ] && mv ~/.vimrc ~/.vimrc.bak
+    [ -d ~/.emacs.d ] && mv ~/.emacs.d ~/.emacs.d.bak
+
+    rm -rf ~/.oh-my-zsh ~/.tmux ~/.fzf ~/.dotfiles
+    rm -f ~/.tmux.conf ~/.tmux.local ~/.fzf.*
     rm -f ~/.gitconfig ~/.gitignore_global ~/.hgignore_global
 }
 
@@ -66,18 +83,6 @@ if [ $sysOS = "Darwin" ] && not hash brew 2>/dev/null; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-sync_repo() {
-    local repo_uri="$1"
-    local repo_path="$2"
-
-    if [ ! -e "$repo_path" ]; then
-        mkdir -p "$repo_path"
-        git clone "$repo_uri" "$repo_path"
-    else
-        cd "$repo_path" && git pull
-    fi
-}
-
 # Oh My Zsh
 printf "${BLUE}Installing Oh My Zsh...${NORMAL}\n"
 printf "${BLUE}You need to input password to change the default shell to zsh.${NORMAL}\n"
@@ -100,10 +105,14 @@ if [ $sysOS = "Darwin" ]; then
     fi
     fzf_install=/usr/local/opt/fzf/install
 else
-    sync_repo --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    if [ ! -e ~/.fzf ]; then
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    else
+        cd ~/.fzf && git pull && cd - >/dev/null
+    fi
     fzf_install=~/.fzf/install
 fi
-[ -f $fzf_install ] && $fzf_install --all >/dev/null
+[ -f $fzf_install ] && $fzf_install --all 2>/dev/null 2>&1
 
 # Emacs
 printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"

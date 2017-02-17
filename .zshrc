@@ -145,8 +145,8 @@ alias h='history'
 alias c='clear'
 alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
 alias rmelc='rm -f ~/.emacs.d/lisp/*.elc'
-alias upgrade_dotfiles='cd ~/.dotfiles && git pull --rebase --stat origin master && cd -'
-alias upgrade_emacs='cd ~/.emacs.d && git pull --rebase --stat origin master && cd -'
+alias upgrade_dotfiles='cd ~/.dotfiles && git pull --rebase --stat origin master && cd - >/dev/null'
+alias upgrade_emacs='cd ~/.emacs.d && git pull --rebase --stat origin master && cd - >/dev/null'
 
 # proxy
 if [ -f /opt/XX-Net/start ]; then
