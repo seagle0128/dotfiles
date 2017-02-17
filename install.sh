@@ -46,10 +46,10 @@ YES=0
 NO=1
 promote_yn() {
     eval ${2}=$NO
-    read -p "$1 [Yn]: " yn
+    read -p "$1 [yN]: " yn
     case $yn in
-        [Yy]*|'' ) eval ${2}=$YES;;
-        [Nn]* )    eval ${2}=$NO;;
+        [Yy]* )    eval ${2}=$YES;;
+        [Nn]*|'' ) eval ${2}=$NO;;
         *)         eval ${2}=$NO;;
     esac
 }
@@ -66,17 +66,29 @@ if [ $sysOS = "Darwin" ] && not hash brew 2>/dev/null; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+sync_repo() {
+    local repo_uri="$1"
+    local repo_path="$2"
+
+    if [ ! -e "$repo_path" ]; then
+        mkdir -p "$repo_path"
+        git clone "$repo_uri" "$repo_path"
+    else
+        cd "$repo_path" && git pull
+    fi
+}
+
 # Oh My Zsh
 printf "${BLUE}Installing Oh My Zsh...${NORMAL}\n"
 printf "${BLUE}You need to input password to change the default shell to zsh.${NORMAL}\n"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's/env zsh/ /g')" > /dev/null
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-git clone https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/alias-tips
+sync_repo https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+sync_repo https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+sync_repo https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/alias-tips
 
 # Oh My Tmux
 printf "${BLUE}Installing Oh My Tmux...${NORMAL}\n"
-git clone https://github.com/gpakosz/.tmux.git ~/.tmux
+sync_repo https://github.com/gpakosz/.tmux.git ~/.tmux
 ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
 # cp ~/.tmux/.tmux.conf.local ~/.tmux.conf.local
 
@@ -88,25 +100,29 @@ if [ $sysOS = "Darwin" ]; then
     fi
     fzf_install=/usr/local/opt/fzf/install
 else
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    sync_repo --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     fzf_install=~/.fzf/install
 fi
 [ -f $fzf_install ] && $fzf_install --all >/dev/null
 
 # Emacs
 printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"
-git clone https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
+sync_repo https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
 
 # Dotfiles
 printf "${BLUE}Installing dotfiles...${NORMAL}\n"
-git clone https://github.com/seagle0128/dotfiles.git ~/.dotfiles
+sync_repo https://github.com/seagle0128/dotfiles.git ~/.dotfiles
 ln -s -f ~/.dotfiles/.zshrc ~/.zshrc
-touch ~/.zshrc.local
 ln -s -f ~/.dotfiles/.tmux.conf.local ~/.tmux.conf.local
 ln -s -f ~/.dotfiles/.vimrc ~/.vimrc
 ln -s -f ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
 ln -s -f ~/.dotfiles/.hgignore_global ~/.hgignore_global
+
+if [ ! -f ~/.zshrc.local ]; then
+    touch ~/.zshrc.local
+    echo "# Please add your personal configurations here." > ~/.zshrc.local
+fi
 
 # Entering zsh
 printf "${BLUE}Done. Enjoy!${NORMAL}\n"
