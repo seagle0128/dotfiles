@@ -44,7 +44,7 @@ sync_repo() {
         mkdir -p "$repo_path"
         git clone "$repo_uri" "$repo_path"
     else
-        cd "$repo_path" && git pull && cd - >/dev/null
+        cd "$repo_path" && git pull origin master && cd - >/dev/null
     fi
 }
 
