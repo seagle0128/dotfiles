@@ -112,7 +112,7 @@ else
     fi
     fzf_install=~/.fzf/install
 fi
-[ -f $fzf_install ] && $fzf_install --all 2>/dev/null 2>&1
+[ -f $fzf_install ] && $fzf_install --all >/dev/null 2>&1
 
 # Emacs
 printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"
