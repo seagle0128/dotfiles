@@ -101,7 +101,9 @@ git clone https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
 printf "${BLUE}Installing dotfiles...${NORMAL}\n"
 git clone https://github.com/seagle0128/dotfiles.git ~/.dotfiles
 ln -s -f ~/.dotfiles/.zshrc ~/.zshrc
+touch ~/.zshrc.local
 ln -s -f ~/.dotfiles/.tmux.conf.local ~/.tmux.conf.local
+ln -s -f ~/.dotfiles/.vimrc ~/.vimrc
 ln -s -f ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
 ln -s -f ~/.dotfiles/.hgignore_global ~/.hgignore_global
