@@ -124,8 +124,18 @@ fi
 
 # Golang
 if hash go 2>/dev/null; then
-    export GOPATH=$HOME/goprojects
-    export PATH=$PATH:$GOPATH/bin
+    GO_CACHE=$HOME/.gopath/cache # First GOPATH, 'go get' saves files here, and it's always safe to be cleaned
+    GO_PKGS=$HOME/.gopath/pkgs   # For 3rd party go packages, use 'gosave' to sync all packages from cache to this folder or moved manually
+    GO_PROJ=$HOME/goprojects     # Your go projects root
+    export GOPATH=$GO_CACHE:$GO_PKGS:$GO_PROJ
+    export PATH=$PATH:$GO_CACHE/bin:$GO_PKGS/bin:$GO_PROJ/bin
+    alias gosave='rsync -aAXv ${GO_CACHE}/ ${GO_PKGS}'
+    #                    |||└─ increase verbosity
+    #                    ||└─ preserve extended attributes
+    #                    |└─ preserve ACLs (implies --perms)
+    #                    └─ archive mode; equals -rlptgoD (no -H,-A,-X)
+    alias goclean='[ -d "$GO_CACHE" ] && rm -rf ${GO_CACHE}/*'
+    #                                                       └─ double rm verification in zsh
 fi
 
 # aliases
@@ -136,6 +146,7 @@ alias c='clear'
 alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
 alias rmelc='rm -f ~/.emacs.d/lisp/*.elc'
 alias upgrade_dotfiles='cd ~/.dotfiles && git pull --rebase --stat origin master && cd -'
+alias upgrade_emacs='cd ~/.emacs.d && git pull --rebase --stat origin master && cd -'
 
 # proxy
 if [ -f /opt/XX-Net/start ]; then
