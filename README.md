@@ -3,8 +3,8 @@
 ## Prerequisite
 
 - GNU Linux, macOS, Cygwin
-- git, zsh, curl
-- tmux, emacs, wget (optional)
+- git, zsh, curl/wget
+- tmux, emacs, vim (optional)
 
 ## Quickstart
 
