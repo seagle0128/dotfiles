@@ -110,11 +110,6 @@ fi
 if [[ $sysOS == "Darwin" ]]; then
     export PATH=/usr/local/sbin:$PATH
 
-    # nodejs
-    if hash node 2> /dev/null; then
-        export PATH=/usr/local/opt/node@6/bin:$PATH
-    fi
-
     # Homebrew bottles
     if hash brew 2>/dev/null; then
         export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
