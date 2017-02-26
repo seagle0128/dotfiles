@@ -1,5 +1,9 @@
 #!/bin/sh
-# Get dotfiles and set intial configurations
+#############################################################
+# Set development environment on Linux/macOS/Cygwin quickly.
+# Author: Vincent Zhang <seagle0128@gmail.com>
+# URL: https://github.com/seagle0128/dotfiles
+#############################################################
 
 # Get OS name
 sysOS=`uname -s`
