@@ -16,8 +16,6 @@
 	trustExitCode = true
 [commit]
 	template = ~/.stCommitMsg
-[g2 "panic"]
-	excludes = -e .classpath -e .settings -e *.iml
 [diff]
 	tool = sourcetree
 [merge]
