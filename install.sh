@@ -67,7 +67,7 @@ YES=0
 NO=1
 promote_yn() {
     eval ${2}=$NO
-    read -p "$1 [yN]: " yn
+    read -p "$1 [y/N]: " yn
     case $yn in
         [Yy]* )    eval ${2}=$YES;;
         [Nn]*|'' ) eval ${2}=$NO;;
@@ -76,7 +76,7 @@ promote_yn() {
 }
 
 if [ -d ~/.oh-my-zsh ] || [ -d ~/.tmux ] || [ -d ~/.fzf ] || [ -d ~/.emacs.d ]; then
-    promote_yn "Do you want to clean all configurations?" "continue"
+    promote_yn "Do you want to reset all configurations?" "continue"
     if [ $continue -eq $YES ]; then
         clean_dotfiles
     fi
