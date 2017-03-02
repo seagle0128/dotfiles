@@ -8,20 +8,6 @@
 	autocrlf = false
 	ignorecase = false
 	safecrlf = warn
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[commit]
-	template = ~/.stCommitMsg
-[g2 "panic"]
-	excludes = -e .classpath -e .settings -e *.iml
-[diff]
-	tool = sourcetree
-[merge]
-	tool = sourcetree
 [color]
 	branch = auto
 	diff = auto

@@ -129,15 +129,22 @@ sync_repo https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
 # Dotfiles
 printf "${BLUE}Installing dotfiles...${NORMAL}\n"
 sync_repo https://github.com/seagle0128/dotfiles.git ~/.dotfiles
+
 ln -s -f ~/.dotfiles/.zshrc ~/.zshrc
 ln -s -f ~/.dotfiles/.tmux.conf.local ~/.tmux.conf.local
 ln -s -f ~/.dotfiles/.vimrc ~/.vimrc
 ln -s -f ~/.dotfiles/.npmrc ~/.npmrc
 ln -s -f ~/.dotfiles/.gemrc ~/.gemrc
+
 [ ! -d ~/.pip ] && mkdir ~/.pip; ln -s -f ~/.dotfiles/.pip.conf ~/.pip/pip.conf
-ln -s -f ~/.dotfiles/.gitconfig ~/.gitconfig
+
+if [ $sysOS = "Darwin" ]; then
+    ln -s -f ~/.dotfiles/.gitconfig_macOS ~/.gitconfig
+else
+    ln -s -f ~/.dotfiles/.gitconfig ~/.gitconfig
+fi
+
 ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
-ln -s -f ~/.dotfiles/.hgignore_global ~/.hgignore_global
 
 if [ ! -f ~/.zshrc.local ]; then
     touch ~/.zshrc.local
