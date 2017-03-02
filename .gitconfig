@@ -5,7 +5,7 @@
 	excludesfile = ~/.gitignore_global
 	editor = emacs
 	pager = cat
-	autocrlf = input
+	autocrlf = false
 	ignorecase = false
 	safecrlf = warn
 [difftool "sourcetree"]
