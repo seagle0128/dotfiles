@@ -150,7 +150,7 @@ alias upgrade_oh_my_tmux='cd ~/.tmux && git pull --rebase --stat origin master &
 # proxy
 if [ -f /opt/XX-Net/start ]; then
     alias startproxy='/opt/XX-Net/start'
-    alias setproxy='export http_proxy=http://127.0.0.1:8087; export https_proxy=http://127.0.0.1:8087'
+    alias setproxy='export http_proxy=http://127.0.0.1:8087; export https_proxy=$http_proxy'
     alias unsetproxy='export http_proxy=; export https_proxy='
     alias showproxy='echo "http_proxy=$http_proxy"; echo "https_proxy=$https_proxy"'
 fi
