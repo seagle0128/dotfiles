@@ -8,6 +8,8 @@
 	autocrlf = false
 	ignorecase = false
 	safecrlf = warn
+	preloadindex = true
+	fscache = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
@@ -27,3 +29,5 @@
 	status = auto
 [push]
 	default = current
+[gc]
+	auto = 256

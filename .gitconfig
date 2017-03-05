@@ -8,6 +8,8 @@
 	autocrlf = false
 	ignorecase = false
 	safecrlf = warn
+	preloadindex = true
+	fscache = true
 [color]
 	branch = auto
 	diff = auto
@@ -15,3 +17,5 @@
 	status = auto
 [push]
 	default = current
+[gc]
+	auto = 256
