@@ -59,15 +59,15 @@ plugins=(emacs git history-substring-search
          copydir copyfile colorize colored-man-pages
          python ruby sudo themes z zsh_reload)
 
+if [[ $sysOS == "Darwin" ]]; then
+    plugins+=(osx)
+fi
+
 # Workaround for fixing the segment fault while reloading
 # https://github.com/zsh-users/zsh-autosuggestions/issues/126
 if [ -z "$_zsh_custom_scripts_loaded" ]; then
     _zsh_custom_scripts_loaded=1
-    plugins+=(zsh-autosuggestions zsh-syntax-highlighting alias-tips)
-fi
-
-if [[ $sysOS == "Darwin" ]]; then
-    plugins+=(osx)
+    plugins+=(alias-tips zsh-autosuggestions zsh-syntax-highlighting)
 fi
 
 source $ZSH/oh-my-zsh.sh
