@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #############################################################
 # Set development environment on Linux/macOS/Cygwin quickly.
 # Author: Vincent Zhang <seagle0128@gmail.com>
@@ -83,7 +83,7 @@ if [ -d ~/.oh-my-zsh ] || [ -d ~/.tmux ] || [ -d ~/.fzf ] || [ -d ~/.emacs.d ]; 
 fi
 
 # Brew
-if [ $sysOS = "Darwin" ] && not hash brew 2>/dev/null; then
+if [ "$sysOS" = "Darwin" ] && not hash brew 2>/dev/null; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
@@ -107,7 +107,7 @@ ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
 
 # FZF
 printf "${BLUE}Installing FZF...${NORMAL}\n"
-if [ $sysOS = "Darwin" ]; then
+if [ "$sysOS" = "Darwin" ]; then
     if hash brew 2>/dev/null && not hash fzf 2>/dev/null; then
         brew install fzf
     fi
@@ -138,7 +138,7 @@ ln -s -f ~/.dotfiles/.gemrc ~/.gemrc
 
 [ ! -d ~/.pip ] && mkdir ~/.pip; ln -s -f ~/.dotfiles/.pip.conf ~/.pip/pip.conf
 
-if [ $sysOS = "Darwin" ]; then
+if [ "$sysOS" = "Darwin" ]; then
     ln -s -f ~/.dotfiles/.gitconfig_macOS ~/.gitconfig
 else
     ln -s -f ~/.dotfiles/.gitconfig ~/.gitconfig
@@ -146,7 +146,7 @@ fi
 
 ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
 
-if [ $OSTYPE = "cygwin" ]; then
+if [ "$OSTYPE" = "cygwin" ]; then
     ln -s -f ~/.dotfiles/.minttyrc ~/.minttyrc
 fi
 
