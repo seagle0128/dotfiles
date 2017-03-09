@@ -146,6 +146,10 @@ fi
 
 ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
 
+if [ $OSTYPE = "cygwin" ]; then
+    ln -s -f ~/.dotfiles/.minttyrc ~/.minttyrc
+fi
+
 if [ ! -f ~/.zshrc.local ]; then
     touch ~/.zshrc.local
     echo "# Please add your personal configurations here." > ~/.zshrc.local
