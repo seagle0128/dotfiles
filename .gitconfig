@@ -1,9 +1,10 @@
 [core]
-	include = ~/.gitconfig_local
 	excludesfile = ~/.gitignore_global
 	autocrlf = false
 	ignorecase = false
 	safecrlf = warn
+[include]
+	path = ~/.gitconfig_local
 [color]
 	branch = auto
 	diff = auto
