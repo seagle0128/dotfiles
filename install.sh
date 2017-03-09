@@ -135,6 +135,7 @@ ln -s -f ~/.dotfiles/.vimrc ~/.vimrc
 ln -s -f ~/.dotfiles/.npmrc ~/.npmrc
 ln -s -f ~/.dotfiles/.gemrc ~/.gemrc
 
+cp -n ~/.dotfiles/.zshrc.theme.local ~/.zshrc.theme.local
 cp -n ~/.dotfiles/.tmux.conf.local ~/.tmux.conf.local
 
 [ ! -d ~/.pip ] && mkdir ~/.pip; ln -s -f ~/.dotfiles/.pip.conf ~/.pip/pip.conf
@@ -149,11 +150,6 @@ ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
 
 if [ "$OSTYPE" = "cygwin" ]; then
     ln -s -f ~/.dotfiles/.minttyrc ~/.minttyrc
-fi
-
-if [ ! -f ~/.zshrc.theme.local ]; then
-    touch ~/.zshrc.theme.local
-    echo "# Please add your favorite theme here." > ~/.zshrc.theme.local
 fi
 
 if [ ! -f ~/.zshrc.local ]; then
