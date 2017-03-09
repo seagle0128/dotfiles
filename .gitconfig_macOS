@@ -8,16 +8,12 @@
 	autocrlf = false
 	ignorecase = false
 	safecrlf = warn
-	preloadindex = true
-	fscache = true
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-[commit]
-	template = ~/.stCommitMsg
 [diff]
 	tool = sourcetree
 [merge]
@@ -29,5 +25,3 @@
 	status = auto
 [push]
 	default = current
-[gc]
-	auto = 256
