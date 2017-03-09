@@ -13,6 +13,9 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="ys"                  # ys, dst, steef, wedisagree
 
+# Source customization
+if [ -f ~/.zshrc.theme.local ]; then source ~/.zshrc.theme.local; fi
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 

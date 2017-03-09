@@ -150,6 +150,11 @@ if [ $OSTYPE = "cygwin" ]; then
     ln -s -f ~/.dotfiles/.minttyrc ~/.minttyrc
 fi
 
+if [ ! -f ~/.zshrc.theme.local ]; then
+    touch ~/.zshrc.theme.local
+    echo "# Please add your favorite theme here." > ~/.zshrc.theme.local
+fi
+
 if [ ! -f ~/.zshrc.local ]; then
     touch ~/.zshrc.local
     echo "# Please add your personal configurations here." > ~/.zshrc.local
