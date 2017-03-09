@@ -4,7 +4,6 @@
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = emacs
-	pager = cat
 	autocrlf = false
 	ignorecase = false
 	safecrlf = warn
