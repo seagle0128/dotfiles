@@ -60,7 +60,7 @@ clean_dotfiles() {
 
     rm -rf ~/.oh-my-zsh ~/.tmux ~/.fzf ~/.dotfiles
     rm -f ~/.tmux.conf ~/.tmux.local ~/.fzf.*
-    rm -f ~/.gitconfig ~/.gitignore_global ~/.hgignore_global
+    rm -f ~/.gitconfig ~/.gitignore_global ~/.gitconfig.local
 }
 
 YES=0
@@ -131,19 +131,20 @@ printf "${BLUE}Installing dotfiles...${NORMAL}\n"
 sync_repo https://github.com/seagle0128/dotfiles.git ~/.dotfiles
 
 ln -s -f ~/.dotfiles/.zshrc ~/.zshrc
-ln -s -f ~/.dotfiles/.tmux.conf.local ~/.tmux.conf.local
 ln -s -f ~/.dotfiles/.vimrc ~/.vimrc
 ln -s -f ~/.dotfiles/.npmrc ~/.npmrc
 ln -s -f ~/.dotfiles/.gemrc ~/.gemrc
 
+cp -n ~/.dotfiles/.tmux.conf.local ~/.tmux.conf.local
+
 [ ! -d ~/.pip ] && mkdir ~/.pip; ln -s -f ~/.dotfiles/.pip.conf ~/.pip/pip.conf
 
+ln -s -f ~/.dotfiles/.gitconfig ~/.gitconfig
 if [ "$sysOS" = "Darwin" ]; then
-    ln -s -f ~/.dotfiles/.gitconfig_macOS ~/.gitconfig
+    cp -n ~/.dotfiles/.gitconfig_macOS_local ~/.gitconfig_local
 else
-    ln -s -f ~/.dotfiles/.gitconfig ~/.gitconfig
+    cp -n ~/.dotfiles/.gitconfig_local ~/.gitconfig_local
 fi
-
 ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
 
 if [ "$OSTYPE" = "cygwin" ]; then

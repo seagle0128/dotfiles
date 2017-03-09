@@ -2,11 +2,7 @@
 	name = Vincent Zhang
 	email = seagle0128@gmail.com
 [core]
-	excludesfile = ~/.gitignore_global
 	editor = emacs
-	autocrlf = false
-	ignorecase = false
-	safecrlf = warn
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
@@ -17,10 +13,3 @@
 	tool = sourcetree
 [merge]
 	tool = sourcetree
-[color]
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
-[push]
-	default = current
