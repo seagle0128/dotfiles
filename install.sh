@@ -154,7 +154,7 @@ fi
 
 if [ ! -f ~/.zshrc.local ]; then
     touch ~/.zshrc.local
-    echo "# Please add your personal configurations here." > ~/.zshrc.local
+    echo "# Please add your personal configurations here" > ~/.zshrc.local
 fi
 
 # Entering zsh
