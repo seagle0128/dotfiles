@@ -15,6 +15,10 @@ fi
 # Brew
 if not hash brew 2>/dev/null; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+    brew tap caskroom/cask
+    cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask
+    git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
 fi
 
 # Cask

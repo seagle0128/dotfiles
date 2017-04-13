@@ -83,8 +83,20 @@ if [ -d ~/.oh-my-zsh ] || [ -d ~/.tmux ] || [ -d ~/.fzf ] || [ -d ~/.emacs.d ]; 
 fi
 
 # Brew
-if [ "$sysOS" = "Darwin" ] && not hash brew 2>/dev/null; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if [ "$sysOS" = "Darwin" ]; then
+    if not hash brew 2>/dev/null; then
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    else
+        cd "$(brew --repo)"
+        git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
+
+        cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
+
+        brew tap caskroom/cask
+        cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask
+        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
+    fi
 fi
 
 # Oh My Zsh
