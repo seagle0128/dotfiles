@@ -85,17 +85,29 @@ fi
 # Brew
 if [ "$sysOS" = "Darwin" ]; then
     if not hash brew 2>/dev/null; then
+        # Install homebrew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+        # Tap cask and cask-upgrade
+        brew tap caskroom/cask
+        brew tap buo/cask-upgrade
     else
+        # Set homebrew mirrors
         cd "$(brew --repo)"
         git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
+        cd - >/dev/null
 
         cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
         git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
+        cd - >/dev/null
 
-        brew tap caskroom/cask
         cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask
         git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
+        cd - >/dev/null
+
+        # Upgrade
+        brew upgrade
+        brew cu
     fi
 fi
 
