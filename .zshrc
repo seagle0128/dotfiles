@@ -57,7 +57,7 @@ if [ -f ~/.zshrc.theme.local ]; then source ~/.zshrc.theme.local; fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(emacs git history-substring-search
+plugins=(emacs git history-substring-search golang
          copydir copyfile colorize colored-man-pages
          python ruby sudo tmux themes z zsh_reload)
 
