@@ -122,6 +122,7 @@ fi
 sync_repo https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 sync_repo https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 sync_repo https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/alias-tips
+sync_repo https://github.com/supercrabtree/k ~/.oh-my-zsh/custom/plugins/k
 
 # Oh My Tmux
 printf "${BLUE}Installing Oh My Tmux...${NORMAL}\n"

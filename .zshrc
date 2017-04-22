@@ -69,7 +69,7 @@ fi
 # https://github.com/zsh-users/zsh-autosuggestions/issues/126
 if [ -z "$_zsh_custom_scripts_loaded" ]; then
     _zsh_custom_scripts_loaded=1
-    plugins+=(alias-tips zsh-autosuggestions zsh-syntax-highlighting)
+    plugins+=(alias-tips k zsh-autosuggestions zsh-syntax-highlighting)
 fi
 
 source $ZSH/oh-my-zsh.sh
