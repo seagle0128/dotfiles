@@ -59,7 +59,8 @@ if [ -f ~/.zshrc.theme.local ]; then source ~/.zshrc.theme.local; fi
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(emacs git history-substring-search golang
          copydir copyfile colorize colored-man-pages
-         python ruby sudo tmux themes z zsh_reload)
+         python ruby sudo tmux thefuck themes
+         z zsh_reload)
 
 if [[ $sysOS == "Darwin" ]]; then
     plugins+=(osx)
