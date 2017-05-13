@@ -66,12 +66,8 @@ if [[ $sysOS == "Darwin" ]]; then
     plugins+=(osx)
 fi
 
-# Workaround for fixing the segment fault while reloading
-# https://github.com/zsh-users/zsh-autosuggestions/issues/126
-if [ -z "$_zsh_custom_scripts_loaded" ]; then
-    _zsh_custom_scripts_loaded=1
-    plugins+=(alias-tips k zsh-autosuggestions zsh-syntax-highlighting)
-fi
+# custom plugins
+plugins+=(alias-tips k zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
