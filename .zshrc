@@ -152,6 +152,7 @@ alias restart_emacs='emacsclient -e "(let ((last-nonmenu-event nil) (kill-emacs-
 alias upgrade_dotfiles='cd ~/.dotfiles && git pull --rebase --stat origin master && cd - >/dev/null && src'
 alias upgrade_emacs='cd ~/.emacs.d && git pull --rebase --stat origin master && cd - >/dev/null'
 alias upgrade_oh_my_tmux='cd ~/.tmux && git pull --rebase --stat origin master && cd - >/dev/null'
+alias upgrade_env='sh ~/.dotfiles/install.sh'
 
 # proxy
 alias setproxy='export http_proxy=http://127.0.0.1:1087; export https_proxy=http://127.0.0.1:1087;'
