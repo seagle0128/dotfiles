@@ -34,10 +34,11 @@ brew cask install iterm2
 brew cask install java
 brew cask install mplayerx
 brew cask install scroll-reverser
-brew cask install shiftit
+# brew cask install shiftit
 brew cask install skype-for-business
 brew cask install sogouinput
 brew cask install sourcetree
+brew cask install spectacle
 brew cask install thunder
 brew cask install veracrypt
 brew cask install visual-studio-code
