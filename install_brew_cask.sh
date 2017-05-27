@@ -37,6 +37,7 @@ brew cask install scroll-reverser
 # brew cask install shiftit
 brew cask install skype-for-business
 brew cask install sogouinput
+brew cask install soundflower   # Need soundflowerbed
 brew cask install sourcetree
 brew cask install spectacle
 brew cask install thunder
