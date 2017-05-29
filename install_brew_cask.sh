@@ -28,13 +28,15 @@ brew cask install bwana
 brew cask install cheatsheet
 brew cask install clipy
 brew cask install firefox
+brew cask install fliqlo        # Screen Saver
 brew cask install google-chrome
 brew cask install hyperswitch
 brew cask install iterm2
 brew cask install java
+# brew cask install karabiner-elements # karabiner: Keboard remapping
 brew cask install mplayerx
 brew cask install scroll-reverser
-# brew cask install shiftit
+# brew cask install shiftit       # Replaced by spectacle
 brew cask install skype-for-business
 brew cask install sogouinput
 brew cask install soundflower   # Need soundflowerbed
