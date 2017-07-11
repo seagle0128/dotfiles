@@ -74,7 +74,7 @@ if hash thefuck 2>/dev/null; then
 fi
 
 # custom plugins
-plugins+=(alias-tips k zsh-autosuggestions zsh-syntax-highlighting)
+plugins+=(alias-tips k zsh-autosuggestions zsh-syntax-highlighting zsh-256color)
 
 source $ZSH/oh-my-zsh.sh
 
