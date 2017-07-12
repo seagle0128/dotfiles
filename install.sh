@@ -121,6 +121,10 @@ if [ ! -e ~/.oh-my-zsh ]; then
 else
     cd ~/.oh-my-zsh && git pull origin master && cd - >/dev/null
 fi
+
+curl -fsSL https://raw.githubusercontent.com/dracula/zsh/master/dracula.zsh-theme -o ~/.oh-my-zsh/custom/themes/dracula.zsh-theme
+curl -fsSL https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/spaceship.zsh -o ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
+
 sync_repo https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 sync_repo https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 sync_repo https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/alias-tips
