@@ -122,6 +122,7 @@ else
     cd ~/.oh-my-zsh && git pull origin master && cd - >/dev/null
 fi
 
+mkdir -p ~/.oh-my-zsh/custom/themes/
 curl -fsSL https://raw.githubusercontent.com/dracula/zsh/master/dracula.zsh-theme -o ~/.oh-my-zsh/custom/themes/dracula.zsh-theme
 curl -fsSL https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/spaceship.zsh -o ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
 
