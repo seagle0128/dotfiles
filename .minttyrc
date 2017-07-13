@@ -12,7 +12,7 @@ ComposeKey=off
 /* Darcula theme */
 ForegroundColour=248,248,242
 BackgroundColour=40,42,54
-Black=0,0,0
+Black=40,42,54
 BoldBlack=80,84,108
 Red=255,85,85
 BoldRed=255,110,103
