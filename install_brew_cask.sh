@@ -22,26 +22,30 @@ if not hash brew 2>/dev/null; then
 fi
 
 # Cask
-brew cask install aliwangwang
-brew cask install baidunetdisk
-brew cask install bwana
-brew cask install cheatsheet
-brew cask install clipy
-brew cask install firefox
-brew cask install fliqlo        # Screen Saver
-brew cask install google-chrome
-brew cask install hyperswitch
+brew cask install shadowsocksx-ng
 brew cask install iterm2
-brew cask install java
+brew cask install clipy
+brew cask install cheatsheet
+brew cask install hyperswitch
+brew cask install scroll-reverser
+brew cask install fliqlo        # Screen Saver
+# brew cask install shiftit       # Replaced by spectacle
+brew cask install spectacle
+brew cask install sogouinput
+
+brew cask install google-chrome
+brew cask install firefox
 # brew cask install karabiner-elements # karabiner: Keboard remapping
 brew cask install mplayerx
-brew cask install scroll-reverser
-# brew cask install shiftit       # Replaced by spectacle
-brew cask install skype-for-business
-brew cask install sogouinput
+brew cask install osx-fuse
+brew cask install veracrypt
 brew cask install soundflower   # Need soundflowerbed
 brew cask install sourcetree
-brew cask install spectacle
-brew cask install thunder
-brew cask install veracrypt
 brew cask install visual-studio-code
+
+brew cask install aliwangwang
+brew cask install thunder
+brew cask install baidunetdisk
+brew cask install bwana
+# brew cask install skype-for-business
+brew cask install java
