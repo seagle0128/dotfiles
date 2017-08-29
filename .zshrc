@@ -69,11 +69,7 @@ if hash tmux 2>/dev/null; then
     plugins+=(tmux)
 fi
 
-if hash thefuck 2>/dev/null; then
-    plugins+=(thefuck)
-fi
-
-# custom plugins
+# Custom plugins
 plugins+=(alias-tips k zsh-autosuggestions zsh-syntax-highlighting zsh-256color)
 
 source $ZSH/oh-my-zsh.sh
