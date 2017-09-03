@@ -106,10 +106,8 @@ if [ "$sysOS" = "Darwin" ]; then
         cd - >/dev/null
 
         # Upgrade
-        brew update
-        brew upgrade
-        brew cleanup
-        brew cu --cleanup --yes
+        brew upgrade --cleanup
+        brew cu -a -y --no-brew-update --cleanup
     fi
 fi
 
