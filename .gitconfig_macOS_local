@@ -1,3 +1,4 @@
+# -*- mode: gitconfig -*-
 [user]
 	name = Vincent Zhang
 	email = seagle0128@gmail.com
