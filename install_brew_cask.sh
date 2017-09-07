@@ -49,3 +49,6 @@ brew cask install baidunetdisk
 brew cask install bwana
 # brew cask install skype-for-business
 brew cask install java
+
+# Cleanup
+brew cask cleanup
