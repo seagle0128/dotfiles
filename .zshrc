@@ -70,7 +70,9 @@ if hash tmux 2>/dev/null; then
 fi
 
 # Custom plugins
-plugins+=(alias-tips k zsh-autosuggestions zsh-syntax-highlighting zsh-256color)
+plugins+=(alias-tips k  zsh-256color
+          zsh-autosuggestions zsh-syntax-highlighting
+          zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
