@@ -1,6 +1,8 @@
-# Centaur dotfiles
+# Centaur Dotfiles
 
 ![Centaur](logo.png)
+
+Full configurations for terminal on GNU Linux, macOS and Cygwin environments.
 
 ## Prerequisite
 
@@ -13,13 +15,13 @@
 
 Run this command in the console.
 
-```sh
+``` shell
 sh -c "$(curl -fsSL https://github.com/seagle0128/dotfiles/raw/master/install.sh)"
 ```
 
 or
 
-```sh
+``` shell
 sh -c "$(wget https://github.com/seagle0128/dotfiles/raw/master/install.sh -O -)"
 ```
 
