@@ -1,10 +1,13 @@
-# Personal dotfiles
+# Centaur dotfiles
+
+![Centaur](logo.png)
 
 ## Prerequisite
 
 - GNU Linux, macOS, Cygwin
 - git, zsh, curl/wget
-- tmux, emacs, vim (optional)
+- Recommend: GNU Emacs, tmux
+- Optional: Vim
 
 ## Quickstart
 
