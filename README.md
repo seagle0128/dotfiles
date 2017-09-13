@@ -2,7 +2,7 @@
 
 ![Centaur](logo.png)
 
-Full configurations for terminal on GNU Linux, macOS and Cygwin environments.
+Full and clean configurations for terminal on GNU Linux, macOS and Cygwin environments.
 
 ## Prerequisite
 
@@ -77,7 +77,10 @@ Set your git configurations, e.g. user credentials.
 
 # Screenshots
 
+- Sample UI with Tmux
 ![tmux](https://github.com/ray-g/devstrap/raw/master/docs/snapshots/layout.PNG)
+
+- Git Log
 ![git_log](https://github.com/ray-g/devstrap/raw/master/docs/snapshots/git_log.PNG)
 
 # Acknowledgements
