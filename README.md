@@ -83,6 +83,9 @@ Set your git configurations, e.g. user credentials.
 ## Git Log
 ![git_log](https://github.com/ray-g/devstrap/raw/master/docs/snapshots/git_log.PNG)
 
+## Centaur Emacs
+![Emacs](https://user-images.githubusercontent.com/140797/30391180-20bd0ba8-987e-11e7-9cb4-2aa66a6fd69d.png)
+
 # Acknowledgements
 
 Related projects: [DevStrap](https://github.com/ray-g/devstrap)
