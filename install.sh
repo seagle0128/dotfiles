@@ -171,6 +171,8 @@ cp -n ~/.dotfiles/.zshrc.theme.local ~/.zshrc.theme.local
 ln -s -f ~/.dotfiles/.gitconfig ~/.gitconfig
 if [ "$sysOS" = "Darwin" ]; then
     cp -n ~/.dotfiles/.gitconfig_macOS_local ~/.gitconfig_local
+elif [ "OSTYPE" = "cygwin" ]; then
+    cp -n ~/.dotfiles/.gitconfig_cygwin_local ~/.gitconfig_local
 else
     cp -n ~/.dotfiles/.gitconfig_local ~/.gitconfig_local
 fi
@@ -178,7 +180,6 @@ ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
 
 if [ "$OSTYPE" = "cygwin" ]; then
     ln -s -f ~/.dotfiles/.minttyrc ~/.minttyrc
-    echo "\tfilemode = false" >> ~/.gitconfig_local
 fi
 
 if [ ! -f ~/.zshrc.local ]; then
