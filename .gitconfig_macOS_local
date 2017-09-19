@@ -2,6 +2,8 @@
 [user]
 	name = Vincent Zhang
 	email = seagle0128@gmail.com
+[credential]
+	helper = osxkeychain
 [core]
 	editor = emacs
 [difftool "sourcetree"]

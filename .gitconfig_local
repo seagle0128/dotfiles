@@ -2,5 +2,7 @@
 [user]
 	name = Vincent Zhang
 	email = seagle0128@gmail.com
+[credential]
+	helper = cache --timeout=3600
 [core]
 	editor = emacs
