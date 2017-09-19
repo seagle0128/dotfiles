@@ -178,6 +178,7 @@ ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
 
 if [ "$OSTYPE" = "cygwin" ]; then
     ln -s -f ~/.dotfiles/.minttyrc ~/.minttyrc
+    echo "\tfilemode = false" >> ~/.gitconfig_local
 fi
 
 if [ ! -f ~/.zshrc.local ]; then
