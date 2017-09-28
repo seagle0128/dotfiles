@@ -160,16 +160,15 @@ else
     PROXY=http://127.0.0.1:1087
 fi
 alias showproxy='echo "http_proxy=$http_proxy"; echo "https_proxy=$https_proxy"'
+alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; showproxy'
+alias unsetproxy='export http_proxy=; export https_proxy=; showproxy'
 function toggleproxy()
 {
     if [ -n "$http_proxy" ]; then
-        export http_proxy=
-        export https_proxy=
+        unsetproxy
     else
-        export http_proxy=http://127.0.0.1:1087
-        export https_proxy=http://127.0.0.1:1087
+        setproxy
     fi
-    showproxy
 }
 
 # bind P and N for EMACS mode
