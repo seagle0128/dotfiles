@@ -153,13 +153,24 @@ alias upgrade_oh_my_tmux='cd ~/.tmux && git pull --rebase --stat origin master &
 alias upgrade_env='upgrade_dotfiles && sh ~/.dotfiles/install.sh'
 
 # proxy
-alias setproxy='export http_proxy=http://127.0.0.1:1087; export https_proxy=http://127.0.0.1:1087;'
-alias unsetproxy='export http_proxy=; export https_proxy='
-alias showproxy='echo "http_proxy=$http_proxy"; echo "https_proxy=$https_proxy"'
 if [ -f /opt/XX-Net/start ]; then
     alias startproxy='/opt/XX-Net/start'
-    alias setproxy='export http_proxy=http://127.0.0.1:8087; export https_proxy=http://127.0.0.1:8087'
+    PROXY=http://127.0.0.1:8087
+else
+    PROXY=http://127.0.0.1:1087
 fi
+alias showproxy='echo "http_proxy=$http_proxy"; echo "https_proxy=$https_proxy"'
+function toggleproxy()
+{
+    if [ -n "$http_proxy" ]; then
+        export http_proxy=
+        export https_proxy=
+    else
+        export http_proxy=http://127.0.0.1:1087
+        export https_proxy=http://127.0.0.1:1087
+    fi
+    showproxy
+}
 
 # bind P and N for EMACS mode
 bindkey -M emacs '^P' history-substring-search-up
