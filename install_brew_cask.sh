@@ -22,12 +22,13 @@ if not hash brew 2>/dev/null; then
 fi
 
 # Cask
-brew cask install shadowsocksx-ng
 brew cask install iterm2
+brew cask install emacs
 brew cask install clipy
 brew cask install cheatsheet
 brew cask install hyperswitch
 brew cask install scroll-reverser
+brew cask install shadowsocksx-ng
 brew cask install fliqlo        # Screen Saver
 # brew cask install shiftit       # Replaced by spectacle
 brew cask install spectacle
