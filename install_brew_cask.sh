@@ -27,19 +27,17 @@ brew cask install emacs
 brew cask install clipy
 brew cask install cheatsheet
 brew cask install hyperswitch
-brew cask install scroll-reverser # Replaced by Mos
+brew cask install scroll-reverser # Alternative: Mos
 brew cask install shadowsocksx-ng
 brew cask install fliqlo        # Screen Saver
-# brew cask install shiftit       # Replaced by spectacle
-brew cask install spectacle
-# brew cask install sogouinput
-brew cask install vanilla       # Hide menu bar icons
+brew cask install spectacle     # Deprecated: shiftit
+# brew cask install sogouinput    # Replaced by builtin input
+# brew cask install vanilla       # Hide menu bar icons, buggy
 
 brew cask install google-chrome
 brew cask install firefox
 # brew cask install karabiner-elements # karabiner: Keboard remapping
-brew cask install iina
-# brew cask install mplayerx
+brew cask install iina          # Alternative: mplayerx
 brew cask install osx-fuse
 brew cask install veracrypt
 brew cask install soundflower   # Need soundflowerbed
@@ -50,8 +48,8 @@ brew cask install aliwangwang
 brew cask install thunder
 brew cask install baidunetdisk
 brew cask install bwana
-# brew cask install skype-for-business
 brew cask install java
+# brew cask install skype-for-business
 
 # Cleanup
 brew cask cleanup
