@@ -40,7 +40,7 @@ brew cask install firefox
 brew cask install iina          # Alternative: mplayerx
 brew cask install osx-fuse
 brew cask install veracrypt
-brew cask install soundflower   # Need soundflowerbed
+# brew cask install soundflower   # With soundflowerbed. Deprecated. Replaced by Sound Siphon
 brew cask install sourcetree
 brew cask install visual-studio-code
 
