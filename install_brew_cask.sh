@@ -24,6 +24,7 @@ fi
 # Cask
 brew cask install iterm2
 brew cask install emacs
+brew cask install keycastr
 brew cask install clipy
 brew cask install cheatsheet
 brew cask install fliqlo        # Screen Saver
