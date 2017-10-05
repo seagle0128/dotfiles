@@ -33,6 +33,9 @@ brew cask install mounty          # Mounty for NTFS read/write
 brew cask install spectacle     # Deprecated: shiftit
 brew cask install scroll-reverser # Alternative: Mos
 brew cask install shadowsocksx-ng
+brew cask install sound-siphon
+# brew cask install soundflower   # Deprecated. Replaced by Sound Siphon
+# brew cask install soundflowerbed # Deprecated
 # brew cask install vanilla       # Hide menu bar icons, buggy
 
 brew cask install google-chrome
@@ -40,17 +43,17 @@ brew cask install firefox
 # brew cask install karabiner-elements # karabiner: Keboard remapping
 brew cask install osx-fuse
 brew cask install veracrypt
-# brew cask install soundflower   # With soundflowerbed. Deprecated. Replaced by Sound Siphon
 brew cask install sourcetree
 brew cask install visual-studio-code
 
 brew cask install aliwangwang
-brew cask install thunder
 brew cask install baidunetdisk
 # brew cask install bwana
 brew cask install java
+# brew cask install neteasemusic
 # brew cask install skype-for-business
 # brew cask install sogouinput    # Replaced by builtin input
+brew cask install thunder
 
 # Cleanup
 brew cask cleanup
