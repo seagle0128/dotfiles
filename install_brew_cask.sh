@@ -22,29 +22,29 @@ if not hash brew 2>/dev/null; then
 fi
 
 # Cask
-brew cask install iterm2
-brew cask install emacs
-brew cask install keycastr
-brew cask install clipy
 brew cask install cheatsheet
+brew cask install clipy
+brew cask install emacs
 brew cask install fliqlo        # Screen Saver
-brew cask install hyperswitch
+# brew cask install hyperswitch   # Buggy
 brew cask install iina          # Replace mplayerx
+brew cask install iterm2
+brew cask install keycastr
 brew cask install mounty          # Mounty for NTFS read/write
-brew cask install spectacle     # Deprecated: shiftit
-brew cask install scroll-reverser # Alternative: Mos
+brew cask install scroll-reverser # Alternative: MOS
 brew cask install shadowsocksx-ng
 brew cask install sound-siphon
+brew cask install spectacle     # Deprecated: shiftit
 # brew cask install soundflower   # Deprecated. Replaced by Sound Siphon
 # brew cask install soundflowerbed # Deprecated
 # brew cask install vanilla       # Hide menu bar icons, buggy
 
-brew cask install google-chrome
 brew cask install firefox
+brew cask install google-chrome
 # brew cask install karabiner-elements # karabiner: Keboard remapping
+brew cask install sourcetree
 brew cask install osx-fuse
 brew cask install veracrypt
-brew cask install sourcetree
 brew cask install visual-studio-code
 
 brew cask install aliwangwang
