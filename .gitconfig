@@ -3,15 +3,14 @@
 	autocrlf = false
 	ignorecase = false
 	safecrlf = warn
-[color]
+	editor = emacsclient -c -n -a=\"\"
+	[color]
 	branch = auto
 	diff = auto
 	interactive = auto
 	status = auto
 [push]
 	default = current
-[core]
-	editor = emacs
 [diff]
 	tool = ediff
 [merge]
