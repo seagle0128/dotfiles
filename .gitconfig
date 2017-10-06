@@ -3,7 +3,7 @@
 	autocrlf = false
 	ignorecase = false
 	safecrlf = warn
-	editor = emacsclient -c -n -a=\"\"
+	editor = emacsclient -t -a=\\\"\\\"
 	[color]
 	branch = auto
 	diff = auto
