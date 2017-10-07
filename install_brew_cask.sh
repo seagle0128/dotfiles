@@ -29,7 +29,8 @@ brew cask install fliqlo        # Screen Saver
 brew cask install hyperswitch
 brew cask install iina          # Replace mplayerx
 brew cask install iterm2
-brew cask install keycastr
+brew cask install keycastr      # Show keys on the screen
+brew cask install licecap       # Recording screen as gif
 brew cask install mounty          # Mounty for NTFS read/write
 brew cask install scroll-reverser # Alternative: MOS
 brew cask install shadowsocksx-ng
