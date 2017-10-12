@@ -29,16 +29,6 @@ else
     NORMAL=""
 fi
 
-# Only enable exit-on-error after the non-critical colorization stuff,
-# which may fail on systems lacking tput or terminfo
-# set -e
-
-# Check git
-hash git >/dev/null 2>&1 || {
-    echo "Error: git is not installed"
-    exit 1
-}
-
 # Sync repository
 sync_repo() {
     local repo_uri="$1"
@@ -75,6 +65,17 @@ promote_yn() {
     esac
 }
 
+# Only enable exit-on-error after the non-critical colorization stuff,
+# which may fail on systems lacking tput or terminfo
+# set -e
+
+# Check git
+hash git >/dev/null 2>&1 || {
+    echo "Error: git is not installed"
+    exit 1
+}
+
+# Reset configurations
 if [ -d ~/.oh-my-zsh ] || [ -d ~/.tmux ] || [ -d ~/.fzf ] || [ -d ~/.emacs.d ]; then
     promote_yn "Do you want to reset all configurations?" "continue"
     if [ $continue -eq $YES ]; then
@@ -121,7 +122,6 @@ else
 fi
 
 sync_repo https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/alias-tips
-sync_repo https://github.com/supercrabtree/k ~/.oh-my-zsh/custom/plugins/k
 sync_repo https://github.com/chrissicool/zsh-256color ~/.oh-my-zsh/custom/plugins/zsh-256color
 sync_repo https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 sync_repo https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
