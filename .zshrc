@@ -139,14 +139,20 @@ alias ohmyzsh='$EDITOR ~/.oh-my-zsh'
 alias h='history'
 alias c='clear'
 
+# emacs
 alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
 alias rmelc='rm -f ~/.emacs.d/lisp/*.elc'
 alias restart_emacs='emacsclient -e "(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))" && te'
 
+# upgrade
 alias upgrade_dotfiles='cd ~/.dotfiles && git pull --rebase --stat origin master && cd - >/dev/null && src'
 alias upgrade_emacs='cd ~/.emacs.d && git pull --rebase --stat origin master && cd - >/dev/null'
 alias upgrade_oh_my_tmux='cd ~/.tmux && git pull --rebase --stat origin master && cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles && sh ~/.dotfiles/install.sh'
+
+# brew
+alias bu='brew update && brew upgrade && brew cleanup'
+alias bcu='brew cu --all --yes --no-brew-update --cleanup'
 
 # proxy
 if [ -f /opt/XX-Net/start ]; then
@@ -158,14 +164,7 @@ fi
 alias showproxy='echo "http_proxy=$http_proxy"; echo "https_proxy=$https_proxy"'
 alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; showproxy'
 alias unsetproxy='export http_proxy=; export https_proxy=; showproxy'
-function toggleproxy()
-{
-    if [ -n "$http_proxy" ]; then
-        unsetproxy
-    else
-        setproxy
-    fi
-}
+alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
 
 # bind P and N for EMACS mode
 bindkey -M emacs '^P' history-substring-search-up
