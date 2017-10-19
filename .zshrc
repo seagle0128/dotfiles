@@ -150,6 +150,9 @@ alias upgrade_emacs='cd ~/.emacs.d && git pull --rebase --stat origin master && 
 alias upgrade_oh_my_tmux='cd ~/.tmux && git pull --rebase --stat origin master && cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles && sh ~/.dotfiles/install.sh'
 
+# apt
+alias apu='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y'
+
 # brew
 alias bu='brew update && brew upgrade && brew cleanup'
 alias bcu='brew cu --all --yes --no-brew-update --cleanup'
