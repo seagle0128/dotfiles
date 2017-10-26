@@ -120,7 +120,7 @@ if hash go 2>/dev/null; then
     GO_PROJ=$HOME/goprojects     # Your go projects root
     export GOPATH=$GO_CACHE:$GO_PKGS:$GO_PROJ
     export PATH=$PATH:$GO_CACHE/bin:$GO_PKGS/bin:$GO_PROJ/bin
-    alias gosave='cp -rpf ${GO_CACHE}/* ${GO_PKGS}'
+    alias gosave='[ -d "$GO_CACHE" ] && ([ -d "$GO_PKGS" ] || mkdir ${GO_PKGS}) && cp -RLpf ${GO_CACHE}/* ${GO_PKGS}'
     alias goclean='[ -d "$GO_CACHE" ] && rm -rf ${GO_CACHE}/*'
 fi
 
