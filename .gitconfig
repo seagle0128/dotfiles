@@ -4,6 +4,7 @@
 	ignorecase = false
 	safecrlf = warn
 	editor = emacsclient -t -a=\\\"\\\"
+	quotepath = false
 [color]
 	branch = auto
 	diff = auto

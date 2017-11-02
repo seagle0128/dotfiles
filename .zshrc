@@ -98,31 +98,34 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 export DEFAULT_USER=$USER
+export PATH=$HOME/bin:/usr/local/sbin:$PATH
 
-if hash rbenv 2> /dev/null; then
-    export PATH=$HOME/.rbenv/shims:$PATH
-fi
+export PATH=$HOME/.rbenv/shims:$PATH # ruby
+export PATH=$HOME/.fzf/bin:$PATH     # fzf
 
 if [[ $sysOS == "Darwin" ]]; then
-    export PATH=/usr/local/sbin:$PATH
-
     # Homebrew bottles
-    if hash brew 2>/dev/null; then
-        export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
-        # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
-    fi
+    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 fi
 
 # Golang
-if hash go 2>/dev/null; then
-    GO_CACHE=$HOME/.gopath/cache # First GOPATH, 'go get' saves files here, and it's always safe to be cleaned
-    GO_PKGS=$HOME/.gopath/pkgs   # For 3rd party go packages, use 'gosave' to sync all packages from cache to this folder or moved manually
-    GO_PROJ=$HOME/goprojects     # Your go projects root
-    export GOPATH=$GO_CACHE:$GO_PKGS:$GO_PROJ
-    export PATH=$PATH:$GO_CACHE/bin:$GO_PKGS/bin:$GO_PROJ/bin
-    alias gosave='cp -rpf ${GO_CACHE}/* ${GO_PKGS}'
-    alias goclean='[ -d "$GO_CACHE" ] && rm -rf ${GO_CACHE}/*'
-fi
+export GOPATH=$HOME/.gopath
+export PATH=$GOPATH/bin:$PATH
+
+function goclean() {
+    go clean -i -n $1
+    go clean -i $1
+    rm -rf $GOPATH/src/$1
+    if [ -d $GOPATH/pkg/${sysOS:l}_amd64/$1 ]; then
+        rm -rf $GOPATH/pkg/${sysOS:l}_amd64/$1;
+    fi
+}
+
+function goclean_test() {
+    go clean -i -n $1
+    tree -L 1 $GOPATH/src/$1
+    tree -L 1 $GOPATH/pkg/${sysOS:l}_amd64/$1
+}
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
