@@ -1,4 +1,4 @@
-# ZSH configuration
+# Zsh configuration
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -97,36 +97,6 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-export DEFAULT_USER=$USER
-export PATH=$HOME/bin:/usr/local/sbin:$PATH
-
-export PATH=$HOME/.rbenv/shims:$PATH # ruby
-export PATH=$HOME/.fzf/bin:$PATH     # fzf
-
-if [[ $sysOS == "Darwin" ]]; then
-    # Homebrew bottles
-    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
-fi
-
-# Golang
-export GOPATH=$HOME/.gopath
-export PATH=$GOPATH/bin:$PATH
-
-function goclean() {
-    go clean -i -n $1
-    go clean -i $1
-    rm -rf $GOPATH/src/$1
-    if [ -d $GOPATH/pkg/${sysOS:l}_amd64/$1 ]; then
-        rm -rf $GOPATH/pkg/${sysOS:l}_amd64/$1;
-    fi
-}
-
-function goclean_test() {
-    go clean -i -n $1
-    tree -L 1 $GOPATH/src/$1
-    tree -L 1 $GOPATH/pkg/${sysOS:l}_amd64/$1
-}
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -167,7 +137,23 @@ alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; showproxy'
 alias unsetproxy='export http_proxy=; export https_proxy=; showproxy'
 alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
 
-# bind P and N for EMACS mode
+# functions
+function goclean() {
+    go clean -i -n $1
+    go clean -i $1
+    rm -rf $GOPATH/src/$1
+    if [ -d $GOPATH/pkg/${sysOS:l}_amd64/$1 ]; then
+        rm -rf $GOPATH/pkg/${sysOS:l}_amd64/$1;
+    fi
+}
+
+function goclean_test() {
+    go clean -i -n $1
+    tree -L 1 $GOPATH/src/$1
+    tree -L 1 $GOPATH/pkg/${sysOS:l}_amd64/$1
+}
+
+# bind P and N for Emacs mode
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
 

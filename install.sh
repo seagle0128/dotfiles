@@ -44,6 +44,7 @@ sync_repo() {
 
 # Clean all configurations
 clean_dotfiles() {
+    [ -f ~/.zshenv ] && mv ~/.zshenv ~/.zshenv.bak
     [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.bak
     [ -f ~/.vimrc ] && mv ~/.vimrc ~/.vimrc.bak
     [ -d ~/.emacs.d ] && mv ~/.emacs.d ~/.emacs.d.bak
@@ -158,6 +159,7 @@ sync_repo https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
 printf "${BLUE}Installing dotfiles...${NORMAL}\n"
 sync_repo https://github.com/seagle0128/dotfiles.git ~/.dotfiles
 
+ln -s -f ~/.dotfiles/.zshenv ~/.zshenv
 ln -s -f ~/.dotfiles/.zshrc ~/.zshrc
 ln -s -f ~/.dotfiles/.vimrc ~/.vimrc
 ln -s -f ~/.dotfiles/.npmrc ~/.npmrc
