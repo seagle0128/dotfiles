@@ -34,10 +34,10 @@ brew cask install licecap       # Recording screen as gif
 brew cask install mounty          # Mounty for NTFS read/write
 # brew cask install scroll-reverser # Alternative: MOS
 brew cask install shadowsocksx-ng
-brew cask install sound-siphon
+# brew cask install sound-siphon
 brew cask install soundflower
 brew cask install soundflowerbed
-brew cask install spectacle
+brew cask install spectacle     # window management
 # brew cask install vanilla       # Hide menu bar icons, buggy
 
 # brew cask install firefox
@@ -53,7 +53,6 @@ brew cask install sogouinput
 # brew cask install acrobat-reader
 brew cask install aliwangwang
 brew cask install baidunetdisk
-# brew cask install bwana
 brew cask install java
 # brew cask install neteasemusic
 # brew cask install skype-for-business
