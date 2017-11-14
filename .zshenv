@@ -13,5 +13,5 @@ export PATH=$HOME/.fzf/bin:$PATH
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 # Golang
-export GOPATH=$HOME/.gopath
+export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
