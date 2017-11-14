@@ -64,7 +64,7 @@ plugins=(emacs git history-substring-search golang
          python ruby sudo themes z zsh_reload)
 
 if [[ $sysOS == "Darwin" ]]; then
-    plugins+=(osx)
+    plugins+=(osx xcode)
 fi
 
 if hash tmux 2>/dev/null; then
