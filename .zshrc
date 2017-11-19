@@ -117,6 +117,7 @@ alias upgrade_dotfiles='cd ~/.dotfiles && git pull --rebase --stat origin master
 alias upgrade_emacs='cd ~/.emacs.d && git pull --rebase --stat origin master && cd - >/dev/null'
 alias upgrade_oh_my_tmux='cd ~/.tmux && git pull --rebase --stat origin master && cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles && sh ~/.dotfiles/install.sh'
+alias upgrade_go='sh ~/.dotfiles/install_go.sh'
 
 # apt
 alias apu='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y'
