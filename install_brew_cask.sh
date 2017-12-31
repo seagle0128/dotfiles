@@ -5,60 +5,79 @@
 # URL: https://github.com/seagle0128/dotfiles
 #############################################################
 
-# Check OS
-sysOS=`uname -s`
-if [ "$sysOS" != "Darwin" ] ; then
-    echo "Error: only install software via brew_cask on macOS."
-    exit 1
-fi
+apps=(
+    cheatsheet
+    clipy
+    fliqlo        # Screen Saver
+    # hyperswitch
+    iterm2
+    keycastr      # Show keys on the screen
+    licecap       # Recording screen as gif
+    mounty        # Mounty for NTFS read/write
+    mos           # Smooth and reverse scroll. alternative: scroll-reverser
+    shadowsocksx-ng
+    spectacle     # Window management
+    # vanilla       # Hide menu bar icons, buggy
 
-# Brew
-if not hash brew 2>/dev/null; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    iina          # Media player
+    firefox
+    google-chrome
+    # karabiner-elements # karabiner: Keboard remapping
+    # netspot       # Wifi signal analysis and scanner
+    osxfuse
+    veracrypt
+    sogouinput
 
-    brew tap caskroom/cask
-    cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask
-    git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
-fi
+    # Audio
+    # sound-siphon
+    soundflower
+    soundflowerbed
 
-# Cask
-brew cask install cheatsheet
-brew cask install clipy
-brew cask install fliqlo        # Screen Saver
-# brew cask install hyperswitch
-brew cask install iterm2
-brew cask install keycastr      # Show keys on the screen
-brew cask install licecap       # Recording screen as gif
-brew cask install mounty        # Mounty for NTFS read/write
-brew cask install mos           # Smooth and reverse scroll. alternative: scroll-reverser
-brew cask install shadowsocksx-ng
-# brew cask install sound-siphon
-brew cask install soundflower soundflowerbed
-brew cask install spectacle     # window management
-# brew cask install vanilla       # Hide menu bar icons, buggy
+    # Development
+    # java          # optional
+    docker
+    emacs
+    sourcetree
+    typora        # Markdown editor
+    visual-studio-code
 
-brew cask install iina          # Replace mplayerx
-brew cask install firefox
-brew cask install google-chrome
-# brew cask install karabiner-elements # karabiner: Keboard remapping
-# brew cask install netspot       # Wifi signal analysis and scanner
-brew cask install osxfuse veracrypt
-brew cask install sogouinput
+    # # Utils
+    # acrobat-reader
+    aliwangwang
+    baidunetdisk
+    # neteasemusic
+    # skype-for-business
+    thunder
+)
 
-# Development
-brew cask install emacs
-brew cask install docker
-# brew cask install java          # optional
-brew cask install sourcetree
-brew cask install visual-studio-code
+function check {
+    # Check OS
+    sysOS=`uname -s`
+    if [ "$sysOS" != "Darwin" ] ; then
+        echo "Error: only install software via brew_cask on macOS."
+        exit 1
+    fi
 
-# Utils
-# brew cask install acrobat-reader
-brew cask install aliwangwang
-brew cask install baidunetdisk
-# brew cask install neteasemusic
-# brew cask install skype-for-business
-brew cask install thunder
+    # Check brew
+    if not hash brew 2>/dev/null; then
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-# Cleanup
-brew cask cleanup
+        brew tap caskroom/cask
+        cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask
+        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
+    fi
+}
+
+function install () {
+    for app in ${apps[@]}; do
+        brew cask install ${app}
+    done
+}
+
+function cleanup {
+    brew cask cleanup
+}
+
+check
+install
+cleanup
