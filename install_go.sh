@@ -20,9 +20,9 @@ packages=(
     github.com/rogpeppe/godef
     github.com/golang/lint/golint
     github.com/derekparker/delve/cmd/dlv
+    github.com/aarzilli/gdlv
     github.com/josharian/impl
     github.com/cweill/gotests/...
-    sourcegraph.com/sqs/goreturns
 )
 
 function check {
