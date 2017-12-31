@@ -29,8 +29,8 @@ brew cask install fliqlo        # Screen Saver
 brew cask install iterm2
 brew cask install keycastr      # Show keys on the screen
 brew cask install licecap       # Recording screen as gif
-brew cask install mounty          # Mounty for NTFS read/write
-# brew cask install scroll-reverser # Alternative: MOS
+brew cask install mounty        # Mounty for NTFS read/write
+brew cask install mos           # Smooth and reverse scroll. alternative: scroll-reverser
 brew cask install shadowsocksx-ng
 # brew cask install sound-siphon
 brew cask install soundflower soundflowerbed
