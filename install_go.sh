@@ -5,22 +5,38 @@
 # URL: https://github.com/seagle0128/dotfiles
 #############################################################
 
-if not hash go 2>/dev/null; then
-    echo "Error: go is not installed"
-fi
 
-# go tools
-go get -u golang.org/x/tools/cmd/godoc
-go get -u golang.org/x/tools/cmd/goimports
-go get -u golang.org/x/tools/cmd/gorename
-go get -u golang.org/x/tools/cmd/gotype
-go get -u golang.org/x/tools/cmd/guru
+# Go packages
+packages=(
+    # go tools
+    golang.org/x/tools/cmd/godoc
+    golang.org/x/tools/cmd/goimports
+    golang.org/x/tools/cmd/gorename
+    golang.org/x/tools/cmd/gotype
+    golang.org/x/tools/cmd/guru
 
-# 3rd party
-go get -u github.com/nsf/gocode
-go get -u github.com/rogpeppe/godef
-go get -u github.com/golang/lint/golint
-go get -u github.com/derekparker/delve/cmd/dlv
-go get -u github.com/josharian/impl
-go get -u github.com/cweill/gotests/...
-go get -u sourcegraph.com/sqs/goreturns
+    # 3rd party
+    github.com/nsf/gocode
+    github.com/rogpeppe/godef
+    github.com/golang/lint/golint
+    github.com/derekparker/delve/cmd/dlv
+    github.com/josharian/impl
+    github.com/cweill/gotests/...
+    sourcegraph.com/sqs/goreturns
+)
+
+function check {
+    if not hash go 2>/dev/null; then
+        echo "Error: go is not installed"
+        exit
+    fi
+}
+
+function install () {
+    for p in ${packages[@]}; do
+        go get -u ${p}
+    done
+}
+
+check
+install
