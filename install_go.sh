@@ -23,12 +23,14 @@ packages=(
     github.com/aarzilli/gdlv
     github.com/josharian/impl
     github.com/cweill/gotests/...
+    github.com/fatih/gomodifytags
+    github.com/davidrjenni/reftools/cmd/fillstruct
 )
 
 function check {
     if not hash go 2>/dev/null; then
         echo "Error: go is not installed"
-        exit
+        exit 1
     fi
 }
 
