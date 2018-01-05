@@ -61,7 +61,7 @@ if [ -f ~/.zshrc.theme.local ]; then source ~/.zshrc.theme.local; fi
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(emacs git history-substring-search golang
          copydir copyfile colorize colored-man-pages d
-         docker docker-compose docker-machine
+         docker docker-compose docker-machine extract
          python ruby rbenv sudo themes z zsh_reload)
 
 if [[ $sysOS == "Darwin" ]]; then
