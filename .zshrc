@@ -60,7 +60,7 @@ if [ -f ~/.zshrc.theme.local ]; then source ~/.zshrc.theme.local; fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(emacs git history-substring-search golang
-         copydir copyfile colorize colored-man-pages
+         copydir copyfile colorize colored-man-pages d
          docker docker-compose docker-machine
          python ruby rbenv sudo themes z zsh_reload)
 
@@ -107,6 +107,7 @@ alias zshconf='$EDITOR ~/.zshrc'
 alias ohmyzsh='$EDITOR ~/.oh-my-zsh'
 alias h='history'
 alias c='clear'
+alias rt='trash'                # npm install --global trash-cli
 
 # emacs
 alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
