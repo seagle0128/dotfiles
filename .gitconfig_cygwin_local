@@ -6,3 +6,5 @@
 	helper = cache --timeout=3600
 [core]
 	filemode = false
+[github]
+	user = seagle0128
