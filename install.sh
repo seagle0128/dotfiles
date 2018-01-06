@@ -176,7 +176,7 @@ ln -s -f ~/.dotfiles/.npmrc ~/.npmrc
 ln -s -f ~/.dotfiles/.gemrc ~/.gemrc
 ln -s -f ~/.dotfiles/.tmux.conf.local ~/.tmux.conf.local
 
-cp -n ~/.dotfiles/.zshrc.theme.local ~/.zshrc.theme.local
+cp -n ~/.dotfiles/.zshrc.local ~/.zshrc.local
 
 [ ! -d ~/.pip ] && mkdir ~/.pip; ln -s -f ~/.dotfiles/.pip.conf ~/.pip/pip.conf
 
@@ -192,11 +192,6 @@ ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
 
 if [ "$OSTYPE" = "cygwin" ]; then
     ln -s -f ~/.dotfiles/.minttyrc ~/.minttyrc
-fi
-
-if [ ! -f ~/.zshrc.local ]; then
-    touch ~/.zshrc.local
-    echo "# Please add your personal configurations here" > ~/.zshrc.local
 fi
 
 # Entering zsh

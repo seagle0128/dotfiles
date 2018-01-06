@@ -15,7 +15,8 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="robbyrussell"
 
 # Source customization
-if [ -f ~/.zshrc.theme.local ]; then source ~/.zshrc.theme.local; fi
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -60,12 +61,11 @@ if [ -f ~/.zshrc.theme.local ]; then source ~/.zshrc.theme.local; fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(emacs git history-substring-search golang
-         copydir copyfile colorize colored-man-pages d
-         docker docker-compose docker-machine extract
-         python ruby rbenv sudo themes z zsh_reload)
+         colored-man-pages d extract
+         sudo themes z zsh_reload)
 
 if [[ $sysOS == "Darwin" ]]; then
-    plugins+=(osx xcode)
+    plugins+=(osx)
 fi
 
 if hash tmux 2>/dev/null; then
@@ -73,8 +73,11 @@ if hash tmux 2>/dev/null; then
 fi
 
 # Custom plugins
-plugins+=(alias-tips zsh-256color zsh-autosuggestions
-          zsh-syntax-highlighting zsh-completions)
+plugins+=(alias-tips
+          zsh-256color
+          zsh-autosuggestions
+          zsh-syntax-highlighting
+          zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -155,13 +158,3 @@ function goclean_test() {
     tree -L 1 $GOPATH/src/$1
     tree -L 1 $GOPATH/pkg/${sysOS:l}_amd64/$1
 }
-
-# bind P and N for Emacs mode
-bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' history-substring-search-down
-
-# Fuzzy finder
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Source customization
-if [ -f ~/.zshrc.local ]; then source ~/.zshrc.local; fi

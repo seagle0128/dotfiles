@@ -1,0 +1,9 @@
+# Local configurations -*- mode: sh -*-
+
+# plugins
+plugins+=()
+
+# theme
+ZSH_THEME="steeef"                  # ys, dst, steeef, wedisagree
+
+# alias/functions/env ...
