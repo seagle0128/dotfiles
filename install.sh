@@ -8,6 +8,13 @@
 # Get OS name
 sysOS=`uname -s`
 
+# Consts
+DOTFILES="~/.dotfiles"
+ZSH="~/.oh-my-zsh"
+ZSH_CUSTOM=$ZSH/custom
+ZSH_CUSTOM_PLUGINS=$ZSH_CUSTOM/plugins
+TMUX="~/.tmux"
+
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
 if which tput >/dev/null 2>&1; then
@@ -36,7 +43,7 @@ sync_repo() {
 
     if [ ! -e "$repo_path" ]; then
         mkdir -p "$repo_path"
-        git clone "$repo_uri" "$repo_path"
+        git clone "https://github.com/$repo_uri" "$repo_path"
     else
         cd "$repo_path" && git pull origin master && cd - >/dev/null
     fi
@@ -49,7 +56,7 @@ clean_dotfiles() {
     [ -f ~/.vimrc ] && mv ~/.vimrc ~/.vimrc.bak
     [ -d ~/.emacs.d ] && mv ~/.emacs.d ~/.emacs.d.bak
 
-    rm -rf ~/.oh-my-zsh ~/.tmux ~/.fzf ~/.dotfiles
+    rm -rf $ZSH $TMUX ~/.fzf $DOTFILES
     rm -f ~/.tmux.conf ~/.tmux.local ~/.fzf.*
     rm -f ~/.gitconfig ~/.gitignore_global ~/.gitconfig.local
 }
@@ -77,7 +84,7 @@ hash git >/dev/null 2>&1 || {
 }
 
 # Reset configurations
-if [ -d ~/.oh-my-zsh ] || [ -d ~/.tmux ] || [ -d ~/.fzf ] || [ -d ~/.emacs.d ]; then
+if [ -d $ZSH ] || [ -d $TMUX ] || [ -d ~/.fzf ] || [ -d ~/.emacs.d ]; then
     promote_yn "Do you want to reset all configurations?" "continue"
     if [ $continue -eq $YES ]; then
         clean_dotfiles
@@ -116,23 +123,26 @@ fi
 # Oh My Zsh
 printf "${BLUE}Installing Oh My Zsh...${NORMAL}\n"
 printf "${BLUE}You need to input password to change the default shell to zsh.${NORMAL}\n"
-if [ ! -e ~/.oh-my-zsh ]; then
+if [ ! -e $ZSH ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's/env zsh/ /g')" > /dev/null
 else
-    cd ~/.oh-my-zsh && git pull origin master && cd - >/dev/null
+    cd $ZSH && git pull origin master && cd - >/dev/null
 fi
 
-sync_repo https://github.com/djui/alias-tips.git ~/.oh-my-zsh/custom/plugins/alias-tips
-sync_repo https://github.com/chrissicool/zsh-256color ~/.oh-my-zsh/custom/plugins/zsh-256color
-sync_repo https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-sync_repo https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-sync_repo https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
+sync_repo djui/alias-tips $ZSH_CUSTOM_PLUGINS/alias-tips
+sync_repo chrissicool/zsh-256color $ZSH_CUSTOM_PLUGINS/zsh-256color
+
+sync_repo zsh-users/zsh-autosuggestions $ZSH_CUSTOM_PLUGINS/zsh-autosuggestions
+sync_repo zsh-users/zsh-completions $ZSH_CUSTOM_PLUGINS/zsh-completions
+# sync_repo zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM_PLUGINS/zsh-syntax-highlighting
+sync_repo zdharma/fast-syntax-highlighting $ZSH_CUSTOM_PLUGINS/fast-syntax-highlighting
+sync_repo zsh-users/zsh-history-substring-search $ZSH_CUSTOM_PLUGINS/zsh-history-substring-search
 
 # Oh My Tmux
 printf "${BLUE}Installing Oh My Tmux...${NORMAL}\n"
-sync_repo https://github.com/gpakosz/.tmux.git ~/.tmux
-ln -s -f ~/.tmux/.tmux.conf ~/.tmux.conf
-# cp ~/.tmux/.tmux.conf.local ~/.tmux.conf.local
+sync_repo gpakosz/.tmux $TMUX
+ln -s -f $TMUX/.tmux.conf ~/.tmux.conf
+# cp $TMUX/.tmux.conf.local ~/.tmux.conf.local
 
 # FZF
 printf "${BLUE}Installing FZF...${NORMAL}\n"
@@ -163,35 +173,35 @@ fi
 
 # Emacs
 printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"
-sync_repo https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
+sync_repo seagle0128/.emacs.d ~/.emacs.d
 
 # Dotfiles
 printf "${BLUE}Installing dotfiles...${NORMAL}\n"
-sync_repo https://github.com/seagle0128/dotfiles.git ~/.dotfiles
+sync_repo seagle0128/dotfiles $DOTFILES
 
-ln -s -f ~/.dotfiles/.zshenv ~/.zshenv
-ln -s -f ~/.dotfiles/.zshrc ~/.zshrc
-ln -s -f ~/.dotfiles/.vimrc ~/.vimrc
-ln -s -f ~/.dotfiles/.npmrc ~/.npmrc
-ln -s -f ~/.dotfiles/.gemrc ~/.gemrc
-ln -s -f ~/.dotfiles/.tmux.conf.local ~/.tmux.conf.local
+ln -s -f $DOTFILES/.zshenv ~/.zshenv
+ln -s -f $DOTFILES/.zshrc ~/.zshrc
+ln -s -f $DOTFILES/.vimrc ~/.vimrc
+ln -s -f $DOTFILES/.npmrc ~/.npmrc
+ln -s -f $DOTFILES/.gemrc ~/.gemrc
+ln -s -f $DOTFILES/.tmux.conf.local ~/.tmux.conf.local
 
-cp -n ~/.dotfiles/.zshrc.local ~/.zshrc.local
+cp -n $DOTFILES/.zshrc.local ~/.zshrc.local
 
-[ ! -d ~/.pip ] && mkdir ~/.pip; ln -s -f ~/.dotfiles/.pip.conf ~/.pip/pip.conf
+[ ! -d ~/.pip ] && mkdir ~/.pip; ln -s -f $DOTFILES/.pip.conf ~/.pip/pip.conf
 
-ln -s -f ~/.dotfiles/.gitconfig ~/.gitconfig
+ln -s -f $DOTFILES/.gitconfig ~/.gitconfig
 if [ "$sysOS" = "Darwin" ]; then
-    cp -n ~/.dotfiles/.gitconfig_macOS_local ~/.gitconfig_local
+    cp -n $DOTFILES/.gitconfig_macOS_local ~/.gitconfig_local
 elif [ "OSTYPE" = "cygwin" ]; then
-    cp -n ~/.dotfiles/.gitconfig_cygwin_local ~/.gitconfig_local
+    cp -n $DOTFILES/.gitconfig_cygwin_local ~/.gitconfig_local
 else
-    cp -n ~/.dotfiles/.gitconfig_local ~/.gitconfig_local
+    cp -n $DOTFILES/.gitconfig_local ~/.gitconfig_local
 fi
-ln -s -f ~/.dotfiles/.gitignore_global ~/.gitignore_global
+ln -s -f $DOTFILES/.gitignore_global ~/.gitignore_global
 
 if [ "$OSTYPE" = "cygwin" ]; then
-    ln -s -f ~/.dotfiles/.minttyrc ~/.minttyrc
+    ln -s -f $DOTFILES/.minttyrc ~/.minttyrc
 fi
 
 # Entering zsh

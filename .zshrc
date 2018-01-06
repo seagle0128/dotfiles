@@ -16,7 +16,6 @@ ZSH_THEME="robbyrussell"
 
 # Source customization
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -26,7 +25,7 @@ ZSH_THEME="robbyrussell"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -60,9 +59,8 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(emacs git history-substring-search golang
-         colored-man-pages d extract
-         sudo themes z zsh_reload)
+plugins+=(emacs git colored-man-pages d extract
+          sudo themes z zsh_reload)
 
 if [[ $sysOS == "Darwin" ]]; then
     plugins+=(osx)
@@ -76,12 +74,17 @@ fi
 plugins+=(alias-tips
           zsh-256color
           zsh-autosuggestions
-          zsh-syntax-highlighting
+          # zsh-syntax-highlighting
+          fast-syntax-highlighting
+          zsh-history-substring-search
           zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# Load FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
