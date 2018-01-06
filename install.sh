@@ -151,6 +151,16 @@ else
 fi
 [ -f $fzf_install ] && $fzf_install --all >/dev/null 2>&1
 
+# Peco
+printf "${BLUE}Installing Peco...${NORMAL}\n"
+if [ "$sysOS" = "Darwin" ]; then
+    if hash brew 2>/dev/null && not hash peco 2>/dev/null; then
+        brew install peco
+    fi
+else
+    echo "${GREEN}Please download from https://github.com/peco/peco/releases. $(NORMAL}\n)"
+fi
+
 # Emacs
 printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"
 sync_repo https://github.com/seagle0128/.emacs.d.git ~/.emacs.d
