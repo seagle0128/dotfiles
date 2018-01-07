@@ -14,9 +14,6 @@ export ZSH=$HOME/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
-# Source customization
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -79,6 +76,9 @@ plugins+=(alias-tips
           fast-syntax-highlighting
           zsh-history-substring-search
           zsh-completions)
+
+# Local customizations, e.g. theme, plugins, aliases, etc.
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 source $ZSH/oh-my-zsh.sh
 
