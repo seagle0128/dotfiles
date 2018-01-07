@@ -9,11 +9,11 @@
 sysOS=`uname -s`
 
 # Consts
-DOTFILES="~/.dotfiles"
-ZSH="~/.oh-my-zsh"
+DOTFILES="$HOME/.dotfiles"
+TMUX="$HOME/.tmux"
+ZSH="$HOME/.oh-my-zsh"
 ZSH_CUSTOM=$ZSH/custom
 ZSH_CUSTOM_PLUGINS=$ZSH_CUSTOM/plugins
-TMUX="~/.tmux"
 
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
@@ -115,8 +115,8 @@ if [ "$sysOS" = "Darwin" ]; then
         cd - >/dev/null
 
         # Upgrade
-        brew update && brew upgrade && brew cleanup
-        brew cu --all --yes --no-brew-update --cleanup
+        # brew update && brew upgrade && brew cleanup
+        # brew cu --all --yes --no-brew-update --cleanup
     fi
 fi
 
