@@ -9,9 +9,9 @@
 sysOS=`uname -s`
 
 # Consts
-DOTFILES="$HOME/.dotfiles"
-TMUX="$HOME/.tmux"
-ZSH="$HOME/.oh-my-zsh"
+DOTFILES=$HOME/.dotfiles
+TMUX=$HOME/.tmux
+ZSH=$HOME/.oh-my-zsh
 ZSH_CUSTOM=$ZSH/custom
 ZSH_CUSTOM_PLUGINS=$ZSH_CUSTOM/plugins
 
