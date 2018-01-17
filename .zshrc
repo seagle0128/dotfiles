@@ -57,7 +57,7 @@ DISABLE_UPDATE_PROMPT="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins+=(emacs git colored-man-pages d extract
+plugins+=(git colored-man-pages extract
           sudo themes z zsh_reload)
 
 if [[ $sysOS == "Darwin" ]]; then
@@ -117,6 +117,10 @@ alias c='clear'
 alias rt='trash'                # npm install --global trash-cli
 
 # emacs
+export EDITOR="emacsclient -a \"\" -n"
+alias e=$EDITOR
+alias ef="$EDITOR -c"
+alias te="emacsclient -a \"\" -nw"
 alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
 alias rmelc='rm -f ~/.emacs.d/lisp/*.elc'
 alias restart_emacs='emacsclient -e "(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))" && te'
