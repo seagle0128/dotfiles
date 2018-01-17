@@ -1,6 +1,7 @@
-# Zsh envioronment
+# ZSH envioronment
 
 export DEFAULT_USER=$USER
+export EDITOR='emacsclient -a "" -n'
 export PATH=$HOME/bin:/usr/local/sbin:$PATH
 
 # Ruby

@@ -1,9 +1,33 @@
 # Local configurations -*- mode: sh -*-
 
 # theme
-ZSH_THEME="steeef"                  # ys, dst, steeef, wedisagree
+antigen theme steeef            # ys, dst, steeef, wedisagree, robbyrussell
 
 # plugins
-plugins+=()
+antigen bundle golang
+antigen bundle python
+antigen bundle ruby
+antigen bundle docker
+antigen bundle docker-compose
+antigen bundle docker-machine
 
-# alias/functions/env ...
+# env
+# export EDITOR=vim
+
+# aliases
+
+# functions
+function goclean() {
+    go clean -i -n $1
+    go clean -i $1
+    rm -rf $GOPATH/src/$1
+    if [ -d $GOPATH/pkg/${sysOS:l}_amd64/$1 ]; then
+        rm -rf $GOPATH/pkg/${sysOS:l}_amd64/$1;
+    fi
+}
+
+function goclean_test() {
+    go clean -i -n $1
+    tree -L 1 $GOPATH/src/$1
+    tree -L 1 $GOPATH/pkg/${sysOS:l}_amd64/$1
+}

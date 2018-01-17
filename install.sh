@@ -10,10 +10,8 @@ sysOS=`uname -s`
 
 # Consts
 DOTFILES=$HOME/.dotfiles
+ZSH=$HOME/.antigen
 TMUX=$HOME/.tmux
-ZSH=$HOME/.oh-my-zsh
-ZSH_CUSTOM=$ZSH/custom
-ZSH_CUSTOM_PLUGINS=$ZSH_CUSTOM/plugins
 
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
@@ -120,23 +118,10 @@ if [ "$sysOS" = "Darwin" ]; then
     fi
 fi
 
-# Oh My Zsh
-printf "${BLUE}Installing Oh My Zsh...${NORMAL}\n"
-printf "${BLUE}You need to input password to change the default shell to zsh.${NORMAL}\n"
-if [ ! -e $ZSH ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's/env zsh/ /g')" > /dev/null
-else
-    cd $ZSH && git pull origin master && cd - >/dev/null
-fi
-
-sync_repo djui/alias-tips $ZSH_CUSTOM_PLUGINS/alias-tips
-sync_repo chrissicool/zsh-256color $ZSH_CUSTOM_PLUGINS/zsh-256color
-
-sync_repo zsh-users/zsh-autosuggestions $ZSH_CUSTOM_PLUGINS/zsh-autosuggestions
-sync_repo zsh-users/zsh-completions $ZSH_CUSTOM_PLUGINS/zsh-completions
-# sync_repo zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM_PLUGINS/zsh-syntax-highlighting
-sync_repo zdharma/fast-syntax-highlighting $ZSH_CUSTOM_PLUGINS/fast-syntax-highlighting
-sync_repo zsh-users/zsh-history-substring-search $ZSH_CUSTOM_PLUGINS/zsh-history-substring-search
+# Antigen: the plugin manager for zsh
+printf "${BLUE}Installing Antigen...${NORMAL}\n"
+if [ ! -e $ZSH ]; then mkdir $ZSH; fi
+curl -L git.io/antigen > ~/.antigen/antigen.zsh
 
 # Oh My Tmux
 printf "${BLUE}Installing Oh My Tmux...${NORMAL}\n"
