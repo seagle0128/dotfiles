@@ -120,7 +120,7 @@ fi
 
 # Antigen: the plugin manager for zsh
 printf "${BLUE}Installing Antigen...${NORMAL}\n"
-if [ ! -e $ZSH ]; then mkdir $ZSH; fi
+if [ ! -e $ZSH ]; then mkdir -p $ZSH; fi
 curl -L git.io/antigen > ~/.antigen/antigen.zsh
 
 # Oh My Tmux
