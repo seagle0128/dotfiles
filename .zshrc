@@ -1,5 +1,8 @@
+# Zsh configuration
+
 source ~/.antigen/antigen.zsh
 
+# Configure Antigen.
 typeset -a ANTIGEN_CHECK_FILES=(~/.zshrc ~/.zshrc.local)
 
 # Load the oh-my-zsh's library.
@@ -11,9 +14,9 @@ antigen bundle colored-man-pages
 antigen bundle extract
 antigen bundle sudo
 antigen bundle z
-antigen bundle djui/alias-tips
 
-# Syntax highlighting bundle.
+# Misc bundles.
+antigen bundle djui/alias-tips
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zdharma/fast-syntax-highlighting
 # antigen bundle zsh-users/zsh-syntax-highlighting
@@ -29,7 +32,7 @@ antigen theme robbyrussell
 # Tell Antigen that you're done.
 antigen apply
 
-# Load fzf.
+# Load FZF.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh;
 
 #
