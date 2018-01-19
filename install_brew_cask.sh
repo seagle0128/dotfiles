@@ -77,6 +77,10 @@ function cleanup {
     brew cask cleanup
 }
 
-check
-install
-cleanup
+function main {
+    check
+    install
+    cleanup
+}
+
+main
