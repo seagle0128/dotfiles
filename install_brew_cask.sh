@@ -52,8 +52,7 @@ apps=(
 
 function check {
     # Check OS
-    sysOS=`uname -s`
-    if [ "$sysOS" != "Darwin" ] ; then
+    if [[ $OSTYPE != darwin* ]]; then
         echo "Error: only install software via brew_cask on macOS."
         exit 1
     fi

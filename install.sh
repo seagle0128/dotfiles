@@ -5,10 +5,7 @@
 # URL: https://github.com/seagle0128/dotfiles
 #############################################################
 
-# Get OS name
-sysOS=`uname -s`
-
-# Consts
+# Variables
 DOTFILES=$HOME/.dotfiles
 ZSH=$HOME/.antigen
 TMUX=$HOME/.tmux
@@ -90,7 +87,7 @@ if [ -d $ZSH ] || [ -d $TMUX ] || [ -d ~/.fzf ] || [ -d ~/.emacs.d ]; then
 fi
 
 # Brew
-if [ "$sysOS" = "Darwin" ]; then
+if [[ $OSTYPE == darwin* ]]; then
     if not hash brew 2>/dev/null; then
         # Install homebrew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -131,7 +128,7 @@ ln -s -f $TMUX/.tmux.conf ~/.tmux.conf
 
 # FZF
 printf "${BLUE}Installing FZF...${NORMAL}\n"
-if [ "$sysOS" = "Darwin" ]; then
+if [[ $OSTYPE == darwin* ]]; then
     if hash brew 2>/dev/null && not hash fzf 2>/dev/null; then
         brew install fzf
     fi
@@ -148,7 +145,7 @@ fi
 
 # Peco
 printf "${BLUE}Installing Peco...${NORMAL}\n"
-if [ "$sysOS" = "Darwin" ]; then
+if [[ $OSTYPE == darwin* ]]; then
     if hash brew 2>/dev/null && not hash peco 2>/dev/null; then
         brew install peco
     fi
@@ -176,16 +173,16 @@ cp -n $DOTFILES/.zshrc.local ~/.zshrc.local
 [ ! -d ~/.pip ] && mkdir ~/.pip; ln -s -f $DOTFILES/.pip.conf ~/.pip/pip.conf
 
 ln -s -f $DOTFILES/.gitconfig ~/.gitconfig
-if [ "$sysOS" = "Darwin" ]; then
+if [[ $OSTYPE == darwin* ]]; then
     cp -n $DOTFILES/.gitconfig_macOS_local ~/.gitconfig_local
-elif [ "OSTYPE" = "cygwin" ]; then
+elif [[ $OSTYPE == cygwin* ]]; then
     cp -n $DOTFILES/.gitconfig_cygwin_local ~/.gitconfig_local
 else
     cp -n $DOTFILES/.gitconfig_local ~/.gitconfig_local
 fi
 ln -s -f $DOTFILES/.gitignore_global ~/.gitignore_global
 
-if [ "$OSTYPE" = "cygwin" ]; then
+if [[ $OSTYPE == cygwin* ]]; then
     ln -s -f $DOTFILES/.minttyrc ~/.minttyrc
 fi
 
