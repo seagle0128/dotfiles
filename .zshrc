@@ -14,6 +14,7 @@ antigen bundle colored-man-pages
 antigen bundle extract
 antigen bundle sudo
 antigen bundle z
+[[ $OSTYPE == darwin* ]] && antigen bundle osx
 
 # Misc bundles.
 antigen bundle djui/alias-tips
