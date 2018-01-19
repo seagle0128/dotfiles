@@ -34,11 +34,15 @@ function check {
     fi
 }
 
-function install () {
+function install {
     for p in ${packages[@]}; do
         go get -u ${p}
     done
 }
 
-check
-install
+function main {
+    check
+    install
+}
+
+main
