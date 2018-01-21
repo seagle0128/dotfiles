@@ -41,21 +41,15 @@ export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 
 ## ~/.zshrc.local
 
-Your personal zsh configurations. For example:
+Set your personal zsh configurations. For example:
 
 ``` shell
-Please add your personal configurations here. -*- mode: sh -*-
+# theme
+antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
 
-# Set local aliases.
-alias starwars="telnet towel.blinkenlights.nl"
-```
-
-## ~/.zshrc.theme.local
-
-Set your favorite terminal theme. A fence one ~ys~ is set by default.
-
-``` shell
-ZSH_THEME="ys"                  # ys, dst, steeef, wedisagree
+# plugins
+antigen bundle python
+antigen bundle ruby
 ```
 
 ## ~/.gitconfig.local
@@ -66,7 +60,6 @@ Set your git configurations, e.g. user credentials.
 [commit]
     # Sign commits using GPG.
     # https://help.github.com/articles/signing-commits-using-gpg/
-
     gpgsign = true
 
 [user]

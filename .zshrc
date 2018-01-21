@@ -47,7 +47,7 @@ alias c='clear'
 alias rt='trash'                # npm install --global trash-cli
 
 # Emacs
-alias e=$EDITOR
+alias e="$EDITOR"
 alias ef="$EDITOR -c"
 alias te='emacsclient -a "" -nw'
 alias rmelc='rm -f ~/.emacs.d/lisp/*.elc'
