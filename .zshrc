@@ -22,11 +22,13 @@ antigen bundle z
 
 # Misc bundles.
 antigen bundle djui/alias-tips
+antigen bundle andrewferrier/fzf-z
+
+antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zdharma/fast-syntax-highlighting
 # antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle zsh-users/zsh-completions
 
 # Load the theme.
 antigen theme robbyrussell

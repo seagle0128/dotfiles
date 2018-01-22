@@ -25,6 +25,13 @@ or
 sh -c "$(wget https://github.com/seagle0128/dotfiles/raw/master/install.sh -O -)"
 ```
 
+## Shortcuts
+
+- `Alt-c`: cd into the selected directory.
+- `Ctrl-g`: Paste the recent path(s) fr{}om `z` history into the command line.
+- `Ctrl-r`: Paste the selected command from history into the command line.
+- `Ctrl-t`: Paste the selected file path(s) into the command line.
+
 That's it. Enjoy!
 
 # Customization
