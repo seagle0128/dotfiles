@@ -26,6 +26,7 @@ apps=(
     # netspot       # Wifi signal analysis and scanner
     osxfuse
     veracrypt
+    vox2          # Music player
     sogouinput
 
     # Audio
