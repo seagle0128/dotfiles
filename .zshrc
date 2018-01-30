@@ -22,7 +22,7 @@ antigen bundle z
 
 # Misc bundles.
 antigen bundle djui/alias-tips
-antigen bundle andrewferrier/fzf-z
+[[ $OSTYPE != cygwin* ]] && antigen bundle andrewferrier/fzf-z
 
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
