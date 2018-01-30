@@ -48,6 +48,7 @@ sync_repo() {
 clean_dotfiles() {
     [ -f ~/.zshenv ] && mv ~/.zshenv ~/.zshenv.bak
     [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.bak
+    [ -f ~/.zshrc.local ] && mv ~/.zshrc.local ~/.zshrc.local.bak
     [ -f ~/.vimrc ] && mv ~/.vimrc ~/.vimrc.bak
     [ -d ~/.emacs.d ] && mv ~/.emacs.d ~/.emacs.d.bak
 
@@ -88,6 +89,7 @@ fi
 
 # Brew
 if [[ $OSTYPE == darwin* ]]; then
+    printf "${BLUE}Installing brew...${NORMAL}\n"
     if not hash brew 2>/dev/null; then
         # Install homebrew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -115,49 +117,18 @@ if [[ $OSTYPE == darwin* ]]; then
     fi
 fi
 
+# Apt-Cyg
+if [[ $OSTYPE == cygwin* ]]; then
+    printf "${BLUE}Installing Apt-Cyg...${NORMAL}\n"
+    if not hash apt-cyg 2>/dev/null; then
+        curl -L rawgit.com/transcode-open/apt-cyg/master/apt-cyg > /usr/local/bin/apt-cyg
+    fi
+fi
+
 # Antigen: the plugin manager for zsh
 printf "${BLUE}Installing Antigen...${NORMAL}\n"
 if [ ! -e $ZSH ]; then mkdir -p $ZSH; fi
 curl -L git.io/antigen > ~/.antigen/antigen.zsh
-
-# Oh My Tmux
-printf "${BLUE}Installing Oh My Tmux...${NORMAL}\n"
-sync_repo gpakosz/.tmux $TMUX
-ln -s -f $TMUX/.tmux.conf ~/.tmux.conf
-# cp $TMUX/.tmux.conf.local ~/.tmux.conf.local
-
-# FZF
-printf "${BLUE}Installing FZF...${NORMAL}\n"
-if [[ $OSTYPE == darwin* ]]; then
-    if hash brew 2>/dev/null && not hash fzf 2>/dev/null; then
-        brew install fzf
-    fi
-    fzf_install=/usr/local/opt/fzf/install
-else
-    if [ ! -e ~/.fzf ]; then
-        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    else
-        cd ~/.fzf && git pull && cd - >/dev/null
-    fi
-    fzf_install=~/.fzf/install
-fi
-[ -f $fzf_install ] && $fzf_install --all >/dev/null 2>&1
-
-# Peco
-if [[ $OSTYPE != cygwin* ]]; then
-    printf "${BLUE}Installing Peco...${NORMAL}\n"
-    if [[ $OSTYPE == darwin* ]]; then
-        if hash brew 2>/dev/null && not hash peco 2>/dev/null; then
-            brew install peco
-        fi
-    else
-        echo "${GREEN}Please download from https://github.com/peco/peco/releases. $(NORMAL}\n)"
-    fi
-fi
-
-# Emacs
-printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"
-sync_repo seagle0128/.emacs.d ~/.emacs.d
 
 # Dotfiles
 printf "${BLUE}Installing dotfiles...${NORMAL}\n"
@@ -186,6 +157,50 @@ ln -s -f $DOTFILES/.gitignore_global ~/.gitignore_global
 
 if [[ $OSTYPE == cygwin* ]]; then
     ln -s -f $DOTFILES/.minttyrc ~/.minttyrc
+fi
+
+# Emacs
+printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"
+sync_repo seagle0128/.emacs.d ~/.emacs.d
+
+# Oh My Tmux
+printf "${BLUE}Installing Oh My Tmux...${NORMAL}\n"
+sync_repo gpakosz/.tmux $TMUX
+ln -s -f $TMUX/.tmux.conf ~/.tmux.conf
+# cp $TMUX/.tmux.conf.local ~/.tmux.conf.local
+
+# FZF
+printf "${BLUE}Installing FZF...${NORMAL}\n"
+if [[ $OSTYPE == darwin* ]]; then
+    if hash brew 2>/dev/null && not hash fzf 2>/dev/null; then
+        brew install fzf
+    fi
+    fzf_install=/usr/local/opt/fzf/install
+elif [[ $OSTYPE == cygwin* ]]; then
+    if hash apt-cyg 2>/dev/null && not hash fzf 2>/dev/null; then
+        apt-cyg install fzf fzf-zsh fzf-zsh-completion
+    fi
+    fzf_install=~/.fzf/install
+else
+    if [ ! -e ~/.fzf ]; then
+        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    else
+        cd ~/.fzf && git pull && cd - >/dev/null
+    fi
+    fzf_install=~/.fzf/install
+fi
+[ -f $fzf_install ] && $fzf_install --all --no-update-rc --no-bash --no-fish >/dev/null 2>&1
+
+# Peco
+if [[ $OSTYPE != cygwin* ]]; then
+    printf "${BLUE}Installing Peco...${NORMAL}\n"
+    if [[ $OSTYPE == darwin* ]]; then
+        if hash brew 2>/dev/null && not hash peco 2>/dev/null; then
+            brew install peco
+        fi
+    else
+        printf "${GREEN}Please download from https://github.com/peco/peco/releases. $(NORMAL}\n)"
+    fi
 fi
 
 # Entering zsh
