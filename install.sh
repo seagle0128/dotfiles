@@ -40,7 +40,7 @@ sync_repo() {
         mkdir -p "$repo_path"
         git clone "https://github.com/$repo_uri.git" "$repo_path"
     else
-        cd "$repo_path" && git pull origin master && cd - >/dev/null
+        cd "$repo_path" && git pull origin master >/dev/null 2>&1; cd - >/dev/null
     fi
 }
 
@@ -89,8 +89,8 @@ fi
 
 # Brew
 if [[ $OSTYPE == darwin* ]]; then
-    printf "${BLUE}Installing brew...${NORMAL}\n"
-    if not hash brew 2>/dev/null; then
+    printf "${BLUE}Installing Homebrew...${NORMAL}\n"
+    if ! hash brew 2>/dev/null; then
         # Install homebrew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
@@ -120,18 +120,20 @@ fi
 # Apt-Cyg
 if [[ $OSTYPE == cygwin* ]]; then
     printf "${BLUE}Installing Apt-Cyg...${NORMAL}\n"
-    if not hash apt-cyg 2>/dev/null; then
-        curl -L rawgit.com/transcode-open/apt-cyg/master/apt-cyg > /usr/local/bin/apt-cyg
+    if ! hash apt-cyg 2>/dev/null; then
+        APT_CYG=/usr/local/bin/apt-cyg
+        curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG
+        chmod +x $APT_CYG
     fi
 fi
 
 # Antigen: the plugin manager for zsh
 printf "${BLUE}Installing Antigen...${NORMAL}\n"
 if [ ! -e $ZSH ]; then mkdir -p $ZSH; fi
-curl -L git.io/antigen > ~/.antigen/antigen.zsh
+curl -fsSL git.io/antigen > ~/.antigen/antigen.zsh
 
 # Dotfiles
-printf "${BLUE}Installing dotfiles...${NORMAL}\n"
+printf "${BLUE}Installing Dotfiles...${NORMAL}\n"
 sync_repo seagle0128/dotfiles $DOTFILES
 
 ln -s -f $DOTFILES/.zshenv ~/.zshenv
@@ -175,27 +177,27 @@ if [[ $OSTYPE == darwin* ]]; then
     if hash brew 2>/dev/null && not hash fzf 2>/dev/null; then
         brew install fzf
     fi
-    fzf_install=/usr/local/opt/fzf/install
+    fZF_INSTALL=/usr/local/opt/fzf/install
 elif [[ $OSTYPE == cygwin* ]]; then
     if hash apt-cyg 2>/dev/null && not hash fzf 2>/dev/null; then
         apt-cyg install fzf fzf-zsh fzf-zsh-completion
     fi
-    fzf_install=~/.fzf/install
+    FZF_INSTALL=~/.fzf/install
 else
     if [ ! -e ~/.fzf ]; then
         git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     else
         cd ~/.fzf && git pull && cd - >/dev/null
     fi
-    fzf_install=~/.fzf/install
+    FZF_INSTALL=~/.fzf/install
 fi
-[ -f $fzf_install ] && $fzf_install --all --no-update-rc --no-bash --no-fish >/dev/null 2>&1
+[ -f $FZF_INSTALL ] && $FZF_INSTALL --all --no-update-rc --no-bash --no-fish >/dev/null 2>&1
 
 # Peco
 if [[ $OSTYPE != cygwin* ]]; then
     printf "${BLUE}Installing Peco...${NORMAL}\n"
     if [[ $OSTYPE == darwin* ]]; then
-        if hash brew 2>/dev/null && not hash peco 2>/dev/null; then
+        if hash brew 2>/dev/null && ! hash peco 2>/dev/null; then
             brew install peco
         fi
     else
