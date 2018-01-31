@@ -89,7 +89,7 @@ fi
 
 # Brew
 if [[ $OSTYPE == darwin* ]]; then
-    printf "${BLUE}Installing Homebrew...${NORMAL}\n"
+    printf "${BLUE} ➜  Installing Homebrew...${NORMAL}\n"
     if ! hash brew 2>/dev/null; then
         # Install homebrew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -121,7 +121,7 @@ fi
 
 # Apt-Cyg
 if [[ $OSTYPE == cygwin* ]]; then
-    printf "${BLUE}Installing Apt-Cyg...${NORMAL}\n"
+    printf "${BLUE} ➜  Installing Apt-Cyg...${NORMAL}\n"
     if ! hash apt-cyg 2>/dev/null; then
         APT_CYG=/usr/local/bin/apt-cyg
         curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG
@@ -130,12 +130,12 @@ if [[ $OSTYPE == cygwin* ]]; then
 fi
 
 # Antigen: the plugin manager for zsh
-printf "${BLUE}Installing Antigen...${NORMAL}\n"
+printf "${BLUE} ➜  Installing Antigen...${NORMAL}\n"
 if [ ! -e $ZSH ]; then mkdir -p $ZSH; fi
 curl -fsSL git.io/antigen > ~/.antigen/antigen.zsh
 
 # Dotfiles
-printf "${BLUE}Installing Dotfiles...${NORMAL}\n"
+printf "${BLUE} ➜  Installing Dotfiles...${NORMAL}\n"
 sync_repo seagle0128/dotfiles $DOTFILES
 
 ln -fs $DOTFILES/.zshenv ~/.zshenv
@@ -164,17 +164,17 @@ if [[ $OSTYPE == cygwin* ]]; then
 fi
 
 # Emacs
-printf "${BLUE}Installing Centaur Emacs...${NORMAL}\n"
+printf "${BLUE} ➜  Installing Centaur Emacs...${NORMAL}\n"
 sync_repo seagle0128/.emacs.d ~/.emacs.d
 
 # Oh My Tmux
-printf "${BLUE}Installing Oh My Tmux...${NORMAL}\n"
+printf "${BLUE} ➜  Installing Oh My Tmux...${NORMAL}\n"
 sync_repo gpakosz/.tmux $TMUX
 ln -fs $TMUX/.tmux.conf ~/.tmux.conf
 # cp $TMUX/.tmux.conf.local ~/.tmux.conf.local
 
 # FZF
-printf "${BLUE}Installing FZF...${NORMAL}\n"
+printf "${BLUE} ➜  Installing FZF...${NORMAL}\n"
 if [[ $OSTYPE == darwin* ]]; then
     if hash brew 2>/dev/null && not hash fzf 2>/dev/null; then
         brew install fzf
@@ -197,7 +197,7 @@ fi
 
 # Peco
 if [[ $OSTYPE != cygwin* ]]; then
-    printf "${BLUE}Installing Peco...${NORMAL}\n"
+    printf "${BLUE} ➜  Installing Peco...${NORMAL}\n"
     if [[ $OSTYPE == darwin* ]]; then
         if hash brew 2>/dev/null && ! hash peco 2>/dev/null; then
             brew install peco
