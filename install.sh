@@ -40,7 +40,7 @@ sync_repo() {
         mkdir -p "$repo_path"
         git clone "https://github.com/$repo_uri.git" "$repo_path"
     else
-        cd "$repo_path" && git pull origin master >/dev/null 2>&1; cd - >/dev/null
+        cd "$repo_path" && git pull --rebase --stat origin master >/dev/null 2>&1; cd - >/dev/null
     fi
 }
 

@@ -64,11 +64,12 @@ alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
 alias restart_emacs='emacsclient -e "(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))" && te'
 
 # Upgrade
-alias upgrade_dotfiles='cd $DOTFILES && git pull --rebase --stat origin master && cd - >/dev/null'
-alias upgrade_emacs='cd ~/.emacs.d && git pull --rebase --stat origin master && cd - >/dev/null'
-alias upgrade_oh_my_tmux='cd ~/.tmux && git pull --rebase --stat origin master && cd - >/dev/null'
+alias upgrade_repo='git pull --rebase --stat origin master >/dev/null 2>&1'
+alias upgrade_dotfiles='cd $DOTFILES &&  upgrade_repo; cd - >/dev/null'
+alias upgrade_emacs='cd ~/.emacs.d && upgrade_repo; cd - >/dev/null'
+alias upgrade_oh_my_tmux='cd ~/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles && sh $DOTFILES/install.sh'
-alias upgrade_antigen='curl -L git.io/antigen > $ANTIGEN/antigen.zsh'
+alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh'
 alias upgrade_go='sh $DOTFILES/install_go.sh'
 
 # Apt
