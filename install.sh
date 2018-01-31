@@ -99,16 +99,18 @@ if [[ $OSTYPE == darwin* ]]; then
         brew tap buo/cask-upgrade
     else
         # Set homebrew mirrors
+        BREW_URL=https://mirrors.ustc.edu.cn
+
         cd "$(brew --repo)"
-        git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
+        git remote set-url origin $BREW_URL/brew.git
         cd - >/dev/null
 
         cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
+        git remote set-url origin $BREW_URL/homebrew-core.git
         cd - >/dev/null
 
-        cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask
-        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
+        cd "$(brew --repo)/Library/Taps/caskroom/homebrew-cask"
+        git remote set-url origin $BREW_URL/homebrew-cask.git
         cd - >/dev/null
 
         # Upgrade
@@ -136,18 +138,18 @@ curl -fsSL git.io/antigen > ~/.antigen/antigen.zsh
 printf "${BLUE}Installing Dotfiles...${NORMAL}\n"
 sync_repo seagle0128/dotfiles $DOTFILES
 
-ln -s -f $DOTFILES/.zshenv ~/.zshenv
-ln -s -f $DOTFILES/.zshrc ~/.zshrc
-ln -s -f $DOTFILES/.vimrc ~/.vimrc
-ln -s -f $DOTFILES/.npmrc ~/.npmrc
-ln -s -f $DOTFILES/.gemrc ~/.gemrc
-ln -s -f $DOTFILES/.tmux.conf.local ~/.tmux.conf.local
+ln -fs $DOTFILES/.zshenv ~/.zshenv
+ln -fs $DOTFILES/.zshrc ~/.zshrc
+ln -fs $DOTFILES/.vimrc ~/.vimrc
+ln -fs $DOTFILES/.npmrc ~/.npmrc
+ln -fs $DOTFILES/.gemrc ~/.gemrc
+ln -fs $DOTFILES/.tmux.conf.local ~/.tmux.conf.local
 
 cp -n $DOTFILES/.zshrc.local ~/.zshrc.local
 
-[ ! -d ~/.pip ] && mkdir ~/.pip; ln -s -f $DOTFILES/.pip.conf ~/.pip/pip.conf
+[ ! -d ~/.pip ] && mkdir ~/.pip; ln -fs $DOTFILES/.pip.conf ~/.pip/pip.conf
 
-ln -s -f $DOTFILES/.gitconfig ~/.gitconfig
+ln -fs $DOTFILES/.gitconfig ~/.gitconfig
 if [[ $OSTYPE == darwin* ]]; then
     cp -n $DOTFILES/.gitconfig_macOS_local ~/.gitconfig_local
 elif [[ $OSTYPE == cygwin* ]]; then
@@ -155,20 +157,20 @@ elif [[ $OSTYPE == cygwin* ]]; then
 else
     cp -n $DOTFILES/.gitconfig_local ~/.gitconfig_local
 fi
-ln -s -f $DOTFILES/.gitignore_global ~/.gitignore_global
+ln -fs $DOTFILES/.gitignore_global ~/.gitignore_global
 
 if [[ $OSTYPE == cygwin* ]]; then
-    ln -s -f $DOTFILES/.minttyrc ~/.minttyrc
+    ln -fs $DOTFILES/.minttyrc ~/.minttyrc
 fi
 
 # Emacs
-printf "${BLUE}Installing Emacs Configurations...${NORMAL}\n"
+printf "${BLUE}Installing Centaur Emacs...${NORMAL}\n"
 sync_repo seagle0128/.emacs.d ~/.emacs.d
 
 # Oh My Tmux
 printf "${BLUE}Installing Oh My Tmux...${NORMAL}\n"
 sync_repo gpakosz/.tmux $TMUX
-ln -s -f $TMUX/.tmux.conf ~/.tmux.conf
+ln -fs $TMUX/.tmux.conf ~/.tmux.conf
 # cp $TMUX/.tmux.conf.local ~/.tmux.conf.local
 
 # FZF
@@ -187,7 +189,7 @@ else
     if [ ! -e ~/.fzf ]; then
         git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     else
-        cd ~/.fzf && git pull && cd - >/dev/null
+        cd ~/.fzf && git pull; cd - >/dev/null
     fi
     FZF_INSTALL=~/.fzf/install
 fi
