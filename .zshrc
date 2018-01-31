@@ -73,10 +73,10 @@ alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh'
 alias upgrade_go='sh $DOTFILES/install_go.sh'
 
 # Apt
-alias apu='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y'
+alias apu='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoremove -y; sudo apt-get autoclean -y'
 
 # Brew
-alias bu='brew update && brew upgrade && brew cleanup'
+alias bu='brew update; brew upgrade; brew cleanup'
 alias bcu='brew cu --all --yes --no-brew-update --cleanup'
 
 # Proxy
