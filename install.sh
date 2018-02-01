@@ -6,11 +6,11 @@
 #############################################################
 
 # Variables
-DOTFILES=~/.dotfiles
-EMACSD=~/.emacs.d
-FZF=~/.fzf
-TMUX=~/.tmux
-ZSH=~/.antigen
+DOTFILES=$HOME/.dotfiles
+EMACSD=$HOME/.emacs.d
+FZF=$HOME/.fzf
+TMUX=$HOME/.tmux
+ZSH=$HOME/.antigen
 
 # Get OS name
 SYSTEM=`uname -s`
@@ -51,15 +51,15 @@ sync_repo() {
 
 # Clean all configurations
 clean_dotfiles() {
-    [ -f ~/.zshenv ] && mv ~/.zshenv ~/.zshenv.bak
-    [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.bak
-    [ -f ~/.zshrc.local ] && mv ~/.zshrc.local ~/.zshrc.local.bak
-    [ -f ~/.vimrc ] && mv ~/.vimrc ~/.vimrc.bak
+    [ -f $HOME/.zshenv ] && mv $HOME/.zshenv $HOME/.zshenv.bak
+    [ -f $HOME/.zshrc ] && mv $HOME/.zshrc $HOME/.zshrc.bak
+    [ -f $HOME/.zshrc.local ] && mv $HOME/.zshrc.local $HOME/.zshrc.local.bak
+    [ -f $HOME/.vimrc ] && mv $HOME/.vimrc $HOME/.vimrc.bak
     [ -d $EMACSD ] && mv $EMACSD $EMACSD.bak
 
     rm -rf $ZSH $TMUX $FZF $DOTFILES
-    rm -f ~/.tmux.conf ~/.tmux.local ~/.fzf.*
-    rm -f ~/.gitconfig ~/.gitignore_global ~/.gitconfig.local
+    rm -f $HOME/.tmux.conf $HOME/.tmux.local $HOME/.fzf.*
+    rm -f $HOME/.gitconfig $HOME/.gitignore_global $HOME/.gitconfig.local
 }
 
 YES=0
@@ -143,40 +143,39 @@ mkdir -p $ZSH; curl -fsSL git.io/antigen > $ZSH/antigen.zsh
 printf "${BLUE} ➜  Installing Dotfiles...${NORMAL}\n"
 sync_repo seagle0128/dotfiles $DOTFILES
 
-ln -fs $DOTFILES/.zshenv ~/.zshenv
-ln -fs $DOTFILES/.zshrc ~/.zshrc
-ln -fs $DOTFILES/.vimrc ~/.vimrc
-ln -fs $DOTFILES/.npmrc ~/.npmrc
-ln -fs $DOTFILES/.gemrc ~/.gemrc
-ln -fs $DOTFILES/.tmux.conf.local ~/.tmux.conf.local
+ln -fs $DOTFILES/.zshenv $HOME/.zshenv
+ln -fs $DOTFILES/.zshrc $HOME/.zshrc
+ln -fs $DOTFILES/.vimrc $HOME/.vimrc
+ln -fs $DOTFILES/.npmrc $HOME/.npmrc
+ln -fs $DOTFILES/.gemrc $HOME/.gemrc
+ln -fs $DOTFILES/.tmux.conf.local $HOME/.tmux.conf.local
 
-cp -n $DOTFILES/.zshrc.local ~/.zshrc.local
+cp -n $DOTFILES/.zshrc.local $HOME/.zshrc.local
 
-mkdir -p ~/.pip; ln -fs $DOTFILES/.pip.conf ~/.pip/pip.conf
+mkdir -p $HOME/.pip; ln -fs $DOTFILES/.pip.conf $HOME/.pip/pip.conf
 
-ln -fs $DOTFILES/.gitconfig ~/.gitconfig
+ln -fs $DOTFILES/.gitconfig $HOME/.gitconfig
 if [ "$SYSTEM" = "Darwin" ]; then
-    cp -n $DOTFILES/.gitconfig_macOS_local ~/.gitconfig_local
+    cp -n $DOTFILES/.gitconfig_macOS_local $HOME/.gitconfig_local
 elif [ "$OSTYPE" = "cygwin" ]; then
-    cp -n $DOTFILES/.gitconfig_cygwin_local ~/.gitconfig_local
+    cp -n $DOTFILES/.gitconfig_cygwin_local $HOME/.gitconfig_local
 else
-    cp -n $DOTFILES/.gitconfig_local ~/.gitconfig_local
+    cp -n $DOTFILES/.gitconfig_local $HOME/.gitconfig_local
 fi
-ln -fs $DOTFILES/.gitignore_global ~/.gitignore_global
+ln -fs $DOTFILES/.gitignore_global $HOME/.gitignore_global
 
 if [ "$OSTYPE" = "cygwin" ]; then
-    ln -fs $DOTFILES/.minttyrc ~/.minttyrc
+    ln -fs $DOTFILES/.minttyrc $HOME/.minttyrc
 fi
 
-# Emacs
+# Emacs Configs
 printf "${BLUE} ➜  Installing Centaur Emacs...${NORMAL}\n"
 sync_repo seagle0128/.emacs.d $EMACSD
 
 # Oh My Tmux
 printf "${BLUE} ➜  Installing Oh My Tmux...${NORMAL}\n"
 sync_repo gpakosz/.tmux $TMUX
-ln -fs $TMUX/.tmux.conf ~/.tmux.conf
-# cp $TMUX/.tmux.conf.local ~/.tmux.conf.local
+ln -fs $TMUX/.tmux.conf $HOME/.tmux.conf
 
 # FZF
 printf "${BLUE} ➜  Installing FZF...${NORMAL}\n"

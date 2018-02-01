@@ -1,13 +1,13 @@
 # Zsh configuration
 
-ANTIGEN=~/.antigen
-DOTFILES=~/.dotfiles
+ANTIGEN=$HOME/.antigen
+DOTFILES=$HOME/.dotfiles
 
 # Load Antigen
 source $ANTIGEN/antigen.zsh
 
 # Configure Antigen
-typeset -a ANTIGEN_CHECK_FILES=(~/.zshrc ~/.zshrc.local)
+typeset -a ANTIGEN_CHECK_FILES=($HOME/.zshrc $HOME/.zshrc.local)
 
 # Load the oh-my-zsh's library
 antigen use oh-my-zsh
@@ -34,7 +34,7 @@ antigen bundle zsh-users/zsh-history-substring-search
 antigen theme robbyrussell
 
 # Local customizations, e.g. theme, plugins, aliases, etc.
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
 
 # Tell Antigen that you're done
 antigen apply
@@ -46,7 +46,7 @@ source $DOTFILES/completion.zsh
 if [[ $OSTYPE == cygwin* ]]; then
     [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh;
 else
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh;
+    [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh;
 fi
 
 #
@@ -54,7 +54,7 @@ fi
 #
 
 # General
-alias zshconf="$EDITOR ~/.zshrc; $EDITOR ~/.zshrc.local"
+alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
 alias h='history'
 alias c='clear'
 alias rt='trash'                # `brew install trash` or `npm install --global trash-cli`
@@ -63,15 +63,15 @@ alias rt='trash'                # `brew install trash` or `npm install --global 
 alias e="$EDITOR"
 alias ef="$EDITOR -c"
 alias te='emacsclient -a "" -nw'
-alias rmelc='rm -f ~/.emacs.d/lisp/*.elc'
+alias rmelc='rm -f $HOME/.emacs.d/lisp/*.elc'
 alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
 alias restart_emacs='emacsclient -e "(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))" && te'
 
 # Upgrade
 alias upgrade_repo='git pull --rebase --stat origin master >/dev/null 2>&1'
 alias upgrade_dotfiles='cd $DOTFILES &&  upgrade_repo; cd - >/dev/null'
-alias upgrade_emacs='cd ~/.emacs.d && upgrade_repo; cd - >/dev/null'
-alias upgrade_oh_my_tmux='cd ~/.tmux && upgrade_repo; cd - >/dev/null'
+alias upgrade_emacs='cd $HOME/.emacs.d && upgrade_repo; cd - >/dev/null'
+alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles && sh $DOTFILES/install.sh'
 alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh'
 alias upgrade_go='sh $DOTFILES/install_go.sh'
