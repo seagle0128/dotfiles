@@ -131,8 +131,7 @@ fi
 
 # Antigen: the plugin manager for zsh
 printf "${BLUE} ➜  Installing Antigen...${NORMAL}\n"
-if [ ! -e $ZSH ]; then mkdir -p $ZSH; fi
-curl -fsSL git.io/antigen > ~/.antigen/antigen.zsh
+mkdir -p $ZSH; curl -fsSL git.io/antigen > $ZSH/antigen.zsh
 
 # Dotfiles
 printf "${BLUE} ➜  Installing Dotfiles...${NORMAL}\n"
@@ -147,7 +146,7 @@ ln -fs $DOTFILES/.tmux.conf.local ~/.tmux.conf.local
 
 cp -n $DOTFILES/.zshrc.local ~/.zshrc.local
 
-[ ! -d ~/.pip ] && mkdir ~/.pip; ln -fs $DOTFILES/.pip.conf ~/.pip/pip.conf
+mkdir -p ~/.pip; ln -fs $DOTFILES/.pip.conf ~/.pip/pip.conf
 
 ln -fs $DOTFILES/.gitconfig ~/.gitconfig
 if [[ $OSTYPE == darwin* ]]; then
