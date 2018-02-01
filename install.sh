@@ -129,15 +129,17 @@ if [ "$OSTYPE" = "cygwin" ]; then
     printf "${BLUE} ➜  Installing Apt-Cyg...${NORMAL}\n"
     if ! hash apt-cyg 2>/dev/null; then
         APT_CYG=/usr/local/bin/apt-cyg
-        curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG.bak
-        move $APT_CYG.bak $APT_CYG
+        curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG.tmp
+        mv $APT_CYG.tmp $APT_CYG
         chmod +x $APT_CYG
     fi
 fi
 
 # Antigen: the plugin manager for zsh
 printf "${BLUE} ➜  Installing Antigen...${NORMAL}\n"
-mkdir -p $ZSH; curl -fsSL git.io/antigen > $ZSH/antigen.zsh
+mkdir -p $ZSH
+curl -fsSL git.io/antigen > $ZSH/antigen.zsh.tmp
+mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
 
 # Dotfiles
 printf "${BLUE} ➜  Installing Dotfiles...${NORMAL}\n"
