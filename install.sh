@@ -180,7 +180,7 @@ ln -fs $TMUX/.tmux.conf $HOME/.tmux.conf
 # FZF
 printf "${BLUE} ➜  Installing FZF...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
-    if hash brew 2>/dev/null && not hash fzf 2>/dev/null; then
+    if not hash fzf 2>/dev/null && hash brew 2>/dev/null; then
         brew install fzf
     fi
     fZF=/usr/local/opt/fzf
