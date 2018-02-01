@@ -43,7 +43,7 @@ sync_repo() {
 
     if [ ! -e "$repo_path" ]; then
         mkdir -p "$repo_path"
-        git clone --depth 1 "https://github.com/$repo_uri.git" "$repo_path"
+        git clone --depth 1 "https://github.com/$repo_uri.git" "$repo_path" >/dev/null 2>&1
     else
         cd "$repo_path" && git pull --rebase --stat origin master >/dev/null 2>&1; cd - >/dev/null
     fi
