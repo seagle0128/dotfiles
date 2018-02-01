@@ -43,7 +43,7 @@ sync_repo() {
 
     if [ ! -e "$repo_path" ]; then
         mkdir -p "$repo_path"
-        git clone "https://github.com/$repo_uri.git" "$repo_path"
+        git clone --depth 1 "https://github.com/$repo_uri.git" "$repo_path"
     else
         cd "$repo_path" && git pull --rebase --stat origin master >/dev/null 2>&1; cd - >/dev/null
     fi
@@ -184,21 +184,15 @@ if [ "$SYSTEM" = "Darwin" ]; then
     if hash brew 2>/dev/null && not hash fzf 2>/dev/null; then
         brew install fzf
     fi
-    fZF_INSTALL=/usr/local/opt/fzf/install
+    fZF=/usr/local/opt/fzf
 elif [ "$OSTYPE" = "cygwin" ]; then
     if hash apt-cyg 2>/dev/null && not hash fzf 2>/dev/null; then
         apt-cyg install fzf fzf-zsh fzf-zsh-completion
     fi
-    FZF_INSTALL=~/.fzf/install
 else
-    if [ ! -e ~/.fzf ]; then
-        git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    else
-        cd ~/.fzf && git pull; cd - >/dev/null
-    fi
-    FZF_INSTALL=~/.fzf/install
+    sync_repo junegunn/fzf $FZF
 fi
-[ -f $FZF_INSTALL ] && $FZF_INSTALL --all --no-update-rc --no-bash --no-fish >/dev/null 2>&1
+[ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null 2>&1
 
 # Peco
 if [ "$OSTYPE" = "cygwin" ]; then
