@@ -12,6 +12,9 @@ FZF=~/.fzf
 TMUX=~/.tmux
 ZSH=~/.antigen
 
+# Get OS name
+SYSTEM=`uname -s`
+
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
 if which tput >/dev/null 2>&1; then
@@ -90,7 +93,7 @@ if [ -d $ZSH ] || [ -d $TMUX ] || [ -d ~$FZF ] || [ -d $EMACSD ]; then
 fi
 
 # Brew
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$SYSTEM" = "Darwin" ]; then
     printf "${BLUE} ➜  Installing Homebrew...${NORMAL}\n"
     if ! hash brew 2>/dev/null; then
         # Install homebrew
@@ -122,11 +125,12 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 # Apt-Cyg
-if [[ $OSTYPE == cygwin* ]]; then
+if [ "$OSTYPE" = "cygwin" ]; then
     printf "${BLUE} ➜  Installing Apt-Cyg...${NORMAL}\n"
     if ! hash apt-cyg 2>/dev/null; then
         APT_CYG=/usr/local/bin/apt-cyg
-        curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG
+        curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG.bak
+        move $APT_CYG.bak $APT_CYG
         chmod +x $APT_CYG
     fi
 fi
@@ -151,16 +155,16 @@ cp -n $DOTFILES/.zshrc.local ~/.zshrc.local
 mkdir -p ~/.pip; ln -fs $DOTFILES/.pip.conf ~/.pip/pip.conf
 
 ln -fs $DOTFILES/.gitconfig ~/.gitconfig
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$SYSTEM" = "Darwin" ]; then
     cp -n $DOTFILES/.gitconfig_macOS_local ~/.gitconfig_local
-elif [[ $OSTYPE == cygwin* ]]; then
+elif [ "$OSTYPE" = "cygwin" ]; then
     cp -n $DOTFILES/.gitconfig_cygwin_local ~/.gitconfig_local
 else
     cp -n $DOTFILES/.gitconfig_local ~/.gitconfig_local
 fi
 ln -fs $DOTFILES/.gitignore_global ~/.gitignore_global
 
-if [[ $OSTYPE == cygwin* ]]; then
+if [ "$OSTYPE" = "cygwin" ]; then
     ln -fs $DOTFILES/.minttyrc ~/.minttyrc
 fi
 
@@ -176,12 +180,12 @@ ln -fs $TMUX/.tmux.conf ~/.tmux.conf
 
 # FZF
 printf "${BLUE} ➜  Installing FZF...${NORMAL}\n"
-if [[ $OSTYPE == darwin* ]]; then
+if [ "$SYSTEM" = "Darwin" ]; then
     if hash brew 2>/dev/null && not hash fzf 2>/dev/null; then
         brew install fzf
     fi
     fZF_INSTALL=/usr/local/opt/fzf/install
-elif [[ $OSTYPE == cygwin* ]]; then
+elif [ "$OSTYPE" = "cygwin" ]; then
     if hash apt-cyg 2>/dev/null && not hash fzf 2>/dev/null; then
         apt-cyg install fzf fzf-zsh fzf-zsh-completion
     fi
@@ -197,9 +201,9 @@ fi
 [ -f $FZF_INSTALL ] && $FZF_INSTALL --all --no-update-rc --no-bash --no-fish >/dev/null 2>&1
 
 # Peco
-if [[ $OSTYPE != cygwin* ]]; then
+if [ "$OSTYPE" = "cygwin" ]; then
     printf "${BLUE} ➜  Installing Peco...${NORMAL}\n"
-    if [[ $OSTYPE == darwin* ]]; then
+    if [ "$SYSTEM" = "Darwin" ]; then
         if hash brew 2>/dev/null && ! hash peco 2>/dev/null; then
             brew install peco
         fi
