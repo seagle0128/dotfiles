@@ -6,9 +6,11 @@
 #############################################################
 
 # Variables
-DOTFILES=$HOME/.dotfiles
-ZSH=$HOME/.antigen
-TMUX=$HOME/.tmux
+DOTFILES=~/.dotfiles
+EMACSD=~/.emacs.d
+FZF=~/.fzf
+TMUX=~/.tmux
+ZSH=~/.antigen
 
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
@@ -50,9 +52,9 @@ clean_dotfiles() {
     [ -f ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.bak
     [ -f ~/.zshrc.local ] && mv ~/.zshrc.local ~/.zshrc.local.bak
     [ -f ~/.vimrc ] && mv ~/.vimrc ~/.vimrc.bak
-    [ -d ~/.emacs.d ] && mv ~/.emacs.d ~/.emacs.d.bak
+    [ -d $EMACSD ] && mv $EMACSD $EMACSD.bak
 
-    rm -rf $ZSH $TMUX ~/.fzf $DOTFILES
+    rm -rf $ZSH $TMUX $FZF $DOTFILES
     rm -f ~/.tmux.conf ~/.tmux.local ~/.fzf.*
     rm -f ~/.gitconfig ~/.gitignore_global ~/.gitconfig.local
 }
@@ -80,7 +82,7 @@ hash git >/dev/null 2>&1 || {
 }
 
 # Reset configurations
-if [ -d $ZSH ] || [ -d $TMUX ] || [ -d ~/.fzf ] || [ -d ~/.emacs.d ]; then
+if [ -d $ZSH ] || [ -d $TMUX ] || [ -d ~$FZF ] || [ -d $EMACSD ]; then
     promote_yn "Do you want to reset all configurations?" "continue"
     if [ $continue -eq $YES ]; then
         clean_dotfiles
@@ -164,7 +166,7 @@ fi
 
 # Emacs
 printf "${BLUE} ➜  Installing Centaur Emacs...${NORMAL}\n"
-sync_repo seagle0128/.emacs.d ~/.emacs.d
+sync_repo seagle0128/.emacs.d $EMACSD
 
 # Oh My Tmux
 printf "${BLUE} ➜  Installing Oh My Tmux...${NORMAL}\n"
