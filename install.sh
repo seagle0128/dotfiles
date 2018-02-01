@@ -183,7 +183,7 @@ if [ "$SYSTEM" = "Darwin" ]; then
     if not hash fzf 2>/dev/null && hash brew 2>/dev/null; then
         brew install fzf
     fi
-    fZF=/usr/local/opt/fzf
+    FZF=/usr/local/opt/fzf
 elif [ "$OSTYPE" = "cygwin" ]; then
     if not hash fzf 2>/dev/null && hash apt-cyg 2>/dev/null; then
         apt-cyg install fzf fzf-zsh fzf-zsh-completion
