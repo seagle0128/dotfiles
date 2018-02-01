@@ -195,14 +195,14 @@ fi
 [ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null 2>&1
 
 # Peco
-if [ "$OSTYPE" = "cygwin" ]; then
+if [ "$OSTYPE" != "cygwin" ]; then
     printf "${BLUE} ➜  Installing Peco...${NORMAL}\n"
     if [ "$SYSTEM" = "Darwin" ]; then
         if hash brew 2>/dev/null && ! hash peco 2>/dev/null; then
             brew install peco
         fi
     else
-        printf "${GREEN}Please download from https://github.com/peco/peco/releases. $(NORMAL}\n)"
+        printf "${GREEN}Please download from https://github.com/peco/peco/releases. ${NORMAL}\n)"
     fi
 fi
 
