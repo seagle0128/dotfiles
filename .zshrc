@@ -43,7 +43,11 @@ antigen apply
 source $DOTFILES/completion.zsh
 
 # Load FZF
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh;
+if [[ $OSTYPE == cygwin* ]]; then
+    [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh;
+else
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh;
+fi
 
 #
 # Aliases

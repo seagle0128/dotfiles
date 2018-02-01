@@ -186,7 +186,7 @@ if [ "$SYSTEM" = "Darwin" ]; then
     fi
     fZF=/usr/local/opt/fzf
 elif [ "$OSTYPE" = "cygwin" ]; then
-    if hash apt-cyg 2>/dev/null && not hash fzf 2>/dev/null; then
+    if not hash fzf 2>/dev/null && hash apt-cyg 2>/dev/null; then
         apt-cyg install fzf fzf-zsh fzf-zsh-completion
     fi
 else
