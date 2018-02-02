@@ -73,7 +73,7 @@ alias upgrade_dotfiles='cd $DOTFILES &&  upgrade_repo; cd - >/dev/null'
 alias upgrade_emacs='cd $HOME/.emacs.d && upgrade_repo; cd - >/dev/null'
 alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles && sh $DOTFILES/install.sh'
-alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh'
+alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh.tmp && mv $ANTIGEN/antigen.zsh.tmp $ANTIGEN/antigen.zsh'
 alias upgrade_go='sh $DOTFILES/install_go.sh'
 
 # Apt
