@@ -15,6 +15,10 @@ ZSH=$HOME/.antigen
 # Get OS name
 SYSTEM=`uname -s`
 
+# Only enable exit-on-error after the non-critical colorization stuff,
+# which may fail on systems lacking tput or terminfo
+# set -e
+
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
 if which tput >/dev/null 2>&1; then
@@ -36,6 +40,12 @@ else
     NORMAL=""
 fi
 
+# Check git
+hash git >/dev/null 2>&1 || {
+    echo "Error: git is not installed"
+    exit 1
+}
+
 # Sync repository
 sync_repo() {
     local repo_uri="$1"
@@ -46,6 +56,19 @@ sync_repo() {
         git clone --depth 1 "https://github.com/$repo_uri.git" "$repo_path" >/dev/null 2>&1
     else
         cd "$repo_path" && git pull --rebase --stat origin master >/dev/null 2>&1; cd - >/dev/null
+    fi
+}
+
+sync_brew_package() {
+    if ! hash brew >/dev/null 2>&1; then
+        echo "Error: brew is not installed"
+        return 1
+    fi
+
+    if ! hash ${1} >/dev/null 2>&1; then
+        brew install ${1}
+    else
+        brew upgrade ${1}
     fi
 }
 
@@ -74,16 +97,6 @@ promote_yn() {
     esac
 }
 
-# Only enable exit-on-error after the non-critical colorization stuff,
-# which may fail on systems lacking tput or terminfo
-# set -e
-
-# Check git
-hash git >/dev/null 2>&1 || {
-    echo "Error: git is not installed"
-    exit 1
-}
-
 # Reset configurations
 if [ -d $ZSH ] || [ -d $TMUX ] || [ -d ~$FZF ] || [ -d $EMACSD ]; then
     promote_yn "Do you want to reset all configurations?" "continue"
@@ -95,7 +108,7 @@ fi
 # Brew
 if [ "$SYSTEM" = "Darwin" ]; then
     printf "${BLUE} ➜  Installing Homebrew...${NORMAL}\n"
-    if ! hash brew 2>/dev/null; then
+    if ! hash brew >/dev/null 2>&1; then
         # Install homebrew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
@@ -127,10 +140,9 @@ fi
 # Apt-Cyg
 if [ "$OSTYPE" = "cygwin" ]; then
     printf "${BLUE} ➜  Installing Apt-Cyg...${NORMAL}\n"
-    if ! hash apt-cyg 2>/dev/null; then
+    if ! hash apt-cyg >/dev/null 2>&1; then
         APT_CYG=/usr/local/bin/apt-cyg
-        curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG.tmp
-        mv $APT_CYG.tmp $APT_CYG
+        curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG
         chmod +x $APT_CYG
     fi
 fi
@@ -182,12 +194,10 @@ ln -fs $TMUX/.tmux.conf $HOME/.tmux.conf
 # FZF
 printf "${BLUE} ➜  Installing FZF...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
-    if not hash fzf 2>/dev/null && hash brew 2>/dev/null; then
-        brew install fzf
-    fi
+    sync_brew_package fzf
     FZF=/usr/local/opt/fzf
 elif [ "$OSTYPE" = "cygwin" ]; then
-    if not hash fzf 2>/dev/null && hash apt-cyg 2>/dev/null; then
+    if ! hash fzf >/dev/null 2>&1 && hash apt-cyg >/dev/null 2>&1; then
         apt-cyg install fzf fzf-zsh fzf-zsh-completion
     fi
 else
@@ -199,11 +209,9 @@ fi
 if [ "$OSTYPE" != "cygwin" ]; then
     printf "${BLUE} ➜  Installing Peco...${NORMAL}\n"
     if [ "$SYSTEM" = "Darwin" ]; then
-        if hash brew 2>/dev/null && ! hash peco 2>/dev/null; then
-            brew install peco
-        fi
+        sync_brew_package peco
     else
-        printf "${GREEN}Please download from https://github.com/peco/peco/releases. ${NORMAL}\n)"
+        printf "    Please download from https://github.com/peco/peco/releases. ${NORMAL}\n"
     fi
 fi
 
