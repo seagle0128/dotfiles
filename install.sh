@@ -66,9 +66,9 @@ sync_brew_package() {
     fi
 
     if ! hash ${1} >/dev/null 2>&1; then
-        brew install ${1}
+        brew install ${1} >/dev/null 2>&1
     else
-        brew upgrade ${1}
+        brew upgrade ${1} >/dev/null 2>&1
     fi
 }
 
