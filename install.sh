@@ -210,13 +210,18 @@ if [ "$OSTYPE" != "cygwin" ]; then
     printf "${BLUE} ➜  Installing Peco...${NORMAL}\n"
     if [ "$SYSTEM" = "Darwin" ]; then
         sync_brew_package peco
-    else
-        printf "    Please download from https://github.com/peco/peco/releases. ${NORMAL}\n"
+    elif [ "SYSTEM" = "Linux" ]; then
+        if ! hash peco >/dev/null 2>&1; then
+            # printf "    Please download from https://github.com/peco/peco/releases. ${NORMAL}\n"
+            curl -fsSL https://github.com/peco/peco/releases/download/v0.5.2/peco_linux_amd64.tar.gz | tar xzf -
+            sudo mv peco_linux_amd64/peco /usr/local/bin
+            rm -rf peco_linux_amd64
+        fi
     fi
 fi
 
 # Entering zsh
 printf "${BLUE}Done. Enjoy!${NORMAL}\n"
-if hash zsh 2> /dev/null; then
+if hash zsh >/dev/null 2>&1; then
     env zsh
 fi
