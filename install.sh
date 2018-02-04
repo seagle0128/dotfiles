@@ -212,8 +212,9 @@ if [ "$OSTYPE" != "cygwin" ]; then
         sync_brew_package peco
     elif [ "SYSTEM" = "Linux" ]; then
         if ! hash peco >/dev/null 2>&1; then
-            # printf "    Please download from https://github.com/peco/peco/releases. ${NORMAL}\n"
+            # Only support Linux x64 binary
             curl -fsSL https://github.com/peco/peco/releases/download/v0.5.2/peco_linux_amd64.tar.gz | tar xzf -
+            chmod +x peco_linux_amd64/peco
             sudo mv peco_linux_amd64/peco /usr/local/bin
             rm -rf peco_linux_amd64
         fi
