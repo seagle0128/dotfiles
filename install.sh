@@ -157,18 +157,18 @@ mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
 printf "${BLUE} ➜  Installing Dotfiles...${NORMAL}\n"
 sync_repo seagle0128/dotfiles $DOTFILES
 
-ln -fs $DOTFILES/.zshenv $HOME/.zshenv
-ln -fs $DOTFILES/.zshrc $HOME/.zshrc
-ln -fs $DOTFILES/.vimrc $HOME/.vimrc
-ln -fs $DOTFILES/.npmrc $HOME/.npmrc
-ln -fs $DOTFILES/.gemrc $HOME/.gemrc
-ln -fs $DOTFILES/.tmux.conf.local $HOME/.tmux.conf.local
+ln -sf $DOTFILES/.zshenv $HOME/.zshenv
+ln -sf $DOTFILES/.zshrc $HOME/.zshrc
+ln -sf $DOTFILES/.vimrc $HOME/.vimrc
+ln -sf $DOTFILES/.npmrc $HOME/.npmrc
+ln -sf $DOTFILES/.gemrc $HOME/.gemrc
+ln -sf $DOTFILES/.tmux.conf.local $HOME/.tmux.conf.local
 
 cp -n $DOTFILES/.zshrc.local $HOME/.zshrc.local
 
-mkdir -p $HOME/.pip; ln -fs $DOTFILES/.pip.conf $HOME/.pip/pip.conf
+mkdir -p $HOME/.pip; ln -sf $DOTFILES/.pip.conf $HOME/.pip/pip.conf
 
-ln -fs $DOTFILES/.gitconfig $HOME/.gitconfig
+ln -sf $DOTFILES/.gitconfig $HOME/.gitconfig
 if [ "$SYSTEM" = "Darwin" ]; then
     cp -n $DOTFILES/.gitconfig_macOS_local $HOME/.gitconfig_local
 elif [ "$OSTYPE" = "cygwin" ]; then
@@ -176,10 +176,10 @@ elif [ "$OSTYPE" = "cygwin" ]; then
 else
     cp -n $DOTFILES/.gitconfig_local $HOME/.gitconfig_local
 fi
-ln -fs $DOTFILES/.gitignore_global $HOME/.gitignore_global
+ln -sf $DOTFILES/.gitignore_global $HOME/.gitignore_global
 
 if [ "$OSTYPE" = "cygwin" ]; then
-    ln -fs $DOTFILES/.minttyrc $HOME/.minttyrc
+    ln -sf $DOTFILES/.minttyrc $HOME/.minttyrc
 fi
 
 # Emacs Configs
@@ -189,7 +189,7 @@ sync_repo seagle0128/.emacs.d $EMACSD
 # Oh My Tmux
 printf "${BLUE} ➜  Installing Oh My Tmux...${NORMAL}\n"
 sync_repo gpakosz/.tmux $TMUX
-ln -fs $TMUX/.tmux.conf $HOME/.tmux.conf
+ln -sf $TMUX/.tmux.conf $HOME/.tmux.conf
 
 # FZF
 printf "${BLUE} ➜  Installing FZF...${NORMAL}\n"
