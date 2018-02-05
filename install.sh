@@ -222,7 +222,7 @@ if [ "$OSTYPE" != "cygwin" ]; then
 fi
 
 # Entering zsh
-printf "$Done. Enjoy!\n"
+printf "Done. Enjoy!\n"
 if hash zsh >/dev/null 2>&1; then
     env zsh
 fi
