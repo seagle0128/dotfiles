@@ -210,9 +210,9 @@ if [ "$OSTYPE" != "cygwin" ]; then
     printf "${BLUE} ➜  Installing Peco...${NORMAL}\n"
     if [ "$SYSTEM" = "Darwin" ]; then
         sync_brew_package peco
-    elif [ "SYSTEM" = "Linux" ]; then
-        if ! hash peco >/dev/null 2>&1; then
-            # Only support Linux x64 binary
+    elif [ "$SYSTEM" = "Linux" ]; then
+        # Only support Linux x64 binary
+        if ! hash peco >/dev/null 2>&1 && [ "`uname -m`" = "x86_64" ]; then
             curl -fsSL https://github.com/peco/peco/releases/download/v0.5.2/peco_linux_amd64.tar.gz | tar xzf -
             chmod +x peco_linux_amd64/peco
             sudo mv peco_linux_amd64/peco /usr/local/bin
