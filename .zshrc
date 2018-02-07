@@ -84,12 +84,7 @@ alias bu='brew update; brew upgrade; brew cleanup'
 alias bcu='brew cu --all --yes --no-brew-update --cleanup'
 
 # Proxy
-if [ -f /opt/XX-Net/start ]; then
-    alias startproxy='/opt/XX-Net/start'
-    PROXY=http://127.0.0.1:8087
-else
-    PROXY=http://127.0.0.1:1087
-fi
+PROXY=http://127.0.0.1:1087
 alias showproxy='echo "http_proxy=$http_proxy"; echo "https_proxy=$https_proxy"'
 alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; showproxy'
 alias unsetproxy='export http_proxy=; export https_proxy=; showproxy'
