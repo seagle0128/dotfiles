@@ -10,8 +10,10 @@ antigen theme steeef            # ys, dst, steeef, wedisagree, robbyrussell
 # antigen bundle docker
 # antigen bundle docker-compose
 # antigen bundle docker-machine
+# antigen bundle npm
 
 # env
+export TERM=xterm-256color
 # export EDITOR=vim
 
 # aliases
