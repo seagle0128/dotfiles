@@ -24,7 +24,7 @@ antigen bundle z
 antigen bundle djui/alias-tips
 [[ $OSTYPE != cygwin* ]] && antigen bundle andrewferrier/fzf-z
 
-antigen bundle zsh-users/zsh-completions
+# antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zdharma/fast-syntax-highlighting
 # antigen bundle zsh-users/zsh-syntax-highlighting
