@@ -53,9 +53,9 @@ sync_repo() {
 
     if [ ! -e "$repo_path" ]; then
         mkdir -p "$repo_path"
-        git clone --depth 1 "https://github.com/$repo_uri.git" "$repo_path" >/dev/null 2>&1
+        git clone --depth 1 "https://github.com/$repo_uri.git" "$repo_path" >/dev/null
     else
-        cd "$repo_path" && git pull --rebase --stat origin master >/dev/null 2>&1; cd - >/dev/null
+        cd "$repo_path" && git pull --rebase --stat origin master >/dev/null; cd - >/dev/null
     fi
 }
 
@@ -66,9 +66,9 @@ sync_brew_package() {
     fi
 
     if ! hash ${1} >/dev/null 2>&1; then
-        brew install ${1} >/dev/null 2>&1
+        brew install ${1} >/dev/null
     else
-        brew upgrade ${1} >/dev/null 2>&1
+        brew upgrade ${1} >/dev/null
     fi
 }
 
@@ -203,7 +203,7 @@ elif [ "$OSTYPE" = "cygwin" ]; then
 else
     sync_repo junegunn/fzf $FZF
 fi
-[ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null 2>&1
+[ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null
 
 # Peco
 if [ "$OSTYPE" != "cygwin" ]; then
