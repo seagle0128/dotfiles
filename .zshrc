@@ -71,7 +71,6 @@ alias restart_emacs='emacsclient -e "(let ((last-nonmenu-event nil) (kill-emacs-
 alias upgrade_repo='git pull --rebase --stat origin master >/dev/null'
 alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
 alias upgrade_emacs='cd $HOME/.emacs.d && upgrade_repo; cd - >/dev/null'
-alias upgrade_emacs_packages="emacs -Q --batch --eval '(add-to-list (quote load-path) (expand-file-name \"lisp\" user-emacs-directory))' -l init-package.el --eval '(paradox-upgrade-packages)'"
 alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles && sh $DOTFILES/install.sh'
 alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh.tmp && mv $ANTIGEN/antigen.zsh.tmp $ANTIGEN/antigen.zsh'
