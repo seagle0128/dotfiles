@@ -171,7 +171,7 @@ sync_repo seagle0128/dotfiles $DOTFILES
 
 chmod +x $DOTFILES/install.sh
 chmod +x $DOTFILES/install_brew_cask.sh
-chmod +x $DOTFILES/isntall_go.sh
+chmod +x $DOTFILES/install_go.sh
 
 ln -sf $DOTFILES/.zshenv $HOME/.zshenv
 ln -sf $DOTFILES/.zshrc $HOME/.zshrc
