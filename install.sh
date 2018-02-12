@@ -74,20 +74,27 @@ sync_brew_package() {
 
 # Clean all configurations
 clean_dotfiles() {
-    [ -f $HOME/.gemrc ] && mv $HOME/.gemrc $HOME/.gemrc.bak
-    [ -f $HOME/.gitconfig ] && mv $HOME/.gitconfig $HOME/.gitconfig.bak
-    [ -f $HOME/.npmrc ] && mv $HOME/.npmrc $HOME/.npmrc.bak
-    [ -f $HOME/.tmux.conf ] && mv $HOME/.tmux.conf $HOME/.tmux.conf.bak
-    [ -f $HOME/.vimrc ] && mv $HOME/.vimrc $HOME/.vimrc.bak
-    [ -f $HOME/.zshenv ] && mv $HOME/.zshenv $HOME/.zshenv.bak
-    [ -f $HOME/.zshrc ] && mv $HOME/.zshrc $HOME/.zshrc.bak
-    [ -f $HOME/.zshrc.local ] && mv $HOME/.zshrc.local $HOME/.zshrc.local.bak
+    confs="
+    .gemrc
+    .gitconfig
+    .npmrc
+    .tmux.conf
+    .vimrc
+    .zshenv
+    .zshrc
+    .zshrc.local
+    "
+    for c in ${confs}; do
+        [ -f $HOME/${c} ] && mv $HOME/${c} $HOME/${c}.bak
+    done
 
     [ -d $EMACSD ] && mv $EMACSD $EMACSD.bak
 
     rm -rf $ZSH $TMUX $FZF $DOTFILES
+
+    rm -f $HOME/.fzf.*
     rm -f $HOME/.gitignore_global $HOME/.gitconfig.local
-    rm -f $HOME/.tmux.conf $HOME/.tmux.local $HOME/.fzf.*
+    rm -f $HOME/.tmux.conf $HOME/.tmux.local
 }
 
 YES=0
