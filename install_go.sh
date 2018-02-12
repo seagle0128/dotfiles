@@ -56,7 +56,7 @@ function check {
 
 function install {
     for p in ${packages[@]}; do
-        echo "${BLUE}➜ Installing ${p}...${NORMAL}"
+        echo "${BLUE}  ➜ Installing ${p}...${NORMAL}"
         go get -u ${p}
     done
 }

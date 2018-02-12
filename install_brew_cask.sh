@@ -82,7 +82,7 @@ function check {
 
     # Check brew
     if not hash brew 2>/dev/null; then
-        echo "${BLUE}➜ Installing Homebrew and Cask...${NORMAL}"
+        echo "${BLUE}  ➜ Installing Homebrew and Cask...${NORMAL}"
 
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
