@@ -74,15 +74,20 @@ sync_brew_package() {
 
 # Clean all configurations
 clean_dotfiles() {
+    [ -f $HOME/.gemrc ] && mv $HOME/.gemrc $HOME/.gemrc.bak
+    [ -f $HOME/.gitconfig ] && mv $HOME/.gitconfig $HOME/.gitconfig.bak
+    [ -f $HOME/.npmrc ] && mv $HOME/.npmrc $HOME/.npmrc.bak
+    [ -f $HOME/.tmux.conf ] && mv $HOME/.tmux.conf $HOME/.tmux.conf.bak
+    [ -f $HOME/.vimrc ] && mv $HOME/.vimrc $HOME/.vimrc.bak
     [ -f $HOME/.zshenv ] && mv $HOME/.zshenv $HOME/.zshenv.bak
     [ -f $HOME/.zshrc ] && mv $HOME/.zshrc $HOME/.zshrc.bak
     [ -f $HOME/.zshrc.local ] && mv $HOME/.zshrc.local $HOME/.zshrc.local.bak
-    [ -f $HOME/.vimrc ] && mv $HOME/.vimrc $HOME/.vimrc.bak
+
     [ -d $EMACSD ] && mv $EMACSD $EMACSD.bak
 
     rm -rf $ZSH $TMUX $FZF $DOTFILES
+    rm -f $HOME/.gitignore_global $HOME/.gitconfig.local
     rm -f $HOME/.tmux.conf $HOME/.tmux.local $HOME/.fzf.*
-    rm -f $HOME/.gitconfig $HOME/.gitignore_global $HOME/.gitconfig.local
 }
 
 YES=0
@@ -160,10 +165,10 @@ sync_repo seagle0128/dotfiles $DOTFILES
 ln -sf $DOTFILES/.zshenv $HOME/.zshenv
 ln -sf $DOTFILES/.zshrc $HOME/.zshrc
 ln -sf $DOTFILES/.vimrc $HOME/.vimrc
-ln -sf $DOTFILES/.npmrc $HOME/.npmrc
-ln -sf $DOTFILES/.gemrc $HOME/.gemrc
 ln -sf $DOTFILES/.tmux.conf.local $HOME/.tmux.conf.local
 
+cp -n $DOTFILES/.npmrc $HOME/.npmrc
+cp -n $DOTFILES/.gemrc $HOME/.gemrc
 cp -n $DOTFILES/.zshrc.local $HOME/.zshrc.local
 
 mkdir -p $HOME/.pip; ln -sf $DOTFILES/.pip.conf $HOME/.pip/pip.conf
