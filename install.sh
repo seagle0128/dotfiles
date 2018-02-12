@@ -42,7 +42,7 @@ fi
 
 # Check git
 hash git >/dev/null 2>&1 || {
-    echo "Error: git is not installed"
+    echo "${RED}Error: git is not installed${NORMAL}"
     exit 1
 }
 
@@ -61,7 +61,7 @@ sync_repo() {
 
 sync_brew_package() {
     if ! hash brew >/dev/null 2>&1; then
-        echo "Error: brew is not installed"
+        echo "${RED}Error: brew is not installed${NORMAL}"
         return 1
     fi
 
