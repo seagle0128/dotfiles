@@ -72,16 +72,21 @@ alias upgrade_repo='git pull --rebase --stat origin master'
 alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
 alias upgrade_emacs='cd $HOME/.emacs.d && upgrade_repo; cd - >/dev/null'
 alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
-alias upgrade_env='upgrade_dotfiles && sh $DOTFILES/install.sh'
+alias upgrade_env='upgrade_dotfiles && $DOTFILES/install.sh'
 alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh.tmp && mv $ANTIGEN/antigen.zsh.tmp $ANTIGEN/antigen.zsh'
-alias upgrade_go='sh $DOTFILES/install_go.sh'
+alias upgrade_go='$DOTFILES/install_go.sh'
+[[ $OSTYPE == darwin* ]] && alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
 
 # Apt
-alias apu='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoremove -y; sudo apt-get autoclean -y'
+if [[ $OSTYPE == linux* ]] && hash apt >/dev/null 2>&1; then
+    alias apu='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoremove -y; sudo apt-get autoclean -y'
+fi
 
 # Brew
-alias bu='brew update; brew upgrade; brew cleanup'
-alias bcu='brew cu --all --yes --no-brew-update --cleanup'
+if [[ $OSTYPE == darwin* ]]; then
+    alias bu='brew update; brew upgrade; brew cleanup'
+    alias bcu='brew cu --all --yes --no-brew-update --cleanup'
+fi
 
 # Proxy
 PROXY=http://127.0.0.1:1087
