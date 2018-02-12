@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #############################################################
 # Install macOS via brew cask
 # Author: Vincent Zhang <seagle0128@gmail.com>

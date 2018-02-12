@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #############################################################
 # Install and update go packages
 # Author: Vincent Zhang <seagle0128@gmail.com>

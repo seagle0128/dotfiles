@@ -169,6 +169,10 @@ mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
 printf "${BLUE} ➜  Installing Dotfiles...${NORMAL}\n"
 sync_repo seagle0128/dotfiles $DOTFILES
 
+chmod +x $DOTFILES/install.sh
+chmod +x $DOTFILES/install_brew_cask.sh
+chmod +x $DOTFILES/isntall_go.sh
+
 ln -sf $DOTFILES/.zshenv $HOME/.zshenv
 ln -sf $DOTFILES/.zshrc $HOME/.zshrc
 ln -sf $DOTFILES/.vimrc $HOME/.vimrc
