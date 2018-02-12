@@ -48,7 +48,7 @@ else
 fi
 
 function check {
-    if not hash go 2>/dev/null; then
+    if not hash go >/dev/null 2>&1; then
         echo "${RED}Error: go is not installed${NORMAL}"
         exit 1
     fi
