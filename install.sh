@@ -181,8 +181,7 @@ ln -sf $DOTFILES/.tmux.conf.local $HOME/.tmux.conf.local
 cp -n $DOTFILES/.npmrc $HOME/.npmrc
 cp -n $DOTFILES/.gemrc $HOME/.gemrc
 cp -n $DOTFILES/.zshrc.local $HOME/.zshrc.local
-
-mkdir -p $HOME/.pip; ln -sf $DOTFILES/.pip.conf $HOME/.pip/pip.conf
+mkdir -p $HOME/.pip; cp -n $DOTFILES/.pip.conf $HOME/.pip/pip.conf
 
 ln -sf $DOTFILES/.gitconfig $HOME/.gitconfig
 if [ "$SYSTEM" = "Darwin" ]; then
