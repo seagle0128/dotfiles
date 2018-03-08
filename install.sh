@@ -236,6 +236,29 @@ if [ "$OSTYPE" != "cygwin" ]; then
     fi
 fi
 
+# Powerline fonts
+if [ "$OSTYPE" != "cygwin" ]; then
+    printf "${BLUE} ➜  Installing Powerline fonts...${NORMAL}\n"
+
+    if hash apt >/dev/null 2>&1; then
+        apt-get install fonts-powerline
+    else
+        # TODO: brew cask install on macOS?
+        if [ "$SYSTEM" = "Darwin" ]; then
+            font_dir="$HOME/Library/Fonts"
+        else
+            font_dir="$HOME/.local/share/fonts"
+        fi
+
+        if [ ! -f "${font_dir}/Hack-Regular.ttf" ]; then
+            sync_repo powerline/fonts
+            cd fonts
+            ./install.sh
+            cd ..
+            rm -rf fonts
+        fi
+    fi
+
 # Entering zsh
 printf "Done. Enjoy!\n"
 if hash zsh >/dev/null 2>&1; then
