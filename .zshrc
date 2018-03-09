@@ -7,7 +7,8 @@ DOTFILES=$HOME/.dotfiles
 source $ANTIGEN/antigen.zsh
 
 # Configure Antigen
-typeset -a ANTIGEN_CHECK_FILES=($HOME/.zshrc $HOME/.zshrc.local)
+declare -a ANTIGEN_CHECK_FILES
+ANTIGEN_CHECK_FILES=($HOME/.zshrc $HOME/.zshrc.local)
 
 # Load the oh-my-zsh's library
 antigen use oh-my-zsh
