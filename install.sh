@@ -243,7 +243,6 @@ if [ "$OSTYPE" != "cygwin" ]; then
     if hash apt >/dev/null 2>&1; then
         apt-get install fonts-powerline
     else
-        # TODO: brew cask install on macOS?
         if [ "$SYSTEM" = "Darwin" ]; then
             font_dir="$HOME/Library/Fonts"
         else
@@ -258,6 +257,7 @@ if [ "$OSTYPE" != "cygwin" ]; then
             rm -rf fonts
         fi
     fi
+fi
 
 # Entering zsh
 printf "Done. Enjoy!\n"
