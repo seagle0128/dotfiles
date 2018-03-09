@@ -1,166 +1,96 @@
-# Get OS name
-sysOS=`uname -s`
+# Zsh configuration
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+ANTIGEN=$HOME/.antigen
+DOTFILES=$HOME/.dotfiles
 
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# Load Antigen
+source $ANTIGEN/antigen.zsh
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="ys"                  # ys, dst, steef, wedisagree
+# Configure Antigen
+typeset -a ANTIGEN_CHECK_FILES=($HOME/.zshrc $HOME/.zshrc.local)
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# Load the oh-my-zsh's library
+antigen use oh-my-zsh
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# Bundles from the default repo (robbyrussell's oh-my-zsh)
+antigen bundle git
+antigen bundle colored-man-pages
+antigen bundle extract
+antigen bundle sudo
+antigen bundle z
+[[ $OSTYPE == darwin* ]] && antigen bundle osx
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Misc bundles.
+antigen bundle djui/alias-tips
+[[ $OSTYPE != cygwin* ]] && antigen bundle andrewferrier/fzf-z
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zdharma/fast-syntax-highlighting
+# antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-history-substring-search
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+# Load the theme.
+antigen theme robbyrussell
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# Local customizations, e.g. theme, plugins, aliases, etc.
+[ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+# Tell Antigen that you're done
+antigen apply
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+# Completion enhancements
+source $DOTFILES/completion.zsh
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(emacs git history-substring-search
-         copydir copyfile colorize colored-man-pages
-         python ruby sudo themes z zsh_reload)
-
-# Workaround for fixing the segment fault while reloading
-# https://github.com/zsh-users/zsh-autosuggestions/issues/126
-if [ -z "$_zsh_custom_scripts_loaded" ]; then
-    _zsh_custom_scripts_loaded=1
-    plugins+=(zsh-autosuggestions zsh-syntax-highlighting alias-tips)
+# Load FZF
+if [[ $OSTYPE == cygwin* ]]; then
+    [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh;
+else
+    [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh;
 fi
 
-if [[ $sysOS == "Darwin" ]]; then
-    plugins+=(osx)
-fi
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overridin those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Aliases
+#
 
-export DEFAULT_USER=$USER
-
-if hash rbenv 2> /dev/null; then
-    export PATH=$HOME/.rbenv/shims:$PATH
-fi
-
-if [[ $sysOS == "Darwin" ]]; then
-    export PATH=/usr/local/sbin:$PATH
-
-    # nodejs
-    if hash node 2> /dev/null; then
-        export PATH=/usr/local/opt/node@6/bin:$PATH
-    fi
-
-    # Homebrew bottles
-    if hash brew 2>/dev/null; then
-        export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
-        # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
-    fi
-fi
-
-# Golang
-if hash go 2>/dev/null; then
-    GO_CACHE=$HOME/.gopath/cache # First GOPATH, 'go get' saves files here, and it's always safe to be cleaned
-    GO_PKGS=$HOME/.gopath/pkgs   # For 3rd party go packages, use 'gosave' to sync all packages from cache to this folder or moved manually
-    GO_PROJ=$HOME/goprojects     # Your go projects root
-    export GOPATH=$GO_CACHE:$GO_PKGS:$GO_PROJ
-    export PATH=$PATH:$GO_CACHE/bin:$GO_PKGS/bin:$GO_PROJ/bin
-    alias gosave='rsync -aAXv ${GO_CACHE}/ ${GO_PKGS}'
-    #                    |||└─ increase verbosity
-    #                    ||└─ preserve extended attributes
-    #                    |└─ preserve ACLs (implies --perms)
-    #                    └─ archive mode; equals -rlptgoD (no -H,-A,-X)
-    alias goclean='[ -d "$GO_CACHE" ] && rm -rf ${GO_CACHE}/*'
-    #                                                       └─ double rm verification in zsh
-fi
-
-# aliases
-alias zshconf='$EDITOR ~/.zshrc'
-alias ohmyzsh='$EDITOR ~/.oh-my-zsh'
+# General
+alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
 alias h='history'
 alias c='clear'
-alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
-alias rmelc='rm -f ~/.emacs.d/lisp/*.elc'
-alias upgrade_dotfiles='cd ~/.dotfiles && git pull --rebase --stat origin master && cd -'
+alias rt='trash'                # `brew install trash` or `npm install --global trash-cli`
 
-# proxy
-if [ -f /opt/XX-Net/start ]; then
-    alias startproxy='/opt/XX-Net/start'
-    alias setproxy='export http_proxy=http://127.0.0.1:8087; export https_proxy=http://127.0.0.1:8087'
-    alias unsetproxy='export http_proxy; export https_proxy'
-    alias showproxy='echo "http_proxy=$http_proxy"; echo "https_proxy=$https_proxy"'
+# Emacs
+alias e="$EDITOR"
+alias ef="$EDITOR -c"
+alias te='emacsclient -a "" -nw'
+alias rmelc='rm -f $HOME/.emacs.d/lisp/*.elc'
+alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
+alias restart_emacs='emacsclient -e "(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))" && te'
+
+# Upgrade
+alias upgrade_repo='git pull --rebase --stat origin master'
+alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
+alias upgrade_emacs='cd $HOME/.emacs.d && upgrade_repo; cd - >/dev/null'
+alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
+alias upgrade_env='upgrade_dotfiles && $DOTFILES/install.sh'
+alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh.tmp && mv $ANTIGEN/antigen.zsh.tmp $ANTIGEN/antigen.zsh'
+alias upgrade_go='$DOTFILES/install_go.sh'
+[[ $OSTYPE == darwin* ]] && alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
+
+# Apt
+if [[ $OSTYPE == linux* ]] && hash apt >/dev/null 2>&1; then
+    alias apu='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoremove -y; sudo apt-get autoclean -y'
 fi
 
-# bind P and N for EMACS mode
-bindkey -M emacs '^P' history-substring-search-up
-bindkey -M emacs '^N' history-substring-search-down
+# Brew
+if [[ $OSTYPE == darwin* ]]; then
+    alias bu='brew update; brew upgrade; brew cleanup'
+    alias bcu='brew cu --all --yes --no-brew-update --cleanup'
+fi
 
-# Fuzzy finder
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Source customization
-if [ -f ~/.zshrc.local ]; then source ~/.zshrc.local; fi
+# Proxy
+PROXY=http://127.0.0.1:1087
+alias showproxy='echo "http_proxy=$http_proxy"; echo "https_proxy=$https_proxy"'
+alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; showproxy'
+alias unsetproxy='export http_proxy=; export https_proxy=; showproxy'
+alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'

@@ -1,27 +1,10 @@
-[user]
-	name = Vincent Zhang
-	email = seagle0128@gmail.com
 [core]
 	excludesfile = ~/.gitignore_global
-	editor = emacs
-	pager = cat
-	autocrlf = input
+	autocrlf = false
 	ignorecase = false
 	safecrlf = warn
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[commit]
-	template = ~/.stCommitMsg
-[g2 "panic"]
-	excludes = -e .classpath -e .settings -e *.iml
-[diff]
-	tool = sourcetree
-[merge]
-	tool = sourcetree
+	editor = emacsclient -t -a=\\\"\\\"
+	quotepath = false
 [color]
 	branch = auto
 	diff = auto
@@ -29,3 +12,13 @@
 	status = auto
 [push]
 	default = current
+[diff]
+	tool = ediff
+[merge]
+	tool = ediff
+[difftool "ediff"]
+	cmd = emacsclient -n -a \"\" --eval \"(ediff-files \\\"$LOCAL\\\" \\\"$REMOTE\\\")\"
+[mergetool "ediff"]
+	cmd = emacsclient -n -a \"\" --eval \"(ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\")\"
+[include]
+	path = ~/.gitconfig_local
