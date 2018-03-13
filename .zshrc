@@ -50,6 +50,14 @@ else
     [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh;
 fi
 
+# Generate cache
+autoload -Uz compinit
+if [ ! -f $HOME/.zcompdump ] || [ $(date +'%j') != $(stat -f '%Sm' -t '%j' $HOME/.zcompdump) ]; then
+    compinit
+else
+    compinit -C
+fi
+
 #
 # Aliases
 #
