@@ -60,6 +60,12 @@ alias h='history'
 alias c='clear'
 alias rt='trash'                # `brew install trash` or `npm install --global trash-cli`
 
+if [[ $OSTYPE == darwin* ]]; then
+    hash gls >/dev/null 2>&1 && alias ls='gls --color=tty --group-directories-first'
+else
+    alias ls='ls --color=tty --group-directories-first'
+fi
+
 # Emacs
 alias e="$EDITOR"
 alias ef="$EDITOR -c"
