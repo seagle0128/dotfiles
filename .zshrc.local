@@ -3,6 +3,42 @@
 # theme
 antigen theme steeef            # ys, dst, steeef, wedisagree, robbyrussell
 
+# Powerful theme (require powerline fonts)
+# antigen theme caiogondim/bullet-train.zsh
+
+# BULLETTRAIN_PROMPT_ORDER=(status custom context dir go git cmd_exec_time)
+# BULLETTRAIN_PROMPT_CHAR=""
+# BULLETTRAIN_PROMPT_SEPARATE_LINE=false
+# BULLETTRAIN_PROMPT_ADD_NEWLINE=false
+
+# BULLETTRAIN_CONTEXT_DEFAULT_USER=$USER
+
+# BULLETTRAIN_DIR_BG=black
+
+# BULLETTRAIN_GIT_PREFIX="" # "\ue0a0"
+# BULLETTRAIN_GIT_EXTENDED=false
+# BULLETTRAIN_GIT_COLORIZE_DIRTY=true
+# BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR=red
+# BULLETTRAIN_GIT_DIRTY=""
+# BULLETTRAIN_GIT_CLEAN=""
+# BULLETTRAIN_GIT_BG=green
+# BULLETTRAIN_GIT_PROMPT_CMD="\$(custom_git_prompt)"
+
+# custom_git_prompt () {
+#     local ref
+#     if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]
+#     then
+#         ref=$(command git symbolic-ref HEAD 2> /dev/null)  || ref=$(command git rev-parse --short HEAD 2> /dev/null)  || return 0
+
+#         if [[ ${ref#refs/heads/} == master ]]; then
+#             echo "$ZSH_THEME_GIT_PROMPT_PREFIX"
+#             # echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+#         else
+#             echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+#         fi
+#     fi
+# }
+
 # plugins
 # antigen bundle golang
 # antigen bundle python
