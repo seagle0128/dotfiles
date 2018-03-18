@@ -16,7 +16,6 @@ antigen theme steeef            # ys, dst, steeef, wedisagree, robbyrussell
 # BULLETTRAIN_DIR_BG=black
 
 # BULLETTRAIN_GIT_PREFIX="" # "\ue0a0"
-# BULLETTRAIN_GIT_EXTENDED=false
 # BULLETTRAIN_GIT_COLORIZE_DIRTY=true
 # BULLETTRAIN_GIT_COLORIZE_DIRTY_BG_COLOR=red
 # BULLETTRAIN_GIT_DIRTY=""
