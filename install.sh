@@ -240,7 +240,7 @@ fi
 if [ "$OSTYPE" != "cygwin" ]; then
     printf "${BLUE} ➜  Installing Powerline fonts...${NORMAL}\n"
 
-    if hash apt >/dev/null 2>&1; then
+    if hash apt-get >/dev/null 2>&1; then
         apt-get install fonts-powerline
     else
         if [ "$SYSTEM" = "Darwin" ]; then
