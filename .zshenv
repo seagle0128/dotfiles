@@ -1,5 +1,6 @@
 # ZSH envioronment
 
+export TERM=xterm-256color
 export DEFAULT_USER=$USER
 export EDITOR='emacsclient -a "" -n'
 export PATH=$HOME/bin:/usr/local/sbin:$PATH

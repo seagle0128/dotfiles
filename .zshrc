@@ -32,7 +32,7 @@ antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
 
 # Load the theme.
-antigen theme robbyrussell
+antigen theme steeef            # ys, dst, steeef, wedisagree, robbyrussell
 
 # Local customizations, e.g. theme, plugins, aliases, etc.
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
