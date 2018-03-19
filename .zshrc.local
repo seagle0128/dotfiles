@@ -45,14 +45,13 @@
 #     fi
 # }
 
-# env
+# Env
 # export EDITOR=vim
 # export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 
-# aliases
+# Aliases
 
-# functions
-
+# Functions
 function goclean() {
     go clean -i -n $1
     go clean -i $1
