@@ -18,6 +18,7 @@ packages=(
     github.com/nsf/gocode
     github.com/rogpeppe/godef
     github.com/golang/lint/golint
+    github.com/google/gops
     github.com/derekparker/delve/cmd/dlv
     github.com/aarzilli/gdlv
     github.com/josharian/impl
