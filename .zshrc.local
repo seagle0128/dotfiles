@@ -19,6 +19,14 @@
 # BULLETTRAIN_PROMPT_SEPARATE_LINE=false
 # BULLETTRAIN_PROMPT_ADD_NEWLINE=false
 
+# if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+#     BULLETTRAIN_IS_SSH_CLIENT=true
+# else
+#     case $(ps -o comm= -p $PPID) in
+#         sshd|*/sshd) BULLETTRAIN_IS_SSH_CLIENT=true
+#     esac
+# fi
+
 # BULLETTRAIN_CONTEXT_DEFAULT_USER=$USER
 # BULLETTRAIN_DIR_BG=black
 # BULLETTRAIN_GO_FG=black
