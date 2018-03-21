@@ -46,7 +46,7 @@
 # BULLETTRAIN_GIT_AHEAD="⬆"
 # BULLETTRAIN_GIT_BEHIND="⬇"
 # BULLETTRAIN_GIT_DIVERGED="⬍"
-# BULLETTRAIN_GIT_PROMPT_CMD="\$(custom_git_prompt)"
+# BULLETTRAIN_GIT_PROMPT_CMD="\$(custom_git_prompt_info)"
 
 # custom_git_prompt_info () {
 #     local ref
