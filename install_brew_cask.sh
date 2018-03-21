@@ -43,13 +43,18 @@ apps=(
     typora        # Markdown editor
     visual-studio-code
 
-    # # Utils
+    # Utils
     # acrobat-reader
     aliwangwang
     baidunetdisk
     # neteasemusic
     # skype-for-business
     thunder
+
+    # Fonts
+    font-wenquanyi-zen-hei
+    font-wenquanyi-micro-hei
+    font-wenquanyi-micro-hei-lite
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
@@ -87,6 +92,7 @@ function check {
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
         brew tap caskroom/cask
+        brew tap caskroom/fonts
         cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask
         git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
     fi
