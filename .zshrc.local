@@ -36,6 +36,7 @@
 # BULLETTRAIN_GIT_PREFIX=""
 # BULLETTRAIN_GIT_DIRTY=""
 # BULLETTRAIN_GIT_CLEAN=""
+# BULLETTRAIN_GIT_UNTRACKED=" %F{magenta}✭%F{black}"
 # BULLETTRAIN_GIT_PROMPT_CMD="\$(custom_git_prompt_info)"
 
 # custom_git_prompt_info () {
