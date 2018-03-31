@@ -49,6 +49,14 @@ if [[ $OSTYPE == cygwin* ]]; then
 else
     [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh;
 fi
+if hash rg >/dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='rg --hidden --files'
+elif hash ag >/dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='ag -U --hidden -g ""'
+fi
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 #
 # Aliases
