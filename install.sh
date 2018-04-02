@@ -225,7 +225,7 @@ if [ "$OSTYPE" != "cygwin" ]; then
     printf "${BLUE} ➜  Installing Peco...${NORMAL}\n"
     if [ "$SYSTEM" = "Darwin" ]; then
         sync_brew_package peco
-    elif [[ "$SYSTEM" = "Linux" ] && [ "`uname -m`" = "x86_64" ]]; then
+    elif [ "$SYSTEM" = "Linux" ] && [ "`uname -m`" = "x86_64" ]; then
         # Only support Linux x64 binary
         PECO_UPDATE=1
         PECO_RELEASE_URL="https://github.com/peco/peco/releases"
