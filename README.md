@@ -2,7 +2,8 @@
 
 ![Centaur](logo.png)
 
-Full and clean configurations for development environment on GNU Linux, macOS and Cygwin.
+Full and clean configurations for development environment on GNU Linux, macOS
+and Cygwin.
 
 ## Prerequisite
 
@@ -34,11 +35,12 @@ sh -c "$(wget https://github.com/seagle0128/dotfiles/raw/master/install.sh -O -)
 
 That's it. Enjoy!
 
-# Customization
+## Customization
 
-## ~/.zshenv
+### ZSH ENV
 
-Add your zsh environments. This is recommended by ZSH officially. For example:
+Add your zsh environments in `~/.zshenv`. This is recommended by ZSH officially.
+For example:
 
 ``` shell
 export PATH=/usr/local/sbin:$PATH
@@ -46,9 +48,9 @@ export PATH=$HOME/.rbenv/shims:$PATH
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 ```
 
-## ~/.zshrc.local
+### ZSH local config
 
-Set your personal zsh configurations. For example:
+Set your personal zsh configurations in `~/.zshrc.local`. For example:
 
 ``` shell
 # theme
@@ -59,9 +61,9 @@ antigen bundle python
 antigen bundle ruby
 ```
 
-## ~/.gitconfig.local
+### Git local config
 
-Set your git configurations, e.g. user credentials.
+Set your git configurations in `~/.gitconfig.local`, e.g. user credentials.
 
 ``` shell
 [commit]
@@ -75,21 +77,24 @@ Set your git configurations, e.g. user credentials.
     signingkey = XXXXXXXX
 ```
 
-# Screenshots
+## Screenshots
 
-## Sample UI with Tmux
+### Sample UI with Tmux
+
 ![tmux](https://github.com/ray-g/devstrap/raw/master/docs/snapshots/layout.PNG)
 
-## Git Log
+### Git Log
+
 ![git_log](https://github.com/ray-g/devstrap/raw/master/docs/snapshots/git_log.PNG)
 
-## Centaur Emacs
+### Centaur Emacs
+
 ![Emacs](https://user-images.githubusercontent.com/140797/30391180-20bd0ba8-987e-11e7-9cb4-2aa66a6fd69d.png)
 
-# Acknowledgements
+## Acknowledgements
 
 Related projects: [DevStrap](https://github.com/ray-g/devstrap)
 
-# License
+## License
 
 [MIT License](https://github.com/ray-g/devstrap/blob/master/LICENSE)
