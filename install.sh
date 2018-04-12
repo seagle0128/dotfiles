@@ -77,6 +77,7 @@ clean_dotfiles() {
     confs="
     .gemrc
     .gitconfig
+    .markdownlint.json
     .npmrc
     .tmux.conf
     .vimrc
@@ -177,6 +178,7 @@ ln -sf $DOTFILES/.zshenv $HOME/.zshenv
 ln -sf $DOTFILES/.zshrc $HOME/.zshrc
 ln -sf $DOTFILES/.vimrc $HOME/.vimrc
 ln -sf $DOTFILES/.tmux.conf.local $HOME/.tmux.conf.local
+ln -sf $DOTFILES/.markdownlint.json $HOME/.markdownlint.json
 
 cp -n $DOTFILES/.npmrc $HOME/.npmrc
 cp -n $DOTFILES/.gemrc $HOME/.gemrc
