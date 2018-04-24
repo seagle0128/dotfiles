@@ -12,7 +12,11 @@
 # antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
 
 # Powerline theme
-# antigen theme seagle0128/bullet-train.zsh
+# if [ -n "$INSIDE_EMACS" ]; then
+#     antigen theme ys
+# else
+#     antigen theme seagle0128/bullet-train.zsh
+# fi
 
 # BULLETTRAIN_PROMPT_ORDER=(status custom context dir go git cmd_exec_time)
 # BULLETTRAIN_PROMPT_CHAR=""
