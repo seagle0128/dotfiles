@@ -281,5 +281,8 @@ fi
 # Entering zsh
 printf "Done. Enjoy!\n"
 if hash zsh >/dev/null 2>&1; then
+    if [ "$SHELL" != "$(which zsh)" ]; then
+        chsh -s $(which zsh)
+    fi
     env zsh
 fi
