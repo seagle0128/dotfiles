@@ -283,6 +283,7 @@ printf "Done. Enjoy!\n"
 if hash zsh >/dev/null 2>&1; then
     if [ "$SHELL" != "$(which zsh)" ]; then
         chsh -s $(which zsh)
+        printf "${BLUE} You need to logout and login to enable zsh as the default shell.${NORMAL}\n"
     fi
     env zsh
 fi
