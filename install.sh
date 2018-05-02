@@ -163,10 +163,7 @@ fi
 # Antigen: the plugin manager for zsh
 printf "${BLUE} ➜  Installing Antigen...${NORMAL}\n"
 mkdir -p $ZSH
-curl -fsSL git.io/antigen > $ZSH/antigen.zsh.tmp
-if [ $(stat -c%s $ZSH/antigen.zsh.tmp) > 0 ]; then
-    mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
-fi
+curl -fsSL git.io/antigen > $ZSH/antigen.zsh.tmp && mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
 
 # Dotfiles
 printf "${BLUE} ➜  Installing Dotfiles...${NORMAL}\n"
