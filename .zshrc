@@ -30,6 +30,7 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zdharma/fast-syntax-highlighting
 # antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle hlissner/zsh-autopair
 
 # Load the theme.
 antigen theme steeef            # ys, dst, steeef, wedisagree, robbyrussell
