@@ -105,8 +105,12 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 # Proxy
-PROXY=http://127.0.0.1:1087
-alias showproxy='echo "http_proxy=$http_proxy"; echo "https_proxy=$https_proxy"'
-alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; showproxy'
-alias unsetproxy='export http_proxy=; export https_proxy=; showproxy'
+HTTP_PROXY=http://127.0.0.1:1087
+PROXY=socks5://127.0.0.1:1086
+NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
+alias showproxy='echo "proxy=$http_proxy"'
+alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export no_proxy=$NO_PROXY; showproxy'
+alias set_http_proxy='export http_proxy=$HTTP_PROXY; export https_proxy=$HTTP_PROXY; export no_proxy=$NO_PROXY; showproxy'
+alias unsetproxy='export http_proxy=; export https_proxy=; exort no_proxy=; showproxy'
 alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
+setproxy >/dev/null
