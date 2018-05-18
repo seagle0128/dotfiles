@@ -8,7 +8,7 @@
 # Go packages
 packages=(
     # go tools
-    golang.org/x/tools/cmd/godoc
+    # golang.org/x/tools/cmd/godoc
     golang.org/x/tools/cmd/goimports
     golang.org/x/tools/cmd/gorename
     golang.org/x/tools/cmd/gotype
