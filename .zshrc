@@ -94,7 +94,7 @@ alias upgrade_go='$DOTFILES/install_go.sh'
 [[ $OSTYPE == darwin* ]] && alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
 
 # Apt
-if [[ $OSTYPE == linux* ]] && hash apt >/dev/null 2>&1; then
+if [[ $OSTYPE == linux* ]] && which apt >/dev/null 2>&1; then
     alias apu='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoremove -y; sudo apt-get autoclean -y'
 fi
 
