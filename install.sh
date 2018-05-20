@@ -266,7 +266,7 @@ if [ "$OSTYPE" != "cygwin" ]; then
     else
         font_dir="$HOME/.local/share/fonts"
     fi
-    [ -d $font_dir ] || sudo mkdir $font_dir
+    [ -d $font_dir ] || mkdir $font_dir
 
     # Source Code Pro
     if [ ! -d "${font_dir}/source-code-pro" ]; then
