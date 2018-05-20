@@ -115,5 +115,3 @@ alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
 alias set_http_proxy='export http_proxy=$HTTP_PROXY; export https_proxy=$HTTP_PROXY; export no_proxy=$NO_PROXY; showproxy'
 alias unset_http_proxy=unsetproxy
 alias toggle_http_proxy='if [ -n "$http_proxy" ]; then unset_http_proxy; else set_http_proxy; fi'
-
-setproxy >/dev/null
