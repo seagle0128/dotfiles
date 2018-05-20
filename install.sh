@@ -50,12 +50,17 @@ hash git >/dev/null 2>&1 || {
 sync_repo() {
     local repo_uri="$1"
     local repo_path="$2"
+    local repo_branch="$3"
+
+    if [ -z "$repo_branch" ]; then
+        repo_branch="master"
+    fi
 
     if [ ! -e "$repo_path" ]; then
         mkdir -p "$repo_path"
-        git clone --depth 1 "https://github.com/$repo_uri.git" "$repo_path"
+        git clone --depth 1 --branch $repo_branch "https://github.com/$repo_uri.git" "$repo_path"
     else
-        cd "$repo_path" && git pull --rebase --stat origin master; cd - >/dev/null
+        cd "$repo_path" && git pull --rebase --stat origin $repo_branch; cd - >/dev/null
     fi
 }
 
@@ -252,26 +257,31 @@ if [ "$OSTYPE" != "cygwin" ]; then
     fi
 fi
 
-# Powerline fonts
+# Fonts
 if [ "$OSTYPE" != "cygwin" ]; then
-    printf "${BLUE} ➜  Installing Powerline fonts...${NORMAL}\n"
+    printf "${BLUE} ➜  Installing fonts...${NORMAL}\n"
+
+    if [ "$SYSTEM" = "Darwin" ]; then
+        font_dir="$HOME/Library/Fonts"
+    else
+        font_dir="$HOME/.local/share/fonts"
+    fi
+    [ -d $font_dir ] || sudo mkdir $font_dir
+
+    # Source Code Pro
+    if [ ! -d "${font_dir}/source-code-pro" ]; then
+        sync_repo adobe-fonts/source-code-pro $font_dir/source-code-pro release
+        fc-cache -f -v $font_dir/source-code-pro
+    fi
 
     if hash apt-get >/dev/null 2>&1; then
-        sudo apt-get install fonts-powerline
         sudo apt-get install fonts-wqy-microhei
         sudo apt-get install fonts-wqy-zenhei
+        sudo apt-get install fonts-powerline
     else
-        if [ "$SYSTEM" = "Darwin" ]; then
-            font_dir="$HOME/Library/Fonts"
-        else
-            font_dir="$HOME/.local/share/fonts"
-        fi
-
         if [ ! -f "${font_dir}/Hack-Regular.ttf" ]; then
             sync_repo powerline/fonts
-            cd fonts
-            ./install.sh
-            cd ..
+            ./fonts/install.sh
             rm -rf fonts
         fi
     fi
