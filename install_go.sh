@@ -6,15 +6,17 @@
 #############################################################
 
 # Go packages
-packages=(
-    # go tools
+# x tools
+x_tools=(
     # golang.org/x/tools/cmd/godoc
     golang.org/x/tools/cmd/goimports
     golang.org/x/tools/cmd/gorename
     golang.org/x/tools/cmd/gotype
     golang.org/x/tools/cmd/guru
+)
 
-    # 3rd party
+# 3rd party tools
+packages=(
     github.com/nsf/gocode
     github.com/rogpeppe/godef
     github.com/golang/lint/golint
@@ -48,6 +50,18 @@ else
     NORMAL=""
 fi
 
+YES=0
+NO=1
+promote_yn() {
+    eval ${2}=$NO
+    read -p "$1 [y/N]: " yn
+    case $yn in
+        [Yy]* )    eval ${2}=$YES;;
+        [Nn]*|'' ) eval ${2}=$NO;;
+        *)         eval ${2}=$NO;;
+    esac
+}
+
 function check {
     if not hash go >/dev/null 2>&1; then
         echo "${RED}Error: go is not installed${NORMAL}"
@@ -56,6 +70,14 @@ function check {
 }
 
 function install {
+    promote_yn "Install x-tools?" "continue"
+    if [ $continue -eq $YES ]; then
+        for p in ${x_tools[@]}; do
+            echo "${BLUE} ➜  Installing ${p}...${NORMAL}"
+            go get -u ${p}
+        done
+    fi
+
     for p in ${packages[@]}; do
         echo "${BLUE} ➜  Installing ${p}...${NORMAL}"
         go get -u ${p}
