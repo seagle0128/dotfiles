@@ -12,13 +12,14 @@ x_tools=(
     golang.org/x/tools/cmd/goimports
     golang.org/x/tools/cmd/gorename
     golang.org/x/tools/cmd/gotype
-    golang.org/x/tools/cmd/guru
+    # golang.org/x/tools/cmd/guru
 )
 
 # 3rd party tools
 packages=(
     github.com/nsf/gocode
     github.com/rogpeppe/godef
+    golang.org/x/tools/cmd/guru
     github.com/golang/lint/golint
     github.com/google/gops
     github.com/derekparker/delve/cmd/dlv
