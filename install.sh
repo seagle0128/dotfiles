@@ -259,30 +259,33 @@ fi
 
 # Fonts
 if [ "$OSTYPE" != "cygwin" ]; then
-    printf "${BLUE} ➜  Installing fonts...${NORMAL}\n"
+    promote_yn "Do you want to install fonts?" "continue"
+    if [ $continue -eq $YES ]; then
+        printf "${BLUE} ➜  Installing fonts...${NORMAL}\n"
 
-    if [ "$SYSTEM" = "Darwin" ]; then
-        font_dir="$HOME/Library/Fonts"
-    else
-        font_dir="$HOME/.local/share/fonts"
-    fi
-    [ -d $font_dir ] || mkdir $font_dir
+        if [ "$SYSTEM" = "Darwin" ]; then
+            font_dir="$HOME/Library/Fonts"
+        else
+            font_dir="$HOME/.local/share/fonts"
+        fi
+        [ -d $font_dir ] || mkdir $font_dir
 
-    # Source Code Pro
-    if [ ! -d "${font_dir}/source-code-pro" ]; then
-        sync_repo adobe-fonts/source-code-pro $font_dir/source-code-pro release
-        fc-cache -f -v $font_dir/source-code-pro
-    fi
+        # Source Code Pro
+        if [ ! -d "${font_dir}/source-code-pro" ]; then
+            sync_repo adobe-fonts/source-code-pro $font_dir/source-code-pro release
+            fc-cache -f -v $font_dir/source-code-pro
+        fi
 
-    if hash apt-get >/dev/null 2>&1; then
-        sudo apt-get install fonts-wqy-microhei
-        sudo apt-get install fonts-wqy-zenhei
-        sudo apt-get install fonts-powerline
-    else
-        if [ ! -f "${font_dir}/Hack-Regular.ttf" ]; then
-            sync_repo powerline/fonts
-            ./fonts/install.sh
-            rm -rf fonts
+        if hash apt-get >/dev/null 2>&1; then
+            sudo apt-get install fonts-wqy-microhei
+            sudo apt-get install fonts-wqy-zenhei
+            sudo apt-get install fonts-powerline
+        else
+            if [ ! -f "${font_dir}/Hack-Regular.ttf" ]; then
+                sync_repo powerline/fonts
+                ./fonts/install.sh
+                rm -rf fonts
+            fi
         fi
     fi
 fi
