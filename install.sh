@@ -132,21 +132,22 @@ if [ "$SYSTEM" = "Darwin" ]; then
 
         # Tap cask and cask-upgrade
         brew tap homebrew/cask
+        brew tap homebrew/cask-fonts
         brew tap buo/cask-upgrade
-    else
+        # else
         # Set homebrew mirrors
-        # BREW_URL=https://mirrors.ustc.edu.cn
+        # HOMEBREW_URL=https://mirrors.ustc.edu.cn
 
         # cd "$(brew --repo)"
-        # git remote set-url origin $BREW_URL/brew.git
+        # git remote set-url origin $HOMEBREW_URL/brew.git
         # cd - >/dev/null
 
         # cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-        # git remote set-url origin $BREW_URL/homebrew-core.git
+        # git remote set-url origin $HOMEBREW_URL/homebrew-core.git
         # cd - >/dev/null
 
         # cd "$(brew --repo)/Library/Taps/homebrew/homebrew-cask"
-        # git remote set-url origin $BREW_URL/homebrew-cask.git
+        # git remote set-url origin $HOMEBREW_URL/homebrew-cask.git
         # cd - >/dev/null
 
         # Upgrade
@@ -264,27 +265,76 @@ if [ "$OSTYPE" != "cygwin" ]; then
         printf "${BLUE} ➜  Installing fonts...${NORMAL}\n"
 
         if [ "$SYSTEM" = "Darwin" ]; then
+            # macOS
             font_dir="$HOME/Library/Fonts"
+
+            fonts=(
+                font-wenquanyi-micro-hei
+                font-wenquanyi-micro-hei-lite
+                font-wenquanyi-zen-hei
+
+                font-source-code-pro
+                font-dejavu-sans
+                font-inconsolata
+                font-ubuntu
+                font-roboto
+
+                font-hack
+                font-anonymice-powerline
+                font-consolas-for-powerline
+                font-dejavu-sans-mono-for-powerline
+                font-droid-sans-mono-for-powerline
+                font-fira-mono-for-powerline
+                font-inconsolata-dz-for-powerline
+                font-inconsolata-for-powerline
+                font-inconsolata-g-for-powerline
+                font-liberation-mono-for-powerline
+                font-menlo-for-powerline
+                font-meslo-for-powerline
+                font-monofur-for-powerline
+                font-noto-mono-for-powerline
+                font-roboto-mono-for-powerline
+                font-source-code-pro-for-powerline
+                font-ubuntu-mono-derivative-powerline
+            )
+
+            if [ ! -f "${font_dir}/SourceCodePro-Regular.otf" ]; then
+                for f in ${fonts[@]}; do
+                    brew cask install ${f}
+                done
+                fc-cache -f -v $font_dir
+            fi
         else
+            # Linux
             font_dir="$HOME/.local/share/fonts"
-        fi
-        [ -d $font_dir ] || mkdir $font_dir
+            mkdir -p $font_dir
 
-        # Source Code Pro
-        if [ ! -d "${font_dir}/source-code-pro" ]; then
-            sync_repo adobe-fonts/source-code-pro $font_dir/source-code-pro release
-            fc-cache -f -v $font_dir/source-code-pro
-        fi
+            # Source Code Pro
+            if [ ! -f "${font_dir}/SourceCodePro-Regular.otf" ]; then
+                sync_repo adobe-fonts/source-code-pro $font_dir/source-code-pro release
+                echo "Copying fonts..."
+                find "$font_dir/source-code-pro" \( -name "$prefix*.[ot]tf" -or -name "$prefix*.pcf.gz" \) -type f -print0 | xargs -0 -n1 -I % cp "%" "$font_dir/"
+                rm -rf $font_dir/source-code-pro
+                fc-cache -f -v $font_dir
+            fi
 
-        if hash apt-get >/dev/null 2>&1; then
-            sudo apt-get install fonts-wqy-microhei
-            sudo apt-get install fonts-wqy-zenhei
-            sudo apt-get install fonts-powerline
-        else
-            if [ ! -f "${font_dir}/Hack-Regular.ttf" ]; then
-                sync_repo powerline/fonts
-                ./fonts/install.sh
-                rm -rf fonts
+            if hash apt-get >/dev/null 2>&1; then
+                # Ubuntu/Debian
+                fonts=(
+                    fonts-wqy-microhei
+                    fonts-wqy-zenhei
+                    fonts-powerline
+                )
+
+                for f in ${fonts[@]}; do
+                    sudo apt-get install ${f}
+                done
+            else
+                if [ ! -f "${font_dir}/Hack-Regular.ttf" ]; then
+                    sync_repo powerline/fonts
+                    ./fonts/install.sh
+                    rm -rf fonts
+                fi
             fi
         fi
     fi
