@@ -50,11 +50,6 @@ apps=(
     # neteasemusic
     # skype-for-business
     thunder
-
-    # Fonts
-    font-wenquanyi-zen-hei
-    font-wenquanyi-micro-hei
-    font-wenquanyi-micro-hei-lite
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
