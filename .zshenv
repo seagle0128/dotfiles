@@ -15,7 +15,7 @@ export PATH=$HOME/.fzf/bin:$PATH
 export PATH="/usr/local/opt/imagemagick@6/bin":$PATH
 
 # Homebrew bottles
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+# export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 # Golang
 export GOPATH=$HOME/go

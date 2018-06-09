@@ -131,23 +131,23 @@ if [ "$SYSTEM" = "Darwin" ]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
         # Tap cask and cask-upgrade
-        brew tap caskroom/cask
+        brew tap homebrew/cask
         brew tap buo/cask-upgrade
     else
         # Set homebrew mirrors
-        BREW_URL=https://mirrors.ustc.edu.cn
+        # BREW_URL=https://mirrors.ustc.edu.cn
 
-        cd "$(brew --repo)"
-        git remote set-url origin $BREW_URL/brew.git
-        cd - >/dev/null
+        # cd "$(brew --repo)"
+        # git remote set-url origin $BREW_URL/brew.git
+        # cd - >/dev/null
 
-        cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-        git remote set-url origin $BREW_URL/homebrew-core.git
-        cd - >/dev/null
+        # cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+        # git remote set-url origin $BREW_URL/homebrew-core.git
+        # cd - >/dev/null
 
-        cd "$(brew --repo)/Library/Taps/caskroom/homebrew-cask"
-        git remote set-url origin $BREW_URL/homebrew-cask.git
-        cd - >/dev/null
+        # cd "$(brew --repo)/Library/Taps/homebrew/homebrew-cask"
+        # git remote set-url origin $BREW_URL/homebrew-cask.git
+        # cd - >/dev/null
 
         # Upgrade
         # brew update && brew upgrade && brew cleanup
