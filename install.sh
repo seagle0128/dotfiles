@@ -302,7 +302,6 @@ if [ "$OSTYPE" != "cygwin" ]; then
                 for f in ${fonts[@]}; do
                     brew cask install ${f}
                 done
-                fc-cache -f -v $font_dir
             fi
         else
             # Linux
@@ -315,7 +314,7 @@ if [ "$OSTYPE" != "cygwin" ]; then
                 echo "Copying fonts..."
                 find "$font_dir/source-code-pro" \( -name "$prefix*.[ot]tf" -or -name "$prefix*.pcf.gz" \) -type f -print0 | xargs -0 -n1 -I % cp "%" "$font_dir/"
                 rm -rf $font_dir/source-code-pro
-                fc-cache -f -v $font_dir
+                fc-cache -f $font_dir
             fi
 
             if hash apt-get >/dev/null 2>&1; then
