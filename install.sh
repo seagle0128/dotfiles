@@ -303,6 +303,7 @@ if [ "$OSTYPE" != "cygwin" ]; then
                     brew cask install ${f}
                 done
             fi
+            brew cask cleanup
         else
             # Linux
             font_dir="$HOME/.local/share/fonts"
