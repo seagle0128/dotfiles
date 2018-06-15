@@ -9,11 +9,10 @@
 # antigen bundle docker-machine
 
 # Theme
-# # antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
-
 # if [ -n "$INSIDE_EMACS" ]; then
 #     antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
 # else
+#     # antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
 #     # antigen theme seagle0128/bullet-train.zsh
 #     # antigen theme simnalamburt/shellder
 #
