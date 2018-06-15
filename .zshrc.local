@@ -12,7 +12,7 @@
 # if [ -n "$INSIDE_EMACS" ]; then
 #     antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
 # else
-#     # antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
+#     # antigen theme steeef      # ys, dst, steeef, wedisagree, robbyrussell
 #     # antigen theme danihodovic/steeef
 #     # antigen theme seagle0128/bullet-train.zsh
 #     # antigen theme simnalamburt/shellder
