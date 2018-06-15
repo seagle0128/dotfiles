@@ -33,7 +33,7 @@ antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle hlissner/zsh-autopair
 
 # Load the theme.
-antigen theme steeef            # ys, dst, steeef, wedisagree, robbyrussell
+antigen theme danihodovic/steeef
 
 # Local customizations, e.g. theme, plugins, aliases, etc.
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local

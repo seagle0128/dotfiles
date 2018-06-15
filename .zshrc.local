@@ -9,53 +9,31 @@
 # antigen bundle docker-machine
 
 # Theme
-# antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
+# # antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
 
-# Powerline theme
 # if [ -n "$INSIDE_EMACS" ]; then
-#     antigen theme ys
+#     antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
 # else
-#     antigen theme seagle0128/bullet-train.zsh
-# fi
+#     # antigen theme seagle0128/bullet-train.zsh
+#     # antigen theme simnalamburt/shellder
+#
+#     if command powerline-go >/dev/null 2>&1 && [ "$TERM" != "linux" ]; then
+#         # Powerful theme (require powerline fonts)
+#         function powerline_precmd() {
+#             PS1="$(powerline-go -error $? -shell zsh)"
+#         }
 
-# BULLETTRAIN_PROMPT_ORDER=(status custom context dir go git cmd_exec_time)
-# BULLETTRAIN_PROMPT_CHAR=""
-# BULLETTRAIN_PROMPT_SEPARATE_LINE=false
-# BULLETTRAIN_PROMPT_ADD_NEWLINE=false
-
-# if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-#     BULLETTRAIN_IS_SSH_CLIENT=true
-# else
-#     case $(ps -o comm= -p $PPID) in
-#         sshd|*/sshd) BULLETTRAIN_IS_SSH_CLIENT=true
-#     esac
-# fi
-
-# BULLETTRAIN_CONTEXT_DEFAULT_USER=$USER
-# BULLETTRAIN_DIR_BG=black
-# BULLETTRAIN_GO_FG=black
-
-# BULLETTRAIN_GIT_BG=green
-# BULLETTRAIN_GIT_COLORIZE_DIRTY=true
-# BULLETTRAIN_GIT_PREFIX=""
-# BULLETTRAIN_GIT_DIRTY=""
-# BULLETTRAIN_GIT_CLEAN=""
-# BULLETTRAIN_GIT_UNTRACKED=" %F{magenta}✭%F{black}"
-# BULLETTRAIN_GIT_PROMPT_CMD="\$(custom_git_prompt_info)"
-
-# custom_git_prompt_info () {
-#     local ref
-#     if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]
-#     then
-#         ref=$(command git symbolic-ref HEAD 2> /dev/null)  || ref=$(command git rev-parse --short HEAD 2> /dev/null)  || return 0
-
-#         if [[ ${ref#refs/heads/} == master ]]; then
-#             echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
-#         else
-#             echo "$ZSH_THEME_GIT_PROMPT_PREFIX ${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
-#         fi
+#         function install_powerline_precmd() {
+#             for s in "${precmd_functions[@]}"; do
+#                 if [ "$s" = "powerline_precmd" ]; then
+#                     return
+#                 fi
+#             done
+#             precmd_functions+=(powerline_precmd)
+#         }
+#         install_powerline_precmd
 #     fi
-# }
+# fi
 
 # Env
 # export EDITOR=vim
