@@ -17,6 +17,7 @@
 #     # antigen theme seagle0128/bullet-train.zsh
 #     # antigen theme simnalamburt/shellder
 #
+#     # go get -u github.com/justjanne/powerline-go
 #     if command powerline-go >/dev/null 2>&1 && [ "$TERM" != "linux" ]; then
 #         # Powerful theme (require powerline fonts)
 #         function powerline_precmd() {
