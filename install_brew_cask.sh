@@ -32,13 +32,13 @@ apps=(
 
     # Audio
     # sound-siphon
-    soundflower
-    soundflowerbed
+    # soundflower
+    # soundflowerbed
 
     # Development
     # java          # optional
     docker
-    emacs
+    # emacs
     sourcetree
     typora        # Markdown editor
     visual-studio-code
