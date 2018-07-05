@@ -5,6 +5,9 @@ export DEFAULT_USER=$USER
 export EDITOR='emacsclient -a "" -n'
 export PATH=$HOME/bin:/usr/local/sbin:$PATH
 
+#Cask
+export PATH=$HOME/.cask/bin:$PATH
+
 # Ruby
 export PATH=$HOME/.rbenv/shims:$PATH
 
