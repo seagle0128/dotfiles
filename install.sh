@@ -213,6 +213,15 @@ printf "${BLUE} ➜  Installing Oh My Tmux...${NORMAL}\n"
 sync_repo gpakosz/.tmux $TMUX
 ln -sf $TMUX/.tmux.conf $HOME/.tmux.conf
 
+# Search tools
+printf "${BLUE} ➜  Installing Search tools...${NORMAL}\n"
+if [ "$SYSTEM" = "Darwin" ]; then
+    sync_brew_package ripgrep
+elif [ "$SYSTEM" = "Linux" ] && ! hash rg >/dev/null 2>&1 && hash dpkg >/dev/null 2>&1; then
+    curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep_0.8.1_amd64.deb
+    sudo dpkg -i ripgrep_0.8.1_amd64.deb
+fi
+
 # FZF
 printf "${BLUE} ➜  Installing FZF...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
