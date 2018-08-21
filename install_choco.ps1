@@ -7,13 +7,15 @@
 # Packages
 $packages = (
     "chocholatey",
-    "7zip", "clipx", "everything",
+    "7zip", "clipx", "everything", "putty",
     "emacs", "vscode",
     "totalcommander", "wox", "ccleaner",
     "googlechrome", # "firefox",
+    "git", "tortoisegit",
     "peco", "ag", "pt", "ripgrep",
-    # "golang", "python", "ruby", "nodejs"
-             # "jdk8", "jre8", "eclipse",
+    # "cygwin", "cyg-get",
+    # "golang", "python", "ruby", "nodejs",
+    # "jdk8", "jre8", "eclipse",
     "sysinternals", "dependecywalker"
 );
 
