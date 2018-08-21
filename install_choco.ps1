@@ -44,6 +44,8 @@ function install {
         Write-Host "`n-> Installing $p..."
         choco upgrade ${p} -y
     }
+
+    RefreshEnv
 }
 
 function main {
