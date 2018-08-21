@@ -7,7 +7,7 @@
 # Packages
 $packages = ("7zip", "clipx", "everything",
              "emacs", "vscode",
-             "totalcommander", "wox",
+             "totalcommander", "wox", "ccleaner",
              "googlechrome", # "firefox",
              "peco", "ag", "pt", "ripgrep",
              # "golang", "python", "ruby", "nodejs"
