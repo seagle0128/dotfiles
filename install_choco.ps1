@@ -5,14 +5,17 @@
 #############################################################
 
 # Packages
-$packages = ("7zip", "clipx", "everything",
-             "emacs", "vscode",
-             "totalcommander", "wox", "ccleaner",
-             "googlechrome", # "firefox",
-             "peco", "ag", "pt", "ripgrep",
-             # "golang", "python", "ruby", "nodejs"
+$packages = (
+    "chocholatey",
+    "7zip", "clipx", "everything",
+    "emacs", "vscode",
+    "totalcommander", "wox", "ccleaner",
+    "googlechrome", # "firefox",
+    "peco", "ag", "pt", "ripgrep",
+    # "golang", "python", "ruby", "nodejs"
              # "jdk8", "jre8", "eclipse",
-             "sysinternals", "dependecywalker");
+    "sysinternals", "dependecywalker"
+);
 
 function Test-Administrator
 {
