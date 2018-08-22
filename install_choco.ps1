@@ -12,7 +12,7 @@ $packages = (
     "totalcommander", "wox", "ccleaner",
     "googlechrome", # "firefox",
     "git", "tortoisegit",
-    "peco", "ag", "pt", "ripgrep",
+    "fzf", "peco", "ag", "pt", "ripgrep",
     # "cygwin", "cyg-get",
     # "golang", "python", "ruby", "nodejs",
     # "jdk8", "jre8", "eclipse",
