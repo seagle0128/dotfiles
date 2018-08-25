@@ -17,9 +17,11 @@ x_tools=(
 
 # 3rd party tools
 packages=(
+    # For go-mode
     github.com/nsf/gocode
     github.com/rogpeppe/godef
     golang.org/x/tools/cmd/guru
+
     github.com/golang/lint/golint
     github.com/google/gops
     github.com/derekparker/delve/cmd/dlv
@@ -28,6 +30,7 @@ packages=(
     github.com/cweill/gotests/...
     github.com/fatih/gomodifytags
     github.com/davidrjenni/reftools/cmd/fillstruct
+    github.com/sourcegraph/go-langserver
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
