@@ -56,7 +56,7 @@ fi
 
 YES=0
 NO=1
-promote_yn() {
+function promote_yn() {
     eval ${2}=$NO
     read -p "$1 [y/N]: " yn
     case $yn in
@@ -66,14 +66,14 @@ promote_yn() {
     esac
 }
 
-function check {
+function check() {
     if not hash go >/dev/null 2>&1; then
         echo "${RED}Error: go is not installed${NORMAL}"
         exit 1
     fi
 }
 
-function install {
+function install() {
     promote_yn "Install x-tools?" "continue"
     if [ $continue -eq $YES ]; then
         for p in ${x_tools[@]}; do
@@ -88,9 +88,34 @@ function install {
     done
 }
 
-function main {
+function goclean() {
+    go clean -i -n $1
+    go clean -i $1
+    rm -rf $GOPATH/src/$1
+    if [ -d $GOPATH/pkg/${sysOS:l}_amd64/$1 ]; then
+        rm -rf $GOPATH/pkg/${sysOS:l}_amd64/$1;
+    fi
+}
+
+function clean() {
+    for p in ${x_tools[@]}; do
+        goclean ${p}
+    done
+
+    for p in ${packages[@]}; do
+        goclean ${p}
+    done
+}
+
+function main() {
     check
-    install
+
+    promote_yn "Clean all packages?" "continue"
+    if [ $continue -eq $YES ]; then
+        clean
+    else
+        install
+    fi
 }
 
 main
