@@ -220,6 +220,7 @@ if [ "$SYSTEM" = "Darwin" ]; then
 elif [ "$SYSTEM" = "Linux" ] && ! hash rg >/dev/null 2>&1 && hash dpkg >/dev/null 2>&1; then
     curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep_0.8.1_amd64.deb
     sudo dpkg -i ripgrep_0.8.1_amd64.deb
+    rm ripgrep_0.8.1_amd64.deb
 fi
 
 # FZF
