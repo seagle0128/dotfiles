@@ -218,8 +218,8 @@ printf "${BLUE} ➜  Installing Search tools...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
     sync_brew_package ripgrep
 elif [ "$SYSTEM" = "Linux" ] && ! hash rg >/dev/null 2>&1 && hash dpkg >/dev/null 2>&1; then
-    curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep_0.8.1_amd64.deb
-    sudo dpkg -i ripgrep_0.8.1_amd64.deb
+    curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.8.1/ripgrep_0.8.1_amd64.deb &&
+        sudo dpkg -i ripgrep_0.8.1_amd64.deb
     rm ripgrep_0.8.1_amd64.deb
 fi
 
@@ -260,9 +260,8 @@ if [ "$OSTYPE" != "cygwin" ]; then
         fi
 
         if [ $PECO_UPDATE -eq 1 ]; then
-            curl -fsSL ${PECO_RELEASE_URL}/download/${PECO_RELEASE_TAG}/peco_linux_amd64.tar.gz | tar xzf -
-            chmod +x peco_linux_amd64/peco
-            sudo mv peco_linux_amd64/peco /usr/local/bin
+            curl -fsSL ${PECO_RELEASE_URL}/download/${PECO_RELEASE_TAG}/peco_linux_amd64.tar.gz | tar xzf - &&
+                chmod +x peco_linux_amd64/peco && sudo mv peco_linux_amd64/peco /usr/local/bin
             rm -rf peco_linux_amd64
         fi
     fi
