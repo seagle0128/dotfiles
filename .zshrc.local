@@ -41,6 +41,9 @@
 # export EDITOR=vim
 # export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 
+# Homebrew bottles
+# export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+
 # Aliases
 
 # Functions
