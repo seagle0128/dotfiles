@@ -23,4 +23,3 @@ export PATH="/usr/local/opt/imagemagick@6/bin":$PATH
 # Golang
 export GOPATH=$HOME/go
 export PATH=$PATH:${GOPATH//://bin:}/bin
-export PATH="/usr/local/opt/go@1.10/bin:$PATH"
