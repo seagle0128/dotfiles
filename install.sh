@@ -225,17 +225,19 @@ fi
 
 # FZF
 printf "${BLUE} ➜  Installing FZF...${NORMAL}\n"
-if [ "$SYSTEM" = "Darwin" ]; then
-    sync_brew_package fzf
-    FZF=/usr/local/opt/fzf
-elif [ "$OSTYPE" = "cygwin" ]; then
+if [ "$OSTYPE" = "cygwin" ]; then
     if ! hash fzf >/dev/null 2>&1 && hash apt-cyg >/dev/null 2>&1; then
         apt-cyg install fzf fzf-zsh fzf-zsh-completion
     fi
 else
-    sync_repo junegunn/fzf $FZF
+    if [ "$SYSTEM" = "Darwin" ]; then
+        sync_brew_package fzf
+        FZF=/usr/local/opt/fzf
+    elif [ "$SYSTEM" = "Linux" ] && hash apt-get >/dev/null 2>&1; then
+        sync_repo junegunn/fzf $FZF
+    fi
+    [ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null
 fi
-[ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null
 
 # Peco
 if [ "$OSTYPE" != "cygwin" ]; then
