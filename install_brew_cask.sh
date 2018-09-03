@@ -82,7 +82,7 @@ function check {
 
     # Check brew
     if not hash brew >/dev/null 2>&1; then
-        echo "${BLUE} ➜  Installing Homebrew and Cask...${NORMAL}"
+        printf "${BLUE} ➜  Installing Homebrew and Cask...${NORMAL}\n"
 
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
@@ -95,7 +95,7 @@ function check {
 
 function install () {
     for app in ${apps[@]}; do
-        echo "${BLUE} ➜  Installing ${app}...${NORMAL}"
+        printf "${BLUE} ➜  Installing ${app}...${NORMAL}\n"
         brew cask install ${app}
     done
 }

@@ -5,6 +5,9 @@
 # URL: https://github.com/seagle0128/dotfiles
 #############################################################
 
+# Get OS name
+SYSTEM=`uname -s`
+
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
 if which tput >/dev/null 2>&1; then
@@ -111,7 +114,7 @@ function install {
             done
         fi
         brew cask cleanup
-    else
+    elif [ "$SYSTEM" = "Linux" ]; then
         # Linux
         font_dir="$HOME/.local/share/fonts"
         mkdir -p $font_dir
