@@ -11,10 +11,14 @@ packages=(
     # zsh
     emacs
     fzf
-    npm
     peco
     ripgrep
     shadowsocks-qt5
+
+    npm
+    python-pip
+    rubygems
+    rubyrdoc
 
     # Fonts
     adobe-source-code-pro-fonts
