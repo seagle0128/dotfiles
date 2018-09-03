@@ -275,4 +275,7 @@ if hash zsh >/dev/null 2>&1; then
         printf "${BLUE} You need to logout and login to enable zsh as the default shell.${NORMAL}\n"
     fi
     env zsh
+else
+    echo "${RED}Error: zsh is not installed${NORMAL}"
+    exit 1
 fi
