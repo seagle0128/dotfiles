@@ -78,13 +78,13 @@ function install() {
     promote_yn "Install x-tools?" "continue"
     if [ $continue -eq $YES ]; then
         for p in ${x_tools[@]}; do
-            echo "${BLUE} ➜  Installing ${p}...${NORMAL}"
+            printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
             go get -u ${p}
         done
     fi
 
     for p in ${packages[@]}; do
-        echo "${BLUE} ➜  Installing ${p}...${NORMAL}"
+        printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
         go get -u ${p}
     done
 }
