@@ -1,12 +1,15 @@
 # Local configurations -*- mode: sh -*-
 
 # Plugins
-# antigen bundle golang
-# antigen bundle ruby
-# antigen bundle python
 # antigen bundle docker
 # antigen bundle docker-compose
 # antigen bundle docker-machine
+# antigen bundle golang
+# antigen bundle python
+# antigen bundle ruby
+
+# antigen bundle archlinux
+# antigen bundle ubuntu
 
 # Theme
 # if [ -n "$INSIDE_EMACS" ]; then
