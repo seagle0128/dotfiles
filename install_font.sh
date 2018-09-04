@@ -134,10 +134,11 @@ function install {
                 fonts-wqy-microhei
                 fonts-wqy-zenhei
                 fonts-powerline
+                ttf-mscorefonts-installer
             )
 
             for f in ${fonts[@]}; do
-                sudo apt-get install ${f}
+                sudo apt-get install ${f} -y
             done
         else
             if [ ! -f "${font_dir}/Hack-Regular.ttf" ]; then
