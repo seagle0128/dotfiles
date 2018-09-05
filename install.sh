@@ -169,7 +169,7 @@ fi
 # Antigen: the plugin manager for zsh
 printf "${BLUE} ➜  Installing Antigen...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
-    brew install antigen
+    sync_brew_package antigen
 elif [ "$SYSTEM" = "Linux" ] && hash apt-get >/dev/null 2>&1; then
     sudo apt-get install zsh-antigen
 else
