@@ -189,7 +189,8 @@ printf "${BLUE} ➜  Installing Antigen...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
     sync_brew_package antigen
 elif [ "$SYSTEM" = "Linux" ]; then
-    sync_apt_package zsh-antigen
+    # sync_apt_package zsh-antigen
+    sudo curl -o /usr/share/zsh-antigen/antigen.zsh -sL git.io/antigen
 else
     mkdir -p $ZSH
     curl -fsSL git.io/antigen > $ZSH/antigen.zsh.tmp && mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
