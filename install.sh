@@ -190,6 +190,7 @@ if [ "$SYSTEM" = "Darwin" ]; then
     sync_brew_package antigen
 elif [ "$SYSTEM" = "Linux" ]; then
     # sync_apt_package zsh-antigen
+    sudo mkdir -p /usr/share/zsh-antigen
     sudo curl -o /usr/share/zsh-antigen/antigen.zsh -sL git.io/antigen
 else
     mkdir -p $ZSH
