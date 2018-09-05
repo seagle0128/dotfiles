@@ -99,7 +99,7 @@ clean_dotfiles() {
     rm -rf $ZSH $TMUX $FZF $DOTFILES
 
     rm -f $HOME/.fzf.*
-    rm -f $HOME/.gitignore_global $HOME/.gitconfig.local
+    rm -f $HOME/.gitignore_global $HOME/.gitconfig_global
     rm -f $HOME/.tmux.conf $HOME/.tmux.local
 }
 
@@ -190,15 +190,15 @@ cp -n $DOTFILES/.gemrc $HOME/.gemrc
 cp -n $DOTFILES/.zshrc.local $HOME/.zshrc.local
 mkdir -p $HOME/.pip; cp -n $DOTFILES/.pip.conf $HOME/.pip/pip.conf
 
-ln -sf $DOTFILES/.gitconfig $HOME/.gitconfig
-if [ "$SYSTEM" = "Darwin" ]; then
-    cp -n $DOTFILES/.gitconfig_macOS_local $HOME/.gitconfig_local
-elif [ "$OSTYPE" = "cygwin" ]; then
-    cp -n $DOTFILES/.gitconfig_cygwin_local $HOME/.gitconfig_local
-else
-    cp -n $DOTFILES/.gitconfig_local $HOME/.gitconfig_local
-fi
 ln -sf $DOTFILES/.gitignore_global $HOME/.gitignore_global
+ln -sf $DOTFILES/.gitconfig_global $HOME/.gitconfig_global
+if [ "$SYSTEM" = "Darwin" ]; then
+    cp -n $DOTFILES/.gitconfig_macOS $HOME/.gitconfig
+elif [ "$OSTYPE" = "cygwin" ]; then
+    cp -n $DOTFILES/.gitconfig_cygwin $HOME/.gitconfig
+else
+    cp -n $DOTFILES/.gitconfig_linux $HOME/.gitconfig
+fi
 
 if [ "$OSTYPE" = "cygwin" ]; then
     ln -sf $DOTFILES/.minttyrc $HOME/.minttyrc

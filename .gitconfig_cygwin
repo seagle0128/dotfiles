@@ -1,8 +1,12 @@
 # -*- mode: gitconfig -*-
+[include]
+	path = ~/.gitconfig_global
 [user]
 	name = Vincent Zhang
 	email = seagle0128@gmail.com
 [credential]
-	helper = osxkeychain
+	helper = cache --timeout=3600
+[core]
+	filemode = false
 [github]
 	user = seagle0128
