@@ -138,7 +138,7 @@ function install {
             )
 
             for f in ${fonts[@]}; do
-                sudo apt-get install ${f} -y
+                sudo apt-get upgrade -y ${f}
             done
         else
             if [ ! -f "${font_dir}/Hack-Regular.ttf" ]; then

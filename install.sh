@@ -77,6 +77,24 @@ sync_brew_package() {
     fi
 }
 
+sync_apt_package() {
+    if ! hash agt-get >/dev/null 2>&1; then
+        echo "${RED}Error: apt-get is not installed${NORMAL}"
+        return 1
+    fi
+
+    sudo apt-get upgrade -y ${1} >/dev/null
+}
+
+sync_arch_package() {
+    if ! hash pacman >/dev/null 2>&1; then
+        echo "${RED}Error: pacman is not installed${NORMAL}"
+        return 1
+    fi
+
+    sudo pacman -U --noconfirm ${1} >/dev/null
+}
+
 # Clean all configurations
 clean_dotfiles() {
     confs="
@@ -170,8 +188,8 @@ fi
 printf "${BLUE} ➜  Installing Antigen...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
     sync_brew_package antigen
-elif [ "$SYSTEM" = "Linux" ] && hash apt-get >/dev/null 2>&1; then
-    sudo apt-get install zsh-antigen
+elif [ "$SYSTEM" = "Linux" ]; then
+    sync_apt_package zsh-antigen
 else
     mkdir -p $ZSH
     curl -fsSL git.io/antigen > $ZSH/antigen.zsh.tmp && mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
