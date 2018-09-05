@@ -78,7 +78,7 @@ sync_brew_package() {
 }
 
 sync_apt_package() {
-    if ! hash agt-get >/dev/null 2>&1; then
+    if ! hash apt-get >/dev/null 2>&1; then
         echo "${RED}Error: apt-get is not installed${NORMAL}"
         return 1
     fi
