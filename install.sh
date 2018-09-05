@@ -168,8 +168,14 @@ fi
 
 # Antigen: the plugin manager for zsh
 printf "${BLUE} ➜  Installing Antigen...${NORMAL}\n"
-mkdir -p $ZSH
-curl -fsSL git.io/antigen > $ZSH/antigen.zsh.tmp && mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
+if [ "$SYSTEM" = "Darwin" ]; then
+    brew install antigen
+elif [ "$SYSTEM" = "Linux" ] && hash apt-get >/dev/null 2>&1; then
+    sudo apt-get install zsh-antigen
+else
+    mkdir -p $ZSH
+    curl -fsSL git.io/antigen > $ZSH/antigen.zsh.tmp && mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
+fi
 
 # Dotfiles
 printf "${BLUE} ➜  Installing Dotfiles...${NORMAL}\n"
