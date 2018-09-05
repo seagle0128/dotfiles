@@ -20,11 +20,21 @@ antigen bundle colored-man-pages
 antigen bundle extract
 antigen bundle sudo
 antigen bundle z
-[[ $OSTYPE == darwin* ]] && antigen bundle osx
 
 # Misc bundles.
 antigen bundle djui/alias-tips
 [[ $OSTYPE != cygwin* ]] && antigen bundle andrewferrier/fzf-z
+
+# OS bundles
+if [[ $OSTYPE == darwin* ]]; then
+    antigen bundle osx
+elif [[ $OSTYPE == linux* ]]; then
+    if which apt-get >/dev/null 2>&1; then
+        antigen bundle ubuntu
+    elif which pacman >/dev/null 2>&1; then
+        antigen bundle archlinux
+    fi
+fi
 
 # antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
@@ -96,7 +106,7 @@ alias upgrade_go='$DOTFILES/install_go.sh'
 
 # Apt
 if [[ $OSTYPE == linux* ]] && which apt-get >/dev/null 2>&1; then
-    alias apu='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoremove -y; sudo apt-get autoclean -y'
+    alias agua='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoremove -y; sudo apt-get autoclean -y'
 fi
 
 # Brew
