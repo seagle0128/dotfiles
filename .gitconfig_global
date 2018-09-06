@@ -1,3 +1,4 @@
+# -*- mode: gitconfig -*-
 [core]
 	excludesfile = ~/.gitignore_global
 	autocrlf = false
