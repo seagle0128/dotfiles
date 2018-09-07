@@ -42,6 +42,10 @@ elif [[ $OSTYPE == linux* ]]; then
     if command -v apt-get >/dev/null 2>&1; then
         antigen bundle ubuntu
         alias agua='aguu -y; agar -y; aga -y'
+        alias kclean+='sudo aptitude remove -P "?and(~i~nlinux-(ima|hea),\
+                            ?not(?or(~n`uname -r | cut -d'\''-'\'' -f-2`,\
+                            ~nlinux-generic,\
+                            ~n(linux-(virtual|headers-virtual|headers-generic|image-virtual|image-generic|image-`dpkg --print-architecture`)))))"'
     elif command -v pacman >/dev/null 2>&1; then
         antigen bundle archlinux
     fi
