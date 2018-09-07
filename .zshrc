@@ -34,15 +34,15 @@ antigen bundle djui/alias-tips
 # OS bundles
 if [[ $OSTYPE == darwin* ]]; then
     antigen bundle osx
-    if which brew >/dev/null 2>&1; then
+    if command -v brew >/dev/null 2>&1; then
         alias bu='brew update; brew upgrade; brew cleanup'
         alias bcu='brew cu --all --yes --no-brew-update --cleanup'
     fi
 elif [[ $OSTYPE == linux* ]]; then
-    if which apt-get >/dev/null 2>&1; then
+    if command -v apt-get >/dev/null 2>&1; then
         antigen bundle ubuntu
         alias agua='aguu -y; agar -y; aga -y'
-    elif which pacman >/dev/null 2>&1; then
+    elif command -v pacman >/dev/null 2>&1; then
         antigen bundle archlinux
     fi
 fi
@@ -72,9 +72,9 @@ if [[ $OSTYPE == cygwin* ]]; then
 else
     [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh;
 fi
-if hash rg >/dev/null 2>&1; then
+if command -v rg >/dev/null 2>&1; then
     export FZF_DEFAULT_COMMAND='rg --hidden --files'
-elif hash ag >/dev/null 2>&1; then
+elif command -v ag >/dev/null 2>&1; then
     export FZF_DEFAULT_COMMAND='ag -U --hidden -g ""'
 fi
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
@@ -92,7 +92,7 @@ alias c='clear'
 alias rt='trash'                # `brew install trash` or `npm install --global trash-cli`
 
 if [[ $OSTYPE == darwin* ]]; then
-    hash gls >/dev/null 2>&1 && alias ls='gls --color=tty --group-directories-first'
+    command -v gls >/dev/null 2>&1 && alias ls='gls --color=tty --group-directories-first'
 else
     alias ls='ls --color=tty --group-directories-first'
 fi
@@ -110,7 +110,7 @@ alias upgrade_repo='git pull --rebase --stat origin master'
 alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
 alias upgrade_emacs='cd $HOME/.emacs.d && upgrade_repo; cd - >/dev/null'
 alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
-alias upgrade_env='upgrade_dotfiles && $DOTFILES/install.sh'
+alias upgrade_env='upgrade_dotfiles && sh $DOTFILES/install.sh'
 
 if [[ $OSTYPE == darwin* ]]; then
     (( $+commands[brew] )) && alias upgrade_antigen='brew update antigen'
