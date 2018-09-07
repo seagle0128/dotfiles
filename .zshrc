@@ -36,7 +36,8 @@ if [[ $OSTYPE == darwin* ]]; then
     antigen bundle osx
     if command -v brew >/dev/null 2>&1; then
         alias bu='brew upgrade --cleanup'
-        alias bcu='brew cu --all --yes --no-brew-update --cleanup'
+        # alias bcu='brew cu --all --yes --no-brew-update --cleanup'
+        alias bcu='brew cask upgrade; brew cleanup'
     fi
 elif [[ $OSTYPE == linux* ]]; then
     if command -v apt-get >/dev/null 2>&1; then
