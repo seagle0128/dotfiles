@@ -13,8 +13,8 @@ if [[ $OSTYPE == darwin* ]]; then
 else
     if command -v apt-get >/dev/null 2>&1; then
         source /usr/share/zsh-antigen/antigen.zsh
-    elif command -v yaourt >/dev/nul 2>&1; then
-        source /usr/share/zsh/antigen.zsh
+    elif command -v yaourt >/dev/null 2>&1; then
+        source /usr/share/zsh/share/antigen.zsh
     else
         source $ANTIGEN/antigen.zsh
     fi
