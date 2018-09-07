@@ -78,12 +78,18 @@ sync_brew_package() {
 }
 
 sync_apt_package() {
-    if ! hash apt-get >/dev/null 2>&1; then
-        echo "${RED}Error: apt-get is not installed${NORMAL}"
+    if hash apt >/dev/null 2>&1; then
+        APT=apt
+    elif has apt-get >/dev/null 2>&1; then
+        APT=apt-get
+    else
+        echo "${RED}Error: unable to find apt or apt-get${NORMAL}"
         return 1
     fi
 
-    sudo apt-get upgrade -y ${1} >/dev/null
+    if [ ! -z "$APT" ]; then
+        sudo $APT upgrade -y ${1} >/dev/null
+    fi
 }
 
 sync_arch_package() {
