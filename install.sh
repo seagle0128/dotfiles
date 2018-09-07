@@ -98,7 +98,7 @@ sync_arch_package() {
         return 1
     fi
 
-    sudo pacman -U --noconfirm ${1} >/dev/null
+    sudo pacman -S --noconfirm ${1} >/dev/null
 }
 
 # Clean all configurations
@@ -199,7 +199,7 @@ else
     if command -v apt-get >/dev/null 2>&1; then
         sudo mkdir -p /usr/share/zsh-antigen && sudo curl -o /usr/share/zsh-antigen/antigen.zsh -sL git.io/antigen
     elif command -v yaourt >/dev/null 2>&1; then
-        sudo yaourt -U --noconfirm antigen-git
+        sudo yaourt -S --noconfirm antigen-git
     else
         mkdir -p $ZSH
         curl -fsSL git.io/antigen > $ZSH/antigen.zsh.tmp && mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh

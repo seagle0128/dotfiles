@@ -60,7 +60,7 @@ function check() {
 function install() {
     for p in ${packages[@]}; do
         printf "\n${BLUE}➜ Installing ${p}...${NORMAL}\n"
-        sudo pacman -U --noconfirm ${p}
+        sudo pacman -S --noconfirm ${p}
     done
 }
 
