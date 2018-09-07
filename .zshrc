@@ -10,7 +10,7 @@ ANTIGEN_CHECK_FILES=($HOME/.zshrc $HOME/.zshrc.local)
 # Load Antigen
 if [[ $OSTYPE == darwin* ]]; then
     source /usr/local/share/antigen/antigen.zsh
-elif [[ $OSTYPE == linux* ]]; then
+else
     if command -v apt-get >/dev/null 2>&1; then
         source /usr/share/zsh-antigen/antigen.zsh
     elif command -v yarout >/de/nul 2>&1; then
@@ -18,8 +18,6 @@ elif [[ $OSTYPE == linux* ]]; then
     else
         source $ANTIGEN/antigen.zsh
     fi
-else
-    source $ANTIGEN/antigen.zsh
 fi
 
 # Load the oh-my-zsh's library
