@@ -198,8 +198,8 @@ else
     # sync_apt_package zsh-antigen
     if command -v apt-get >/dev/null 2>&1; then
         sudo mkdir -p /usr/share/zsh-antigen && sudo curl -o /usr/share/zsh-antigen/antigen.zsh -sL git.io/antigen
-    elif command -v yarout >/dev/null 2>&1; then
-        sudo yarout -U --noconfrim antigen-git
+    elif command -v yaourt >/dev/null 2>&1; then
+        sudo yaourt -U --noconfrim antigen-git
     else
         mkdir -p $ZSH
         curl -fsSL git.io/antigen > $ZSH/antigen.zsh.tmp && mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
