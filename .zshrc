@@ -34,9 +34,14 @@ antigen bundle djui/alias-tips
 # OS bundles
 if [[ $OSTYPE == darwin* ]]; then
     antigen bundle osx
+    if which brew >/dev/null 2>&1; then
+        alias bu='brew update; brew upgrade; brew cleanup'
+        alias bcu='brew cu --all --yes --no-brew-update --cleanup'
+    fi
 elif [[ $OSTYPE == linux* ]]; then
     if which apt-get >/dev/null 2>&1; then
         antigen bundle ubuntu
+        alias agua='aguu -y; agar -y; aga -y'
     elif which pacman >/dev/null 2>&1; then
         antigen bundle archlinux
     fi
@@ -109,18 +114,6 @@ alias upgrade_env='upgrade_dotfiles && $DOTFILES/install.sh'
 # alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh.tmp && mv $ANTIGEN/antigen.zsh.tmp $ANTIGEN/antigen.zsh'
 alias upgrade_go='$DOTFILES/install_go.sh'
 [[ $OSTYPE == darwin* ]] && alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
-
-# Apt
-if [[ $OSTYPE == linux* ]] && which $APT >/dev/null 2>&1; then
-    # alias agua='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoremove -y; sudo apt-get autoclean -y'
-    alias agua='aguu -y; agar -y; aga -y'
-fi
-
-# Brew
-if [[ $OSTYPE == darwin* ]]; then
-    alias bu='brew update; brew upgrade; brew cleanup'
-    alias bcu='brew cu --all --yes --no-brew-update --cleanup'
-fi
 
 # Proxy
 HTTP_PROXY=http://127.0.0.1:1087
