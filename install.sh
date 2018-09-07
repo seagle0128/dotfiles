@@ -21,7 +21,7 @@ SYSTEM=`uname -s`
 
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
-if which tput >/dev/null 2>&1; then
+if command -v tput >/dev/null 2>&1; then
     ncolors=$(tput colors)
 fi
 if [ -t 1 ] && [ -n "$ncolors" ] && [ "$ncolors" -ge 8 ]; then
@@ -41,8 +41,8 @@ else
 fi
 
 # Check git
-hash git >/dev/null 2>&1 || {
-    echo "${RED}Error: git is not installed${NORMAL}"
+command -v git >/dev/null 2>&1 || {
+    echo "${RED}Error: git is not installed${NORMAL}" >&2
     exit 1
 }
 
@@ -65,12 +65,12 @@ sync_repo() {
 }
 
 sync_brew_package() {
-    if ! hash brew >/dev/null 2>&1; then
-        echo "${RED}Error: brew is not installed${NORMAL}"
+    if ! command -v brew >/dev/null 2>&1; then
+        echo "${RED}Error: brew is not installed${NORMAL}" >&2
         return 1
     fi
 
-    if ! hash ${1} >/dev/null 2>&1; then
+    if ! command -v ${1} >/dev/null 2>&1; then
         brew install ${1} >/dev/null
     else
         brew upgrade ${1} >/dev/null
@@ -78,12 +78,12 @@ sync_brew_package() {
 }
 
 sync_apt_package() {
-    if hash apt >/dev/null 2>&1; then
+    if command -v apt >/dev/null 2>&1; then
         APT=apt
     elif has apt-get >/dev/null 2>&1; then
         APT=apt-get
     else
-        echo "${RED}Error: unable to find apt or apt-get${NORMAL}"
+        echo "${RED}Error: unable to find apt or apt-get${NORMAL}" >&2
         return 1
     fi
 
@@ -93,8 +93,8 @@ sync_apt_package() {
 }
 
 sync_arch_package() {
-    if ! hash pacman >/dev/null 2>&1; then
-        echo "${RED}Error: pacman is not installed${NORMAL}"
+    if ! command -v pacman >/dev/null 2>&1; then
+        echo "${RED}Error: pacman is not installed${NORMAL}" >&2
         return 1
     fi
 
@@ -150,7 +150,7 @@ fi
 # Brew
 if [ "$SYSTEM" = "Darwin" ]; then
     printf "${BLUE} ➜  Installing Homebrew...${NORMAL}\n"
-    if ! hash brew >/dev/null 2>&1; then
+    if ! command -v brew >/dev/null 2>&1; then
         # Install homebrew
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
@@ -183,7 +183,7 @@ fi
 # Apt-Cyg
 if [ "$OSTYPE" = "cygwin" ]; then
     printf "${BLUE} ➜  Installing Apt-Cyg...${NORMAL}\n"
-    if ! hash apt-cyg >/dev/null 2>&1; then
+    if ! command -v apt-cyg >/dev/null 2>&1; then
         APT_CYG=/usr/local/bin/apt-cyg
         curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG
         chmod +x $APT_CYG
@@ -249,7 +249,7 @@ ln -sf $TMUX/.tmux.conf $HOME/.tmux.conf
 printf "${BLUE} ➜  Installing Search tools...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
     sync_brew_package ripgrep
-elif [ "$SYSTEM" = "Linux" ] && ! hash rg >/dev/null 2>&1 && hash dpkg >/dev/null 2>&1; then
+elif [ "$SYSTEM" = "Linux" ] && ! command -v rg >/dev/null 2>&1 && command -v dpkg >/dev/null 2>&1; then
     # sync_apt_package ripgrep
     RG_VER=0.9.0
     curl -LO https://github.com/BurntSushi/ripgrep/releases/download/${RG_VER}/ripgrep_${RG_VER}_amd64.deb &&
@@ -260,14 +260,14 @@ fi
 # FZF
 printf "${BLUE} ➜  Installing FZF...${NORMAL}\n"
 if [ "$OSTYPE" = "cygwin" ]; then
-    if ! hash fzf >/dev/null 2>&1 && hash apt-cyg >/dev/null 2>&1; then
+    if ! command -v fzf >/dev/null 2>&1 && command -v apt-cyg >/dev/null 2>&1; then
         apt-cyg install fzf fzf-zsh fzf-zsh-completion
     fi
 else
     if [ "$SYSTEM" = "Darwin" ]; then
         sync_brew_package fzf
         FZF=/usr/local/opt/fzf
-    elif [ "$SYSTEM" = "Linux" ] && hash apt-get >/dev/null 2>&1; then
+    elif [ "$SYSTEM" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
         sync_repo junegunn/fzf $FZF
     fi
     [ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null
@@ -286,7 +286,7 @@ if [ "$OSTYPE" != "cygwin" ]; then
 
         PECO_RELEASE_TAG=$(curl -fs "${PECO_RELEASE_URL}/latest" | grep -oE $PECO_VERSION_PATTERN)
 
-        if hash peco >/dev/null 2>&1; then
+        if command -v peco >/dev/null 2>&1; then
             PECO_UPDATE=0
 
             PECO_VERSION=$(peco --version | grep -oE $PECO_VERSION_PATTERN)
@@ -305,13 +305,13 @@ fi
 
 # Entering zsh
 printf "Done. Enjoy!\n"
-if hash zsh >/dev/null 2>&1; then
+if command -v zsh >/dev/null 2>&1; then
     if [ "$OSTYPE" != "cygwin" ] && [ "$SHELL" != "$(which zsh)" ]; then
         chsh -s $(which zsh)
         printf "${BLUE} You need to logout and login to enable zsh as the default shell.${NORMAL}\n"
     fi
     env zsh
 else
-    echo "${RED}Error: zsh is not installed${NORMAL}"
+    echo "${RED}Error: zsh is not installed${NORMAL}" >&2
     exit 1
 fi

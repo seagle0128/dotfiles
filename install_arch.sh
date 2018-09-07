@@ -31,7 +31,7 @@ packages=(
 
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
-if which tput >/dev/null 2>&1; then
+if command -v tput >/dev/null 2>&1; then
     ncolors=$(tput colors)
 fi
 if [ -t 1 ] && [ -n "$ncolors" ] && [ "$ncolors" -ge 8 ]; then
@@ -51,8 +51,8 @@ else
 fi
 
 function check() {
-    if not hash pacman >/dev/null 2>&1; then
-        echo "${RED}Error: not Archlinux or its devrived edition.${NORMAL}"
+    if ! command -v pacman >/dev/null 2>&1; then
+        echo "${RED}Error: not Archlinux or its devrived edition.${NORMAL}" >&2
         exit 1
     fi
 }

@@ -54,7 +54,7 @@ apps=(
 
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
-if which tput >/dev/null 2>&1; then
+if command -v tput >/dev/null 2>&1; then
     ncolors=$(tput colors)
 fi
 if [ -t 1 ] && [ -n "$ncolors" ] && [ "$ncolors" -ge 8 ]; then
@@ -76,12 +76,12 @@ fi
 function check {
     # Check OS
     if [[ $OSTYPE != darwin* ]]; then
-        echo "${RED}Error: only install software via brew_cask on macOS.${NORMAL}"
+        echo "${RED}Error: only install software via brew_cask on macOS.${NORMAL}" >&2
         exit 1
     fi
 
     # Check brew
-    if not hash brew >/dev/null 2>&1; then
+    if ! command -v brew >/dev/null 2>&1; then
         printf "${BLUE} ➜  Installing Homebrew and Cask...${NORMAL}\n"
 
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"

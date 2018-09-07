@@ -10,7 +10,7 @@ SYSTEM=`uname -s`
 
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
-if which tput >/dev/null 2>&1; then
+if command -v tput >/dev/null 2>&1; then
     ncolors=$(tput colors)
 fi
 if [ -t 1 ] && [ -n "$ncolors" ] && [ "$ncolors" -ge 8 ]; then
@@ -61,12 +61,12 @@ sync_repo() {
 
 
 function check {
-    if not hash git >/dev/null 2>&1; then
-        echo "${RED}Error: git is not installed${NORMAL}"
+    if ! command -v git >/dev/null 2>&1; then
+        echo "${RED}Error: git is not installed${NORMAL}" >&2
         exit 1
     fi
     if [ "$OSTYPE" = "cygwin" ]; then
-        echo "${RED}Error: Cygwin is not supported${NORMAL}"
+        echo "${RED}Error: Cygwin is not supported${NORMAL}" >&2
         exit 1
     fi
 }
@@ -128,7 +128,7 @@ function install {
             fc-cache -f $font_dir
         fi
 
-        if hash apt-get >/dev/null 2>&1; then
+        if command -v apt-get >/dev/null 2>&1; then
             # Ubuntu/Debian
             fonts=(
                 fonts-wqy-microhei

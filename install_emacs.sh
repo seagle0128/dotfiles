@@ -10,7 +10,7 @@ SYSTEM=`uname -s`
 
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
-if which tput >/dev/null 2>&1; then
+if command -v tput >/dev/null 2>&1; then
     ncolors=$(tput colors)
 fi
 if [ -t 1 ] && [ -n "$ncolors" ] && [ "$ncolors" -ge 8 ]; then
@@ -30,9 +30,9 @@ else
 fi
 
 printf "${BLUE} ➜  Installing Emacs...${NORMAL}\n"
-if [ "$SYSTEM" = "Darwin" ] && hash brew >/dev/null 2>&1; then
+if [ "$SYSTEM" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
     brew install emacs --with-gnutls --with-cocoa --with-modules --with-imagemagick@6 --with-librsvg
-elif [ "$SYSTEM" = "Linux" ] && hash apt-get >/dev/null 2>&1; then
+elif [ "$SYSTEM" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
     sudo add-apt-repository -y ppa:kelleyk/emacs
     sudo apt-get update
     sudo apt-get install emacs26

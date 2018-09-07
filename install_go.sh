@@ -36,7 +36,7 @@ packages=(
 
 # Use colors, but only if connected to a terminal, and that terminal
 # supports them.
-if which tput >/dev/null 2>&1; then
+if command -v tput >/dev/null 2>&1; then
     ncolors=$(tput colors)
 fi
 if [ -t 1 ] && [ -n "$ncolors" ] && [ "$ncolors" -ge 8 ]; then
@@ -68,8 +68,8 @@ function promote_yn() {
 }
 
 function check() {
-    if not hash go >/dev/null 2>&1; then
-        echo "${RED}Error: go is not installed${NORMAL}"
+    if ! command -v go >/dev/null 2>&1; then
+        echo "${RED}Error: go is not installed${NORMAL}" >&2
         exit 1
     fi
 }
