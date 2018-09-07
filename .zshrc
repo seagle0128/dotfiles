@@ -111,8 +111,9 @@ alias upgrade_go='$DOTFILES/install_go.sh'
 [[ $OSTYPE == darwin* ]] && alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
 
 # Apt
-if [[ $OSTYPE == linux* ]] && which apt-get >/dev/null 2>&1; then
-    alias agua='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoremove -y; sudo apt-get autoclean -y'
+if [[ $OSTYPE == linux* ]] && which $APT >/dev/null 2>&1; then
+    # alias agua='sudo apt-get update; sudo apt-get upgrade -y; sudo apt-get autoremove -y; sudo apt-get autoclean -y'
+    alias agua='aguu -y; agar -y; aga -y'
 fi
 
 # Brew
