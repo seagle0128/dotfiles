@@ -35,7 +35,7 @@ antigen bundle djui/alias-tips
 if [[ $OSTYPE == darwin* ]]; then
     antigen bundle osx
     if command -v brew >/dev/null 2>&1; then
-        alias bu='brew update; brew upgrade; brew cleanup'
+        alias bu='brew upgrade --cleanup'
         alias bcu='brew cu --all --yes --no-brew-update --cleanup'
     fi
 elif [[ $OSTYPE == linux* ]]; then
