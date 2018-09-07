@@ -48,6 +48,7 @@
 # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 # Aliases
+# alias upgrade_go='$DOTFILES/install_go.sh'
 
 # Functions
 # function goclean() {

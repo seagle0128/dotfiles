@@ -111,9 +111,16 @@ alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
 alias upgrade_emacs='cd $HOME/.emacs.d && upgrade_repo; cd - >/dev/null'
 alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles && $DOTFILES/install.sh'
-# alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh.tmp && mv $ANTIGEN/antigen.zsh.tmp $ANTIGEN/antigen.zsh'
-alias upgrade_go='$DOTFILES/install_go.sh'
-[[ $OSTYPE == darwin* ]] && alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
+
+if [[ $OSTYPE == darwin* ]]; then
+    (( $+commands[brew] )) && alias upgrade_antigen='brew update antigen'
+    alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
+elif [[ $OSTYPE == linux* ]]; then
+    # (( $+commands[apt-get] )) && apug -y antigen
+    alias upgrade_antigen='sudo curl -o /usr/share/zsh-antigen/antigen.zsh -sL git.io/antigen'
+else
+    alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh.tmp && mv $ANTIGEN/antigen.zsh.tmp $ANTIGEN/antigen.zsh'
+fi
 
 # Proxy
 HTTP_PROXY=http://127.0.0.1:1087
