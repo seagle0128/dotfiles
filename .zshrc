@@ -139,6 +139,6 @@ alias showproxy='echo "proxy=$http_proxy"'
 alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export no_proxy=$NO_PROXY; showproxy'
 alias unsetproxy='export http_proxy=; export https_proxy=; export no_proxy=; showproxy'
 alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
-alias set_sock_proxy='export http_proxy=$HTTP_PROXY; export https_proxy=$HTTP_PROXY; export no_proxy=$NO_PROXY; showproxy'
+alias set_sock_proxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_PROXY; export no_proxy=$NO_PROXY; showproxy'
 alias unset_sock_proxy=unsetproxy
 alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else set_sock_proxy; fi'
