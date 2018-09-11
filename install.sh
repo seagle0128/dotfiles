@@ -252,12 +252,30 @@ ln -sf $TMUX/.tmux.conf $HOME/.tmux.conf
 printf "${BLUE} ➜  Installing Search tools...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
     sync_brew_package ripgrep
-elif [ "$SYSTEM" = "Linux" ] && ! command -v rg >/dev/null 2>&1 && command -v dpkg >/dev/null 2>&1; then
+elif [ "$SYSTEM" = "Linux" ] && [ "`uname -m`" = "x86_64" ] && command -v dpkg >/dev/null 2>&1; then
     # sync_apt_package ripgrep
-    RG_VER=0.10.0
-    curl -LO https://github.com/BurntSushi/ripgrep/releases/download/${RG_VER}/ripgrep_${RG_VER}_amd64.deb &&
-        sudo dpkg -i ripgrep_${RG_VER}_amd64.deb
-    rm ripgrep_${RG_VER}_amd64.deb
+
+    # Only support Linux x64 binary
+    RG_UPDATE=1
+    RG_RELEASE_URL="https://github.com/BurntSushi/ripgrep/releases"
+    RG_VERSION_PATTERN='[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
+
+    RG_RELEASE_TAG=$(curl -fs "${RG_RELEASE_URL}/latest" | grep -oE $RG_VERSION_PATTERN)
+
+    if command -v rg >/dev/null 2>&1; then
+        RG_UPDATE=0
+
+        RG_VERSION=$(rg --version | grep -oE $RG_VERSION_PATTERN)
+        if [ "$RG_VERSION" != "$RG_RELEASE_TAG" ]; then
+            RG_UPDATE=1
+        fi
+    fi
+
+    if [ $RG_UPDATE -eq 1 ]; then
+        curl -LO ${RG_RELEASE_URL}/download/${RG_RELEASE_TAG}/ripgrep_${RG_RELEASE_TAG}_amd64.deb &&
+            sudo dpkg -i ripgrep_${RG_RELEASE_TAG}_amd64.deb
+        rm ripgrep_${RG_RELEASE_TAG}_amd64.deb
+    fi
 fi
 
 # FZF
