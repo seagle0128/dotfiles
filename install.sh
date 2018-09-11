@@ -274,7 +274,7 @@ elif [ "$SYSTEM" = "Linux" ] && [ "`uname -m`" = "x86_64" ] && command -v dpkg >
     if [ $RG_UPDATE -eq 1 ]; then
         curl -LO ${RG_RELEASE_URL}/download/${RG_RELEASE_TAG}/ripgrep_${RG_RELEASE_TAG}_amd64.deb &&
             sudo dpkg -i ripgrep_${RG_RELEASE_TAG}_amd64.deb
-        rm ripgrep_${RG_RELEASE_TAG}_amd64.deb
+        rm -f ripgrep_${RG_RELEASE_TAG}_amd64.deb
     fi
 fi
 
