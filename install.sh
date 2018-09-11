@@ -254,7 +254,7 @@ if [ "$SYSTEM" = "Darwin" ]; then
     sync_brew_package ripgrep
 elif [ "$SYSTEM" = "Linux" ] && ! command -v rg >/dev/null 2>&1 && command -v dpkg >/dev/null 2>&1; then
     # sync_apt_package ripgrep
-    RG_VER=0.9.0
+    RG_VER=0.10.0
     curl -LO https://github.com/BurntSushi/ripgrep/releases/download/${RG_VER}/ripgrep_${RG_VER}_amd64.deb &&
         sudo dpkg -i ripgrep_${RG_VER}_amd64.deb
     rm ripgrep_${RG_VER}_amd64.deb
