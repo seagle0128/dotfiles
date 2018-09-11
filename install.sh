@@ -248,8 +248,8 @@ printf "${BLUE} ➜  Installing Oh My Tmux...${NORMAL}\n"
 sync_repo gpakosz/.tmux $TMUX
 ln -sf $TMUX/.tmux.conf $HOME/.tmux.conf
 
-# Search tools
-printf "${BLUE} ➜  Installing Search tools...${NORMAL}\n"
+# Ripgrep
+printf "${BLUE} ➜  Installing ripgrep (rg)...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
     sync_brew_package ripgrep
 elif [ "$SYSTEM" = "Linux" ] && [ "`uname -m`" = "x86_64" ] && command -v dpkg >/dev/null 2>&1; then
