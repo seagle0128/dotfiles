@@ -11,8 +11,10 @@ packages=(
     # zsh
     # emacs
 
+    parcellite                  # clipit
     peek
     screenkey
+    synapse                     # albert/Ulauncher
 )
 
 # Get OS name
