@@ -7,12 +7,23 @@
 # Packages
 $packages = (
     "chocholatey",
+
+    # Utility
     "7zip", "clipx", "everything", "putty",
-    "emacs", "vscode",
     "totalcommander", "wox", "ccleaner",
-    "googlechrome", # "firefox",
     "git", "tortoisegit",
     "fzf", "peco", "ag", "pt", "ripgrep",
+
+    # Editor
+    "emacs", "vscode",
+
+    # Web browser
+    "googlechrome", # "firefox",
+
+    # Screencast
+    "licecap", "carnac",
+
+    # Misc
     # "cygwin", "cyg-get",
     # "golang", "python", "ruby", "nodejs",
     # "jdk8", "jre8", "eclipse",
