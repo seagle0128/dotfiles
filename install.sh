@@ -80,7 +80,7 @@ sync_brew_package() {
 sync_apt_package() {
     if command -v apt >/dev/null 2>&1; then
         APT=apt
-    elif has apt-get >/dev/null 2>&1; then
+    elif command -v apt-get >/dev/null 2>&1; then
         APT=apt-get
     else
         echo "${RED}Error: unable to find apt or apt-get${NORMAL}" >&2
