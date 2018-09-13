@@ -9,12 +9,17 @@
 packages=(
     # git
     # zsh
-    # emacs
+
+    # sudo add-apt-repository -y ppa:kelleyk/emacs
+    # emacs26
 
     parcellite                  # clipit
     peek
     screenkey
-    synapse                     # albert/Ulauncher
+
+    # Quick launcher: synapse/albert/Ulauncher
+    # sudo add-apt-repository ppa:agornostal/ulauncher
+    ulauncher
 )
 
 # Get OS name
