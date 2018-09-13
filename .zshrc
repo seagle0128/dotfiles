@@ -107,9 +107,11 @@ else
 fi
 
 # Emacs
-alias e="$EDITOR"
-alias ef="$EDITOR -c"
-alias te='emacsclient -a "" -nw'
+alias emacs='emacsclient -a ""'
+alias e='emacs -n'
+alias ec='emacs -c'
+alias ef='emacs -n -c'
+alias te='emacs -nw'
 alias rmelc='rm -f $HOME/.emacs.d/lisp/*.elc'
 alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
 alias restart_emacs='emacsclient -e "(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))" && te'
