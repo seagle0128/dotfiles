@@ -31,7 +31,8 @@ fi
 
 printf "${BLUE} ➜  Installing Emacs...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
-    brew install emacs --with-gnutls --with-cocoa --with-modules --with-imagemagick@6 --with-librsvg
+    # brew install emacs --with-gnutls --with-cocoa --with-modules --with-imagemagick@6 --with-librsvg
+    brew cask install emacs
 elif [ "$SYSTEM" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
     sudo add-apt-repository -y ppa:kelleyk/emacs
     sudo apt-get update

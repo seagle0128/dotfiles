@@ -7,11 +7,11 @@
 
 # Packages
 packages=(
-    # git
-    # zsh
+    git
+    zsh
 
     # sudo add-apt-repository -y ppa:kelleyk/emacs
-    # emacs26
+    emacs26
 
     parcellite                  # clipit
     peek
