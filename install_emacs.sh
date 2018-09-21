@@ -35,6 +35,7 @@ if [ "$SYSTEM" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
     brew cask install emacs
 elif [ "$SYSTEM" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
     sudo add-apt-repository -y ppa:kelleyk/emacs
+    # sudo add-apt-repository -y ppa:ubuntu-elisp/ppa
     sudo apt-get update
     sudo apt-get install emacs26
 fi
