@@ -46,7 +46,7 @@ if [[ $OSTYPE == darwin* ]]; then
 elif [[ $OSTYPE == linux* ]]; then
     if command -v apt-get >/dev/null 2>&1; then
         antigen bundle ubuntu
-        alias agua='aguu -y; agar -y; aga -y'
+        alias agua='aguu -y && agar -y && aga -y'
         alias kclean+='sudo aptitude remove -P "?and(~i~nlinux-(ima|hea),\
                             ?not(?or(~n`uname -r | cut -d'\''-'\'' -f-2`,\
                             ~nlinux-generic,\
