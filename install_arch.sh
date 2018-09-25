@@ -10,6 +10,7 @@ packages=(
     # git
     # zsh
     emacs
+    neofetch                    # screenfetch
     fzf
     peco
     ripgrep

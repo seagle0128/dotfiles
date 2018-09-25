@@ -17,6 +17,8 @@ packages=(
     peek
     screenkey
 
+    neofetch                    # screenfetch
+
     # Quick launcher: synapse/albert/Ulauncher
     # sudo add-apt-repository ppa:agornostal/ulauncher
     ulauncher
