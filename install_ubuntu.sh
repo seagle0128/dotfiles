@@ -13,6 +13,7 @@ packages=(
     # sudo add-apt-repository -y ppa:kelleyk/emacs
     emacs26
 
+    aspell                      # hunspell
     parcellite                  # clipit
     peek
     screenkey
