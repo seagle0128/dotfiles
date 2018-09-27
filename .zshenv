@@ -4,7 +4,7 @@ export LANG="en_US.UTF-8"
 export TERM=xterm-256color
 export DEFAULT_USER=$USER
 export EDITOR='emacsclient -a "" -c'
-export PATH=$HOME/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/sbin:$PATH
 
 # Cask
 export PATH=$HOME/.cask/bin:$PATH
