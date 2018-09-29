@@ -100,6 +100,8 @@ alias h='history'
 alias c='clear'
 alias rt='trash'                # `brew install trash` or `npm install --global trash-cli`
 
+alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
+
 if [[ $OSTYPE == darwin* ]]; then
     command -v gls >/dev/null 2>&1 && alias ls='gls --color=tty --group-directories-first'
 else
