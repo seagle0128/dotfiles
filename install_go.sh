@@ -18,8 +18,8 @@ x_tools=(
 # 3rd party tools
 packages=(
     # For go-mode
-    # github.com/nsf/gocode
-    github.com/mdempsky/gocode
+    # github.com/mdempsky/gocode
+    github.com/stamblerre/gocode # gocode-gomod
     github.com/rogpeppe/godef
     golang.org/x/tools/cmd/guru
 
