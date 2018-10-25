@@ -79,33 +79,14 @@ function install {
         font_dir="$HOME/Library/Fonts"
 
         fonts=(
+            font-source-code-pro
+            # font-dejavu-sans
+            font-inconsolata
+            font-hack-nerd-font
+
             font-wenquanyi-micro-hei
             font-wenquanyi-micro-hei-lite
             font-wenquanyi-zen-hei
-
-            font-source-code-pro
-            font-dejavu-sans
-            font-inconsolata
-            font-ubuntu
-            font-roboto
-
-            font-hack
-            font-anonymice-powerline
-            font-consolas-for-powerline
-            font-dejavu-sans-mono-for-powerline
-            font-droid-sans-mono-for-powerline
-            font-fira-mono-for-powerline
-            font-inconsolata-dz-for-powerline
-            font-inconsolata-for-powerline
-            font-inconsolata-g-for-powerline
-            font-liberation-mono-for-powerline
-            font-menlo-for-powerline
-            font-meslo-for-powerline
-            font-monofur-for-powerline
-            font-noto-mono-for-powerline
-            font-roboto-mono-for-powerline
-            font-source-code-pro-for-powerline
-            font-ubuntu-mono-derivative-powerline
         )
 
         if [ ! -f "${font_dir}/SourceCodePro-Regular.otf" ]; then
@@ -131,9 +112,10 @@ function install {
         if command -v apt-get >/dev/null 2>&1; then
             # Ubuntu/Debian
             fonts=(
+                fonts-hack-ttf
+                fonts-powerline
                 fonts-wqy-microhei
                 fonts-wqy-zenhei
-                fonts-powerline
                 ttf-mscorefonts-installer
             )
 
@@ -141,10 +123,8 @@ function install {
                 sudo apt-get upgrade -y ${f}
             done
         else
-            if [ ! -f "${font_dir}/Hack-Regular.ttf" ]; then
-                sync_repo powerline/fonts
-                ./fonts/install.sh
-                rm -rf fonts
+            if [ ! -f "${font_dir}/Hack Regular Nerd Font Complete.ttf" ]; then
+                sh -c "$(curl -fsSL https://github.com/ryanoasis/nerd-fonts/raw/master/install.sh)"
             fi
         fi
     fi
