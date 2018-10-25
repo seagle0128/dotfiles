@@ -124,7 +124,7 @@ function install {
             done
         else
             if [ ! -f "${font_dir}/Hack Regular Nerd Font Complete.ttf" ]; then
-                sh -c "$(curl -fsSL https://github.com/ryanoasis/nerd-fonts/raw/master/install.sh)"
+                sh -c "$(curl -fsSL https://github.com/ryanoasis/nerd-fonts/raw/master/install.sh) Hack"
             fi
         fi
     fi
