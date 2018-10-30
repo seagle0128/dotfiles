@@ -14,7 +14,7 @@ apps=(
     iterm2
     keycastr      # Show keys on the screen
     licecap       # Recording screen as gif
-    mounty        # Mounty for NTFS read/write
+    # mounty        # Mounty for NTFS read/write
     mos           # Smooth and reverse scroll. alternative: scroll-reverser
     shadowsocksx-ng
     spectacle     # Window management
@@ -27,7 +27,7 @@ apps=(
     # netspot       # Wifi signal analysis and scanner
     osxfuse
     veracrypt
-    vox2          # Music player
+    # vox2          # Music player
     sogouinput
 
     # Audio
@@ -37,8 +37,8 @@ apps=(
 
     # Development
     # java          # optional
-    docker
-    # emacs
+    # docker        # optional
+    emacs
     sourcetree
     typora        # Markdown editor
     visual-studio-code
@@ -50,6 +50,7 @@ apps=(
     # neteasemusic
     # skype-for-business
     thunder
+    aria2gui
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
