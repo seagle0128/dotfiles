@@ -10,15 +10,15 @@ apps=(
     cheatsheet
     clipy
     fliqlo        # Screen Saver
-    # hyperswitch
+    hyperswitch
     iterm2
     keycastr      # Show keys on the screen
     licecap       # Recording screen as gif
-    # mounty        # Mounty for NTFS read/write
-    mos           # Smooth and reverse scroll. alternative: scroll-reverser
+    mounty        # Mounty for NTFS read/write
+    mos           # Smooth and reverse scroll. Alternative: scroll-reverser
     shadowsocksx-ng
     spectacle     # Window management
-    # vanilla       # Hide menu bar icons, buggy
+    vanilla       # Hide menu bar icons. Alternative: bartender
 
     iina          # Media player
     firefox
@@ -27,7 +27,7 @@ apps=(
     # netspot       # Wifi signal analysis and scanner
     osxfuse
     veracrypt
-    # vox2          # Music player
+    # vox           # Music player
     sogouinput
 
     # Audio
