@@ -39,7 +39,7 @@ apps=(
     # java          # optional
     # docker        # optional
     emacs
-    sourcetree
+    fork            # Git Client: gitkraken, sourcetree
     typora        # Markdown editor
     visual-studio-code
 
