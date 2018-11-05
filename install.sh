@@ -278,6 +278,36 @@ elif [ "$SYSTEM" = "Linux" ] && [ "`uname -m`" = "x86_64" ] && command -v dpkg >
     fi
 fi
 
+# FD
+printf "${BLUE} ➜  Installing FD...${NORMAL}\n"
+if [ "$SYSTEM" = "Darwin" ]; then
+    sync_brew_package fd
+elif [ "$SYSTEM" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
+    # sync_apt_package fd-find
+
+    # Only support Linux x64 binary
+    FD_UPDATE=1
+    FD_RELEASE_URL="https://github.com/sharkdp/fd/releases"
+    FD_VERSION_PATTERN='[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
+
+    FD_RELEASE_TAG=$(curl -fs "${FD_RELEASE_URL}/latest" | grep -oE $FD_VERSION_PATTERN)
+
+    if command -v fd >/dev/null 2>&1; then
+        FD_UPDATE=0
+
+        FD_VERSION=$(fd --version | grep -oE $FD_VERSION_PATTERN)
+        if [ "$FD_VERSION" != "$FD_RELEASE_TAG" ]; then
+            FD_UPDATE=1
+        fi
+    fi
+
+    if [ $FD_UPDATE -eq 1 ]; then
+        curl -LO ${FD_RELEASE_URL}/download/v${FD_RELEASE_TAG}/fd_${FD_RELEASE_TAG}_amd64.deb &&
+            sudo dpkg -i fd_${FD_RELEASE_TAG}_amd64.deb
+        rm -f fd_${FD_RELEASE_TAG}_amd64.deb
+    fi
+fi
+
 # FZF
 printf "${BLUE} ➜  Installing FZF...${NORMAL}\n"
 if [ "$OSTYPE" = "cygwin" ]; then

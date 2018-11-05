@@ -11,6 +11,7 @@ packages=(
     # zsh
     emacs
     neofetch                    # screenfetch
+    fd
     fzf
     peco
     ripgrep

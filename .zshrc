@@ -33,7 +33,10 @@ antigen bundle z
 
 # Misc bundles.
 antigen bundle djui/alias-tips
-[[ $OSTYPE != cygwin* ]] && antigen bundle andrewferrier/fzf-z
+[[ $OSTYPE != cygwin* ]] && antigen bundle andrewferrier/fzf-z && unalias fd
+if command -v fdfind >/dev/null 2>&1; then
+    alias fd='fdfind';
+fi
 
 # OS bundles
 if [[ $OSTYPE == darwin* ]]; then

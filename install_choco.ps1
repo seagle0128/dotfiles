@@ -11,8 +11,8 @@ $packages = (
     # Utility
     "7zip", "clipx", "everything", "putty",
     "totalcommander", "wox", "ccleaner",
-    "git", "tortoisegit",
-    "fzf", "peco", "ag", "pt", "ripgrep",
+    "git", "tortoisegit", "fork",
+    "fzf", "peco", "ag", "fd", "ripgrep",
 
     # Editor
     "emacs", "vscode",
