@@ -33,7 +33,7 @@ antigen bundle z
 
 # Misc bundles.
 antigen bundle djui/alias-tips
-[[ $OSTYPE != cygwin* ]] && antigen bundle andrewferrier/fzf-z && unalias fd
+[[ $OSTYPE != cygwin* ]] && antigen bundle andrewferrier/fzf-z
 if command -v fdfind >/dev/null 2>&1; then
     alias fd='fdfind';
 fi
@@ -96,6 +96,7 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 #
 # Aliases
 #
+unalias fd
 
 # General
 alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
