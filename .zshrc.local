@@ -61,7 +61,7 @@ alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export no_p
 alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; export no_proxy=$NO_PROXY; showproxy'
 alias unsetproxy='export http_proxy=; export https_proxy=; export no_proxy=; showproxy'
 alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
-alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy2; fi'
+alias toggleproxy2='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy2; fi'
 alias set_sock_proxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_P2ROXY; export no_proxy=$NO_PROXY; showproxy'
 alias unset_sock_proxy=unsetproxy
 alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else set_sock_proxy; fi'
