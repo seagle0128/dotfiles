@@ -2,6 +2,6 @@
 :backtrace: false
 :bulk_threshold: 1000
 :sources:
-- https://gems.ruby-china.com/
+- http://mirrors.aliyun.com/rubygems/
 :update_sources: true
 :verbose: true
