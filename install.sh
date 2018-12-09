@@ -158,25 +158,6 @@ if [ "$SYSTEM" = "Darwin" ]; then
         brew tap homebrew/cask
         brew tap homebrew/cask-fonts
         brew tap buo/cask-upgrade
-        # else
-        # Set homebrew mirrors
-        # HOMEBREW_URL=https://mirrors.ustc.edu.cn
-
-        # cd "$(brew --repo)"
-        # git remote set-url origin $HOMEBREW_URL/brew.git
-        # cd - >/dev/null
-
-        # cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-        # git remote set-url origin $HOMEBREW_URL/homebrew-core.git
-        # cd - >/dev/null
-
-        # cd "$(brew --repo)/Library/Taps/homebrew/homebrew-cask"
-        # git remote set-url origin $HOMEBREW_URL/homebrew-cask.git
-        # cd - >/dev/null
-
-        # Upgrade
-        # brew update && brew upgrade && brew cleanup
-        # brew cu --all --yes --no-brew-update --cleanup
     fi
 fi
 

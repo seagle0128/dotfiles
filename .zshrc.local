@@ -66,18 +66,50 @@ alias set_sock_proxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_P2
 alias unset_sock_proxy=unsetproxy
 alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else set_sock_proxy; fi'
 
-# Functions
-# function goclean() {
-#     go clean -i -n $1
-#     go clean -i $1
-#     rm -rf $GOPATH/src/$1
-#     if [ -d $GOPATH/pkg/${sysOS:l}_amd64/$1 ]; then
-#         rm -rf $GOPATH/pkg/${sysOS:l}_amd64/$1;
-#     fi
-# }
+# Homebrew
+if [[ $OSTYPE == darwin* ]]; then
+    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles
 
-# function goclean_test() {
-#     go clean -i -n $1
-#     tree -L 1 $GOPATH/src/$1
-#     tree -L 1 $GOPATH/pkg/${sysOS:l}_amd64/$1
-# }
+    function set_homebrew_mirror() {
+        HOMEBREW_URL=https://mirrors.aliyun.com/homebrew
+
+        cd "$(brew --repo)"
+        git remote set-url origin $HOMEBREW_URL/brew.git
+        cd - >/dev/null
+
+        cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+        git remote set-url origin $HOMEBREW_URL/homebrew-core.git
+        cd - >/dev/null
+
+        cd "$(brew --repo)/Library/Taps/homebrew/homebrew-cask"
+        git remote set-url origin $HOMEBREW_URL/homebrew-cask.git
+        cd - >/dev/null
+    }
+
+    function reset_homebrew() {
+        # reset brew.git:
+        $ cd "$(brew --repo)"
+        $ git remote set-url origin https://github.com/Homebrew/brew.git
+        # reset homebrew-core.git:
+        $ cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+        $ git remote set-url origin https://github.com/Homebrew/homebrew-core.git
+    }
+fi
+
+# Golang
+if command -v go >/dev/null 2>&1; then
+    function goclean() {
+        go clean -i -n $1
+        go clean -i $1
+        rm -rf $GOPATH/src/$1
+        if [ -d $GOPATH/pkg/${sysOS:l}_amd64/$1 ]; then
+            rm -rf $GOPATH/pkg/${sysOS:l}_amd64/$1;
+        fi
+    }
+
+    function goclean_test() {
+        go clean -i -n $1
+        tree -L 1 $GOPATH/src/$1
+        tree -L 1 $GOPATH/pkg/${sysOS:l}_amd64/$1
+    }
+fi
