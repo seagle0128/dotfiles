@@ -84,6 +84,8 @@ function install {
             font-inconsolata
             font-hack-nerd-font
 
+            font-symbola
+
             font-wenquanyi-micro-hei
             font-wenquanyi-micro-hei-lite
             font-wenquanyi-zen-hei
@@ -116,7 +118,7 @@ function install {
                 fonts-powerline
                 fonts-wqy-microhei
                 fonts-wqy-zenhei
-                ttf-mscorefonts-installer
+                # ttf-mscorefonts-installer
             )
 
             for f in ${fonts[@]}; do
