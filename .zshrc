@@ -113,11 +113,12 @@ else
 fi
 
 # Emacs
-alias emacs='emacsclient -a ""'
-alias e='emacs -n'
-alias ec='emacs -c'
-alias ef='emacs -n -c'
-alias te='emacs -nw'
+# alias emacs='emacsclient -a ""'
+alias emacs_mini='emacs -Q --load ~/.emacs.d/init-mini.el'
+alias e='emacsclient -n'
+alias ec='emacsclient -c'
+alias ef='emacsclient -n -c'
+alias te='emacsclient -nw'
 alias rmelc='rm -f $HOME/.emacs.d/lisp/*.elc'
 alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
 alias restart_emacs='emacsclient -e "(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))" && te'
