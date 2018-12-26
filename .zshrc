@@ -114,7 +114,7 @@ fi
 
 # Emacs
 # alias emacs='emacsclient -a ""'
-alias emacs_mini='emacs -Q --load ~/.emacs.d/init-mini.el'
+alias emacs-mini='emacs -Q --load ~/.emacs.d/init-mini.el'
 alias e='emacsclient -n'
 alias ec='emacsclient -c'
 alias ef='emacsclient -n -c'
