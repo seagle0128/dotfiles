@@ -44,9 +44,6 @@
 # export EDITOR=vim
 # export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 
-# Homebrew bottles
-# export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
-
 # Aliases
 # alias upgrade_go='$DOTFILES/install_go.sh'
 
@@ -68,10 +65,12 @@ alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else se
 
 # Homebrew
 if [[ $OSTYPE == darwin* ]]; then
-    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles
+    # HOMEBREW_URL=https://mirrors.ustc.edu.cn/homebrew
 
     function set_homebrew_mirror() {
-        HOMEBREW_URL=https://mirrors.aliyun.com/homebrew
+        HOMEBREW_URL=https://mirrors.ustc.edu.cn/homebrew
+
+        export HOMEBREW_BOTTLE_DOMAIN=$HOMEBREW_URL-bottles
 
         cd "$(brew --repo)"
         git remote set-url origin $HOMEBREW_URL/brew.git
@@ -87,12 +86,14 @@ if [[ $OSTYPE == darwin* ]]; then
     }
 
     function reset_homebrew() {
+        export HOMEBREW_BOTTLE_DOMAIN=
+
         # reset brew.git:
-        $ cd "$(brew --repo)"
-        $ git remote set-url origin https://github.com/Homebrew/brew.git
+        cd "$(brew --repo)"
+        git remote set-url origin https://github.com/Homebrew/brew.git
         # reset homebrew-core.git:
-        $ cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-        $ git remote set-url origin https://github.com/Homebrew/homebrew-core.git
+        cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+        git remote set-url origin https://github.com/Homebrew/homebrew-core.git
     }
 fi
 
