@@ -122,11 +122,16 @@ alias te='emacsclient -nw'
 alias rmelc='rm -f $HOME/.emacs.d/lisp/*.elc'
 alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
 alias restart_emacs='emacsclient -e "(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))" && te'
+alias upgrade_emacs='cd $HOME/.emacs.d && upgrade_repo; cd - >/dev/null'
+alias upgrade_emacs_packages='emacs -Q --batch \
+--eval "(package-initialize)" \
+--eval "(setq paradox-execute-asynchronously t)" \
+--eval "(setq paradox-github-token t)" \
+--eval "(if (fboundp (quote paradox-upgrade-packages)) (paradox-upgrade-packages))"'
 
 # Upgrade
 alias upgrade_repo='git pull --rebase --stat origin master'
 alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
-alias upgrade_emacs='cd $HOME/.emacs.d && upgrade_repo; cd - >/dev/null'
 alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles && sh $DOTFILES/install.sh'
 
