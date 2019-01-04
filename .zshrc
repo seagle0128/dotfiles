@@ -136,7 +136,7 @@ alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles && sh $DOTFILES/install.sh'
 
 if [[ $OSTYPE == darwin* ]]; then
-    (( $+commands[brew] )) && alias upgrade_antigen='brew update antigen'
+    command -v brew >/dev/null 2>&1 && alias upgrade_antigen='brew update antigen'
     alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
 elif [[ $OSTYPE == linux* ]]; then
     # (( $+commands[apt-get] )) && apug -y antigen
