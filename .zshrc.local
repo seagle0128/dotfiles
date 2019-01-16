@@ -65,23 +65,22 @@ alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else se
 
 # Homebrew
 if [[ $OSTYPE == darwin* ]]; then
-    # HOMEBREW_URL=https://mirrors.ustc.edu.cn/homebrew
+    HOMEBREW_URL=https://mirrors.ustc.edu.cn/homebrew
+    # export HOMEBREW_BOTTLE_DOMAIN=${HOMEBREW_URL}-bottles
 
     function set_homebrew_mirror() {
-        HOMEBREW_URL=https://mirrors.ustc.edu.cn/homebrew
-
-        export HOMEBREW_BOTTLE_DOMAIN=$HOMEBREW_URL-bottles
+        export HOMEBREW_BOTTLE_DOMAIN=${HOMEBREW_URL}-bottles
 
         cd "$(brew --repo)"
-        git remote set-url origin $HOMEBREW_URL/brew.git
+        git remote set-url origin ${HOMEBREW_URL}/brew.git
         cd - >/dev/null
 
         cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-        git remote set-url origin $HOMEBREW_URL/homebrew-core.git
+        git remote set-url origin ${HOMEBREW_URL}/homebrew-core.git
         cd - >/dev/null
 
         cd "$(brew --repo)/Library/Taps/homebrew/homebrew-cask"
-        git remote set-url origin $HOMEBREW_URL/homebrew-cask.git
+        git remote set-url origin ${HOMEBREW_URL}/homebrew-cask.git
         cd - >/dev/null
     }
 
