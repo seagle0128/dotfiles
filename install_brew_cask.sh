@@ -31,9 +31,10 @@ apps=(
     sogouinput
 
     # Audio
-    # sound-siphon
-    # soundflower
-    # soundflowerbed
+    # sound-siphon  # 2.0.2
+    background-music
+    soundflower
+    soundflowerbed
 
     # Development
     # java          # optional
