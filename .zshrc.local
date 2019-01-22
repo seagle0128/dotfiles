@@ -12,33 +12,34 @@
 # antigen bundle ubuntu
 
 # Theme
-# if [ -n "$INSIDE_EMACS" ]; then
-#     antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
-# else
-#     # antigen theme steeef      # ys, dst, steeef, wedisagree, robbyrussell
-#     # antigen theme danihodovic/steeef
-#     # antigen theme seagle0128/bullet-train.zsh
-#     # antigen theme simnalamburt/shellder
-#     # antigen theme denysdovhan/spaceship-prompt spaceship
+if [ -n "$INSIDE_EMACS" ]; then
+    DISABLE_AUTO_TITLE="true"
+    # antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
+else
+    #     antigen theme steeef      # ys, dst, steeef, wedisagree, robbyrussell
+    #     antigen theme danihodovic/steeef
+    #     antigen theme seagle0128/bullet-train.zsh
+    #     antigen theme simnalamburt/shellder
+    #     antigen theme denysdovhan/spaceship-prompt spaceship
 
-#     # go get -u github.com/justjanne/powerline-go
-#     if command powerline-go >/dev/null 2>&1 && [ "$TERM" != "linux" ]; then
-#         # Powerful theme (require powerline fonts)
-#         function powerline_precmd() {
-#             PS1="$(powerline-go -error $? -shell zsh)"
-#         }
+    #     # go get -u github.com/justjanne/powerline-go
+    #     if command powerline-go >/dev/null 2>&1 && [ "$TERM" != "linux" ]; then
+    #         # Powerful theme (require powerline fonts)
+    #         function powerline_precmd() {
+    #             PS1="$(powerline-go -error $? -shell zsh)"
+    #         }
 
-#         function install_powerline_precmd() {
-#             for s in "${precmd_functions[@]}"; do
-#                 if [ "$s" = "powerline_precmd" ]; then
-#                     return
-#                 fi
-#             done
-#             precmd_functions+=(powerline_precmd)
-#         }
-#         install_powerline_precmd
-#     fi
-# fi
+    #         function install_powerline_precmd() {
+    #             for s in "${precmd_functions[@]}"; do
+    #                 if [ "$s" = "powerline_precmd" ]; then
+    #                     return
+    #                 fi
+    #             done
+    #             precmd_functions+=(powerline_precmd)
+    #         }
+    #         install_powerline_precmd
+    #     fi
+fi
 
 # Env
 # export EDITOR=vim
