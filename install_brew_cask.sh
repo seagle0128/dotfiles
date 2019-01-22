@@ -16,9 +16,9 @@ apps=(
     licecap       # Recording screen as gif
     mounty        # Mounty for NTFS read/write
     mos           # Smooth and reverse scroll. Alternative: scroll-reverser
-    shadowsocksx-ng
-    spectacle     # Window management
-    vanilla       # Hide menu bar icons. Alternative: bartender
+    shadowsocksx-ng-r
+    # shiftit       # Window management. spectacle
+    # vanilla       # Hide menu bar icons. Alternative: bartender
 
     iina          # Media player
     firefox
