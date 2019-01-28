@@ -26,6 +26,14 @@ or
 sh -c "$(wget https://github.com/seagle0128/dotfiles/raw/master/install.sh -O -)"
 ```
 
+## Docker
+
+``` shell
+cd ~/.dotfiles
+docker build -t centaur/ubuntu .
+docker run -it centaur/ubuntu zsh
+```
+
 ## Shortcuts
 
 - `Alt-c`: cd into the selected directory.
@@ -85,11 +93,13 @@ Set your git configurations in `~/.gitconfig.local`, e.g. user credentials.
 
 ### Git Log
 
-![git_log](https://github.com/ray-g/devstrap/raw/master/docs/snapshots/git_log.PNG)
+![git_log](https://user-images.githubusercontent.com/140797/51830877-cf4ce600-232b-11e9-9196-c35a59ebe491.png
+" Git Log")
 
-### Centaur Emacs
+### [Centaur Emacs](https://github.com/seagle0128/.emacs.d)
 
-![Emacs](https://user-images.githubusercontent.com/140797/30391180-20bd0ba8-987e-11e7-9cb4-2aa66a6fd69d.png)
+![centaur_emacs](https://user-images.githubusercontent.com/140797/49697925-400f3600-fbf8-11e8-8781-2e2ee6cd90c9.png
+"Centaur Emacs")
 
 ## Acknowledgements
 
