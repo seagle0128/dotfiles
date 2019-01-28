@@ -32,7 +32,7 @@ antigen bundle sudo
 antigen bundle z
 
 # Misc bundles.
-antigen bundle djui/alias-tips
+command -v python >/dev/null 2>&1 && antigen bundle djui/alias-tips
 [[ $OSTYPE != cygwin* ]] && antigen bundle andrewferrier/fzf-z
 if command -v fdfind >/dev/null 2>&1; then
     alias fd='fdfind';
