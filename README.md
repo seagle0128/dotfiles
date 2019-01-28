@@ -87,9 +87,10 @@ Set your git configurations in `~/.gitconfig.local`, e.g. user credentials.
 
 ## Screenshots
 
-### Sample UI with Tmux
+### Main (with Tmux)
 
-![tmux](https://github.com/ray-g/devstrap/raw/master/docs/snapshots/layout.PNG)
+![main](https://user-images.githubusercontent.com/140797/51855591-9717c880-2368-11e9-9270-bbadc3640982.png
+"Main with tmux")
 
 ### Git Log
 
