@@ -32,7 +32,7 @@ apps=(
 
     # Audio
     # sound-siphon  # 2.0.2
-    background-music
+    # background-music
     soundflower
     soundflowerbed
 

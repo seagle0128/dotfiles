@@ -25,7 +25,7 @@ else
     # Powerful theme (require powerline fonts)
     # go get -u github.com/justjanne/powerline-go
     function powerline_precmd() {
-        PS1="$($GOPATH/bin/powerline-go -error $? -shell zsh)"
+        PS1="$(powerline-go -error $? -shell zsh)"
     }
 
     function install_powerline_precmd() {
@@ -37,7 +37,7 @@ else
         precmd_functions+=(powerline_precmd)
     }
 
-    if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+    if [ "$TERM" != "linux" ] && command -v powerline-go >/dev/null 2>&1; then
         install_powerline_precmd
     fi
 fi
