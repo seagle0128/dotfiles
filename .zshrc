@@ -44,7 +44,7 @@ if [[ $OSTYPE == darwin* ]]; then
     if command -v brew >/dev/null 2>&1; then
         export HOMEBREW_INSTALL_CLEANUP=1
         alias bu='brew upgrade'
-        alias bcu='brew cu --all --yes --no-brew-update --cleanup'
+        alias bcu='brew cu --all --yes --cleanup'
         alias bua='bu && bcu'
     fi
 elif [[ $OSTYPE == linux* ]]; then
