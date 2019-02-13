@@ -9,6 +9,7 @@
 apps=(
     cheatsheet
     clipy
+    ezip          # compress & extract
     fliqlo        # Screen Saver
     hyperswitch
     iterm2
@@ -44,7 +45,7 @@ apps=(
     typora        # Markdown editor
     visual-studio-code
 
-    # Utils
+    # Utilities
     # acrobat-reader
     aliwangwang
     baidunetdisk
