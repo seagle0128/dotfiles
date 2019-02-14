@@ -13,6 +13,7 @@ apps=(
     fliqlo        # Screen Saver
     hyperswitch
     iterm2
+    keepingyouawake
     keycastr      # Show keys on the screen
     licecap       # Recording screen as gif
     mounty        # Mounty for NTFS read/write
