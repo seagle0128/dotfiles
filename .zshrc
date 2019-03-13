@@ -43,7 +43,7 @@ if [[ $OSTYPE == darwin* ]]; then
     antigen bundle osx
     if command -v brew >/dev/null 2>&1; then
         export HOMEBREW_INSTALL_CLEANUP=1
-        alias bu='brew upgrade'
+        alias bu='brew update && brew upgrade'
         alias bcu='brew cu --all --yes --cleanup'
         alias bua='bu && bcu'
     fi
