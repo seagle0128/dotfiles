@@ -17,4 +17,7 @@ export PATH=$HOME/.fzf/bin:$PATH
 
 # Golang
 export GOPATH=$HOME/go
-export PATH=$PATH:${GOPATH//://bin:}/bin
+export PATH=${GOPATH//://bin:}/bin:$PATH
+
+# Rust
+export PATH=$HOME/.cargo/bin:$PATH

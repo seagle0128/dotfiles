@@ -1,5 +1,10 @@
 # Local configurations -*- mode: sh -*-
 
+# Show system information
+if command -v neofetch >/dev/null 2>&1; then
+    neofetch
+fi
+
 # Plugins
 # antigen bundle docker
 # antigen bundle docker-compose
@@ -14,7 +19,7 @@
 # Theme
 if [ -n "$INSIDE_EMACS" ]; then
     DISABLE_AUTO_TITLE="true"
-    # antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
+    # antigen theme dst            # ys, dst, wedisagree, robbyrussell
 else
     # antigen theme steeef      # ys, dst, steeef, wedisagree, robbyrussell
     # antigen theme danihodovic/steeef
@@ -23,9 +28,14 @@ else
     # antigen theme denysdovhan/spaceship-prompt spaceship
 
     # Powerful theme (require powerline fonts)
+    # cargo install powerline-rs
     # go get -u github.com/justjanne/powerline-go
     function powerline_precmd() {
-        PS1="$(powerline-go -error $? -shell zsh)"
+        if command -v powerline-rs >/dev/null 2>&1; then
+            PS1="$(powerline-rs --shell zsh $?)"
+        elif command -v powerline-go >/dev/null 2>&1; then
+            PS1="$(powerline-go -error $? -shell zsh)"
+        fi
     }
 
     function install_powerline_precmd() {
@@ -37,7 +47,7 @@ else
         precmd_functions+=(powerline_precmd)
     }
 
-    if [ "$TERM" != "linux" ] && command -v powerline-go >/dev/null 2>&1; then
+    if [ "$TERM" != "linux" ]; then
         install_powerline_precmd
     fi
 fi
@@ -54,7 +64,7 @@ PROXY=http://127.0.0.1:1087
 PROXY2=http://127.0.0.1:8123
 SOCK_PROXY=socks5://127.0.0.1:1086
 NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
-alias set_polipo_proxy='polipo socksParentProxy=192.168.31.1:1080 &'
+alias set_polipo_proxy='polipo socksParentProxy=192.168.31.1:1082 &'
 alias showproxy='echo "proxy=$http_proxy"'
 alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export no_proxy=$NO_PROXY; showproxy'
 alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; export no_proxy=$NO_PROXY; showproxy'
@@ -104,6 +114,12 @@ fi
 
 # Golang
 if command -v go >/dev/null 2>&1; then
+    export GOPROXY=https://athens.azurefd.net/
+
+    function gocomplete() {
+        antigen bundle golang
+    }
+
     function goclean() {
         go clean -i -n $1
         go clean -i $1
