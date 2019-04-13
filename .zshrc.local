@@ -93,6 +93,8 @@ if [[ $OSTYPE == darwin* ]]; then
         cd "$(brew --repo)/Library/Taps/homebrew/homebrew-cask"
         git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
         cd - >/dev/null
+
+        brew update
     }
 
     function reset_homebrew() {
@@ -109,6 +111,8 @@ if [[ $OSTYPE == darwin* ]]; then
         cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask
         git remote set-url origin https://github.com/Homebrew/homebrew-cask
         cd - >/dev/null
+
+        brew update
     }
 fi
 
