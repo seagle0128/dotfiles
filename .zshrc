@@ -107,13 +107,7 @@ alias rt='trash'                # `brew install trash` or `npm install --global 
 
 alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
-if command -v lsd >/dev/null 2>&1; then
-    alias ls='lsd --group-dirs first --'
-    alias l='lsd -l --group-dirs first --'
-    alias la='lsd -a --group-dirs first --'
-    alias lla='lsd -la --group-dirs first --'
-    alias lt='lsd --tree'
-elif [[ $OSTYPE == darwin* ]]; then
+if [[ $OSTYPE == darwin* ]]; then
     command -v gls >/dev/null 2>&1 && alias ls='gls --color=tty --group-directories-first'
 else
     alias ls='ls --color=tty --group-directories-first'
