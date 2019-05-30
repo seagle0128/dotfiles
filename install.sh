@@ -46,6 +46,12 @@ command -v git >/dev/null 2>&1 || {
     exit 1
 }
 
+# Check curl
+command -v curl >/dev/null 2>&1 || {
+    echo "${RED}Error: curl is not installed${NORMAL}" >&2
+    exit 1
+}
+
 # Sync repository
 sync_repo() {
     local repo_uri="$1"
