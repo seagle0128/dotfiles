@@ -64,14 +64,15 @@ PROXY=http://127.0.0.1:1087
 PROXY2=http://127.0.0.1:8123
 SOCK_PROXY=socks5://127.0.0.1:1086
 NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
-alias set_polipo_proxy='polipo socksParentProxy=192.168.31.1:1082 &'
+alias set_polipo_proxy='ps -ef | grep polipo | grep -v grep; [ $? -ne 0 ] && polipo socksParentProxy=192.168.31.1:1082 &'
 alias showproxy='echo "proxy=$http_proxy"'
 alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export no_proxy=$NO_PROXY; showproxy'
 alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; export no_proxy=$NO_PROXY; showproxy'
 alias unsetproxy='export http_proxy=; export https_proxy=; export no_proxy=; showproxy'
+alias unsetproxy2='killall polipo;unsetproxy'
 alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
-alias toggleproxy2='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy2; fi'
-alias set_sock_proxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_P2ROXY; export no_proxy=$NO_PROXY; showproxy'
+alias toggleproxy2='if [ -n "$http_proxy" ]; then unsetproxy2; else setproxy2; fi'
+alias set_sock_proxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_PROXY; export no_proxy=$NO_PROXY; showproxy'
 alias unset_sock_proxy=unsetproxy
 alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else set_sock_proxy; fi'
 
