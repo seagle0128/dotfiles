@@ -34,7 +34,6 @@ antigen bundle z
 
 # Misc bundles.
 command -v python >/dev/null 2>&1 && antigen bundle djui/alias-tips
-[[ $OSTYPE != cygwin* ]] && antigen bundle andrewferrier/fzf-z
 if command -v fdfind >/dev/null 2>&1; then
     alias fd='fdfind';
 fi
@@ -61,6 +60,28 @@ elif [[ $OSTYPE == linux* ]]; then
     fi
 fi
 
+# Load FZF
+if command -v fzf >/dev/null 2>&1; then
+    if [[ $OSTYPE == cygwin* ]]; then
+        [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh;
+    else
+        antigen bundle fzf
+        antigen bundle andrewferrier/fzf-z
+    fi
+
+    if command -v fd > /dev/null 2>&1; then
+        export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+    elif command -v rg >/dev/null 2>&1; then
+        export FZF_DEFAULT_COMMAND='rg --hidden --files'
+    elif command -v ag >/dev/null 2>&1; then
+        export FZF_DEFAULT_COMMAND='ag -U --hidden -g ""'
+    fi
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+    export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+    export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+fi
+
 # antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zdharma/fast-syntax-highlighting
@@ -79,21 +100,6 @@ antigen apply
 
 # Completion enhancements
 source $DOTFILES/completion.zsh
-
-# Load FZF
-if [[ $OSTYPE == cygwin* ]]; then
-    [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh;
-else
-    [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh;
-fi
-if command -v rg >/dev/null 2>&1; then
-    export FZF_DEFAULT_COMMAND='rg --hidden --files'
-elif command -v ag >/dev/null 2>&1; then
-    export FZF_DEFAULT_COMMAND='ag -U --hidden -g ""'
-fi
-export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 #
 # Aliases

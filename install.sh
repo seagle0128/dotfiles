@@ -304,11 +304,10 @@ if [ "$OSTYPE" = "cygwin" ]; then
 else
     if [ "$SYSTEM" = "Darwin" ]; then
         sync_brew_package fzf
-        FZF=/usr/local/opt/fzf
     elif [ "$SYSTEM" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
         sync_repo junegunn/fzf $FZF
     fi
-    [ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null
+    # [ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null
 fi
 
 # Peco
