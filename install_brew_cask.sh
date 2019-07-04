@@ -29,7 +29,7 @@ apps=(
     # netspot       # Wifi signal analysis and scanner
     osxfuse
     veracrypt
-    vox           # Music player
+    vox2           # Music player
     sogouinput
 
     # Audio
@@ -49,11 +49,12 @@ apps=(
     # Utilities
     # acrobat-reader
     aliwangwang
+    aria2gui
     baidunetdisk
-    # neteasemusic
+    neteasemusic
     # skype-for-business
     thunder
-    aria2gui
+    yyets
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
