@@ -6,32 +6,30 @@
 #############################################################
 
 # Go packages
-# x tools
-x_tools=(
-    # golang.org/x/tools/cmd/godoc
-    golang.org/x/tools/cmd/goimports
-    golang.org/x/tools/cmd/gorename
-    golang.org/x/tools/cmd/gotype
-    # golang.org/x/tools/cmd/guru
-)
-
-# 3rd party tools
 packages=(
     # For go-mode
-    # github.com/mdempsky/gocode
     github.com/stamblerre/gocode # gocode-gomod
     github.com/rogpeppe/godef
-    golang.org/x/tools/cmd/guru
+    github.com/uudashr/gopkgs/cmd/gopkgs
 
     github.com/golang/lint/golint
     github.com/google/gops
-    github.com/derekparker/delve/cmd/dlv
+    github.com/go-delve/delve/cmd/dlv
     github.com/aarzilli/gdlv
     github.com/josharian/impl
     github.com/cweill/gotests/...
     github.com/fatih/gomodifytags
     github.com/davidrjenni/reftools/cmd/fillstruct
-    github.com/sourcegraph/go-langserver
+    onnef.co/go/tools/...
+    github.com/acroca/go-symbols
+    github.com/haya14busa/goplay/cmd/goplay
+
+    golang.org/x/tools/cmd/gopls
+    golang.org/x/tools/cmd/goimports
+    golang.org/x/tools/cmd/gorename
+    golang.org/x/tools/cmd/gotype
+    # golang.org/x/tools/cmd/guru
+    golang.org/x/lint/golint
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
@@ -75,14 +73,6 @@ function check() {
 }
 
 function install() {
-    promote_yn "Install x-tools?" "continue"
-    if [ $continue -eq $YES ]; then
-        for p in ${x_tools[@]}; do
-            printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
-            go get -u ${p}
-        done
-    fi
-
     for p in ${packages[@]}; do
         printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
         go get -u ${p}
