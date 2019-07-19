@@ -123,12 +123,10 @@ fi
 # Emacs
 # alias emacs='emacsclient -a ""'
 alias emacs-mini='emacs -Q --load ~/.emacs.d/init-mini.el'
-alias e='emacsclient -n'
-alias ec='emacsclient -c'
-alias ef='emacsclient -n -c'
-alias te='emacsclient -nw'
-alias rmelc='rm -f $HOME/.emacs.d/lisp/*.elc'
-alias rmtags='rm -f GTAGS; rm -f GRTAGS; rm -f GPATH; rm -f TAGS'
+alias e='emacsclient -a "" -n'
+alias ec='emacsclient -a "" -n -c'
+alias ef='emacsclient -a "" -c'
+alias te='emacsclient -a “” -nw'
 alias restart_emacs='emacsclient -e "(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))" && te'
 
 # Upgrade
