@@ -121,13 +121,12 @@ else
 fi
 
 # Emacs
-# alias emacs='emacsclient -a ""'
-alias emacs-mini='emacs -Q --load ~/.emacs.d/init-mini.el'
-alias e='emacsclient -a "" -n'
-alias ec='emacsclient -a "" -n -c'
-alias ef='emacsclient -a "" -c'
-alias te='emacsclient -a “” -nw'
-alias restart_emacs='emacsclient -e "(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))" && te'
+alias me="emacs -Q --load ~/.emacs.d/init-mini.el" # mini emacs
+alias e="$EDITOR -n"
+alias ec="$EDITOR -n -c"
+alias ef="$EDITOR -c"
+alias te="$EDITOR -a '' -nw"
+alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))' && te"
 
 # Upgrade
 alias upgrade_repo='git pull --rebase --stat origin master'
