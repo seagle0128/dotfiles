@@ -19,7 +19,7 @@ fi
 # Theme
 if [ -n "$INSIDE_EMACS" ]; then
     DISABLE_AUTO_TITLE="true"
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=white,underline'
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=gray,underline'
     # antigen theme dst            # ys, dst, wedisagree, robbyrussell
 else
     # antigen theme steeef      # ys, dst, steeef, wedisagree, robbyrussell
