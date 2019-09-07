@@ -2,11 +2,11 @@
 [include]
 	path = ~/.gitconfig_global
 [user]
-	name = Vincent Zhang
-	email = seagle0128@gmail.com
+	name =
+	email =
 [credential]
 	helper = cache --timeout=3600
 [core]
 	filemode = false
 [github]
-	user = seagle0128
+	user =
