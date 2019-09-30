@@ -8,11 +8,10 @@
 # Go packages
 packages=(
     # For go-mode
-    github.com/stamblerre/gocode # gocode-gomod
+    # github.com/mdempsky/gocode
     github.com/rogpeppe/godef
     github.com/uudashr/gopkgs/cmd/gopkgs
 
-    github.com/golang/lint/golint
     github.com/google/gops
     github.com/go-delve/delve/cmd/dlv
     github.com/aarzilli/gdlv
@@ -20,8 +19,9 @@ packages=(
     github.com/cweill/gotests/...
     github.com/fatih/gomodifytags
     github.com/davidrjenni/reftools/cmd/fillstruct
-    onnef.co/go/tools/...
+    # honnef.co/go/tools/...
     github.com/acroca/go-symbols
+    github.com/golangci/golangci-lint/cmd/golangci-lint
     github.com/haya14busa/goplay/cmd/goplay
 
     golang.org/x/tools/cmd/gopls
