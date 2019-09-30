@@ -7,11 +7,12 @@
 
 # Packages
 packages=(
+    build-essential
     git
     zsh
 
     # sudo add-apt-repository -y ppa:kelleyk/emacs
-    emacs26
+    emacs26                     # emacs-snapshot
 
     aspell                      # hunspell
     parcellite                  # clipit
