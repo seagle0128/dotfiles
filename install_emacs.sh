@@ -40,5 +40,5 @@ elif [ "$SYSTEM" = "Linux" ] && command -v add-apt-repository >/dev/null 2>&1; t
     sudo add-apt-repository -y ppa:kelleyk/emacs
     # sudo add-apt-repository -y ppa:ubuntu-elisp/ppa
     sudo apt-get update
-    sudo apt-get install emacs26
+    sudo apt-get install -y emacs26
 fi
