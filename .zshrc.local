@@ -120,8 +120,6 @@ fi
 
 # Golang
 if command -v go >/dev/null 2>&1; then
-    export GOPROXY=https://athens.azurefd.net/
-
     function gocomplete() {
         antigen bundle golang
     }
