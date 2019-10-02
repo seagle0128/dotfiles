@@ -34,9 +34,7 @@ antigen bundle z
 
 # Misc bundles.
 command -v python >/dev/null 2>&1 && antigen bundle djui/alias-tips
-if command -v fdfind >/dev/null 2>&1; then
-    alias fd='fdfind';
-fi
+command -v fdfind >/dev/null 2>&1 && alias fd='fdfind'
 
 # OS bundles
 if [[ $OSTYPE == darwin* ]]; then
@@ -69,13 +67,7 @@ if command -v fzf >/dev/null 2>&1; then
         antigen bundle andrewferrier/fzf-z
     fi
 
-    if command -v fd > /dev/null 2>&1; then
-        export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-    elif command -v rg >/dev/null 2>&1; then
-        export FZF_DEFAULT_COMMAND='rg --hidden --files'
-    elif command -v ag >/dev/null 2>&1; then
-        export FZF_DEFAULT_COMMAND='ag -U --hidden -g ""'
-    fi
+    export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --hidden --files || find ."
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
     export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
