@@ -310,36 +310,6 @@ else
     # [ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null
 fi
 
-# Peco
-if [ "$OSTYPE" != "cygwin" ]; then
-    printf "${BLUE} ➜  Installing Peco...${NORMAL}\n"
-    if [ "$SYSTEM" = "Darwin" ]; then
-        sync_brew_package peco
-    elif [ "$SYSTEM" = "Linux" ] && [ "`uname -m`" = "x86_64" ]; then
-        # Only support Linux x64 binary
-        PECO_UPDATE=1
-        PECO_RELEASE_URL="https://github.com/peco/peco/releases"
-        PECO_VERSION_PATTERN='v[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
-
-        PECO_RELEASE_TAG=$(curl -fs "${PECO_RELEASE_URL}/latest" | grep -oE $PECO_VERSION_PATTERN)
-
-        if command -v peco >/dev/null 2>&1; then
-            PECO_UPDATE=0
-
-            PECO_VERSION=$(peco --version | grep -oE $PECO_VERSION_PATTERN)
-            if [ "$PECO_VERSION" != "$PECO_RELEASE_TAG" ]; then
-                PECO_UPDATE=1
-            fi
-        fi
-
-        if [ $PECO_UPDATE -eq 1 ]; then
-            curl -fsSL ${PECO_RELEASE_URL}/download/${PECO_RELEASE_TAG}/peco_linux_amd64.tar.gz | tar xzf - &&
-                chmod +x peco_linux_amd64/peco && sudo mv peco_linux_amd64/peco /usr/local/bin
-            rm -rf peco_linux_amd64
-        fi
-    fi
-fi
-
 # Entering zsh
 printf "Done. Enjoy!\n"
 if command -v zsh >/dev/null 2>&1; then
