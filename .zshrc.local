@@ -61,9 +61,9 @@ fi
 # alias upgrade_go='$DOTFILES/install_go.sh'
 
 # Proxy
-PROXY=http://127.0.0.1:1087
+PROXY=http://127.0.0.1:8001     # 1087
 PROXY2=http://127.0.0.1:8123
-SOCK_PROXY=socks5://127.0.0.1:1086
+SOCK_PROXY=socks5://127.0.0.1:1081 # 1086
 NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
 alias set_polipo_proxy='ps -ef | grep polipo | grep -v grep; [ $? -ne 0 ] && polipo socksParentProxy=192.168.31.1:1082 &'
 alias showproxy='echo "proxy=$http_proxy"'
