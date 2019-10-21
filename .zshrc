@@ -124,7 +124,7 @@ alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) (kill-emacs-query-function
 alias upgrade_repo='git pull --rebase --stat origin master'
 alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
 # alias upgrade_emacs='cd $HOME/.emacs.d && upgrade_repo; cd - >/dev/null'
-alias upgrade_emacs='emacs -Q --batch -L "$HOME/.emacs.d/lisp/" -l "init-package.el" -l "init-funcs.el" --eval "(update-config-and-packages)"'
+alias upgrade_emacs='emacs -Q --batch -L "$HOME/.emacs.d/lisp/" -l "init-package.el" -l "init-funcs.el" --eval "(update-config-and-packages t)"'
 alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles && sh $DOTFILES/install.sh'
 alias upgrade_pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
