@@ -209,6 +209,7 @@ ln -sf $DOTFILES/.markdownlint.json $HOME/.markdownlint.json
 
 cp -n $DOTFILES/.npmrc $HOME/.npmrc
 cp -n $DOTFILES/.gemrc $HOME/.gemrc
+mkdir -p $HOME/.cargo && cp -n $DOTFILES/cargo.config $HOME/.cargo/config
 cp -n $DOTFILES/.zshrc.local $HOME/.zshrc.local
 mkdir -p $HOME/.pip; cp -n $DOTFILES/.pip.conf $HOME/.pip/pip.conf
 

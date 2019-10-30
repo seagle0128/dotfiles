@@ -130,6 +130,7 @@ alias upgrade_gem='sudo gem update && sudo gem cleanup'
 alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2); do npm -g install "$package"; done'
 alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update
 
 if [[ $OSTYPE == darwin* ]]; then
     command -v brew >/dev/null 2>&1 && alias upgrade_antigen='brew upgrade antigen'
