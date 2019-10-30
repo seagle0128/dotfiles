@@ -132,7 +132,7 @@ alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 
 if [[ $OSTYPE == darwin* ]]; then
-    command -v brew >/dev/null 2>&1 && alias upgrade_antigen='brew update antigen'
+    command -v brew >/dev/null 2>&1 && alias upgrade_antigen='brew upgrade antigen'
     alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
 elif [[ $OSTYPE == linux* ]]; then
     # (( $+commands[apt-get] )) && apug -y antigen
