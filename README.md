@@ -99,7 +99,7 @@ Set your git configurations in `~/.gitconfig.local`, e.g. user credentials.
 
 ### [Centaur Emacs](https://github.com/seagle0128/.emacs.d)
 
-![centaur_emacs](https://user-images.githubusercontent.com/140797/49697925-400f3600-fbf8-11e8-8781-2e2ee6cd90c9.png
+![centaur_emacs](https://user-images.githubusercontent.com/140797/56488858-4e5c4f80-6512-11e9-9637-b9395c46400f.png
 "Centaur Emacs")
 
 ## Acknowledgements
