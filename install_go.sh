@@ -9,8 +9,8 @@
 packages=(
     # For go-mode
     # github.com/mdempsky/gocode
-    github.com/rogpeppe/godef
-    github.com/uudashr/gopkgs/cmd/gopkgs
+    # github.com/rogpeppe/godef
+    # github.com/uudashr/gopkgs/cmd/gopkgs
 
     github.com/google/gops
     github.com/go-delve/delve/cmd/dlv
@@ -24,12 +24,17 @@ packages=(
     github.com/golangci/golangci-lint/cmd/golangci-lint
     github.com/haya14busa/goplay/cmd/goplay
 
-    golang.org/x/tools/cmd/gopls
     golang.org/x/tools/cmd/goimports
     golang.org/x/tools/cmd/gorename
-    golang.org/x/tools/cmd/gotype
+    # golang.org/x/tools/cmd/gotype
     # golang.org/x/tools/cmd/guru
-    golang.org/x/lint/golint
+    # golang.org/x/lint/golint
+)
+
+# Do not use the -u flag for gopls, as it will update the dependencies to incompatible versions
+# https://github.com/golang/tools/blob/master/gopls/doc/user.md#installation
+packages_no_update=(
+    golang.org/x/tools/gopls@latest
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
@@ -73,6 +78,11 @@ function check() {
 }
 
 function install() {
+    for p in ${packages_no_update[@]}; do
+        printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
+        go get ${p}
+    done
+
     for p in ${packages[@]}; do
         printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
         go get -u ${p}
