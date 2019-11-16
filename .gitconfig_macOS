@@ -8,3 +8,4 @@
 	helper = osxkeychain
 [github]
 	user =
+	oauth-token =

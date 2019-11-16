@@ -10,3 +10,4 @@
 	filemode = false
 [github]
 	user =
+	oauth-token =
