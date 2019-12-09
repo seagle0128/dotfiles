@@ -88,11 +88,11 @@ if [[ $OSTYPE == darwin* ]]; then
         git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
         cd - >/dev/null
 
-        cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-core
         git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
         cd - >/dev/null
 
-        cd "$(brew --repo)/Library/Taps/homebrew/homebrew-cask"
+        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask
         git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
         cd - >/dev/null
 
@@ -106,7 +106,7 @@ if [[ $OSTYPE == darwin* ]]; then
         git remote set-url origin https://github.com/Homebrew/brew.git
         cd - >/dev/null
 
-        cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-core
         git remote set-url origin https://github.com/Homebrew/homebrew-core.git
         cd - >/dev/null
 
