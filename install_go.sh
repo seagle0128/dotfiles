@@ -21,7 +21,7 @@ packages=(
     github.com/davidrjenni/reftools/cmd/fillstruct
     # honnef.co/go/tools/...
     github.com/acroca/go-symbols
-    github.com/golangci/golangci-lint/cmd/golangci-lint
+    # github.com/golangci/golangci-lint/cmd/golangci-lint
     github.com/haya14busa/goplay/cmd/goplay
 
     golang.org/x/tools/cmd/goimports
