@@ -106,10 +106,6 @@ Set your git configurations in `~/.gitconfig.local`, e.g. user credentials.
 
 Related projects: [DevStrap](https://github.com/ray-g/devstrap)
 
-## License
-
-[MIT License](https://github.com/ray-g/devstrap/blob/master/LICENSE)
-
 ## Donate
 
 If you think the it's helpful for you, please consider paying a cup of coffee
