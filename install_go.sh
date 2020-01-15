@@ -7,11 +7,6 @@
 
 # Go packages
 packages=(
-    # For go-mode
-    # github.com/mdempsky/gocode
-    # github.com/rogpeppe/godef
-    # github.com/uudashr/gopkgs/cmd/gopkgs
-
     github.com/google/gops
     github.com/go-delve/delve/cmd/dlv
     github.com/aarzilli/gdlv
@@ -25,7 +20,6 @@ packages=(
     github.com/haya14busa/goplay/cmd/goplay
 
     golang.org/x/tools/cmd/goimports
-    golang.org/x/tools/cmd/gorename
     # golang.org/x/tools/cmd/gotype
     # golang.org/x/tools/cmd/guru
     # golang.org/x/lint/golint
