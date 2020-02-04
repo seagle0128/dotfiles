@@ -40,7 +40,6 @@ command -v fdfind >/dev/null 2>&1 && alias fd='fdfind'
 if [[ $OSTYPE == darwin* ]]; then
     antigen bundle osx
     if command -v brew >/dev/null 2>&1; then
-        export HOMEBREW_INSTALL_CLEANUP=1
         alias bu='brew update && brew upgrade'
         alias bcu='brew cu --all --yes --cleanup'
         alias bua='bu && bcu'
@@ -114,6 +113,7 @@ fi
 
 # Emacs
 alias me="emacs -Q --load ~/.emacs.d/init-mini.el" # mini emacs
+alias mte="emacs -Q -nw --load ~/.emacs.d/init-mini.el" # mini terminal emacs
 alias e="$EDITOR -n"
 alias ec="$EDITOR -n -c"
 alias ef="$EDITOR -c"
