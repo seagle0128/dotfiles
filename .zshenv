@@ -16,7 +16,7 @@ export PATH=$HOME/.rbenv/shims:$PATH
 export PATH=$HOME/.fzf/bin:$PATH
 
 # Golang
-export GO111MODULE=on
+# export GO111MODULE=auto
 export GOPROXY=https://goproxy.cn # https://athens.azurefd.net
 export GOPATH=$HOME/go
 export PATH=${GOPATH//://bin:}/bin:$PATH
