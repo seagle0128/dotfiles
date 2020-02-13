@@ -112,8 +112,8 @@ else
 fi
 
 # Emacs
-alias me="emacs -Q --load ~/.emacs.d/init-mini.el" # mini emacs
-alias mte="emacs -Q -nw --load ~/.emacs.d/init-mini.el" # mini terminal emacs
+alias me="emacs -Q -l ~/.emacs.d/init-mini.el" # mini emacs
+alias mte="emacs -Q -nw -l ~/.emacs.d/init-mini.el" # mini terminal emacs
 alias e="$EDITOR -n"
 alias ec="$EDITOR -n -c"
 alias ef="$EDITOR -c"
