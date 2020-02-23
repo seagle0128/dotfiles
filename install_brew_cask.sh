@@ -14,22 +14,21 @@ apps=(
     hyperswitch
     iterm2
     keepingyouawake
-    keycastr      # Show keys on the screen
-    licecap       # Recording screen as gif
-    mounty        # Mounty for NTFS read/write
-    mos           # Smooth and reverse scroll. Alternative: scroll-reverser
-    shadowsocksx-ng-r
-    # shiftit       # Window management. Alternative: spectacle
-    # vanilla       # Hide menu bar icons. Alternative: bartender
+    keycastr        # Show keys on the screen
+    licecap         # Recording screen as gif
+    mounty          # Mounty for NTFS read/write
+    mos             # Smooth and reverse scroll. Alternative: scroll-reverser
+    v2rayx          # shadowsocksx-ng
+    # shiftit         # Window management. Alternative: spectacle
+    # vanilla         # Hide menu bar icons. Alternative: bartender
 
-    iina          # Media player
-    firefox
-    google-chrome
+    iina            # Media player
+    google-chrome   # Browser. Alternative: firefox, microsoft-edge
     # karabiner-elements # karabiner: Keboard remapping
     # netspot       # Wifi signal analysis and scanner
     osxfuse
     veracrypt
-    vox2           # Music player
+    vox2            # Music player
     sogouinput
 
     # Audio
@@ -41,16 +40,17 @@ apps=(
     # Development
     # java          # optional
     # docker        # optional
-    emacs
+    # emacs
     fork            # Git Client: gitkraken, sourcetree
-    typora        # Markdown editor
+    typora          # Markdown editor
     visual-studio-code
 
     # Utilities
     # acrobat-reader
     aliwangwang
-    aria2gui
+    motrix          # aria2gui
     baidunetdisk
+    macgesture
     neteasemusic
     # skype-for-business
     thunder
