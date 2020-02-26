@@ -24,11 +24,12 @@ fi
 antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh)
+antigen bundle colored-man-pages
 antigen bundle common-aliases
+antigen bundle extract
+antigen bundle fancy-ctrl-z
 antigen bundle git
 antigen bundle gitfast
-antigen bundle colored-man-pages
-antigen bundle extract
 antigen bundle sudo
 antigen bundle z
 
