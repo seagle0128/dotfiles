@@ -66,8 +66,10 @@ if command -v fzf >/dev/null 2>&1; then
         [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh;
     else
         antigen bundle fzf
-        # antigen bundle zsh-interactive-cd
+
+        export FZF_TAB_SHOW_GROUP=brief # Hide group names
         antigen bundle Aloxaf/fzf-tab
+
         antigen bundle andrewferrier/fzf-z
     fi
 
