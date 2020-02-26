@@ -260,9 +260,48 @@ elif [ "$SYSTEM" = "Linux" ] && [ "`uname -m`" = "x86_64" ] && command -v dpkg >
     fi
 
     if [ $RG_UPDATE -eq 1 ]; then
-        curl -LO ${RG_RELEASE_URL}/download/${RG_RELEASE_TAG}/ripgrep_${RG_RELEASE_TAG}_amd64.deb &&
-            sudo dpkg -i ripgrep_${RG_RELEASE_TAG}_amd64.deb
-        rm -f ripgrep_${RG_RELEASE_TAG}_amd64.deb
+        RG_PACKAGE=ripgrep_${RG_RELEASE_TAG}_amd64.deb
+        curl -LO ${RG_RELEASE_URL}/download/${RG_RELEASE_TAG}/${RG_PACKAGE} &&
+            sudo dpkg -i ${RG_PACKAGE}
+        rm -f ${RG_PACKAGE}
+    fi
+fi
+
+# BAT
+printf "${BLUE} ➜  Installing BAT...${NORMAL}\n"
+if [ "$SYSTEM" = "Darwin" ]; then
+    sync_brew_package bat
+elif [ "$SYSTEM" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
+    # sync_apt_package bat
+
+    # Only support Linux x64 binary
+    BAT_UPDATE=1
+    BAT_RELEASE_URL="https://github.com/sharkdp/bat/releases"
+    BAT_VERSION_PATTERN='[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
+
+    BAT_RELEASE_TAG=$(curl -fs "${BAT_RELEASE_URL}/latest" | grep -oE $BAT_VERSION_PATTERN)
+
+    if command -v fd >/dev/null 2>&1; then
+        BAT_UPDATE=0
+
+        BAT_VERSION=$(fd --version | grep -oE $BAT_VERSION_PATTERN)
+        if [ "$BAT_VERSION" != "$BAT_RELEASE_TAG" ]; then
+            BAT_UPDATE=1
+        fi
+    fi
+
+    if [ $BAT_UPDATE -eq 1 ]; then
+        BAT_NAME=bat-v${BAT_RELEASE_TAG}-x86_64-unknown-linux-gnu
+        BAT_PACKAGE=${BAT_NAME}.tar.gz
+
+        curl -LO ${BAT_RELEASE_URL}/download/v${BAT_RELEASE_TAG}/${BAT_PACKAGE} &&
+            tar zxvf $BAT_PACKAGE >/dev/null 2>&1 &&
+            cp ${BAT_NAME}/bat /usr/local/bin/bat &&
+            cp ${BAT_NAME}/bat.1 /usr/local/bin/bat.1 &&
+            chmod +x /usr/local/bin/bat
+
+        rm -f ${BAT_PACKAGE}
+        rm -rf ${BAT_NAME}
     fi
 fi
 
@@ -290,9 +329,10 @@ elif [ "$SYSTEM" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
     fi
 
     if [ $FD_UPDATE -eq 1 ]; then
-        curl -LO ${FD_RELEASE_URL}/download/v${FD_RELEASE_TAG}/fd_${FD_RELEASE_TAG}_amd64.deb &&
-            sudo dpkg -i fd_${FD_RELEASE_TAG}_amd64.deb
-        rm -f fd_${FD_RELEASE_TAG}_amd64.deb
+        FD_PACKAGE=fd_${FD_RELEASE_TAG}_amd64.deb
+        curl -LO ${FD_RELEASE_URL}/download/v${FD_RELEASE_TAG}/${FD_PACKAGE} &&
+            sudo dpkg -i ${FD_PACKAGE}
+        rm -f ${FD_PACKAGE}
     fi
 fi
 
