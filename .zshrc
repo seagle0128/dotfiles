@@ -67,10 +67,11 @@ if command -v fzf >/dev/null 2>&1; then
     else
         antigen bundle fzf
 
-        export FZF_TAB_SHOW_GROUP=brief # Hide group names
         antigen bundle Aloxaf/fzf-tab
+        export FZF_TAB_SHOW_GROUP=brief # Hide group names
 
         antigen bundle andrewferrier/fzf-z
+        export FZFZ_PREVIEW_COMMAND='tree -NC -L 2 -x --noreport --dirsfirst {}'
     fi
 
     export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --hidden --files || find ."
