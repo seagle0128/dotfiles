@@ -57,20 +57,25 @@ elif [[ $OSTYPE == linux* ]]; then
     fi
 fi
 
+# Load FD
+command -v fd >/dev/null 2>&1 && antigen bundle fd
+
 # Load FZF
 if command -v fzf >/dev/null 2>&1; then
     if [[ $OSTYPE == cygwin* ]]; then
         [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh;
     else
         antigen bundle fzf
+        # antigen bundle zsh-interactive-cd
+        antigen bundle Aloxaf/fzf-tab
         antigen bundle andrewferrier/fzf-z
     fi
 
     export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --hidden --files || find ."
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-    export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
-    export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+    export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || cat {} || tree -NC {}) 2> /dev/null | head -200'"
+    export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --exact"
+    export FZF_ALT_C_OPTS="--preview 'tree -NC {} | head -200'"
 fi
 
 # antigen bundle zsh-users/zsh-completions
@@ -101,7 +106,7 @@ unalias fd
 alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
 alias h='history'
 alias c='clear'
-alias rt='trash'                # `brew install trash` or `npm install --global trash-cli`
+alias ip="curl -i http://ip.taobao.com/service/getIpInfo.php\?ip\=myip"
 
 alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
