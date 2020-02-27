@@ -26,6 +26,7 @@ antigen use oh-my-zsh
 # Bundles from the default repo (robbyrussell's oh-my-zsh)
 antigen bundle colored-man-pages
 antigen bundle common-aliases
+antigen bundle cp
 antigen bundle extract
 antigen bundle fancy-ctrl-z
 antigen bundle git
