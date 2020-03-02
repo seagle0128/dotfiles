@@ -101,7 +101,9 @@ source $DOTFILES/completion.zsh
 #
 # Aliases
 #
-unalias fd
+
+# Unalias the original fd in oh-my-zsh
+alias fd >/dev/null && unalias fd
 
 # General
 alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
