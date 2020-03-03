@@ -79,12 +79,12 @@ if command -v fzf >/dev/null 2>&1; then
     export FZF_ALT_C_OPTS="--preview 'tree -NC {} | head -200'"
 fi
 
+antigen bundle hlissner/zsh-autopair
 # antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zdharma/fast-syntax-highlighting
-# antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle hlissner/zsh-autopair
+# antigen bundle zdharma/fast-syntax-highlighting
+antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
 antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
