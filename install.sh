@@ -376,6 +376,7 @@ else
             sync_repo junegunn/fzf $FZF
         fi
         # [ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null
+    fi
 fi
 
 # Entering zsh
