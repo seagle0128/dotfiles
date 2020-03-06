@@ -107,6 +107,15 @@ sync_arch_package() {
     sudo pacman -S --noconfirm ${1} >/dev/null
 }
 
+sync_aur_package() {
+    if ! command -v yay >/dev/null 2>&1; then
+        echo "${RED}Error: yay is not installed${NORMAL}" >&2
+        return 1
+    fi
+
+    yay -S --noconfirm ${1} >/dev/null
+}
+
 # Clean all configurations
 clean_dotfiles() {
     confs="
@@ -182,11 +191,11 @@ printf "${BLUE} ➜  Installing Antigen...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
     sync_brew_package antigen
 else
-    if command -v apt-get >/dev/null 2>&1; then
+    if command -v yay >/dev/null 2>&1; then
+        sync_aur_package antigen-git
+    elif command -v apt-get >/dev/null 2>&1; then
         # sync_apt_package zsh-antigen
         sudo mkdir -p /usr/share/zsh-antigen && sudo curl -o /usr/share/zsh-antigen/antigen.zsh -sL git.io/antigen
-    elif command -v yaourt >/dev/null 2>&1; then
-        yaourt -S --noconfirm antigen-git
     else
         mkdir -p $ZSH
         curl -fsSL git.io/antigen > $ZSH/antigen.zsh.tmp && mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
@@ -240,30 +249,34 @@ ln -sf $TMUX/.tmux.conf $HOME/.tmux.conf
 printf "${BLUE} ➜  Installing ripgrep (rg)...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
     sync_brew_package ripgrep
-elif [ "$SYSTEM" = "Linux" ] && [ "`uname -m`" = "x86_64" ] && command -v dpkg >/dev/null 2>&1; then
-    # sync_apt_package ripgrep
+elif [ "$SYSTEM" = "Linux" ]; then
+    if command -v yay >/dev/null 2>&1; then
+        sync_aur_package ripgrep
+        # elif command -v apt-get >/dev/null 2>&1; then
+        # sync_apt_package ripgrep
+    elif [ "`uname -m`" = "x86_64" ]; then
+        # Only support Linux x64 binary
+        RG_UPDATE=1
+        RG_RELEASE_URL="https://github.com/BurntSushi/ripgrep/releases"
+        RG_VERSION_PATTERN='[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
 
-    # Only support Linux x64 binary
-    RG_UPDATE=1
-    RG_RELEASE_URL="https://github.com/BurntSushi/ripgrep/releases"
-    RG_VERSION_PATTERN='[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
+        RG_RELEASE_TAG=$(curl -fs "${RG_RELEASE_URL}/latest" | grep -oE $RG_VERSION_PATTERN)
 
-    RG_RELEASE_TAG=$(curl -fs "${RG_RELEASE_URL}/latest" | grep -oE $RG_VERSION_PATTERN)
+        if command -v rg >/dev/null 2>&1; then
+            RG_UPDATE=0
 
-    if command -v rg >/dev/null 2>&1; then
-        RG_UPDATE=0
-
-        RG_VERSION=$(rg --version | grep -oE $RG_VERSION_PATTERN)
-        if [ "$RG_VERSION" != "$RG_RELEASE_TAG" ]; then
-            RG_UPDATE=1
+            RG_VERSION=$(rg --version | grep -oE $RG_VERSION_PATTERN)
+            if [ "$RG_VERSION" != "$RG_RELEASE_TAG" ]; then
+                RG_UPDATE=1
+            fi
         fi
-    fi
 
-    if [ $RG_UPDATE -eq 1 ]; then
-        RG_PACKAGE=ripgrep_${RG_RELEASE_TAG}_amd64.deb
-        curl -LO ${RG_RELEASE_URL}/download/${RG_RELEASE_TAG}/${RG_PACKAGE} &&
-            sudo dpkg -i ${RG_PACKAGE}
-        rm -f ${RG_PACKAGE}
+        if [ $RG_UPDATE -eq 1 ]; then
+            RG_PACKAGE=ripgrep_${RG_RELEASE_TAG}_amd64.deb
+            curl -LO ${RG_RELEASE_URL}/download/${RG_RELEASE_TAG}/${RG_PACKAGE} &&
+                sudo dpkg -i ${RG_PACKAGE}
+            rm -f ${RG_PACKAGE}
+        fi
     fi
 fi
 
@@ -271,37 +284,42 @@ fi
 printf "${BLUE} ➜  Installing BAT...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
     sync_brew_package bat
-elif [ "$SYSTEM" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
-    # sync_apt_package bat
+elif [ "$SYSTEM" = "Linux" ]; then
 
-    # Only support Linux x64 binary
-    BAT_UPDATE=1
-    BAT_RELEASE_URL="https://github.com/sharkdp/bat/releases"
-    BAT_VERSION_PATTERN='[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
+    if command -v yay >/dev/null 2>&1; then
+        sync_aur_package bat
+        # elif command -v apt-get >/dev/null 2>&1; then
+        # sync_apt_package bat
+    elif [ "`uname -m`" = "x86_64" ]; then
+        # Only support Linux x64 binary
+        BAT_UPDATE=1
+        BAT_RELEASE_URL="https://github.com/sharkdp/bat/releases"
+        BAT_VERSION_PATTERN='[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
 
-    BAT_RELEASE_TAG=$(curl -fs "${BAT_RELEASE_URL}/latest" | grep -oE $BAT_VERSION_PATTERN)
+        BAT_RELEASE_TAG=$(curl -fs "${BAT_RELEASE_URL}/latest" | grep -oE $BAT_VERSION_PATTERN)
 
-    if command -v fd >/dev/null 2>&1; then
-        BAT_UPDATE=0
+        if command -v fd >/dev/null 2>&1; then
+            BAT_UPDATE=0
 
-        BAT_VERSION=$(fd --version | grep -oE $BAT_VERSION_PATTERN)
-        if [ "$BAT_VERSION" != "$BAT_RELEASE_TAG" ]; then
-            BAT_UPDATE=1
+            BAT_VERSION=$(fd --version | grep -oE $BAT_VERSION_PATTERN)
+            if [ "$BAT_VERSION" != "$BAT_RELEASE_TAG" ]; then
+                BAT_UPDATE=1
+            fi
         fi
-    fi
 
-    if [ $BAT_UPDATE -eq 1 ]; then
-        BAT_NAME=bat-v${BAT_RELEASE_TAG}-x86_64-unknown-linux-gnu
-        BAT_PACKAGE=${BAT_NAME}.tar.gz
+        if [ $BAT_UPDATE -eq 1 ]; then
+            BAT_NAME=bat-v${BAT_RELEASE_TAG}-x86_64-unknown-linux-gnu
+            BAT_PACKAGE=${BAT_NAME}.tar.gz
 
-        curl -LO ${BAT_RELEASE_URL}/download/v${BAT_RELEASE_TAG}/${BAT_PACKAGE} &&
-            tar zxvf $BAT_PACKAGE >/dev/null 2>&1 &&
-            cp ${BAT_NAME}/bat /usr/local/bin/bat &&
-            cp ${BAT_NAME}/bat.1 /usr/local/bin/bat.1 &&
-            chmod +x /usr/local/bin/bat
+            curl -LO ${BAT_RELEASE_URL}/download/v${BAT_RELEASE_TAG}/${BAT_PACKAGE} &&
+                tar zxvf $BAT_PACKAGE >/dev/null 2>&1 &&
+                cp ${BAT_NAME}/bat /usr/local/bin/bat &&
+                cp ${BAT_NAME}/bat.1 /usr/local/bin/bat.1 &&
+                chmod +x /usr/local/bin/bat
 
-        rm -f ${BAT_PACKAGE}
-        rm -rf ${BAT_NAME}
+            rm -f ${BAT_PACKAGE}
+            rm -rf ${BAT_NAME}
+        fi
     fi
 fi
 
@@ -309,30 +327,34 @@ fi
 printf "${BLUE} ➜  Installing FD...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ]; then
     sync_brew_package fd
-elif [ "$SYSTEM" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
-    # sync_apt_package fd-find
+elif [ "$SYSTEM" = "Linux" ]; then
+    if command -v yay >/dev/null 2>&1; then
+        sync_aur_package fd
+        # elif command -v apt-get >/dev/null 2>&1; then
+        # sync_apt_package fd-find
+    elif [ "`uname -m`" = "x86_64" ]; then
+        # Only support Linux x64 binary
+        FD_UPDATE=1
+        FD_RELEASE_URL="https://github.com/sharkdp/fd/releases"
+        FD_VERSION_PATTERN='[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
 
-    # Only support Linux x64 binary
-    FD_UPDATE=1
-    FD_RELEASE_URL="https://github.com/sharkdp/fd/releases"
-    FD_VERSION_PATTERN='[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
+        FD_RELEASE_TAG=$(curl -fs "${FD_RELEASE_URL}/latest" | grep -oE $FD_VERSION_PATTERN)
 
-    FD_RELEASE_TAG=$(curl -fs "${FD_RELEASE_URL}/latest" | grep -oE $FD_VERSION_PATTERN)
+        if command -v fd >/dev/null 2>&1; then
+            FD_UPDATE=0
 
-    if command -v fd >/dev/null 2>&1; then
-        FD_UPDATE=0
-
-        FD_VERSION=$(fd --version | grep -oE $FD_VERSION_PATTERN)
-        if [ "$FD_VERSION" != "$FD_RELEASE_TAG" ]; then
-            FD_UPDATE=1
+            FD_VERSION=$(fd --version | grep -oE $FD_VERSION_PATTERN)
+            if [ "$FD_VERSION" != "$FD_RELEASE_TAG" ]; then
+                FD_UPDATE=1
+            fi
         fi
-    fi
 
-    if [ $FD_UPDATE -eq 1 ]; then
-        FD_PACKAGE=fd_${FD_RELEASE_TAG}_amd64.deb
-        curl -LO ${FD_RELEASE_URL}/download/v${FD_RELEASE_TAG}/${FD_PACKAGE} &&
-            sudo dpkg -i ${FD_PACKAGE}
-        rm -f ${FD_PACKAGE}
+        if [ $FD_UPDATE -eq 1 ]; then
+            FD_PACKAGE=fd_${FD_RELEASE_TAG}_amd64.deb
+            curl -LO ${FD_RELEASE_URL}/download/v${FD_RELEASE_TAG}/${FD_PACKAGE} &&
+                sudo dpkg -i ${FD_PACKAGE}
+            rm -f ${FD_PACKAGE}
+        fi
     fi
 fi
 
@@ -345,10 +367,15 @@ if [ "$OSTYPE" = "cygwin" ]; then
 else
     if [ "$SYSTEM" = "Darwin" ]; then
         sync_brew_package fzf
-    elif [ "$SYSTEM" = "Linux" ] && command -v apt-get >/dev/null 2>&1; then
-        sync_repo junegunn/fzf $FZF
-    fi
-    # [ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null
+    elif [ "$SYSTEM" = "Linux" ]; then
+        if command -v yay >/dev/null 2>&1; then
+            sync_aur_package fzf
+            # elif command -v apt-get >/dev/null 2>&1; then
+            #     sync_apt_package fzf
+        else
+            sync_repo junegunn/fzf $FZF
+        fi
+        # [ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null
 fi
 
 # Entering zsh
