@@ -11,11 +11,11 @@ packages=(
     # zsh
     emacs
     neofetch                    # screenfetch
+    bat
     fd
     fzf
-    peco
     ripgrep
-    shadowsocks-qt5
+    # shadowsocks-qt5
 
     npm
     python-pip

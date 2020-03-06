@@ -12,8 +12,10 @@ FZF=$HOME/.fzf
 TMUX=$HOME/.tmux
 ZSH=$HOME/.antigen
 
-# Get OS name
-SYSTEM=`uname -s`
+# Get OS informatio
+OS=`uname -s`
+OSREV=`uname -r`
+OSARCH=`uname -m`
 
 # Only enable exit-on-error after the non-critical colorization stuff,
 # which may fail on systems lacking tput or terminfo
@@ -70,9 +72,32 @@ sync_repo() {
     fi
 }
 
+is_mac()
+{
+    [ "$OS" = "Darwin" ]
+}
+
+is_cygwin()
+{
+    [ "$OSTYPE" = "cygwin" ]
+}
+
+is_linux()
+{
+    [ "$OS" = "Linux" ]
+}
+
+is_debian() {
+    command -v apt >/dev/null 2>&1 || command -v apt-get >/dev/null 2>&1
+}
+
+is_arch() {
+    command -v yay >/dev/null 2>&1 || command -v pacman >/dev/null 2>&1
+}
+
 sync_brew_package() {
     if ! command -v brew >/dev/null 2>&1; then
-        echo "${RED}Error: brew is not installed${NORMAL}" >&2
+        echo "${RED}Error: brew is not found${NORMAL}" >&2
         return 1
     fi
 
@@ -85,35 +110,24 @@ sync_brew_package() {
 
 sync_apt_package() {
     if command -v apt >/dev/null 2>&1; then
-        APT=apt
+        sudo apt upgrade -y ${1} >/dev/null
     elif command -v apt-get >/dev/null 2>&1; then
-        APT=apt-get
+        sudo apt-get upgrade -y ${1} >/dev/null
     else
-        echo "${RED}Error: unable to find apt or apt-get${NORMAL}" >&2
+        echo "${RED}Error: apt and apt-get are not found${NORMAL}" >&2
         return 1
-    fi
-
-    if [ ! -z "$APT" ]; then
-        sudo $APT upgrade -y ${1} >/dev/null
     fi
 }
 
 sync_arch_package() {
-    if ! command -v pacman >/dev/null 2>&1; then
-        echo "${RED}Error: pacman is not installed${NORMAL}" >&2
+    if command -v yay >/dev/null 2>&1; then
+        yay -Su --noconfirm ${1} >/dev/null
+    elif command -v pacman >/dev/null 2>&1; then
+        sudo pacman -Su --noconfirm ${1} >/dev/null
+    else
+        echo "${RED}Error: pacman and yay are not found${NORMAL}" >&2
         return 1
     fi
-
-    sudo pacman -S --noconfirm ${1} >/dev/null
-}
-
-sync_aur_package() {
-    if ! command -v yay >/dev/null 2>&1; then
-        echo "${RED}Error: yay is not installed${NORMAL}" >&2
-        return 1
-    fi
-
-    yay -S --noconfirm ${1} >/dev/null
 }
 
 # Clean all configurations
@@ -163,7 +177,7 @@ if [ -d $ZSH ] || [ -d $TMUX ] || [ -d ~$FZF ] || [ -d $EMACSD ]; then
 fi
 
 # Brew
-if [ "$SYSTEM" = "Darwin" ]; then
+if is_mac; then
     printf "${BLUE} ➜  Installing Homebrew...${NORMAL}\n"
     if ! command -v brew >/dev/null 2>&1; then
         # Install homebrew
@@ -177,7 +191,7 @@ if [ "$SYSTEM" = "Darwin" ]; then
 fi
 
 # Apt-Cyg
-if [ "$OSTYPE" = "cygwin" ]; then
+if is_cygwin; then
     printf "${BLUE} ➜  Installing Apt-Cyg...${NORMAL}\n"
     if ! command -v apt-cyg >/dev/null 2>&1; then
         APT_CYG=/usr/local/bin/apt-cyg
@@ -188,12 +202,12 @@ fi
 
 # Antigen: the plugin manager for zsh
 printf "${BLUE} ➜  Installing Antigen...${NORMAL}\n"
-if [ "$SYSTEM" = "Darwin" ]; then
+if is_mac; then
     sync_brew_package antigen
 else
-    if command -v yay >/dev/null 2>&1; then
-        sync_aur_package antigen-git
-    elif command -v apt-get >/dev/null 2>&1; then
+    if is_arch; then
+        sync_arch_package antigen-git
+    elif is_debian; then
         # sync_apt_package zsh-antigen
         sudo mkdir -p /usr/share/zsh-antigen && sudo curl -o /usr/share/zsh-antigen/antigen.zsh -sL git.io/antigen
     else
@@ -224,15 +238,15 @@ mkdir -p $HOME/.pip; cp -n $DOTFILES/.pip.conf $HOME/.pip/pip.conf
 
 ln -sf $DOTFILES/.gitignore_global $HOME/.gitignore_global
 ln -sf $DOTFILES/.gitconfig_global $HOME/.gitconfig_global
-if [ "$SYSTEM" = "Darwin" ]; then
+if is_mac; then
     cp -n $DOTFILES/.gitconfig_macOS $HOME/.gitconfig
-elif [ "$OSTYPE" = "cygwin" ]; then
+elif is_cygwin; then
     cp -n $DOTFILES/.gitconfig_cygwin $HOME/.gitconfig
 else
     cp -n $DOTFILES/.gitconfig_linux $HOME/.gitconfig
 fi
 
-if [ "$OSTYPE" = "cygwin" ]; then
+if is_cygwin; then
     ln -sf $DOTFILES/.minttyrc $HOME/.minttyrc
 fi
 
@@ -247,14 +261,14 @@ ln -sf $TMUX/.tmux.conf $HOME/.tmux.conf
 
 # Ripgrep
 printf "${BLUE} ➜  Installing ripgrep (rg)...${NORMAL}\n"
-if [ "$SYSTEM" = "Darwin" ]; then
+if is_mac; then
     sync_brew_package ripgrep
-elif [ "$SYSTEM" = "Linux" ]; then
-    if command -v yay >/dev/null 2>&1; then
-        sync_aur_package ripgrep
-        # elif command -v apt-get >/dev/null 2>&1; then
+elif is_linux; then
+    if is_arch; then
+        sync_arch_package ripgrep
+        # elif is_debian; then
         # sync_apt_package ripgrep
-    elif [ "`uname -m`" = "x86_64" ]; then
+    elif [ "$OSARCH" = "x86_64" ]; then
         # Only support Linux x64 binary
         RG_UPDATE=1
         RG_RELEASE_URL="https://github.com/BurntSushi/ripgrep/releases"
@@ -282,15 +296,15 @@ fi
 
 # BAT
 printf "${BLUE} ➜  Installing BAT...${NORMAL}\n"
-if [ "$SYSTEM" = "Darwin" ]; then
+if is_mac; then
     sync_brew_package bat
-elif [ "$SYSTEM" = "Linux" ]; then
+elif is_linux; then
 
-    if command -v yay >/dev/null 2>&1; then
-        sync_aur_package bat
-        # elif command -v apt-get >/dev/null 2>&1; then
+    if is_arch; then
+        sync_arch_package bat
+        # elif is_debian; then
         # sync_apt_package bat
-    elif [ "`uname -m`" = "x86_64" ]; then
+    elif [ "$OSARCH" = "x86_64" ]; then
         # Only support Linux x64 binary
         BAT_UPDATE=1
         BAT_RELEASE_URL="https://github.com/sharkdp/bat/releases"
@@ -325,14 +339,14 @@ fi
 
 # FD
 printf "${BLUE} ➜  Installing FD...${NORMAL}\n"
-if [ "$SYSTEM" = "Darwin" ]; then
+if is_mac; then
     sync_brew_package fd
-elif [ "$SYSTEM" = "Linux" ]; then
-    if command -v yay >/dev/null 2>&1; then
-        sync_aur_package fd
-        # elif command -v apt-get >/dev/null 2>&1; then
+elif is_linux; then
+    if is_arch; then
+        sync_arch_package fd
+        # elif is_debian; then
         # sync_apt_package fd-find
-    elif [ "`uname -m`" = "x86_64" ]; then
+    elif [ "$OSARCH" = "x86_64" ]; then
         # Only support Linux x64 binary
         FD_UPDATE=1
         FD_RELEASE_URL="https://github.com/sharkdp/fd/releases"
@@ -360,16 +374,16 @@ fi
 
 # FZF
 printf "${BLUE} ➜  Installing FZF...${NORMAL}\n"
-if [ "$OSTYPE" = "cygwin" ]; then
+if is_cygwin; then
     if ! command -v fzf >/dev/null 2>&1 && command -v apt-cyg >/dev/null 2>&1; then
         apt-cyg install fzf fzf-zsh fzf-zsh-completion
     fi
 else
-    if [ "$SYSTEM" = "Darwin" ]; then
+    if is_mac; then
         sync_brew_package fzf
-    elif [ "$SYSTEM" = "Linux" ]; then
-        if command -v yay >/dev/null 2>&1; then
-            sync_aur_package fzf
+    elif is_linux; then
+        if is_arch; then
+            sync_arch_package fzf
             # elif command -v apt-get >/dev/null 2>&1; then
             #     sync_apt_package fzf
         else
