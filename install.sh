@@ -121,9 +121,9 @@ sync_apt_package() {
 
 sync_arch_package() {
     if command -v yay >/dev/null 2>&1; then
-        yay -Su --noconfirm ${1} >/dev/null
+        yay -Ssu --noconfirm ${1} >/dev/null
     elif command -v pacman >/dev/null 2>&1; then
-        sudo pacman -Su --noconfirm ${1} >/dev/null
+        sudo pacman -Ssu --noconfirm ${1} >/dev/null
     else
         echo "${RED}Error: pacman and yay are not found${NORMAL}" >&2
         return 1
