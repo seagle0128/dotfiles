@@ -327,9 +327,9 @@ elif is_linux; then
 
             curl -LO ${BAT_RELEASE_URL}/download/v${BAT_RELEASE_TAG}/${BAT_PACKAGE} &&
                 tar zxvf $BAT_PACKAGE >/dev/null 2>&1 &&
-                cp ${BAT_NAME}/bat /usr/local/bin/bat &&
-                cp ${BAT_NAME}/bat.1 /usr/local/bin/bat.1 &&
-                chmod +x /usr/local/bin/bat
+                sudo cp ${BAT_NAME}/bat /usr/local/bin/bat &&
+                sudo cp ${BAT_NAME}/bat.1 /usr/local/bin/bat.1 &&
+                sudo chmod +x /usr/local/bin/bat
 
             rm -f ${BAT_PACKAGE}
             rm -rf ${BAT_NAME}
