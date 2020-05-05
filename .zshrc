@@ -136,7 +136,7 @@ alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh; upgrade_oh_my_tmux; upgrade_oh_my_zsh'
 
 alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update
-alias upgrade_gem='sudo gem update && sudo gem cleanup'
+alias upgrade_gem='gem update && sudo gem cleanup'
 alias upgrade_go='$DOTFILES/install_go.sh'
 alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2); do npm -g install "$package"; done'
 alias upgrade_pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
