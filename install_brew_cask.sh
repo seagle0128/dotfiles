@@ -89,12 +89,11 @@ function check {
     if ! command -v brew >/dev/null 2>&1; then
         printf "${BLUE} ➜  Installing Homebrew and Cask...${NORMAL}\n"
 
+        xcode-select --install
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
         brew tap caskroom/cask
         brew tap caskroom/fonts
-        cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask
-        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
     fi
 }
 
