@@ -36,10 +36,10 @@ if command -v go >/dev/null 2>&1; then
     go get -u github.com/sourcegraph/go-langserver
 fi
 
-if command -v pip >/dev/null 2>&1; then
-    printf "${BLUE} ➜  Installing Python language server...${NORMAL}\n"
-    pip install python-language-server
-fi
+# if command -v pip >/dev/null 2>&1; then
+#     printf "${BLUE} ➜  Installing Python language server...${NORMAL}\n"
+#     pip install python-language-server
+# fi
 
 if command -v pip >/dev/null 2>&1; then
     printf "${BLUE} ➜  Installing Ruby language server...${NORMAL}\n"

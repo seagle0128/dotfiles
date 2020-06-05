@@ -13,14 +13,14 @@ apps=(
     fliqlo        # Screen Saver
     hyperswitch
     iterm2
-    keepingyouawake
+    # keepingyouawake
     keycastr        # Show keys on the screen
     licecap         # Recording screen as gif
     mounty          # Mounty for NTFS read/write
     mos             # Smooth and reverse scroll. Alternative: scroll-reverser
     v2rayx          # shadowsocksx-ng
-    # shiftit         # Window management. Alternative: spectacle
-    # vanilla         # Hide menu bar icons. Alternative: bartender
+    spectacle       # Window management. Alternative: shiftit
+    vanilla         # Hide menu bar icons. Alternative: bartender
 
     iina            # Media player
     google-chrome   # Browser. Alternative: firefox, microsoft-edge
@@ -94,6 +94,7 @@ function check {
 
         brew tap caskroom/cask
         brew tap caskroom/fonts
+        brew tap buo/cask-upgrade
     fi
 }
 
