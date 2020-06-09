@@ -113,6 +113,8 @@ alias ip="curl -i http://ip.taobao.com/service/getIpInfo.php\?ip\=myip"
 
 alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
+command -v bat >/dev/null 2>&1 && alias cat='bat'
+
 if [[ $OSTYPE == darwin* ]]; then
     command -v gls >/dev/null 2>&1 && alias ls='gls --color=tty --group-directories-first'
 else
@@ -150,3 +152,5 @@ elif [[ $OSTYPE == linux* ]]; then
 else
     alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh.tmp && mv $ANTIGEN/antigen.zsh.tmp $ANTIGEN/antigen.zsh'
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
