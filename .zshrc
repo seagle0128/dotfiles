@@ -83,8 +83,8 @@ antigen bundle hlissner/zsh-autopair
 # antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-history-substring-search
-# antigen bundle zdharma/fast-syntax-highlighting
-antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zdharma/fast-syntax-highlighting
+# antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
 antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
