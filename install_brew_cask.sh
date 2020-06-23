@@ -19,8 +19,8 @@ apps=(
     mounty          # Mounty for NTFS read/write
     mos             # Smooth and reverse scroll. Alternative: scroll-reverser
     v2rayx          # shadowsocksx-ng
-    spectacle       # Window management. Alternative: shiftit
-    vanilla         # Hide menu bar icons. Alternative: bartender
+    rectangle       # Window management
+    # vanilla         # Hide menu bar icons. Alternative: bartender
 
     iina            # Media player
     google-chrome   # Browser. Alternative: firefox, microsoft-edge
@@ -50,7 +50,7 @@ apps=(
     aliwangwang
     motrix          # aria2gui
     baidunetdisk
-    macgesture
+    # macgesture
     neteasemusic
     # skype-for-business
     thunder
