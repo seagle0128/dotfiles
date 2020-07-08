@@ -143,6 +143,7 @@ alias upgrade_gem='gem update && gem cleanup'
 alias upgrade_go='$DOTFILES/install_go.sh'
 alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2); do npm -g install "$package"; done'
 alias upgrade_pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
+alias upgrade_pip3="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
 
 if [[ $OSTYPE == darwin* ]]; then
     command -v brew >/dev/null 2>&1 && alias upgrade_antigen='brew upgrade antigen'
