@@ -208,8 +208,8 @@ else
     if is_arch; then
         sync_arch_package antigen-git
     elif is_debian; then
-        # sync_apt_package zsh-antigen
-        sudo mkdir -p /usr/share/zsh-antigen && sudo curl -o /usr/share/zsh-antigen/antigen.zsh -sL git.io/antigen
+        sync_apt_package zsh-antigen
+        # sudo mkdir -p /usr/share/zsh-antigen && sudo curl -o /usr/share/zsh-antigen/antigen.zsh -sL git.io/antigen
     else
         mkdir -p $ZSH
         curl -fsSL git.io/antigen > $ZSH/antigen.zsh.tmp && mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
@@ -266,6 +266,7 @@ if is_mac; then
 elif is_linux; then
     if is_arch; then
         sync_arch_package ripgrep
+        # FIXME: @See https://github.com/BurntSushi/ripgrep/issues/1562
         # elif is_debian; then
         # sync_apt_package ripgrep
     elif [ "$OSARCH" = "x86_64" ]; then
@@ -302,8 +303,8 @@ elif is_linux; then
 
     if is_arch; then
         sync_arch_package bat
-        # elif is_debian; then
-        # sync_apt_package bat
+    elif is_debian; then
+        sync_apt_package bat
     elif [ "$OSARCH" = "x86_64" ]; then
         # Only support Linux x64 binary
         BAT_UPDATE=1
@@ -344,8 +345,8 @@ if is_mac; then
 elif is_linux; then
     if is_arch; then
         sync_arch_package fd
-        # elif is_debian; then
-        # sync_apt_package fd-find
+    elif is_debian; then
+        sync_apt_package fd-find
     elif [ "$OSARCH" = "x86_64" ]; then
         # Only support Linux x64 binary
         FD_UPDATE=1
@@ -384,8 +385,8 @@ else
     elif is_linux; then
         if is_arch; then
             sync_arch_package fzf
-            # elif command -v apt-get >/dev/null 2>&1; then
-            #     sync_apt_package fzf
+        elif command -v apt-get >/dev/null 2>&1; then
+            sync_apt_package fzf
         else
             sync_repo junegunn/fzf $FZF
         fi
