@@ -264,9 +264,10 @@ if is_mac; then
 elif is_linux; then
     if is_arch; then
         sync_arch_package ripgrep
+    elif is_debian; then
         # FIXME: @See https://github.com/BurntSushi/ripgrep/issues/1562
-        # elif is_debian; then
         # sync_apt_package ripgrep
+        apt-get download ripgrep && sudo dpkg --force-overwrite -i ripgrep*.deb && rm -f ripgrep*.deb
     elif [ "$OSARCH" = "x86_64" ]; then
         # Only support Linux x64 binary
         RG_UPDATE=1
