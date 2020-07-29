@@ -88,7 +88,7 @@ is_linux()
 }
 
 is_debian() {
-    command -v apt >/dev/null 2>&1 || command -v apt-get >/dev/null 2>&1
+    command -v apt-get >/dev/null 2>&1
 }
 
 is_arch() {
