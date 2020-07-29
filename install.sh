@@ -109,9 +109,7 @@ sync_brew_package() {
 }
 
 sync_apt_package() {
-    if command -v apt >/dev/null 2>&1; then
-        sudo apt upgrade -y ${1} >/dev/null
-    elif command -v apt-get >/dev/null 2>&1; then
+    if command -v apt-get >/dev/null 2>&1; then
         sudo apt-get upgrade -y ${1} >/dev/null
     else
         echo "${RED}Error: apt and apt-get are not found${NORMAL}" >&2
