@@ -5,6 +5,11 @@ if command -v neofetch >/dev/null 2>&1; then
     neofetch
 fi
 
+# iTerm2 shell integration
+if test -e "${HOME}/.iterm2_shell_integration.zsh"; then
+    source "${HOME}/.iterm2_shell_integration.zsh"
+fi
+
 # Plugins
 # antigen bundle docker
 # antigen bundle docker-compose
