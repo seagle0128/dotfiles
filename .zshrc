@@ -113,7 +113,7 @@ alias ip="curl -i http://ip.taobao.com/service/getIpInfo.php\?ip\=myip"
 
 alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
-command -v bat >/dev/null 2>&1 && alias cat='bat -p'
+command -v bat >/dev/null 2>&1 && alias cat='bat -p --wrap character'
 command -v htop >/dev/null 2>&1 && alias top='htop'
 
 if [[ $OSTYPE == darwin* ]]; then
