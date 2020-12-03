@@ -29,7 +29,7 @@ apps=(
     osxfuse
     veracrypt
     vox2            # Music player
-    sogouinput
+    sogouinput      # baiduinput
 
     # Audio
     # sound-siphon  # 2.0.2
@@ -101,12 +101,12 @@ function check {
 function install () {
     for app in ${apps[@]}; do
         printf "${BLUE} ➜  Installing ${app}...${NORMAL}\n"
-        brew cask install ${app}
+        brew install ${app}
     done
 }
 
 function cleanup {
-    brew cask cleanup
+    brew cleanup
 }
 
 function main {
