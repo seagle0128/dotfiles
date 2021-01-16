@@ -1,109 +1,138 @@
 # Zsh configuration
 
-ANTIGEN=$HOME/.antigen
+# vars
 DOTFILES=$HOME/.dotfiles
 
-# Configure Antigen
-declare -a ANTIGEN_CHECK_FILES
-ANTIGEN_CHECK_FILES=($HOME/.zshrc $HOME/.zshrc.local)
-
-# Load Antigen
-if [[ $OSTYPE == darwin* ]]; then
-    source /usr/local/share/antigen/antigen.zsh
-else
-    if command -v apt-get >/dev/null 2>&1; then
-        source /usr/share/zsh-antigen/antigen.zsh
-    elif command -v yaourt >/dev/null 2>&1; then
-        source /usr/share/zsh/share/antigen.zsh
-    else
-        source $ANTIGEN/antigen.zsh
-    fi
+# Two regular plugins loaded without investigating.
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+            print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-# Load the oh-my-zsh's library
-antigen use oh-my-zsh
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh)
-antigen bundle colored-man-pages
-antigen bundle common-aliases
-antigen bundle cp
-antigen bundle extract
-antigen bundle fancy-ctrl-z
-antigen bundle git
-antigen bundle gitfast
-antigen bundle sudo
-antigen bundle z
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+      zinit-zsh/z-a-rust \
+      zinit-zsh/z-a-as-monitor \
+      zinit-zsh/z-a-patch-dl \
+      zinit-zsh/z-a-bin-gem-node
 
-# Misc bundles.
-command -v python >/dev/null 2>&1 && antigen bundle djui/alias-tips
-command -v fdfind >/dev/null 2>&1 && alias fd='fdfind'
+### End of Zinit's installer chunk
+
+# Oh My Zsh
+zinit wait lucid for \
+      OMZL::git.zsh atload"unalias grv" OMZP::git \
+      OMZL::history.zsh \
+      OMZL::key-bindings.zsh
+
+zinit wait lucid for \
+      OMZP::common-aliases \
+      OMZP::colored-man-pages \
+      OMZP::cp \
+      OMZP::extract \
+      OMZP::fancy-ctrl-z \
+      OMZP::sudo
+
+zinit wait lucid for \
+      zsh-users/zsh-completions atload"zicompinit; zicdreplay" blockf \
+      zsh-users/zsh-autosuggestions \
+      zsh-users/zsh-history-substring-search
+
+# Completion enhancements
+zinit ice atinit"zicompinit; zicdreplay"
+zinit snippet $DOTFILES/completion.zsh
+
+zinit ice atinit"zicompinit; zicdreplay"
+zinit light zdharma/fast-syntax-highlighting
+
+zinit wait lucid for \
+      hlissner/zsh-autopair
+
+
+# Load the pure theme, with zsh-async library that's bundled with it.
+zinit ice pick"async.zsh" src"pure.zsh"
+zinit light sindresorhus/pure
+
+# Utilities
+zinit as"null" wait lucid from"gh-r" for \
+      mv"bat* -> bat" cp"bat/bat.1 -> $ZPFX/share/man/man1/" sbin"bat/bat" @sharkdp/bat \
+      mv"exa* -> exa" sbin ogham/exa \
+      mv"fd* -> fd" cp"fd/fd.1 -> $ZPFX/share/man/man1/" sbin"fd/fd" @sharkdp/fd \
+      mv"ripgrep* -> rg" sbin"rg/rg" BurntSushi/ripgrep \
+      mv"fzf* -> fzf" sbin junegunn/fzf
+
+# Load FZF
+
+# zinit ice from"gh-r" as"program"
+# zinit load junegunn/fzf
+
+if [[ $OSTYPE == cygwin* ]]; then
+    [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh;
+else
+    zinit wait lucid for \
+          OMZP::fzf \
+          urbainvaes/fzf-marks
+
+    zinit ice src"z.sh"
+    zinit light andrewferrier/fzf-z
+    export FZFZ_PREVIEW_COMMAND='tree -NC -L 2 -x --noreport --dirsfirst {}'
+fi
+
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --hidden --files || find ."
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || cat {} || tree -NC {}) 2> /dev/null | head -200'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --exact"
+export FZF_ALT_C_OPTS="--preview 'tree -NC {} | head -200'"
+
+# Scripts that are built at install (there's single default make target, "install",
+# and it constructs scripts by `cat'ing a few files). The make'' ice could also be:
+# `make"install PREFIX=$ZPFX"`, if "install" wouldn't be the only, default target.
+zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+zinit light tj/git-extras
+
+# For GNU ls (the binaries can be gls, gdircolors, e.g. on OS X when installing the
+# coreutils package from Homebrew; you can also use https://github.com/ogham/exa)
+zinit ice atclone"dircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
+zinit light trapd00r/LS_COLORS
 
 # OS bundles
 if [[ $OSTYPE == darwin* ]]; then
-    antigen bundle osx
-    if command -v brew >/dev/null 2>&1; then
+    # zinit snippet OMZP::osx
+    if (( $+commands[brew] )); then
         alias bu='brew update && brew upgrade'
         alias bcu='brew cu --all --yes --cleanup'
         alias bua='bu && bcu'
     fi
 elif [[ $OSTYPE == linux* ]]; then
-    if command -v apt-get >/dev/null 2>&1; then
-        antigen bundle ubuntu
+    if (( $+commands[apt-get] )); then
+        zinit snippet OMZP::ubuntu
         alias agua='aguu -y && agar -y && aga -y'
         alias kclean+='sudo aptitude remove -P "?and(~i~nlinux-(ima|hea),\
-                            ?not(?or(~n`uname -r | cut -d'\''-'\'' -f-2`,\
-                            ~nlinux-generic,\
-                            ~n(linux-(virtual|headers-virtual|headers-generic|image-virtual|image-generic|image-`dpkg --print-architecture`)))))"'
-    elif command -v pacman >/dev/null 2>&1; then
-        antigen bundle archlinux
+                                ?not(?or(~n`uname -r | cut -d'\''-'\'' -f-2`,\
+                                ~nlinux-generic,\
+                                ~n(linux-(virtual|headers-virtual|headers-generic|image-virtual|image-generic|image-`dpkg --print-architecture`)))))"'
+    elif (( $+commands[pacman] )); then
+        zinit snippet OMZP::archlinux
     fi
 fi
-
-# Load FD
-command -v fd >/dev/null 2>&1 && antigen bundle fd
-
-# Load FZF
-if command -v fzf >/dev/null 2>&1; then
-    if [[ $OSTYPE == cygwin* ]]; then
-        [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh;
-    else
-        antigen bundle fzf
-        antigen bundle andrewferrier/fzf-z
-        export FZFZ_PREVIEW_COMMAND='tree -NC -L 2 -x --noreport --dirsfirst {}'
-    fi
-
-    export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --hidden --files || find ."
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || cat {} || tree -NC {}) 2> /dev/null | head -200'"
-    export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --exact"
-    export FZF_ALT_C_OPTS="--preview 'tree -NC {} | head -200'"
-fi
-
-antigen bundle hlissner/zsh-autopair
-# antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-history-substring-search
-antigen bundle zdharma/fast-syntax-highlighting
-# antigen bundle zsh-users/zsh-syntax-highlighting
-
-# Load the theme.
-antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
 
 # Local customizations, e.g. theme, plugins, aliases, etc.
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
-
-# Tell Antigen that you're done
-antigen apply
-
-# Completion enhancements
-source $DOTFILES/completion.zsh
 
 #
 # Aliases
 #
 
 # Unalias the original fd in oh-my-zsh
-alias fd >/dev/null && unalias fd
+# alias fd >/dev/null && unalias fd
 
 # General
 alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
@@ -113,11 +142,11 @@ alias ip="curl -i http://ip.taobao.com/service/getIpInfo.php\?ip\=myip"
 
 alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
-command -v bat >/dev/null 2>&1 && alias cat='bat -p --wrap character'
-command -v htop >/dev/null 2>&1 && alias top='htop'
+(( $+commands[bat] )) && alias cat='bat -p --wrap character'
+(( $+commands[htop] )) && alias top='htop'
 
 if [[ $OSTYPE == darwin* ]]; then
-    command -v gls >/dev/null 2>&1 && alias ls='gls --color=tty --group-directories-first'
+    (( $+commands[gls] )) && alias ls='gls --color=tty --group-directories-first'
 else
     alias ls='ls --color=tty --group-directories-first'
 fi
@@ -144,13 +173,5 @@ alias upgrade_go='GO111MODULE=on && $DOTFILES/install_go.sh'
 alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2); do npm -g install "$package"; done'
 alias upgrade_pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias upgrade_pip3="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
-
-if [[ $OSTYPE == darwin* ]]; then
-    command -v brew >/dev/null 2>&1 && alias upgrade_antigen='brew upgrade antigen'
-    alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
-elif [[ $OSTYPE == linux* ]]; then
-    # (( $+commands[apt-get] )) && apug -y antigen
-    alias upgrade_antigen='sudo curl -o /usr/share/zsh-antigen/antigen.zsh -sL git.io/antigen'
-else
-    alias upgrade_antigen='curl -fsSL git.io/antigen > $ANTIGEN/antigen.zsh.tmp && mv $ANTIGEN/antigen.zsh.tmp $ANTIGEN/antigen.zsh'
-fi
+[[ $OSTYPE == darwin* ]] && alias upgrade_brew='/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'; alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
+alias upgrade_zinit='sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"'
