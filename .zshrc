@@ -44,7 +44,8 @@ zinit wait lucid for \
 zinit light-mode for \
       zsh-users/zsh-autosuggestions \
       zsh-users/zsh-history-substring-search \
-      hlissner/zsh-autopair
+      hlissner/zsh-autopair \
+      agkozak/zsh-z
 
 zinit ice wait lucid atinit"zicompinit; zicdreplay"
 zinit light zdharma/fast-syntax-highlighting
@@ -58,28 +59,33 @@ zinit snippet $DOTFILES/completion.zsh
 zinit ice pick"async.zsh" src"pure.zsh"
 zinit light sindresorhus/pure
 
+#
 # Utilities
+#
+
+# Scripts that are built at install (there's single default make target, "install",
+# and it constructs scripts by `cat'ing a few files). The make'' ice could also be:
+# `make"install PREFIX=$ZPFX"`, if "install" wouldn't be the only, default target.
+zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+zinit light tj/git-extras
+
 zinit as"null" wait lucid from"gh-r" for \
       mv"bat* -> bat" cp"bat/bat.1 -> $ZPFX/share/man/man1/" sbin"bat/bat" @sharkdp/bat \
       mv"exa* -> exa" sbin ogham/exa \
       mv"fd* -> fd" cp"fd/fd.1 -> $ZPFX/share/man/man1/" sbin"fd/fd" @sharkdp/fd \
-      mv"ripgrep* -> rg" sbin"rg/rg" BurntSushi/ripgrep \
+      mv"ripgrep* -> rg" cp"rg/doc/rg.1 -> $ZPFX/share/man/man1/" sbin"rg/rg" BurntSushi/ripgrep \
       mv"fzf* -> fzf" sbin junegunn/fzf
 
 # Load FZF
-
 # zinit ice from"gh-r" as"program"
 # zinit load junegunn/fzf
 
 if [[ $OSTYPE == cygwin* ]]; then
     [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh;
 else
-    zinit wait lucid for \
+    zinit light-mode for \
           OMZP::fzf \
           urbainvaes/fzf-marks
-
-    zinit ice src"z.sh"
-    zinit light andrewferrier/fzf-z
     export FZFZ_PREVIEW_COMMAND='tree -NC -L 2 -x --noreport --dirsfirst {}'
 fi
 
@@ -88,12 +94,6 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || cat {} || tree -NC {}) 2> /dev/null | head -200'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --exact"
 export FZF_ALT_C_OPTS="--preview 'tree -NC {} | head -200'"
-
-# Scripts that are built at install (there's single default make target, "install",
-# and it constructs scripts by `cat'ing a few files). The make'' ice could also be:
-# `make"install PREFIX=$ZPFX"`, if "install" wouldn't be the only, default target.
-zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
-zinit light tj/git-extras
 
 # For GNU ls (the binaries can be gls, gdircolors, e.g. on OS X when installing the
 # coreutils package from Homebrew; you can also use https://github.com/ogham/exa)
@@ -142,10 +142,14 @@ alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from 
 (( $+commands[bat] )) && alias cat='bat -p --wrap character'
 (( $+commands[htop] )) && alias top='htop'
 
-if [[ $OSTYPE == darwin* ]]; then
-    (( $+commands[gls] )) && alias ls='gls --color=tty --group-directories-first'
+if (( $+commands[exa] )); then
+    alias ls='exa --group-directories-first'
 else
-    alias ls='ls --color=tty --group-directories-first'
+    if [[ $OSTYPE == darwin* ]]; then
+        (( $+commands[gls] )) && alias ls='gls --color=tty --group-directories-first'
+    else
+        alias ls='ls --color=tty --group-directories-first'
+    fi
 fi
 
 # Emacs
