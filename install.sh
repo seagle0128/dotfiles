@@ -179,7 +179,7 @@ if is_mac; then
     printf "${BLUE} ➜  Installing Homebrew...${NORMAL}\n"
     if ! command -v brew >/dev/null 2>&1; then
         # Install homebrew
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
         # Tap cask and cask-upgrade
         brew tap homebrew/cask
