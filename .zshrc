@@ -41,21 +41,18 @@ zinit wait lucid for \
       OMZP::fancy-ctrl-z \
       OMZP::sudo
 
-zinit wait lucid for \
-      zsh-users/zsh-completions atload"zicompinit; zicdreplay" blockf \
+zinit light-mode for \
       zsh-users/zsh-autosuggestions \
-      zsh-users/zsh-history-substring-search
-
-# Completion enhancements
-zinit ice atinit"zicompinit; zicdreplay"
-zinit snippet $DOTFILES/completion.zsh
-
-zinit ice atinit"zicompinit; zicdreplay"
-zinit light zdharma/fast-syntax-highlighting
-
-zinit wait lucid for \
+      zsh-users/zsh-history-substring-search \
       hlissner/zsh-autopair
 
+zinit ice wait lucid atinit"zicompinit; zicdreplay"
+zinit light zdharma/fast-syntax-highlighting
+
+# Completion enhancements
+zinit ice wait lucid atload"zicompinit; zicdreplay" blockf
+zinit light zsh-users/zsh-completions
+zinit snippet $DOTFILES/completion.zsh
 
 # Load the pure theme, with zsh-async library that's bundled with it.
 zinit ice pick"async.zsh" src"pure.zsh"
