@@ -28,18 +28,15 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 # Oh My Zsh
-zinit wait lucid for \
-      OMZL::git.zsh atload"unalias grv" OMZP::git \
-      OMZL::history.zsh \
-      OMZL::key-bindings.zsh
+zinit snippet OMZL::history.zsh
+zinit snippet OMZL::key-bindings.zsh
 
-zinit wait lucid for \
-      OMZP::common-aliases \
-      OMZP::colored-man-pages \
-      OMZP::cp \
-      OMZP::extract \
-      OMZP::fancy-ctrl-z \
-      OMZP::sudo
+zinit snippet OMZP::common-aliases
+zinit snippet OMZP::colored-man-pages
+zinit snippet OMZP::cp
+zinit snippet OMZP::extract
+zinit snippet OMZP::fancy-ctrl-z
+zinit snippet OMZP::sudo
 
 zinit light-mode for \
       zsh-users/zsh-autosuggestions \
@@ -144,6 +141,7 @@ alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from 
 
 if (( $+commands[exa] )); then
     alias ls='exa --group-directories-first'
+    alias la='ls -laFh'
 else
     if [[ $OSTYPE == darwin* ]]; then
         (( $+commands[gls] )) && alias ls='gls --color=tty --group-directories-first'
