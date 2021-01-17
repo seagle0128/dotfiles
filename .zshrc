@@ -28,6 +28,8 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 # Oh My Zsh
+zinit snippet OMZL::key-bindings.zsh
+
 zinit wait lucid for \
       OMZL::correction.zsh \
       OMZL::directories.zsh \
@@ -41,10 +43,10 @@ zinit wait lucid for \
       OMZP::git \
       OMZP::sudo
 
-zinit snippet OMZL::key-bindings.zsh
-
 zinit light-mode for \
-      zsh-users/zsh-autosuggestions \
+      zsh-users/zsh-autosuggestions
+
+zinit wait lucid light-mode for \
       zsh-users/zsh-history-substring-search \
       hlissner/zsh-autopair \
       agkozak/zsh-z
