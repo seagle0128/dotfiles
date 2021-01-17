@@ -67,7 +67,7 @@ zinit light sindresorhus/pure
 zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 
-zinit as"null" wait lucid from"gh-r" for \
+zinit as"null" wait"1" lucid from"gh-r" for \
       mv"bat* -> bat" cp"bat/bat.1 -> $ZPFX/share/man/man1/" sbin"bat/bat" @sharkdp/bat \
       mv"exa* -> exa" sbin ogham/exa \
       mv"fd* -> fd" cp"fd/fd.1 -> $ZPFX/share/man/man1/" sbin"fd/fd" @sharkdp/fd \
@@ -100,7 +100,8 @@ zinit light trapd00r/LS_COLORS
 
 # OS bundles
 if [[ $OSTYPE == darwin* ]]; then
-    # zinit snippet OMZP::osx
+    zinit ice svn
+    zinit snippet OMZP::osx
     if (( $+commands[brew] )); then
         alias bu='brew update && brew upgrade'
         alias bcu='brew cu --all --yes --cleanup'
