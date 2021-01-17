@@ -67,26 +67,25 @@ zinit light sindresorhus/pure
 zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 
-zinit as"null" wait"1" lucid from"gh-r" for \
+zinit as"null" wait lucid from"gh-r" for \
       cp"**/bat.1 -> $ZPFX/share/man/man1/" sbin"**/bat" @sharkdp/bat \
-      sbin"exa" ogham/exa \
+      sbin"exa* -> exa" ogham/exa \
       cp"**/fd.1 -> $ZPFX/share/man/man1/" sbin"**/fd" @sharkdp/fd \
-      cp"**/doc/rg.1 -> $ZPFX/share/man/man1/" sbin"**/rg" BurntSushi/ripgrep \
-      sbin"fzf" junegunn/fzf
+      cp"**/doc/rg.1 -> $ZPFX/share/man/man1/" sbin"**/rg" BurntSushi/ripgrep
 
-# Load FZF
-# zinit ice from"gh-r" as"program"
-# zinit load junegunn/fzf
+# FZF
+zinit ice id-as"fzf-bin" as"program" wait lucid from"gh-r" sbin"fzf"
+zinit light junegunn/fzf
 
-if [[ $OSTYPE == cygwin* ]]; then
-    [ -f /etc/profile.d/fzf.zsh ] && source /etc/profile.d/fzf.zsh;
-else
-    zinit light-mode for \
-          OMZP::fzf \
-          urbainvaes/fzf-marks
-    export FZFZ_PREVIEW_COMMAND='tree -NC -L 2 -x --noreport --dirsfirst {}'
-fi
+zinit ice wait lucid depth"1" as"null" sbin"bin/fzf-tmux" \
+      cp"man/man.1/fzf* -> $ZPFX/share/man/man1" atpull'%atclone' \
+      src'shell/key-bindings.zsh'
+zinit light junegunn/fzf
 
+zinit ice wait lucid atload"zicompinit; zicdreplay" blockf
+zinit light Aloxaf/fzf-tab
+
+export FZFZ_PREVIEW_COMMAND='tree -NC -L 2 -x --noreport --dirsfirst {}'
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --hidden --files || find ."
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || cat {} || tree -NC {}) 2> /dev/null | head -200'"
