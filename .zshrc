@@ -68,11 +68,11 @@ zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 
 zinit as"null" wait"1" lucid from"gh-r" for \
-      mv"bat* -> bat" cp"bat/bat.1 -> $ZPFX/share/man/man1/" sbin"bat/bat" @sharkdp/bat \
-      mv"exa* -> exa" sbin ogham/exa \
-      mv"fd* -> fd" cp"fd/fd.1 -> $ZPFX/share/man/man1/" sbin"fd/fd" @sharkdp/fd \
-      mv"ripgrep* -> rg" cp"rg/doc/rg.1 -> $ZPFX/share/man/man1/" sbin"rg/rg" BurntSushi/ripgrep \
-      mv"fzf* -> fzf" sbin junegunn/fzf
+      cp"**/bat.1 -> $ZPFX/share/man/man1/" sbin"**/bat" @sharkdp/bat \
+      sbin"exa" ogham/exa \
+      cp"**/fd.1 -> $ZPFX/share/man/man1/" sbin"**/fd" @sharkdp/fd \
+      cp"**/doc/rg.1 -> $ZPFX/share/man/man1/" sbin"**/rg" BurntSushi/ripgrep \
+      sbin"fzf" junegunn/fzf
 
 # Load FZF
 # zinit ice from"gh-r" as"program"
