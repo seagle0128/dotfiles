@@ -29,7 +29,6 @@ zinit light-mode for \
 
 # Oh My Zsh
 zinit wait lucid for \
-      OMZL::git.zsh atload"unalias grv" OMZP::git \
       OMZL::correction.zsh \
       OMZL::directories.zsh \
       OMZL::history.zsh \
@@ -40,6 +39,7 @@ zinit wait lucid for \
       OMZP::cp \
       OMZP::extract \
       OMZP::fancy-ctrl-z \
+      OMZP::git \
       OMZP::sudo
 
 zinit light-mode for \
