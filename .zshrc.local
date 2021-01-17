@@ -1,7 +1,7 @@
 # Local configurations -*- mode: sh -*-
 
 # Show system information
-if command -v neofetch >/dev/null 2>&1; then
+if (( $+commands[neofetch] )); then
     neofetch
 fi
 
@@ -89,7 +89,7 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 # Golang
-if command -v go >/dev/null 2>&1; then
+if (( $+commands[go] )); then
     function gocomplete() {
         zinit snippet OMZP::golang
     }

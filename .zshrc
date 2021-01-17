@@ -57,6 +57,11 @@ zinit snippet $DOTFILES/completion.zsh
 zinit ice wait lucid atinit"zicompinit; zicdreplay"
 zinit light zdharma/fast-syntax-highlighting
 
+zinit ice wait lucid from'gh-r' as'program'
+zinit light sei40kr/fast-alias-tips-bin
+zinit ice wait lucid depth"1"
+zinit light sei40kr/zsh-fast-alias-tips
+
 # Load the pure theme, with zsh-async library that's bundled with it.
 zinit ice pick"async.zsh" src"pure.zsh"
 zinit light sindresorhus/pure
