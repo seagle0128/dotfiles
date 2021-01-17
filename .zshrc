@@ -109,7 +109,6 @@ alias fd >/dev/null && unalias fd
 alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
 alias h='history'
 alias c='clear'
-alias ip="curl -i http://ip.taobao.com/service/getIpInfo.php\?ip\=myip"
 
 alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
