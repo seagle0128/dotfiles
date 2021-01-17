@@ -28,15 +28,19 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 # Oh My Zsh
-zinit snippet OMZL::history.zsh
-zinit snippet OMZL::key-bindings.zsh
-
-zinit snippet OMZP::common-aliases
-zinit snippet OMZP::colored-man-pages
-zinit snippet OMZP::cp
-zinit snippet OMZP::extract
-zinit snippet OMZP::fancy-ctrl-z
-zinit snippet OMZP::sudo
+zinit wait lucid for \
+      OMZL::git.zsh atload"unalias grv" OMZP::git \
+      OMZL::correction.zsh \
+      OMZL::directories.zsh \
+      OMZL::history.zsh \
+      OMZL::key-bindings.zsh \
+      OMZL::theme-and-appearance.zsh \
+      OMZP::colored-man-pages \
+      OMZP::common-aliases \
+      OMZP::cp \
+      OMZP::extract \
+      OMZP::fancy-ctrl-z \
+      OMZP::sudo
 
 zinit light-mode for \
       zsh-users/zsh-autosuggestions \
