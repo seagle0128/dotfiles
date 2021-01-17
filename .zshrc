@@ -32,7 +32,6 @@ zinit wait lucid for \
       OMZL::correction.zsh \
       OMZL::directories.zsh \
       OMZL::history.zsh \
-      OMZL::key-bindings.zsh \
       OMZL::theme-and-appearance.zsh \
       OMZP::colored-man-pages \
       OMZP::common-aliases \
@@ -41,6 +40,8 @@ zinit wait lucid for \
       OMZP::fancy-ctrl-z \
       OMZP::git \
       OMZP::sudo
+
+zinit snippet OMZL::key-bindings.zsh
 
 zinit light-mode for \
       zsh-users/zsh-autosuggestions \
