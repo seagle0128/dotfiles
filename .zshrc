@@ -44,13 +44,14 @@ zinit light-mode for \
       hlissner/zsh-autopair \
       agkozak/zsh-z
 
+# Completion enhancements
+zinit ice wait lucid atload"zicompinit; zicdreplay" blockf
+zinit light zsh-users/zsh-completions
+zinit ice wait lucid atload"zicompinit; zicdreplay" blockf
+zinit snippet $DOTFILES/completion.zsh
+
 zinit ice wait lucid atinit"zicompinit; zicdreplay"
 zinit light zdharma/fast-syntax-highlighting
-
-# Completion enhancements
-zinit ice wait lucid atload"zicompinit; zicdreplay" blockf for \
-      zinit light zsh-users/zsh-completions \
-      zinit snippet $DOTFILES/completion.zsh
 
 # Load the pure theme, with zsh-async library that's bundled with it.
 zinit ice pick"async.zsh" src"pure.zsh"
