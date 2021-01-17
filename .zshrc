@@ -78,7 +78,7 @@ zinit light tj/git-extras
 
 zinit as"null" wait lucid from"gh-r" for \
       cp"**/bat.1 -> $ZPFX/share/man/man1/" sbin"**/bat" @sharkdp/bat \
-      sbin"exa* -> exa" ogham/exa \
+      atload"alias ls='exa --group-directories-first' alias la='ls -laFh'" sbin"exa* -> exa" ogham/exa \
       cp"**/fd.1 -> $ZPFX/share/man/man1/" sbin"**/fd" @sharkdp/fd \
       cp"**/doc/rg.1 -> $ZPFX/share/man/man1/" sbin"**/rg" BurntSushi/ripgrep
 
@@ -148,15 +148,10 @@ alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from 
 (( $+commands[bat] )) && alias cat='bat -p --wrap character'
 (( $+commands[htop] )) && alias top='htop'
 
-if (( $+commands[exa] )); then
-    alias ls='exa --group-directories-first'
-    alias la='ls -laFh'
+if [[ $OSTYPE == darwin* ]]; then
+    (( $+commands[gls] )) && alias ls='gls --color=tty --group-directories-first'
 else
-    if [[ $OSTYPE == darwin* ]]; then
-        (( $+commands[gls] )) && alias ls='gls --color=tty --group-directories-first'
-    else
-        alias ls='ls --color=tty --group-directories-first'
-    fi
+    ((! $+commands[exa] )) && alias ls='ls --color=tty --group-directories-first'
 fi
 
 # Emacs
