@@ -1,8 +1,5 @@
 # Zsh configuration
 
-# vars
-DOTFILES=$HOME/.dotfiles
-
 # Two regular plugins loaded without investigating.
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -54,8 +51,6 @@ zinit wait lucid light-mode for \
 # Completion enhancements
 zinit ice wait lucid atload"zicompinit; zicdreplay" blockf
 zinit light zsh-users/zsh-completions
-zinit ice wait lucid atload"zicompinit; zicdreplay" blockf
-zinit snippet $DOTFILES/completion.zsh
 
 zinit ice wait lucid atinit"zicompinit; zicdreplay"
 zinit light zdharma/fast-syntax-highlighting
@@ -97,7 +92,14 @@ zinit light junegunn/fzf
 zinit ice wait lucid atload"zicompinit; zicdreplay" blockf
 zinit light Aloxaf/fzf-tab
 
-export FZFZ_PREVIEW_COMMAND='tree -NC -L 2 -x --noreport --dirsfirst {}'
+zstyle ':completion:complete:*:options' sort false
+zstyle ':fzf-tab:complete:_zlua:*' query-string input
+
+zstyle ":completion:*:git-checkout:*" sort false
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':fzf-tab:complete:(cd|ls|exa|bat|cat|emacs|nano|vi|vim):*' fzf-preview 'exa -1 --color=always $realpath'
+
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --hidden --files || find ."
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || cat {} || tree -NC {}) 2> /dev/null | head -200'"
