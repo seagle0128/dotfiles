@@ -10,7 +10,7 @@ DOTFILES=$HOME/.dotfiles
 EMACSD=$HOME/.emacs.d
 FZF=$HOME/.fzf
 TMUX=$HOME/.tmux
-ZSH=$HOME/.antigen
+ZSH=$HOME/.zinit
 
 # Get OS informatio
 OS=`uname -s`
@@ -190,7 +190,7 @@ fi
 
 # Apt-Cyg
 if is_cygwin; then
-    printf "${BLUE} ➜  Installing Apt-Cyg...${NORMAL}\n"
+    printf "${BLUE}▓▒░ Installing Apt-Cyg...${NORMAL}\n"
     if ! command -v apt-cyg >/dev/null 2>&1; then
         APT_CYG=/usr/local/bin/apt-cyg
         curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG
@@ -198,21 +198,9 @@ if is_cygwin; then
     fi
 fi
 
-# Antigen: the plugin manager for zsh
-printf "${BLUE} ➜  Installing Antigen...${NORMAL}\n"
-if is_mac; then
-    sync_brew_package antigen
-else
-    if is_arch; then
-        sync_arch_package antigen-git
-    elif is_debian; then
-        sync_apt_package zsh-antigen
-        # sudo mkdir -p /usr/share/zsh-antigen && sudo curl -o /usr/share/zsh-antigen/antigen.zsh -sL git.io/antigen
-    else
-        mkdir -p $ZSH
-        curl -fsSL git.io/antigen > $ZSH/antigen.zsh.tmp && mv $ZSH/antigen.zsh.tmp $ZSH/antigen.zsh
-    fi
-fi
+# Zsh plugin manager
+printf "${BLUE}▓▒░ Installing Zinit...${NORMAL}\n"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
 # Dotfiles
 printf "${BLUE} ➜  Installing Dotfiles...${NORMAL}\n"

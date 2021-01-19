@@ -1,72 +1,37 @@
 # Local configurations -*- mode: sh -*-
 
 # Show system information
-if command -v neofetch >/dev/null 2>&1; then
-    neofetch
-fi
+# if (( $+commands[neofetch] )); then
+#     neofetch
+# fi
 
 # iTerm2 shell integration
-if test -e "${HOME}/.iterm2_shell_integration.zsh"; then
-    source "${HOME}/.iterm2_shell_integration.zsh"
-fi
+# if test -e "${HOME}/.iterm2_shell_integration.zsh"; then
+#     source "${HOME}/.iterm2_shell_integration.zsh"
+# fi
 
 # Plugins
-# antigen bundle docker
-# antigen bundle docker-compose
-# antigen bundle docker-machine
-# antigen bundle golang
-# antigen bundle python
-# antigen bundle ruby
-
-# antigen bundle archlinux
-# antigen bundle ubuntu
+# zinit wait lucid for \
+    #       OMZP::python \
+    #       OMZP::golang \
+    #       OMZP::ruby \
+    #       OMZP::rbenv \
+    #       OMZP::rails
 
 # Theme
 if [ -n "$INSIDE_EMACS" ]; then
     DISABLE_AUTO_TITLE="true"
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=gray,underline'
-    # antigen theme dst            # ys, dst, wedisagree, robbyrussell
-else
-    # antigen theme steeef      # ys, dst, steeef, wedisagree, robbyrussell
-    # antigen theme danihodovic/steeef
-    # antigen theme seagle0128/bullet-train.zsh
-    # antigen theme simnalamburt/shellder
-    # antigen theme denysdovhan/spaceship-prompt spaceship
-
-    # Powerful theme (require powerline fonts)
-    # cargo install powerline-rs
-    # go get -u github.com/justjanne/powerline-go
-    function powerline_precmd() {
-        if command -v powerline-rs >/dev/null 2>&1; then
-            PS1="$(powerline-rs --shell zsh $?)"
-        elif command -v powerline-go >/dev/null 2>&1; then
-            PS1="$(powerline-go -error $? -shell zsh)"
-        fi
-    }
-
-    function install_powerline_precmd() {
-        for s in "${precmd_functions[@]}"; do
-            if [ "$s" = "powerline_precmd" ]; then
-                return
-            fi
-        done
-        precmd_functions+=(powerline_precmd)
-    }
-
-    if [ "$TERM" != "linux" ]; then
-        install_powerline_precmd
-    fi
 fi
 
 # Env
 # export EDITOR=vim
-# export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 
 # Aliases
 # alias upgrade_go='$DOTFILES/install_go.sh'
 
 # Proxy
-PROXY=http://127.0.0.1:8001     # 1087
+PROXY=http://127.0.0.1:8001     # 1088
 PROXY2=http://127.0.0.1:8123
 SOCK_PROXY=socks5://127.0.0.1:1081 # 1086
 NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
@@ -124,9 +89,9 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 # Golang
-if command -v go >/dev/null 2>&1; then
+if (( $+commands[go] )); then
     function gocomplete() {
-        antigen bundle golang
+        zinit snippet OMZP::golang
     }
 
     function goclean() {

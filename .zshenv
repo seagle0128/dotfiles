@@ -12,9 +12,6 @@ export PATH=$HOME/.cask/bin:$PATH
 # Ruby
 export PATH=$HOME/.rbenv/shims:$PATH
 
-# FZF
-export PATH=$HOME/.fzf/bin:$PATH
-
 # Golang
 export GO111MODULE=auto
 export GOPROXY=https://goproxy.cn # https://athens.azurefd.net
