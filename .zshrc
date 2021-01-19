@@ -92,13 +92,19 @@ zinit light junegunn/fzf
 zinit ice wait lucid atload"zicompinit; zicdreplay" blockf
 zinit light Aloxaf/fzf-tab
 
-zstyle ':completion:complete:*:options' sort false
-zstyle ':fzf-tab:complete:_zlua:*' query-string input
-
-zstyle ":completion:*:git-checkout:*" sort false
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ":completion:*:git-checkout:*" sort false
 zstyle ':fzf-tab:complete:(cd|ls|exa|bat|cat|emacs|nano|vi|vim):*' fzf-preview 'exa -1 --color=always $realpath'
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
+       '[[ $group == "[process ID]" ]] &&
+        if [[ $OSTYPE == darwin* ]]; then
+           ps -p $word -o comm="" -w -w
+        elif [[ $OSTYPE == linux* ]]; then
+           ps --pid=$word -o cmd --no-headers -w -w
+        fi'
+zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags '--preview-window=down:3:wrap'
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --hidden --files || find ."
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
