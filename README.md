@@ -37,9 +37,9 @@ docker run -it centaur/ubuntu zsh
 ## Shortcuts
 
 - `Alt-c`: cd into the selected directory.
-- `Ctrl-g`: Paste the recent path(s) fr{}om `z` history into the command line.
 - `Ctrl-r`: Paste the selected command from history into the command line.
 - `Ctrl-t`: Paste the selected file path(s) into the command line.
+- `TAB`: To completions.
 
 That's it. Enjoy!
 
@@ -61,13 +61,16 @@ export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 Set your personal zsh configurations in `~/.zshrc.local`. For example:
 
 ``` shell
-# theme
-antigen theme ys            # ys, dst, steeef, wedisagree, robbyrussell
+# Oh-my-zsh plugin
+zinit snippet OMZP::golang
+zinit snippet OMZP::python
+zinit snippet OMZP::ruby
 
-# plugins
-antigen bundle python
-antigen bundle ruby
+# Github plugin
+zinit light ptavares/zsh-direnv
 ```
+
+See details on [zinit](https://github.com/zdharma/zinit).
 
 ### Git local config
 
