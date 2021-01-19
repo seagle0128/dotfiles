@@ -176,7 +176,7 @@ fi
 
 # Brew
 if is_mac; then
-    printf "${BLUE} ➜  Installing Homebrew...${NORMAL}\n"
+    printf "${GREEN}▓▒░ Installing Homebrew...${NORMAL}\n"
     if ! command -v brew >/dev/null 2>&1; then
         # Install homebrew
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -190,7 +190,7 @@ fi
 
 # Apt-Cyg
 if is_cygwin; then
-    printf "${BLUE}▓▒░ Installing Apt-Cyg...${NORMAL}\n"
+    printf "${GREEN}▓▒░ Installing Apt-Cyg...${NORMAL}\n"
     if ! command -v apt-cyg >/dev/null 2>&1; then
         APT_CYG=/usr/local/bin/apt-cyg
         curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG
@@ -199,11 +199,11 @@ if is_cygwin; then
 fi
 
 # Zsh plugin manager
-printf "${BLUE}▓▒░ Installing Zinit...${NORMAL}\n"
+printf "${GREEN}▓▒░ Installing Zinit...${NORMAL}\n"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
 # Dotfiles
-printf "${BLUE} ➜  Installing Dotfiles...${NORMAL}\n"
+printf "${GREEN}▓▒░ Installing Dotfiles...${NORMAL}\n"
 sync_repo seagle0128/dotfiles $DOTFILES
 
 chmod +x $DOTFILES/install.sh
@@ -237,156 +237,20 @@ if is_cygwin; then
 fi
 
 # Emacs Configs
-printf "${BLUE} ➜  Installing Centaur Emacs...${NORMAL}\n"
+printf "${GREEN}▓▒░ Installing Centaur Emacs...${NORMAL}\n"
 sync_repo seagle0128/.emacs.d $EMACSD
 
 # Oh My Tmux
-printf "${BLUE} ➜  Installing Oh My Tmux...${NORMAL}\n"
+printf "${GREEN}▓▒░ Installing Oh My Tmux...${NORMAL}\n"
 sync_repo gpakosz/.tmux $TMUX
 ln -sf $TMUX/.tmux.conf $HOME/.tmux.conf
-
-# Ripgrep
-printf "${BLUE} ➜  Installing ripgrep (rg)...${NORMAL}\n"
-if is_mac; then
-    sync_brew_package ripgrep
-elif is_linux; then
-    if is_arch; then
-        sync_arch_package ripgrep
-    elif is_debian; then
-        # FIXME: @See https://github.com/BurntSushi/ripgrep/issues/1562
-        # sync_apt_package ripgrep
-        apt-get download ripgrep && sudo dpkg --force-overwrite -i ripgrep*.deb && rm -f ripgrep*.deb
-    elif [ "$OSARCH" = "x86_64" ]; then
-        # Only support Linux x64 binary
-        RG_UPDATE=1
-        RG_RELEASE_URL="https://github.com/BurntSushi/ripgrep/releases"
-        RG_VERSION_PATTERN='[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
-
-        RG_RELEASE_TAG=$(curl -fs "${RG_RELEASE_URL}/latest" | grep -oE $RG_VERSION_PATTERN)
-
-        if command -v rg >/dev/null 2>&1; then
-            RG_UPDATE=0
-
-            RG_VERSION=$(rg --version | grep -oE $RG_VERSION_PATTERN)
-            if [ "$RG_VERSION" != "$RG_RELEASE_TAG" ]; then
-                RG_UPDATE=1
-            fi
-        fi
-
-        if [ $RG_UPDATE -eq 1 ]; then
-            RG_PACKAGE=ripgrep_${RG_RELEASE_TAG}_amd64.deb
-            curl -LO ${RG_RELEASE_URL}/download/${RG_RELEASE_TAG}/${RG_PACKAGE} &&
-                sudo dpkg -i ${RG_PACKAGE}
-            rm -f ${RG_PACKAGE}
-        fi
-    fi
-fi
-
-# BAT
-printf "${BLUE} ➜  Installing BAT...${NORMAL}\n"
-if is_mac; then
-    sync_brew_package bat
-elif is_linux; then
-
-    if is_arch; then
-        sync_arch_package bat
-    elif is_debian; then
-        sync_apt_package bat
-    elif [ "$OSARCH" = "x86_64" ]; then
-        # Only support Linux x64 binary
-        BAT_UPDATE=1
-        BAT_RELEASE_URL="https://github.com/sharkdp/bat/releases"
-        BAT_VERSION_PATTERN='[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
-
-        BAT_RELEASE_TAG=$(curl -fs "${BAT_RELEASE_URL}/latest" | grep -oE $BAT_VERSION_PATTERN)
-
-        if command -v fd >/dev/null 2>&1; then
-            BAT_UPDATE=0
-
-            BAT_VERSION=$(fd --version | grep -oE $BAT_VERSION_PATTERN)
-            if [ "$BAT_VERSION" != "$BAT_RELEASE_TAG" ]; then
-                BAT_UPDATE=1
-            fi
-        fi
-
-        if [ $BAT_UPDATE -eq 1 ]; then
-            BAT_NAME=bat-v${BAT_RELEASE_TAG}-x86_64-unknown-linux-gnu
-            BAT_PACKAGE=${BAT_NAME}.tar.gz
-
-            curl -LO ${BAT_RELEASE_URL}/download/v${BAT_RELEASE_TAG}/${BAT_PACKAGE} &&
-                tar zxvf $BAT_PACKAGE >/dev/null 2>&1 &&
-                sudo cp ${BAT_NAME}/bat /usr/local/bin/bat &&
-                sudo cp ${BAT_NAME}/bat.1 /usr/local/bin/bat.1 &&
-                sudo chmod +x /usr/local/bin/bat
-
-            rm -f ${BAT_PACKAGE}
-            rm -rf ${BAT_NAME}
-        fi
-    fi
-fi
-
-# FD
-printf "${BLUE} ➜  Installing FD...${NORMAL}\n"
-if is_mac; then
-    sync_brew_package fd
-elif is_linux; then
-    if is_arch; then
-        sync_arch_package fd
-    elif is_debian; then
-        sync_apt_package fd-find
-    elif [ "$OSARCH" = "x86_64" ]; then
-        # Only support Linux x64 binary
-        FD_UPDATE=1
-        FD_RELEASE_URL="https://github.com/sharkdp/fd/releases"
-        FD_VERSION_PATTERN='[[:digit:]]+\.[[:digit:]]+.[[:digit:]]*'
-
-        FD_RELEASE_TAG=$(curl -fs "${FD_RELEASE_URL}/latest" | grep -oE $FD_VERSION_PATTERN)
-
-        if command -v fd >/dev/null 2>&1; then
-            FD_UPDATE=0
-
-            FD_VERSION=$(fd --version | grep -oE $FD_VERSION_PATTERN)
-            if [ "$FD_VERSION" != "$FD_RELEASE_TAG" ]; then
-                FD_UPDATE=1
-            fi
-        fi
-
-        if [ $FD_UPDATE -eq 1 ]; then
-            FD_PACKAGE=fd_${FD_RELEASE_TAG}_amd64.deb
-            curl -LO ${FD_RELEASE_URL}/download/v${FD_RELEASE_TAG}/${FD_PACKAGE} &&
-                sudo dpkg -i ${FD_PACKAGE}
-            rm -f ${FD_PACKAGE}
-        fi
-    fi
-fi
-
-# FZF
-printf "${BLUE} ➜  Installing FZF...${NORMAL}\n"
-if is_cygwin; then
-    if ! command -v fzf >/dev/null 2>&1 && command -v apt-cyg >/dev/null 2>&1; then
-        apt-cyg install fzf fzf-zsh fzf-zsh-completion
-    fi
-else
-    if is_mac; then
-        sync_brew_package fzf
-    elif is_linux; then
-        if is_arch; then
-            sync_arch_package fzf
-        elif command -v apt-get >/dev/null 2>&1; then
-            sync_apt_package fzf
-        else
-            sync_repo junegunn/fzf $FZF
-        fi
-        # [ -f $FZF/install ] && $FZF/install --all --no-update-rc --no-bash --no-fish >/dev/null
-    fi
-fi
 
 # Entering zsh
 printf "Done. Enjoy!\n"
 if command -v zsh >/dev/null 2>&1; then
     if [ "$OSTYPE" != "cygwin" ] && [ "$SHELL" != "$(which zsh)" ]; then
         chsh -s $(which zsh)
-        printf "${BLUE} You need to logout and login to enable zsh as the default shell.${NORMAL}\n"
+        printf "${GREEN} You need to logout and login to enable zsh as the default shell.${NORMAL}\n"
     fi
     env zsh
 else
