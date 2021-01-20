@@ -76,6 +76,7 @@ zinit light tj/git-extras
 
 zinit as"null" wait lucid from"gh-r" for \
       atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" sbin"exa* -> exa" ogham/exa \
+      cp"completions.zsh -> $HOME/.zinit/completions/_exa" https://github.com/ogham/exa/blob/master/completions/completions.zsh\
       cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> $HOME/.zinit/completions/_bat" sbin"**/bat" @sharkdp/bat \
       cp"**/fd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_fd -> $HOME/.zinit/completions" sbin"**/fd"  @sharkdp/fd \
       cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $HOME/.zinit/completions" sbin"**/rg" BurntSushi/ripgrep
