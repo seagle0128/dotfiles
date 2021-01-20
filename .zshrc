@@ -75,10 +75,10 @@ zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 
 zinit as"null" wait lucid from"gh-r" for \
-      cp"**/bat.1 -> $ZPFX/share/man/man1/" sbin"**/bat" @sharkdp/bat \
-      atload"alias ls='exa --group-directories-first' alias la='ls -laFh'" sbin"exa* -> exa" ogham/exa \
-      cp"**/fd.1 -> $ZPFX/share/man/man1/" sbin"**/fd" @sharkdp/fd \
-      cp"**/doc/rg.1 -> $ZPFX/share/man/man1/" sbin"**/rg" BurntSushi/ripgrep
+      atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" sbin"exa* -> exa" ogham/exa \
+      cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> $HOME/.zinit/completions/_bat" sbin"**/bat" @sharkdp/bat \
+      cp"**/fd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_fd -> $HOME/.zinit/completions" sbin"**/fd"  @sharkdp/fd \
+      cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $HOME/.zinit/completions" sbin"**/rg" BurntSushi/ripgrep
 
 # FZF
 zinit ice id-as"fzf-bin" as"program" wait lucid from"gh-r" sbin"fzf"
@@ -119,7 +119,7 @@ zinit light trapd00r/LS_COLORS
 
 # OS bundles
 if [[ $OSTYPE == darwin* ]]; then
-    zinit ice svn
+    zinit ice svn has'svn'
     zinit snippet OMZP::osx
     if (( $+commands[brew] )); then
         alias bu='brew update && brew upgrade'
