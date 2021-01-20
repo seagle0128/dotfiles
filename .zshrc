@@ -120,8 +120,7 @@ zinit light trapd00r/LS_COLORS
 
 # OS bundles
 if [[ $OSTYPE == darwin* ]]; then
-    zinit ice svn has'svn'
-    zinit snippet OMZP::osx
+    zinit snippet PZTM::osx
     if (( $+commands[brew] )); then
         alias bu='brew update && brew upgrade'
         alias bcu='brew cu --all --yes --cleanup'
