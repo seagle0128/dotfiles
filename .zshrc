@@ -25,13 +25,14 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 # Oh My Zsh
-zinit snippet OMZL::key-bindings.zsh
-
-zinit wait lucid for \
+zinit for \
       OMZL::correction.zsh \
       OMZL::directories.zsh \
       OMZL::history.zsh \
-      OMZL::theme-and-appearance.zsh \
+      OMZL::key-bindings.zsh \
+      OMZL::theme-and-appearance.zsh
+
+zinit wait lucid for \
       OMZP::colored-man-pages \
       OMZP::common-aliases \
       OMZP::cp \
