@@ -1,5 +1,8 @@
 # Zsh configuration
 
+# vars
+DOTFILES=$HOME/.dotfiles
+
 # Two regular plugins loaded without investigating.
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
