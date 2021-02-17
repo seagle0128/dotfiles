@@ -33,11 +33,11 @@ zinit for \
       OMZL::directories.zsh \
       OMZL::history.zsh \
       OMZL::key-bindings.zsh \
-      OMZL::theme-and-appearance.zsh
+      OMZL::theme-and-appearance.zsh \
+      OMZP::common-aliases
 
 zinit wait lucid for \
       OMZP::colored-man-pages \
-      OMZP::common-aliases \
       OMZP::cp \
       OMZP::extract \
       OMZP::fancy-ctrl-z \
