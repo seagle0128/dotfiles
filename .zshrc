@@ -183,7 +183,7 @@ alias upgrade_repo='git pull --rebase --stat origin master'
 alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
 alias upgrade_emacs='emacs -Q --batch -L "$HOME/.emacs.d/lisp/" -l "init-funcs.el" -l "init-package.el" --eval "(update-config-and-packages t)"'
 alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
-alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh; zinit update'
+alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh; upgrade_zinit'
 
 alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update
 alias upgrade_gem='gem update && gem cleanup'
@@ -192,4 +192,4 @@ alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut 
 alias upgrade_pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 alias upgrade_pip3="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
 [[ $OSTYPE == darwin* ]] && alias upgrade_brew='/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'; alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
-alias upgrade_zinit='sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"'
+alias upgrade_zinit='sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"; (( $+commands[zinit] )) && zinit update'
