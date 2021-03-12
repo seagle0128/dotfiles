@@ -8,8 +8,8 @@
 # Cask applications
 apps=(
     cheatsheet
-    clipy
-    ezip          # compress & extract
+    # clipy
+    maczip          # compress & extract
     fliqlo        # Screen Saver
     hyperswitch
     iterm2
@@ -17,44 +17,39 @@ apps=(
     keycastr        # Show keys on the screen
     licecap         # Recording screen as gif
     mounty          # Mounty for NTFS read/write
-    mos             # Smooth and reverse scroll. Alternative: scroll-reverser
+    mos             # Smooth and reverse scroll
     v2rayx          # shadowsocksx-ng
     rectangle       # Window management
     # vanilla         # Hide menu bar icons. Alternative: bartender
 
     iina            # Media player
-    google-chrome   # Browser. Alternative: firefox, microsoft-edge
+    microsoft-edge  # Browser: google-chrome
     # karabiner-elements # karabiner: Keboard remapping
     # netspot       # Wifi signal analysis and scanner
     osxfuse
     veracrypt
     vox2            # Music player
-    sogouinput      # baiduinput
+    squirrel        # sogouinput
 
     # Audio
-    # sound-siphon  # 2.0.2
-    # background-music
-    soundflower
-    soundflowerbed
+    # soundflower
+    # soundflowerbed
 
     # Development
     # java          # optional
     # docker        # optional
-    # emacs
     fork            # Git Client: gitkraken, sourcetree
     typora          # Markdown editor
     visual-studio-code
 
     # Utilities
-    # acrobat-reader
-    aliwangwang
-    motrix          # aria2gui
+    # aliwangwang
+    motrix          # Downloader: ariang
     baidunetdisk
     # macgesture
     neteasemusic
-    # skype-for-business
     thunder
-    yyets
+    wechat
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
