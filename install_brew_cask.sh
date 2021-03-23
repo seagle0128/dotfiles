@@ -30,6 +30,7 @@ apps=(
     veracrypt
     vox2            # Music player
     squirrel        # sogouinput
+    handbrake       # transcoder
 
     # Audio
     # soundflower
@@ -96,7 +97,7 @@ function check {
 function install () {
     for app in ${apps[@]}; do
         printf "${BLUE} ➜  Installing ${app}...${NORMAL}\n"
-        brew install ${app}
+        brew install --cask ${app}
     done
 }
 
