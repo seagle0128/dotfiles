@@ -52,7 +52,7 @@ if [[ $OSTYPE == darwin* ]]; then
     # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
     function set_homebrew_mirror() {
-        export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+        export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
 
         cd "$(brew --repo)"
         git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
@@ -66,6 +66,10 @@ if [[ $OSTYPE == darwin* ]]; then
         git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
         cd - >/dev/null
 
+        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask-versions
+        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask-versions.git
+        cd - >/dev/null
+
         brew update
     }
 
@@ -77,11 +81,15 @@ if [[ $OSTYPE == darwin* ]]; then
         cd - >/dev/null
 
         cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-core
-        git remote set-url origin https://github.com/Homebrew/homebrew-core.git
+        git remote set-url origin https://github.com/Homebrew/homebrew-core
         cd - >/dev/null
 
         cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask
         git remote set-url origin https://github.com/Homebrew/homebrew-cask
+        cd - >/dev/null
+
+        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask-versions
+        git remote set-url origin https://github.com/Homebrew/homebrew-cask-versions.git
         cd - >/dev/null
 
         brew update

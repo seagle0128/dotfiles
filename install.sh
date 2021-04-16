@@ -183,6 +183,7 @@ if is_mac; then
 
         # Tap cask and cask-upgrade
         brew tap homebrew/cask
+        brew tap homebrew/cask-versions
         brew tap homebrew/cask-fonts
         brew tap buo/cask-upgrade
     fi
