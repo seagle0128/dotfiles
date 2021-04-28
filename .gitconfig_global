@@ -11,6 +11,8 @@
 	diff = auto
 	interactive = auto
 	status = auto
+[pull]
+	rebase = false
 [push]
 	default = current
 [diff]
