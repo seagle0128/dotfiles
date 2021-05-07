@@ -10,15 +10,15 @@ apps=(
     cheatsheet
     # clipy
     maczip          # compress & extract
-    fliqlo        # Screen Saver
-    hyperswitch
+    fliqlo          # Screen Saver
+    alt-tab         # hyperswitch
     iterm2
     # keepingyouawake
     keycastr        # Show keys on the screen
     licecap         # Recording screen as gif
-    mounty          # Mounty for NTFS read/write
+    # mounty          # Mounty for NTFS read/write
     mos             # Smooth and reverse scroll
-    v2rayx          # shadowsocksx-ng
+    clashx-pro      # v2rayx, shadowsocksx-ng
     rectangle       # Window management
     # vanilla         # Hide menu bar icons. Alternative: bartender
 
@@ -28,7 +28,7 @@ apps=(
     # netspot       # Wifi signal analysis and scanner
     osxfuse
     veracrypt
-    vox2            # Music player
+    vox             # Music player
     squirrel        # sogouinput
     handbrake       # transcoder
 
@@ -39,8 +39,8 @@ apps=(
     # Development
     # java          # optional
     # docker        # optional
-    fork            # Git Client: gitkraken, sourcetree
-    typora          # Markdown editor
+    # fork            # Git Client: gitkraken, sourcetree
+    # typora          # Markdown editor
     visual-studio-code
 
     # Utilities
@@ -48,9 +48,16 @@ apps=(
     motrix          # Downloader: ariang
     baidunetdisk
     # macgesture
-    neteasemusic
-    thunder
+    qq
     wechat
+    thunder
+    tencent-lemon
+
+    neteasemusic
+    youdaodict
+    youdaonote
+
+    zy-player
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
