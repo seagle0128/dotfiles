@@ -8,44 +8,46 @@
 # Cask applications
 apps=(
     cheatsheet
-    # clipy
-    maczip          # compress & extract
-    fliqlo          # Screen Saver
-    alt-tab         # hyperswitch
-    iterm2
+    clipy                      # Clipboard
+    maczip                     # Compress & extract
+    fliqlo                     # Screen Saver
+    paper                      # Wallpaper
+    hyperswitch                # alt-tab
+    iterm2                     # Terminal
     # keepingyouawake
-    keycastr        # Show keys on the screen
-    licecap         # Recording screen as gif
-    # mounty          # Mounty for NTFS read/write
-    mos             # Smooth and reverse scroll
-    clashx-pro      # v2rayx, shadowsocksx-ng
-    rectangle       # Window management
-    # vanilla         # Hide menu bar icons. Alternative: bartender
+    keycastr                   # Show keys on the screen
+    licecap                    # Recording screen as gif
+    # mounty                     # Mounty for NTFS read/write
+    mos                        # Smooth and reverse scroll
+    clashx-pro                 # Proxy: v2rayx, shadowsocksx-ng-r
+    rectangle                  # Window management
+    # vanilla                    # Hide menu bar icons. Alternative: bartender
 
-    iina            # Media player
-    microsoft-edge  # Browser: google-chrome
-    # karabiner-elements # karabiner: Keboard remapping
-    # netspot       # Wifi signal analysis and scanner
-    osxfuse
-    veracrypt
-    vox             # Music player
-    squirrel        # sogouinput
-    handbrake       # transcoder
+    iina                       # Media player
+    microsoft-edge             # Browser: google-chrome
+    karabiner-elements         # karabiner: Keboard remapping
+    hammersppon                # Ultimate tools
+    # netspot                    # Wifi signal analysis and scanner
+    osxfuse                    # File system
+    veracrypt                  # File crypt
+    vox                        # Music player
+    squirrel                   # sogouinput
+    handbrake                  # transcoder
 
     # Audio
     # soundflower
     # soundflowerbed
 
     # Development
-    # java          # optional
-    # docker        # optional
-    # fork            # Git Client: gitkraken, sourcetree
-    # typora          # Markdown editor
+    # java                       # optional
+    # docker                     # optional
+    # fork                       # Git Client: gitkraken, sourcetree
+    # typora                     # Markdown editor
     visual-studio-code
 
     # Utilities
     # aliwangwang
-    motrix          # Downloader: ariang
+    motrix                     # Downloader: ariang
     baidunetdisk
     # macgesture
     qq
