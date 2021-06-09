@@ -7,6 +7,7 @@
 
 # Cask applications
 apps=(
+    avibrazil-rdm              # Retina display management
     cheatsheet
     clipy                      # Clipboard
     maczip                     # Compress & extract
@@ -47,8 +48,8 @@ apps=(
 
     # Utilities
     # aliwangwang
-    motrix                     # Downloader: ariang
     baidunetdisk
+    motrix                     # Downloader: ariang
     # macgesture
     qq
     wechat
