@@ -78,11 +78,19 @@ zinit light sindresorhus/pure
 zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 
+# Modern Unix commands
+# See https://github.com/ibraheemdev/modern-unix
 zinit as"null" wait lucid from"gh-r" for \
       atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa" sbin"**/exa" ogham/exa \
-      cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
+      atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
       cp"**/fd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
       cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]" sbin"**/rg" BurntSushi/ripgrep \
+      mv"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" sbin"**/btm" ClementTsang/bottom \
+      atload"alias help=cheat" mv"**/cheat** -> cheat" sbin"**/cheat*" cheat/cheat \
+      atload"alias diff=delta" sbin"**/delta" dandavison/delta \
+      atload"unalias duf; alias df=duf" sbin"**/duf" muesli/duf \
+      atload"alias du=dust" sbin"**/dust" bootandy/dust \
+      atload"alias ping=gping" sbin"**/gping" orf/gping \
       atload"alias ps=procs" sbin"**/procs" dalance/procs
 
 # FZF
@@ -160,9 +168,6 @@ alias h='history'
 alias c='clear'
 
 alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
-
-(( $+commands[bat] )) && alias cat='bat -p --wrap character'
-(( $+commands[htop] )) && alias top='htop'
 
 if [[ $OSTYPE == darwin* ]]; then
     (( $+commands[gls] )) && alias ls='gls --color=tty --group-directories-first'

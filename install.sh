@@ -8,7 +8,6 @@
 # Variables
 DOTFILES=$HOME/.dotfiles
 EMACSD=$HOME/.emacs.d
-FZF=$HOME/.fzf
 TMUX=$HOME/.tmux
 ZSH=$HOME/.zinit
 
@@ -147,9 +146,8 @@ clean_dotfiles() {
 
     [ -d $EMACSD ] && mv $EMACSD $EMACSD.bak
 
-    rm -rf $ZSH $TMUX $FZF $DOTFILES
+    rm -rf $ZSH $TMUX $DOTFILES
 
-    rm -f $HOME/.fzf.*
     rm -f $HOME/.gitignore_global $HOME/.gitconfig_global
     rm -f $HOME/.tmux.conf $HOME/.tmux.local
 }
@@ -167,7 +165,7 @@ promote_yn() {
 }
 
 # Reset configurations
-if [ -d $ZSH ] || [ -d $TMUX ] || [ -d ~$FZF ] || [ -d $EMACSD ]; then
+if [ -d $ZSH ] || [ -d $TMUX ] || [ -d $EMACSD ]; then
     promote_yn "Do you want to reset all configurations?" "continue"
     if [ $continue -eq $YES ]; then
         clean_dotfiles
