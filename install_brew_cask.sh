@@ -20,10 +20,11 @@ apps=(
     licecap                    # Recording screen as gif
     # mounty                     # Mounty for NTFS read/write
     mos                        # Smooth and reverse scroll
-    clashx-pro                 # Proxy: v2rayx, shadowsocksx-ng-r
+    raycast                    # Spotlight/Alfred replacement.
     rectangle                  # Window management
     # vanilla                    # Hide menu bar icons. Alternative: bartender
 
+    clashx-pro                 # Proxy: v2rayx, shadowsocksx-ng-r
     iina                       # Media player
     microsoft-edge             # Browser: google-chrome
     karabiner-elements         # karabiner: Keboard remapping
@@ -43,7 +44,7 @@ apps=(
     # java                       # optional
     # docker                     # optional
     # fork                       # Git Client: gitkraken, sourcetree
-    # typora                     # Markdown editor
+    typora                     # Markdown editor
     visual-studio-code
 
     # Utilities
