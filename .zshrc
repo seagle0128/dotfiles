@@ -82,8 +82,8 @@ zinit light tj/git-extras
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
 zinit as"null" wait lucid from"gh-r" for \
-      atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa" sbin"**/exa" ogham/exa \
       atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
+      atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa" sbin"**/exa" ogham/exa \
       cp"**/fd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
       cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]" sbin"**/rg" BurntSushi/ripgrep \
       mv"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" sbin"**/btm" ClementTsang/bottom \
@@ -94,8 +94,12 @@ zinit as"null" wait lucid from"gh-r" for \
       atload"alias ping=gping" sbin"**/gping" orf/gping \
       atload"alias ps=procs" sbin"**/procs" dalance/procs
 
-# FZF
-zinit ice id-as"fzf-bin" as"program" wait lucid from"gh-r" sbin"fzf"
+# Hyperfine: benchmark tool
+zinit ice as"null" wait lucid from"gh-r" sbin"**/hyperfine"
+zinit light sharkdp/hyperfine
+
+# FZF: fuzzy finder
+zinit ice id-as"fzf-bin" as"program" wait lucid from"gh-r" sbin"**/fzf"
 zinit light junegunn/fzf
 
 zinit ice wait lucid depth"1" as"null" sbin"bin/fzf-tmux" \
