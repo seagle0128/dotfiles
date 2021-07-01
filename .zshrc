@@ -2,6 +2,7 @@
 
 # vars
 DOTFILES=$HOME/.dotfiles
+EMACSD=$HOME/.emacs.d
 
 # Two regular plugins loaded without investigating.
 ### Added by Zinit's installer
@@ -86,7 +87,7 @@ zinit as"null" wait lucid from"gh-r" for \
       cp"**/fd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
       cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]" sbin"**/rg" BurntSushi/ripgrep \
       mv"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" sbin"**/btm" ClementTsang/bottom \
-      atload"alias help=cheat" mv"**/cheat** -> cheat" sbin"**/cheat*" cheat/cheat \
+      atload"alias help=cheat" mv"**/cheat** -> cheat" sbin"**/cheat" cheat/cheat \
       atload"alias diff=delta" sbin"**/delta" dandavison/delta \
       atload"unalias duf; alias df=duf" sbin"**/duf" muesli/duf \
       atload"alias du=dust" sbin"**/dust" bootandy/dust \
@@ -176,8 +177,8 @@ else
 fi
 
 # Emacs
-alias me="emacs -Q -l ~/.emacs.d/init-mini.el" # mini emacs
-alias mte="emacs -Q -nw -l ~/.emacs.d/init-mini.el" # mini terminal emacs
+alias me="emacs -Q -l $EMACSD/init-mini.el" # mini emacs
+alias mte="emacs -Q -nw -l $EMACSD/init-mini.el" # mini terminal emacs
 alias e="$EDITOR -n"
 alias ec="$EDITOR -n -c"
 alias ef="$EDITOR -c"
@@ -187,7 +188,7 @@ alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) (kill-emacs-query-function
 # Upgrade
 alias upgrade_repo='git pull --rebase --stat origin master'
 alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
-alias upgrade_emacs='emacs -Q --batch -L "$HOME/.emacs.d/lisp/" -l "init-funcs.el" -l "init-package.el" --eval "(update-config-and-packages t t)"'
+alias upgrade_emacs='emacs -Q --batch -L "$EMACSD/lisp/" -l "init-funcs.el" -l "init-package.el" --eval "(update-config-and-packages t t)"'
 alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
 
