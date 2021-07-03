@@ -7,28 +7,17 @@
 
 # Go packages
 packages=(
-    github.com/google/gops
+    github.com/zmb3/gogetdoc
     github.com/go-delve/delve/cmd/dlv
     github.com/aarzilli/gdlv
     github.com/josharian/impl
     github.com/cweill/gotests/...
     github.com/fatih/gomodifytags
     github.com/davidrjenni/reftools/cmd/fillstruct
-    # honnef.co/go/tools/...
-    github.com/acroca/go-symbols
-    # github.com/golangci/golangci-lint/cmd/golangci-lint
-    github.com/haya14busa/goplay/cmd/goplay
-
     golang.org/x/tools/cmd/goimports
-    # golang.org/x/tools/cmd/gotype
-    # golang.org/x/tools/cmd/guru
-    # golang.org/x/lint/golint
-)
 
-# Do not use the -u flag for gopls, as it will update the dependencies to incompatible versions
-# https://github.com/golang/tools/blob/master/gopls/doc/user.md#installation
-packages_no_update=(
-    golang.org/x/tools/gopls@latest
+    github.com/google/gops
+    github.com/haya14busa/goplay/cmd/goplay
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
@@ -72,10 +61,13 @@ function check() {
 }
 
 function install() {
-    for p in ${packages_no_update[@]}; do
-        printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
-        go get ${p}
-    done
+    # https://github.com/golang/tools/tree/master/gopls#installation
+    printf "${BLUE} ➜  Installing gopls...${NORMAL}\n"
+    GO111MODULE=on go get golang.org/x/tools/gopls@latest
+
+    # https://staticcheck.io/docs/install
+    printf "${BLUE} ➜  Installing staticcheck...${NORMAL}\n"
+    go install honnef.co/go/tools/cmd/staticcheck@latest
 
     for p in ${packages[@]}; do
         printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
