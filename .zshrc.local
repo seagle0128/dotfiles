@@ -48,7 +48,15 @@ if [ -n "$INSIDE_EMACS" ]; then
             fi
         }
 
+        function vterm_prompt_end() {
+            vterm_printf "51;A$(whoami)@$(hostname):$(pwd)";
+        }
+
+        setopt PROMPT_SUBST
+        PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
+
         alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
+        alias reset='vterm_printf "51;Evterm-clear-scrollback";tput clear'
     fi
 fi
 
