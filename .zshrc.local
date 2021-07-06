@@ -24,15 +24,33 @@
     #       https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/cargo/_cargo
 
 # Theme
-if [ -n "$INSIDE_EMACS" ]; then
-    DISABLE_AUTO_TITLE="true"
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=gray,underline'
-fi
-
 # Starship (require nerd fonts)
 # zinit ice as"null" wait lucid from"gh-r" sbin"**/starship"
 # zinit light starship/starship
 # (( $+commands[starship] )) && eval $(starship init zsh)
+
+if [ -n "$INSIDE_EMACS" ]; then
+    DISABLE_AUTO_TITLE="true"
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=gray,underline'
+
+    # VTerm
+    if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
+        function vterm_printf(){
+            if [ -n "$TMUX" ]; then
+                # tell tmux to pass the escape sequences through
+                # (Source: http://permalink.gmane.org/gmane.comp.terminal-emulators.tmux.user/1324)
+                printf "\ePtmux;\e\e]%s\007\e\\" "$1"
+            elif [ "${TERM%%-*}" = "screen" ]; then
+                # GNU screen (screen, screen-256color, screen-256color-bce)
+                printf "\eP\e]%s\007\e\\" "$1"
+            else
+                printf "\e]%s\e\\" "$1"
+            fi
+        }
+
+        alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
+    fi
+fi
 
 # Env
 # export EDITOR=vim
@@ -41,16 +59,17 @@ fi
 # alias upgrade_go='$DOTFILES/install_go.sh'
 
 # Proxy
-PROXY=http://127.0.0.1:8001     # 1088
+PROXY=http://127.0.0.1:7890         # ss:1088, vr:8001
 PROXY2=http://127.0.0.1:8123
-SOCK_PROXY=socks5://127.0.0.1:1081 # 1086
+SOCK_PROXY=socks5://127.0.0.1:7890  # ss:1086, vr:1081
 NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
 alias set_polipo_proxy='ps -ef | grep polipo | grep -v grep; [ $? -ne 0 ] && polipo socksParentProxy=192.168.31.1:1082 &'
 alias showproxy='echo "proxy=$http_proxy"'
 alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export no_proxy=$NO_PROXY; showproxy'
 alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; export no_proxy=$NO_PROXY; showproxy'
 alias unsetproxy='export http_proxy=; export https_proxy=; export all_proxy=; export no_proxy=; showproxy'
-alias unsetproxy2='killall polipo;unsetproxy'
+alias unsetproxy2=unsetproxy
+alias kill_polipo_proxy='killall polipo'
 alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
 alias toggleproxy2='if [ -n "$http_proxy" ]; then unsetproxy2; else setproxy2; fi'
 alias set_sock_proxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_PROXY; all_proxy=$SOCK_PROXY; export no_proxy=$NO_PROXY; showproxy'
@@ -59,10 +78,10 @@ alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else se
 
 # Homebrew
 if [[ $OSTYPE == darwin* ]]; then
-    # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
     function set_homebrew_mirror() {
-        export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
+        export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
         cd "$(brew --repo)"
         git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
@@ -107,10 +126,10 @@ if [[ $OSTYPE == darwin* ]]; then
 fi
 
 # Golang
+export GOPROXY=https://goproxy.cn # goproxy.io
 if (( $+commands[go] )); then
-    function gocomplete() {
-        zinit snippet OMZP::golang
-    }
+    # export GOPROXY=https://goproxy.cn
+    # export GOPROXY=https://athens.azurefd.net
 
     function goclean() {
         go clean -i -n $1
