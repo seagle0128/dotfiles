@@ -18,11 +18,21 @@
     #       OMZP::rbenv \
     #       OMZP::rails
 
+# zinit wait lucid as"completion" for \
+    #       https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/rust/_rust \
+    #       https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/rustup/_rustup \
+    #       https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/cargo/_cargo
+
 # Theme
 if [ -n "$INSIDE_EMACS" ]; then
     DISABLE_AUTO_TITLE="true"
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=gray,underline'
 fi
+
+# Starship (require nerd fonts)
+# zinit ice as"null" wait lucid from"gh-r" sbin"**/starship"
+# zinit light starship/starship
+# (( $+commands[starship] )) && eval $(starship init zsh)
 
 # Env
 # export EDITOR=vim
