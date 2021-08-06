@@ -261,7 +261,7 @@ alias mte="emacs -Q -nw -l $EMACSD/init-mini.el" # mini terminal emacs
 alias e="$EDITOR -n"
 alias ec="$EDITOR -n -c"
 alias ef="$EDITOR -c"
-alias te="$EDITOR -a '' -nw"
+alias te="$EDITOR -nw"
 alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))' && te"
 
 # Upgrade
