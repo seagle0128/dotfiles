@@ -110,7 +110,7 @@ if [[ $OSTYPE == darwin* ]]; then
         brew update
     }
 
-    function reset_homebrew() {
+    function reset_homebrew_mirror() {
         export HOMEBREW_BOTTLE_DOMAIN=
 
         cd "$(brew --repo)"
