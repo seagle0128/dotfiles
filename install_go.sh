@@ -7,6 +7,10 @@
 
 # Go packages
 packages=(
+    golang.org/x/tools/gopls
+    golang.org/x/tools/cmd/goimports
+    honnef.co/go/tools/cmd/staticcheck
+
     github.com/zmb3/gogetdoc
     github.com/go-delve/delve/cmd/dlv
     github.com/aarzilli/gdlv
@@ -14,8 +18,6 @@ packages=(
     github.com/cweill/gotests/...
     github.com/fatih/gomodifytags
     github.com/davidrjenni/reftools/cmd/fillstruct
-    golang.org/x/tools/cmd/goimports
-
     github.com/google/gops
     github.com/haya14busa/goplay/cmd/goplay
 )
@@ -61,17 +63,9 @@ function check() {
 }
 
 function install() {
-    # https://github.com/golang/tools/tree/master/gopls#installation
-    printf "${BLUE} ➜  Installing gopls...${NORMAL}\n"
-    GO111MODULE=on go get golang.org/x/tools/gopls@latest
-
-    # https://staticcheck.io/docs/install
-    printf "${BLUE} ➜  Installing staticcheck...${NORMAL}\n"
-    go install honnef.co/go/tools/cmd/staticcheck@latest
-
     for p in ${packages[@]}; do
         printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
-        go get -u ${p}
+        GO111MODULE=on go install ${p}@latest
     done
 }
 
