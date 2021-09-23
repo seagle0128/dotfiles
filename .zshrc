@@ -268,7 +268,7 @@ alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) (kill-emacs-query-function
 alias upgrade_repo='git pull --rebase --stat origin master'
 alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
 alias upgrade_emacs='emacs -Q --batch -L "$EMACSD/lisp/" -l "init-funcs.el" -l "init-package.el" --eval "(update-config-and-packages t t)"'
-alias upgrade_oh_my_tmux='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
+alias upgrade_omt='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
 
 alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update
