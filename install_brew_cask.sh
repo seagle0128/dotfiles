@@ -9,7 +9,7 @@
 apps=(
     avibrazil-rdm              # Retina display management
     cheatsheet
-    clipy                      # Clipboard
+    maccy                      # Clipboard: clipy
     maczip                     # Compress & extract
     fliqlo                     # Screen Saver
     paper                      # Wallpaper
@@ -33,8 +33,8 @@ apps=(
     osxfuse                    # File system
     veracrypt                  # File crypt
     vox                        # Music player
-    squirrel                   # sogouinput
-    handbrake                  # transcoder
+    squirrel                   # Pinyin Input: sogouinput
+    handbrake                  # Video Transcoder: transcoder
 
     # Audio
     # soundflower
@@ -51,7 +51,7 @@ apps=(
     # aliwangwang
     baidunetdisk
     motrix                     # Downloader: ariang
-    # macgesture
+    macgesture
     qq
     wechat
     thunder
