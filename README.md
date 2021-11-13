@@ -70,7 +70,7 @@ zinit snippet OMZP::ruby
 zinit light ptavares/zsh-direnv
 ```
 
-See details on [zinit](https://github.com/zdharma/zinit).
+See details on [zinit](https://github.com/zdharma-continuum/zinit).
 
 ### Git local config
 

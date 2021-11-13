@@ -199,7 +199,7 @@ fi
 
 # Zsh plugin manager
 printf "${GREEN}▓▒░ Installing Zinit...${NORMAL}\n"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh)"
 
 # Dotfiles
 printf "${GREEN}▓▒░ Installing Dotfiles...${NORMAL}\n"
