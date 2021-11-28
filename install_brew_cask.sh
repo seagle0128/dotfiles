@@ -30,7 +30,7 @@ apps=(
     karabiner-elements         # karabiner: Keboard remapping
     hammersppon                # Ultimate tools
     # netspot                    # Wifi signal analysis and scanner
-    osxfuse                    # File system
+    macfuse                    # File system
     veracrypt                  # File crypt
     vox                        # Music player
     squirrel                   # Pinyin Input: sogouinput
