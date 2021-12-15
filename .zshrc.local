@@ -19,9 +19,8 @@
     #       OMZP::rails
 
 # zinit wait lucid as"completion" for \
-    #       https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/rust/_rust \
-    #       https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/rustup/_rustup \
-    #       https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/cargo/_cargo
+    # https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/rust/_rust
+
 
 # Theme
 # Starship (require nerd fonts)
