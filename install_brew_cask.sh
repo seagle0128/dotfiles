@@ -20,9 +20,9 @@ apps=(
     licecap                    # Recording screen as gif
     # mounty                     # Mounty for NTFS read/write
     mos                        # Smooth and reverse scroll
-    raycast                    # Spotlight/Alfred replacement.
+    # raycast                    # Spotlight/Alfred replacement.
     rectangle                  # Window management
-    # vanilla                    # Hide menu bar icons. Alternative: bartender
+    hiddenbar                  # Hide menu bar icons. Alternative: bartender, vanilla
 
     clashx-pro                 # Proxy: v2rayx, shadowsocksx-ng-r
     iina                       # Media player
@@ -44,7 +44,7 @@ apps=(
     # java                       # optional
     # docker                     # optional
     # fork                       # Git Client: gitkraken, sourcetree
-    typora                     # Markdown editor
+    mark-text                    # Markdown editor: typora
     visual-studio-code
 
     # Utilities
@@ -54,13 +54,13 @@ apps=(
     macgesture
     qq
     wechat
-    thunder
     tencent-lemon
 
     neteasemusic
     youdaodict
     youdaonote
 
+    yesplaymusic
     zy-player
 )
 
