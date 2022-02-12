@@ -44,20 +44,19 @@ zinit wait lucid for \
       OMZP::git \
       OMZP::sudo
 
-zinit light-mode for \
+# Completion enhancements
+zinit wait lucid for \
+      atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+      zdharma-continuum/fast-syntax-highlighting \
+      blockf \
+      zsh-users/zsh-completions \
+      atload"!_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions
 
 zinit wait lucid light-mode for \
       zsh-users/zsh-history-substring-search \
       hlissner/zsh-autopair \
       agkozak/zsh-z
-
-# Completion enhancements
-zinit ice wait lucid atload"zicompinit; zicdreplay" blockf
-zinit light zsh-users/zsh-completions
-
-zinit ice wait lucid atinit"zicompinit; zicdreplay"
-zinit light zdharma-continuum/fast-syntax-highlighting
 
 zinit ice wait lucid from'gh-r' as'program'
 zinit light sei40kr/fast-alias-tips-bin
