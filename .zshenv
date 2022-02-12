@@ -6,9 +6,6 @@ export DEFAULT_USER=$USER
 export EDITOR='emacsclient -a ""'
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/sbin:$PATH
 
-# zinit
-export PATH=$HOME/.zinit/polaris/bin:$PATH
-
 # Cask
 export PATH=$HOME/.cask/bin:$PATH
 
