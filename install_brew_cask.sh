@@ -13,7 +13,7 @@ apps=(
     maczip                     # Compress & extract
     fliqlo                     # Screen Saver
     paper                      # Wallpaper
-    hyperswitch                # alt-tab
+    alt-tab                    # hyperswitch
     iterm2                     # Terminal
     # keepingyouawake
     keycastr                   # Show keys on the screen
@@ -24,15 +24,15 @@ apps=(
     rectangle                  # Window management
     hiddenbar                  # Hide menu bar icons. Alternative: bartender, vanilla
 
-    clashx-pro                 # Proxy: v2rayx, shadowsocksx-ng-r
+    clashx                     # Proxy: v2rayx, shadowsocksx-ng-r
     iina                       # Media player
     microsoft-edge             # Browser: google-chrome
     karabiner-elements         # karabiner: Keboard remapping
-    hammersppon                # Ultimate tools
+    # hammersppon                # Ultimate tools
     # netspot                    # Wifi signal analysis and scanner
     macfuse                    # File system
     veracrypt                  # File crypt
-    vox                        # Music player
+    # vox                        # Music player
     squirrel                   # Pinyin Input: sogouinput
     handbrake                  # Video Transcoder: transcoder
 
@@ -44,12 +44,12 @@ apps=(
     # java                       # optional
     # docker                     # optional
     # fork                       # Git Client: gitkraken, sourcetree
-    mark-text                    # Markdown editor: typora
+    # mark-text                    # Markdown editor: typora
     visual-studio-code
 
     # Utilities
     # aliwangwang
-    baidunetdisk
+    # baidunetdisk
     motrix                     # Downloader: ariang
     macgesture
     qq
@@ -99,8 +99,7 @@ function check {
         xcode-select --install
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-        brew tap caskroom/cask
-        brew tap caskroom/fonts
+        brew tap homebrew/cask-fonts
         brew tap buo/cask-upgrade
     fi
 }

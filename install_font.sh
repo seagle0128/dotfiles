@@ -79,7 +79,7 @@ function install {
         font_dir="$HOME/Library/Fonts"
 
         fonts=(
-            font-source-code-pro
+            # font-source-code-pro
             # font-dejavu-sans
             font-inconsolata
             font-hack-nerd-font
@@ -93,10 +93,10 @@ function install {
 
         if [ ! -f "${font_dir}/SourceCodePro-Regular.otf" ]; then
             for f in ${fonts[@]}; do
-                brew cask install ${f}
+                brew install ${f}
             done
         fi
-        brew cask cleanup
+        brew cleanup
     elif [ "$SYSTEM" = "Linux" ]; then
         # Linux
         font_dir="$HOME/.local/share/fonts"
