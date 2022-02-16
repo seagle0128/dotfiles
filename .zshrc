@@ -58,7 +58,7 @@ zinit wait lucid light-mode for \
       hlissner/zsh-autopair \
       agkozak/zsh-z
 
-if [[ ! $OSTYPE == linux* && ! $CPUTYPE == arm64 ]]; then
+if [[ ! $OSTYPE == linux* && $CPUTYPE == aarch64 ]]; then
     zinit ice wait lucid from'gh-r' as'program'
     zinit light sei40kr/fast-alias-tips-bin
     zinit ice wait lucid depth"1"
@@ -90,7 +90,7 @@ zinit as"null" wait lucid from"gh-r" for \
       atload"alias ping=gping" sbin"**/gping" orf/gping \
       atload"alias ps=procs" sbin"**/procs" dalance/procs
 
-if [[ ! $OSTYPE == linux* && ! $CPUTYPE == aarch64 ^^ ! $CPUTYPE == arm64 ]]; then
+if [[ ! $OSTYPE == linux* && ! $CPUTYPE == aarch64 ]]; then
     zinit ice as"null" from"gh-r" atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa" sbin"**/exa"
     zinit light ogham/exa
 fi
