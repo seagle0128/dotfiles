@@ -20,6 +20,7 @@ apps=(
     keycastr                   # Show keys on the screen
     licecap                    # Recording screen as gif
     # mounty                     # Mounty for NTFS read/write
+    monitorcontrol             # Controls external display brightness and volume
     mos                        # Smooth and reverse scroll
     # raycast                    # Spotlight/Alfred replacement.
     rectangle                  # Window management
