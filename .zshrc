@@ -58,10 +58,12 @@ zinit wait lucid light-mode for \
       hlissner/zsh-autopair \
       agkozak/zsh-z
 
-zinit ice wait lucid from'gh-r' as'program'
-zinit light sei40kr/fast-alias-tips-bin
-zinit ice wait lucid depth"1"
-zinit light sei40kr/zsh-fast-alias-tips
+if [[ ! $OSTYPE == linux* && ! $CPUTYPE == arm64 ]]; then
+    zinit ice wait lucid from'gh-r' as'program'
+    zinit light sei40kr/fast-alias-tips-bin
+    zinit ice wait lucid depth"1"
+    zinit light sei40kr/zsh-fast-alias-tips
+fi
 
 #
 # Utilities
@@ -79,7 +81,8 @@ zinit as"null" wait lucid from"gh-r" for \
       atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
       atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa" sbin"**/exa" ogham/exa \
       cp"**/fd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
-      cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]" sbin"**/rg" BurntSushi/ripgrep \
+      sbin microsoft/ripgrep-prebuilt \
+      cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]" BurntSushi/ripgrep \
       mv"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" sbin"**/btm" ClementTsang/bottom \
       atload"alias help=cheat" mv"**/cheat** -> cheat" sbin"**/cheat" cheat/cheat \
       atload"alias diff=delta" sbin"**/delta" dandavison/delta \
