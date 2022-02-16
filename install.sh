@@ -41,36 +41,7 @@ else
     NORMAL=""
 fi
 
-# Check git
-command -v git >/dev/null 2>&1 || {
-    echo "${RED}Error: git is not installed${NORMAL}" >&2
-    exit 1
-}
-
-# Check curl
-command -v curl >/dev/null 2>&1 || {
-    echo "${RED}Error: curl is not installed${NORMAL}" >&2
-    exit 1
-}
-
-# Sync repository
-sync_repo() {
-    local repo_uri="$1"
-    local repo_path="$2"
-    local repo_branch="$3"
-
-    if [ -z "$repo_branch" ]; then
-        repo_branch="master"
-    fi
-
-    if [ ! -e "$repo_path" ]; then
-        mkdir -p "$repo_path"
-        git clone --depth 1 --branch $repo_branch "https://github.com/$repo_uri.git" "$repo_path"
-    else
-        cd "$repo_path" && git pull --rebase --stat origin $repo_branch; cd - >/dev/null
-    fi
-}
-
+# Functions
 is_mac()
 {
     [ "$OS" = "Darwin" ]
@@ -94,40 +65,35 @@ is_arch() {
     command -v yay >/dev/null 2>&1 || command -v pacman >/dev/null 2>&1
 }
 
-sync_brew_package() {
-    if ! command -v brew >/dev/null 2>&1; then
-        echo "${RED}Error: brew is not found${NORMAL}" >&2
-        return 1
+sync_repo() {
+    local repo_uri="$1"
+    local repo_path="$2"
+    local repo_branch="$3"
+
+    if [ -z "$repo_branch" ]; then
+        repo_branch="master"
     fi
 
-    if ! command -v ${1} >/dev/null 2>&1; then
-        brew install ${1} >/dev/null
+    if [ ! -e "$repo_path" ]; then
+        mkdir -p "$repo_path"
+        git clone --depth 1 --branch $repo_branch "https://github.com/$repo_uri.git" "$repo_path"
     else
-        brew upgrade ${1} >/dev/null
+        cd "$repo_path" && git pull --rebase --stat origin $repo_branch; cd - >/dev/null
     fi
 }
 
-sync_apt_package() {
-    if command -v apt-get >/dev/null 2>&1; then
-        sudo apt-get upgrade -y ${1} >/dev/null
-    else
-        echo "${RED}Error: apt and apt-get are not found${NORMAL}" >&2
-        return 1
+install_package() {
+    if is_mac; then
+        brew install ${1}
+    elif is_debian; then
+        sudo apt-get install -y ${1}
+    elif is_arch; then
+        pacman -Ss --noconfirm ${1}
+    elif is_cygwin; then
+        apt-cyg install -y ${1}
     fi
 }
 
-sync_arch_package() {
-    if command -v yay >/dev/null 2>&1; then
-        yay -Ssu --noconfirm ${1} >/dev/null
-    elif command -v pacman >/dev/null 2>&1; then
-        sudo pacman -Ssu --noconfirm ${1} >/dev/null
-    else
-        echo "${RED}Error: pacman and yay are not found${NORMAL}" >&2
-        return 1
-    fi
-}
-
-# Clean all configurations
 clean_dotfiles() {
     confs="
     .gemrc
@@ -164,15 +130,7 @@ promote_yn() {
     esac
 }
 
-# Reset configurations
-if [ -d $ZSH ] || [ -d $TMUX ] || [ -d $EMACSD ]; then
-    promote_yn "Do you want to reset all configurations?" "continue"
-    if [ $continue -eq $YES ]; then
-        clean_dotfiles
-    fi
-fi
-
-# Brew
+# Install Brew/apt-cyg
 if is_mac; then
     printf "${GREEN}▓▒░ Installing Homebrew...${NORMAL}\n"
     if ! command -v brew >/dev/null 2>&1; then
@@ -185,10 +143,7 @@ if is_mac; then
         brew tap homebrew/cask-fonts
         brew tap buo/cask-upgrade
     fi
-fi
-
-# Apt-Cyg
-if is_cygwin; then
+elif is_cygwin; then
     printf "${GREEN}▓▒░ Installing Apt-Cyg...${NORMAL}\n"
     if ! command -v apt-cyg >/dev/null 2>&1; then
         APT_CYG=/usr/local/bin/apt-cyg
@@ -197,9 +152,42 @@ if is_cygwin; then
     fi
 fi
 
-# Zsh plugin manager
+# Check git
+if ! command -v git >/dev/null 2>&1; then
+    install_package git
+fi
+
+# Check curl
+if ! command -v curl >/dev/null 2>&1; then
+    install_package curl
+fi
+
+# Check zsh
+if ! command -v zsh >/dev/null 2>&1; then
+    if is_mac; then
+        brew install zsh
+    elif is_debian; then
+        apt-get instal -y zsh
+    elif is_cygwin; then
+        apt-cyg install -y zsh
+    fi
+fi
+
+# Clean or not?
+if [ -d $ZSH ] || [ -d $TMUX ] || [ -d $EMACSD ]; then
+    promote_yn "Do you want to reset configurations?" "continue"
+    if [ $continue -eq $YES ]; then
+        clean_dotfiles
+    fi
+fi
+
+# ZSH plugin manager
 printf "${GREEN}▓▒░ Installing Zinit...${NORMAL}\n"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh)"
+if command -v zinit >/dev/null 2>&1; then
+    zinit self-update
+else
+    sh -c "$(curl -fsSL https://git.io/zinit-install)"
+fi
 
 # Dotfiles
 printf "${GREEN}▓▒░ Installing Dotfiles...${NORMAL}\n"
@@ -235,7 +223,7 @@ if is_cygwin; then
     ln -sf $DOTFILES/.minttyrc $HOME/.minttyrc
 fi
 
-# Emacs Configs
+# Emacs Configurations
 printf "${GREEN}▓▒░ Installing Centaur Emacs...${NORMAL}\n"
 sync_repo seagle0128/.emacs.d $EMACSD
 
@@ -247,7 +235,7 @@ ln -sf $TMUX/.tmux.conf $HOME/.tmux.conf
 # Entering zsh
 printf "Done. Enjoy!\n"
 if command -v zsh >/dev/null 2>&1; then
-    if [ "$OSTYPE" != "cygwin" ] && [ "$SHELL" != "$(which zsh)" ]; then
+    if is_cygwin && [ "$SHELL" != "$(which zsh)" ]; then
         chsh -s $(which zsh)
         printf "${GREEN} You need to logout and login to enable zsh as the default shell.${NORMAL}\n"
     fi

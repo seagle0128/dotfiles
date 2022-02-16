@@ -59,7 +59,6 @@ sync_repo() {
     fi
 }
 
-
 function check {
     if ! command -v git >/dev/null 2>&1; then
         echo "${RED}Error: git is not installed${NORMAL}" >&2
