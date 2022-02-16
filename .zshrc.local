@@ -72,57 +72,38 @@ fi
 
 # Homebrew
 if [[ $OSTYPE == darwin* ]]; then
-    export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+    export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+    export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
+    export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 
     function set_homebrew_mirror() {
-        export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+        export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+        export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
+        export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
 
-        cd "$(brew --repo)"
-        git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
-        cd - >/dev/null
-
-        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-core
-        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
-        cd - >/dev/null
-
-        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask
-        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
-        cd - >/dev/null
-
-        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask-versions
-        git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask-versions.git
-        cd - >/dev/null
+        brew tap --custom-remote --force-auto-update homebrew/cask https://mirrors.ustc.edu.cn/homebrew-cask.git
+        brew tap --custom-remote --force-auto-update homebrew/cask-versions https://mirrors.ustc.edu.cn/homebrew-cask-versions.git
 
         brew update
     }
 
     function reset_homebrew_mirror() {
-        export HOMEBREW_BOTTLE_DOMAIN=
+        unset HOMEBREW_BREW_GIT_REMOTE
+        unset HOMEBREW_BOTTLE_DOMAIN
+        unset HOMEBREW_CORE_GIT_REMOTE
 
-        cd "$(brew --repo)"
-        git remote set-url origin https://github.com/Homebrew/brew.git
-        cd - >/dev/null
-
-        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-core
-        git remote set-url origin https://github.com/Homebrew/homebrew-core
-        cd - >/dev/null
-
-        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask
-        git remote set-url origin https://github.com/Homebrew/homebrew-cask
-        cd - >/dev/null
-
-        cd "$(brew --repo)"/Library/Taps/homebrew/homebrew-cask-versions
-        git remote set-url origin https://github.com/Homebrew/homebrew-cask-versions.git
-        cd - >/dev/null
+        brew tap --custom-remote homebrew/core https://github.com/Homebrew/homebrew-core
+        brew tap --custom-remote --force-auto-update homebrew/cask https://github.com/Homebrew/homebrew-cask
+        brew tap --custom-remote --force-auto-update homebrew/cask-versions https://github.com/Homebrew/homebrew-cask-versions
 
         brew update
     }
 fi
 
 # Golang
-export GOPROXY=https://goproxy.cn # goproxy.io
 if (( $+commands[go] )); then
-    # export GOPROXY=https://goproxy.cn
+    export GOPROXY=https://goproxy.cn
+    # export GOPROXY=https://goproxy.io
     # export GOPROXY=https://athens.azurefd.net
 
     function goclean() {

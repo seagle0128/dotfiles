@@ -154,7 +154,8 @@ fi
 if is_mac && ! command -v brew >/dev/null 2>&1; then
     printf "${GREEN}▓▒░ Installing Homebrew...${NORMAL}\n"
     # Install homebrew
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/Homebrew/install@HEAD/install.sh)"
 
     # Tap cask and cask-upgrade
     brew tap homebrew/cask
