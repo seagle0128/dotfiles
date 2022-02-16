@@ -19,8 +19,7 @@
     #       OMZP::rails
 
 # zinit wait lucid as"completion" for \
-    # https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/rust/_rust
-
+    #       https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/rust/_rustc
 
 # Theme
 # Load the pure theme, with zsh-async library that's bundled with it.
