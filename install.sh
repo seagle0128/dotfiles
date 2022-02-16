@@ -167,7 +167,7 @@ if ! command -v zsh >/dev/null 2>&1; then
     if is_mac; then
         brew install zsh
     elif is_debian; then
-        apt-get instal -y zsh
+        apt-get install -y zsh
     elif is_cygwin; then
         apt-cyg install -y zsh
     fi
