@@ -83,14 +83,26 @@ sync_repo() {
 }
 
 install_package() {
-    if is_mac; then
-        brew install ${1}
-    elif is_debian; then
-        sudo apt-get install -y ${1}
-    elif is_arch; then
-        pacman -Ss --noconfirm ${1}
-    elif is_cygwin; then
-        apt-cyg install -y ${1}
+    if ! command -v ${1} >/dev/null 2>&1; then
+        if is_mac; then
+            brew install ${1}
+        elif is_debian; then
+            sudo apt-get install -y ${1}
+        elif is_arch; then
+            pacman -Ssu --noconfirm ${1}
+        elif is_cygwin; then
+            apt-cyg install -y ${1}
+        fi
+    else
+        if is_mac; then
+            brew upgrade ${1}
+        elif is_debian; then
+            sudo apt-get upgrade -y ${1}
+        elif is_arch; then
+            pacman -Ssu --noconfirm ${1}
+        elif is_cygwin; then
+            apt-cyg upgrade -y ${1}
+        fi
     fi
 }
 
@@ -130,26 +142,30 @@ promote_yn() {
     esac
 }
 
-# Install Brew/apt-cyg
-if is_mac; then
-    printf "${GREEN}▓▒░ Installing Homebrew...${NORMAL}\n"
-    if ! command -v brew >/dev/null 2>&1; then
-        # Install homebrew
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Clean or not?
+if [ -d $ZSH ] || [ -d $TMUX ] || [ -d $EMACSD ]; then
+    promote_yn "Do you want to reset all configurations?" "continue"
+    if [ $continue -eq $YES ]; then
+        clean_dotfiles
+    fi
+fi
 
-        # Tap cask and cask-upgrade
-        brew tap homebrew/cask
-        brew tap homebrew/cask-versions
-        brew tap homebrew/cask-fonts
-        brew tap buo/cask-upgrade
-    fi
-elif is_cygwin; then
+# Install Brew/apt-cyg
+if is_mac && ! command -v brew >/dev/null 2>&1; then
+    printf "${GREEN}▓▒░ Installing Homebrew...${NORMAL}\n"
+    # Install homebrew
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    # Tap cask and cask-upgrade
+    brew tap homebrew/cask
+    brew tap homebrew/cask-versions
+    brew tap homebrew/cask-fonts
+    brew tap buo/cask-upgrade
+elif is_cygwin && ! command -v apt-cyg >/dev/null 2>&1; then
     printf "${GREEN}▓▒░ Installing Apt-Cyg...${NORMAL}\n"
-    if ! command -v apt-cyg >/dev/null 2>&1; then
-        APT_CYG=/usr/local/bin/apt-cyg
-        curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG
-        chmod +x $APT_CYG
-    fi
+    APT_CYG=/usr/local/bin/apt-cyg
+    curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG
+    chmod +x $APT_CYG
 fi
 
 # Check git
@@ -164,29 +180,15 @@ fi
 
 # Check zsh
 if ! command -v zsh >/dev/null 2>&1; then
-    if is_mac; then
-        brew install zsh
-    elif is_debian; then
-        apt-get install -y zsh
-    elif is_cygwin; then
-        apt-cyg install -y zsh
-    fi
-fi
-
-# Clean or not?
-if [ -d $ZSH ] || [ -d $TMUX ] || [ -d $EMACSD ]; then
-    promote_yn "Do you want to reset configurations?" "continue"
-    if [ $continue -eq $YES ]; then
-        clean_dotfiles
-    fi
+    install_package zsh
 fi
 
 # ZSH plugin manager
 printf "${GREEN}▓▒░ Installing Zinit...${NORMAL}\n"
-if command -v zinit >/dev/null 2>&1; then
-    zinit self-update
-else
+if ! command -v zinit >/dev/null 2>&1; then
     sh -c "$(curl -fsSL https://git.io/zinit-install)"
+else
+    zinit self-update
 fi
 
 # Dotfiles
