@@ -226,22 +226,13 @@ elif [[ $OSTYPE == linux* ]]; then
     fi
 fi
 
-# Local customizations, e.g. theme, plugins, aliases, etc.
-[ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
-
 #
 # Aliases
 #
 
-# Unalias the original fd in oh-my-zsh
-# alias fd >/dev/null && unalias fd
-
-# General
 alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
 alias h='history'
 alias c='clear'
-
-alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
 if [[ $OSTYPE == darwin* ]]; then
     (( $+commands[gls] )) && alias ls='gls --color=tty --group-directories-first'
@@ -249,27 +240,7 @@ else
     ((! $+commands[exa] )) && alias ls='ls --color=tty --group-directories-first'
 fi
 
-# Emacs
-alias me="emacs -Q -l $EMACSD/init-mini.el" # mini emacs
-alias mte="emacs -Q -nw -l $EMACSD/init-mini.el" # mini terminal emacs
-alias e="$EDITOR -n"
-alias ec="$EDITOR -n -c"
-alias ef="$EDITOR -c"
-alias te="$EDITOR -nw"
-alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))' && te"
+alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
-# Upgrade
-alias upgrade_repo='git pull --rebase --stat origin master'
-alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
-alias upgrade_emacs='emacs -Q --batch -L "$EMACSD/lisp/" -l "init-funcs.el" -l "init-package.el" --eval "(update-config-and-packages t t)"'
-alias upgrade_omt='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
-alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
-
-alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update
-alias upgrade_gem='gem update && gem cleanup'
-alias upgrade_go='GO111MODULE=on && $DOTFILES/install_go.sh'
-alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2); do npm -g install "$package"; done'
-alias upgrade_pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
-alias upgrade_pip3="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
-[[ $OSTYPE == darwin* ]] && alias upgrade_brew='/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'; alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
-alias upgrade_zinit='sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh)"; (( $+functions[zinit] )) && zinit update'
+# Local customizations, e.g. theme, plugins, aliases, etc.
+[ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
