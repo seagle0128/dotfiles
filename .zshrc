@@ -235,6 +235,9 @@ alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
 alias h='history'
 alias c='clear'
 
+# Git
+alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
+
 # Emacs
 alias me="emacs -Q -l $EMACSD/init-mini.el" # mini emacs
 alias mte="emacs -Q -nw -l $EMACSD/init-mini.el" # mini terminal emacs
@@ -283,8 +286,6 @@ if [[ $OSTYPE == darwin* ]]; then
 else
     ((! $+commands[exa] )) && alias ls='ls --color=tty --group-directories-first'
 fi
-
-alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
 # Local customizations, e.g. theme, plugins, aliases, etc.
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
