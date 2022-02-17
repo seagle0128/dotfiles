@@ -99,8 +99,10 @@ function check {
         printf "${BLUE} ➜  Installing Homebrew and Cask...${NORMAL}\n"
 
         xcode-select --install
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /bin/bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/Homebrew/install@HEAD/install.sh)"
 
+        brew tap homebrew/cask
+        brew tap homebrew/cask-versions
         brew tap homebrew/cask-fonts
         brew tap buo/cask-upgrade
     fi
