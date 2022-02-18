@@ -83,11 +83,9 @@ function install {
             font-inconsolata
             font-hack-nerd-font
 
-            font-symbola
-
-            font-wenquanyi-micro-hei
-            font-wenquanyi-micro-hei-lite
-            font-wenquanyi-zen-hei
+            # font-wenquanyi-micro-hei
+            # font-wenquanyi-micro-hei-lite
+            # font-wenquanyi-zen-hei
         )
 
         if [ ! -f "${font_dir}/SourceCodePro-Regular.otf" ]; then
