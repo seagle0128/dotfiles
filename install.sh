@@ -162,6 +162,9 @@ if is_mac && ! command -v brew >/dev/null 2>&1; then
     brew tap homebrew/cask-versions
     brew tap homebrew/cask-fonts
     brew tap buo/cask-upgrade
+
+    # Install GNU utilities
+    brew install coreutils
 elif is_cygwin && ! command -v apt-cyg >/dev/null 2>&1; then
     printf "${GREEN}▓▒░ Installing Apt-Cyg...${NORMAL}\n"
     APT_CYG=/usr/local/bin/apt-cyg
