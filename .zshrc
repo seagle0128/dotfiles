@@ -8,7 +8,7 @@ EMACSD=$HOME/.emacs.d
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
     command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+    command git clone --depth=1 https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
             print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
@@ -19,11 +19,11 @@ autoload -Uz _zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-zinit light-mode for \
-      zdharma-continuum/zinit-annex-rust \
+zinit light-mode depth"1" for \
       zdharma-continuum/zinit-annex-as-monitor \
+      zdharma-continuum/zinit-annex-bin-gem-node \
       zdharma-continuum/zinit-annex-patch-dl \
-      zdharma-continuum/zinit-annex-bin-gem-node
+      zdharma-continuum/zinit-annex-rust
 
 ### End of Zinit's installer chunk
 
@@ -34,9 +34,7 @@ zinit for \
       OMZL::history.zsh \
       OMZL::key-bindings.zsh \
       OMZL::theme-and-appearance.zsh \
-      OMZP::common-aliases
-
-zinit wait lucid for \
+      OMZP::common-aliases \
       OMZP::colored-man-pages \
       OMZP::cp \
       OMZP::extract \
@@ -45,7 +43,7 @@ zinit wait lucid for \
       OMZP::sudo
 
 # Completion enhancements
-zinit wait lucid for \
+zinit wait lucid depth"1" for \
       atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
       zdharma-continuum/fast-syntax-highlighting \
       blockf \
@@ -53,7 +51,7 @@ zinit wait lucid for \
       atload"!_zsh_autosuggest_start" \
       zsh-users/zsh-autosuggestions
 
-zinit wait lucid light-mode for \
+zinit wait lucid light-mode depth"1" for \
       zsh-users/zsh-history-substring-search \
       hlissner/zsh-autopair \
       agkozak/zsh-z
@@ -72,43 +70,63 @@ fi
 # Scripts that are built at install (there's single default make target, "install",
 # and it constructs scripts by `cat'ing a few files). The make'' ice could also be:
 # `make"install PREFIX=$ZPFX"`, if "install" wouldn't be the only, default target.
-zinit ice as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+zinit ice wait lucid as"program" depth"1" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
-zinit as"null" wait lucid from"gh-r" for \
-      atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
-      cp"**/fd.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
-      sbin microsoft/ripgrep-prebuilt \
-      cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]" BurntSushi/ripgrep \
-      mv"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" sbin"**/btm" ClementTsang/bottom \
-      atload"alias help=cheat" mv"**/cheat** -> cheat" sbin"**/cheat" cheat/cheat \
-      atload"alias diff=delta" sbin"**/delta" dandavison/delta \
-      atload"unalias duf; alias df=duf" sbin"**/duf" muesli/duf \
-      atload"alias du=dust" sbin"**/dust" bootandy/dust \
-      atload"alias ping=gping" sbin"**/gping" orf/gping \
-      atload"alias ps=procs" sbin"**/procs" dalance/procs
+zinit as"program" wait lucid from"gh-r" for \
+      atload"alias cat='bat -p --wrap character'" mv"**/bat.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" mv"**/bat -> bat" sharkdp/bat \
+      cp"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" mv"**/fd -> fd" sharkdp/fd \
+      cp"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" ClementTsang/bottom \
+      atload"alias help=cheat" mv"**/cheat** -> cheat" cheat/cheat \
+      atload"alias diff=delta" mv"**/delta -> delta" dandavison/delta \
+      atload"unalias duf; alias df=duf" muesli/duf \
+      atload"alias du=dust" mv"**/dust -> dust" bootandy/dust \
+      atload"alias ping=gping" orf/gping \
+      atload"alias ps=procs" dalance/procs
 
-if [[ ! $OSTYPE == linux* && ! $CPUTYPE == aarch* ]]; then
-    zinit ice as"null" from"gh-r" atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa" sbin"**/exa"
+if [[ $CPUTYPE == arm* || $CPUTYPE == aarch* ]]; then
+    zinit ice as"program" from"gh-r" bpick"*aarch*"
+else
+    zinit ice as"program" from"gh-r"
+fi
+zinit light microsoft/ripgrep-prebuilt
+
+zinit ice as"null" from"gh-r" wait lucid cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]"
+zinit light BurntSushi/ripgrep
+
+if (( $+commands[gls] )); then
+    alias ls='gls --color=tty --group-directories-first'
+else
+    alias ls='ls --color=tty --group-directories-first'
+fi
+
+if [[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]; then
+    zinit ice as"program" from"gh-r" atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" atclone"ln -sf man/exa.1 $ZPFX/share/man/man1/; ln -sf completions/exa.zsh $ZINIT[COMPLETIONS_DIR]/_exa;" mv"**/exa exa"
     zinit light ogham/exa
 fi
 
+# For GNU ls (the binaries can be gls, gdircolors, e.g. on OS X when installing the
+# coreutils package from Homebrew; you can also use https://github.com/ogham/exa)
+# (( $+commands[gdircolors] )) && alias dircolors=gdircolors
+# zinit ice depth"1" atclone"dircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
+# zinit light trapd00r/LS_COLORS
+
 # Hyperfine: benchmark tool
-zinit ice as"null" wait lucid from"gh-r" sbin"**/hyperfine"
+zinit ice as"program" wait lucid from"gh-r" mv"**/hyperfine -> hyperfine"
 zinit light sharkdp/hyperfine
 
 # FZF: fuzzy finder
-zinit ice id-as"fzf-bin" as"program" wait lucid from"gh-r" sbin"**/fzf"
+zinit ice id-as"fzf-bin" as"program" wait lucid from"gh-r"
 zinit light junegunn/fzf
 
-zinit ice wait lucid depth"1" as"null" sbin"bin/fzf-tmux" \
+zinit ice wait lucid depth"1" as"program" mv"**/fzf-tmux fzf-tmux" \
       cp"man/man.1/fzf* -> $ZPFX/share/man/man1" atpull'%atclone' \
       src'shell/key-bindings.zsh'
 zinit light junegunn/fzf
 
-zinit ice wait lucid atload"zicompinit; zicdreplay" blockf
+zinit ice wait lucid depth"1" atload"zicompinit; zicdreplay" blockf
 zinit light Aloxaf/fzf-tab
 
 zstyle ':completion:*:descriptions' format '[%d]'
@@ -207,11 +225,6 @@ bind-git-helper() {
 bind-git-helper f b t r h s
 unset -f bind-git-helper
 
-# For GNU ls (the binaries can be gls, gdircolors, e.g. on OS X when installing the
-# coreutils package from Homebrew; you can also use https://github.com/ogham/exa)
-zinit ice atclone"dircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
-zinit light trapd00r/LS_COLORS
-
 # OS bundles
 if [[ $OSTYPE == darwin* ]]; then
     zinit snippet PZTM::osx
@@ -287,12 +300,6 @@ alias toggleproxy2='if [ -n "$http_proxy" ]; then unsetproxy2; else setproxy2; f
 alias set_sock_proxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_PROXY; all_proxy=$SOCK_PROXY; export no_proxy=$NO_PROXY; showproxy'
 alias unset_sock_proxy=unsetproxy
 alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else set_sock_proxy; fi'
-
-if [[ $OSTYPE == darwin* ]]; then
-    (( $+commands[gls] )) && alias ls='gls --color=tty --group-directories-first'
-else
-    ((! $+commands[exa] )) && alias ls='ls --color=tty --group-directories-first'
-fi
 
 # Local customizations, e.g. theme, plugins, aliases, etc.
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local

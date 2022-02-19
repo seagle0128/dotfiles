@@ -11,26 +11,21 @@
 # fi
 
 # Plugins
-# zinit wait lucid for \
+# zinit for \
     #       OMZP::python \
     #       OMZP::golang \
     #       OMZP::ruby \
-    #       OMZP::rbenv \
-    #       OMZP::rails
-
-# zinit wait lucid as"completion" for \
-    #       https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/rust/_rustc
+    #       OMZP::rbenv
 
 # Theme
 # Load the pure theme, with zsh-async library that's bundled with it.
-zinit ice pick"async.zsh" src"pure.zsh"
+zinit ice depth"1" pick"async.zsh" src"pure.zsh"
 zinit light sindresorhus/pure
 
 # Load starship theme (requires nerd fonts)
-# zinit ice as"command" from"gh-r" sbin"**/starship" \
-    #       atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
-    #       atpull"%atclone" src"init.zsh"
+# zinit ice as"program" wait lucid from"gh-r"
 # zinit light starship/starship
+# (( $+commands[starship] )) && eval $(starship init zsh)
 
 if [ -n "$INSIDE_EMACS" ]; then
     DISABLE_AUTO_TITLE="true"
