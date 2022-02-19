@@ -76,8 +76,9 @@ zinit light tj/git-extras
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
 zinit as"program" wait lucid from"gh-r" for \
-      atload"alias cat='bat -p --wrap character'" mv"**/bat.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" mv"**/bat -> bat" sharkdp/bat \
-      cp"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" mv"**/fd -> fd" sharkdp/fd \
+      atload"alias cat='bat -p --wrap character'" mv"**/bat.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
+      atload"unalias fd" mv"**/fd.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
+      mv"**/hyperfine.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/_hyperfine -> $ZINIT[COMPLETIONS_DIR]" sbin"**/hyperfine" @sharkdp/hyperfine \
       cp"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" ClementTsang/bottom \
       atload"alias help=cheat" mv"**/cheat** -> cheat" cheat/cheat \
       atload"alias diff=delta" mv"**/delta -> delta" dandavison/delta \
@@ -103,7 +104,7 @@ else
 fi
 
 if [[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]; then
-    zinit ice as"program" from"gh-r" atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" atclone"ln -sf man/exa.1 $ZPFX/share/man/man1/; ln -sf completions/exa.zsh $ZINIT[COMPLETIONS_DIR]/_exa;" mv"**/exa exa"
+    zinit ice as"program" from"gh-r" atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" atclone"ln -sf man/exa.1 $ZPFX/share/man/man1; ln -sf completions/exa.zsh $ZINIT[COMPLETIONS_DIR]/_exa;" mv"**/exa exa"
     zinit light ogham/exa
 fi
 
@@ -112,10 +113,6 @@ fi
 # (( $+commands[gdircolors] )) && alias dircolors=gdircolors
 # zinit ice depth"1" atclone"dircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
 # zinit light trapd00r/LS_COLORS
-
-# Hyperfine: benchmark tool
-zinit ice as"program" wait lucid from"gh-r" mv"**/hyperfine -> hyperfine"
-zinit light sharkdp/hyperfine
 
 # FZF: fuzzy finder
 zinit ice id-as"fzf-bin" as"program" wait lucid from"gh-r"
