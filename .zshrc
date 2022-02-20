@@ -269,6 +269,7 @@ alias upgrade_repo='git pull --rebase --stat origin master'
 alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
 alias upgrade_emacs='emacs -Q --batch -L "$EMACSD/lisp/" -l "init-funcs.el" -l "init-package.el" --eval "(update-config-and-packages t t)"'
 alias upgrade_omt='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
+alias upgrade_zinit='zinit self-update && zinit update'
 alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
 
 (( $+commands[cargo] )) && alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update
@@ -278,7 +279,6 @@ alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
 (( $+commands[pip] )) && alias upgrade_pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
 (( $+commands[pip3] )) && alias upgrade_pip3="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
 (( $+commands[brew] )) && alias upgrade_brew='brew update'; alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
-(( $+commands[zinit] )) && alias upgrade_zinit='zinit self-update && zinit update'
 
 # Proxy
 PROXY=http://127.0.0.1:7890         # ss:1088, vr:8001
