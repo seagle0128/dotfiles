@@ -77,7 +77,7 @@ zinit light tj/git-extras
 # See https://github.com/ibraheemdev/modern-unix
 zinit as"program" wait lucid from"gh-r" for \
       atload"alias cat='bat -p --wrap character'" mv"**/bat.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
-      atload"unalias fd" mv"**/fd.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
+      mv"**/fd.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
       mv"**/hyperfine.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/_hyperfine -> $ZINIT[COMPLETIONS_DIR]" sbin"**/hyperfine" @sharkdp/hyperfine \
       cp"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" ClementTsang/bottom \
       atload"alias help=cheat" mv"**/cheat** -> cheat" cheat/cheat \
