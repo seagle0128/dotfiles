@@ -33,7 +33,9 @@ zinit for \
       OMZL::directories.zsh \
       OMZL::history.zsh \
       OMZL::key-bindings.zsh \
-      OMZL::theme-and-appearance.zsh \
+      OMZL::theme-and-appearance.zsh
+
+zinit wait lucid for \
       OMZP::common-aliases \
       OMZP::colored-man-pages \
       OMZP::cp \
@@ -75,18 +77,19 @@ zinit light tj/git-extras
 
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
-zinit as"program" wait lucid from"gh-r" for \
+zinit as"null" wait lucid from"gh-r" for \
       atload"alias cat='bat -p --wrap character'" mv"**/bat.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
       mv"**/fd.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
       mv"**/hyperfine.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/_hyperfine -> $ZINIT[COMPLETIONS_DIR]" sbin"**/hyperfine" @sharkdp/hyperfine \
-      cp"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" ClementTsang/bottom \
-      atload"alias help=cheat" mv"**/cheat** -> cheat" cheat/cheat \
-      atload"alias diff=delta" mv"**/delta -> delta" dandavison/delta \
-      atload"unalias duf; alias df=duf" muesli/duf \
-      atload"alias du=dust" mv"**/dust -> dust" bootandy/dust \
-      atload"alias ping=gping" orf/gping \
-      atload"alias ps=procs" dalance/procs
+      cp"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" sbin ClementTsang/bottom \
+      atload"alias help=cheat" sbin"**/cheat" cheat/cheat \
+      atload"alias diff=delta" sbin"**/delta" dandavison/delta \
+      atload"alias df=duf" sbin muesli/duf \
+      atload"alias du=dust" sbin"**/dust" bootandy/dust \
+      atload"alias ping=gping" sbin orf/gping \
+      atload"alias ps=procs" sbin dalance/procs
 
+# Don't use sbin or fbin since it's incompatible with magit-todos
 if [[ $CPUTYPE == arm* || $CPUTYPE == aarch* ]]; then
     zinit ice as"program" from"gh-r" bpick"*aarch*"
 else
@@ -104,7 +107,7 @@ else
 fi
 
 if [[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]; then
-    zinit ice as"program" from"gh-r" atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" atclone"ln -sf man/exa.1 $ZPFX/share/man/man1; ln -sf completions/exa.zsh $ZINIT[COMPLETIONS_DIR]/_exa;" mv"**/exa exa"
+    zinit ice as"null" from"gh-r" atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv'**/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa' sbin"**/exa"
     zinit light ogham/exa
 fi
 
@@ -115,11 +118,16 @@ fi
 # zinit light trapd00r/LS_COLORS
 
 # FZF: fuzzy finder
-zinit ice id-as"fzf-bin" as"program" wait lucid from"gh-r"
+if [[ $CPUTYPE == arm* || $CPUTYPE == aarch* ]]; then
+    zinit ice id-as"fzf-bin" as"null" wait lucid from"gh-r" bpick"*arm*" sbin
+else
+    zinit ice id-as"fzf-bin" as"null" wait lucid from"gh-r" sbin
+fi
 zinit light junegunn/fzf
 
-zinit ice wait lucid depth"1" as"program" mv"**/fzf-tmux fzf-tmux" \
-      cp"man/man.1/fzf* -> $ZPFX/share/man/man1" atpull'%atclone' \
+zinit ice wait lucid depth"1" as"null" \
+      mv"**/fzf-tmux fzf-tmux" \
+      cp"man/man.1/fzf* -> $ZPFX/share/man/man1" \
       src'shell/key-bindings.zsh'
 zinit light junegunn/fzf
 

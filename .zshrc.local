@@ -1,22 +1,5 @@
 # Local configurations -*- mode: sh -*-
 
-# Show system information
-# if (( $+commands[neofetch] )); then
-#     neofetch
-# fi
-
-# iTerm2 shell integration
-# if test -e "${HOME}/.iterm2_shell_integration.zsh"; then
-#     source "${HOME}/.iterm2_shell_integration.zsh"
-# fi
-
-# Plugins
-# zinit for \
-    #       OMZP::python \
-    #       OMZP::golang \
-    #       OMZP::ruby \
-    #       OMZP::rbenv
-
 # Theme
 # Load the pure theme, with zsh-async library that's bundled with it.
 zinit ice depth"1" pick"async.zsh" src"pure.zsh"
@@ -27,6 +10,29 @@ zinit light sindresorhus/pure
 # zinit light starship/starship
 # (( $+commands[starship] )) && eval $(starship init zsh)
 
+# Plugins
+# zinit wait lucid for \
+    #       OMZP::python \
+    #       OMZP::golang \
+    #       OMZP::ruby \
+    #       OMZP::rbenv \
+    #       OMZP::rails \
+    #       OMZP::rust
+
+# zinit as"completion" wait lucid for \
+    #       OMZP::docker/_docker
+
+# Show system information
+# if (( $+commands[neofetch] )); then
+#     neofetch
+# fi
+
+# iTerm2 shell integration
+# if test -e "${HOME}/.iterm2_shell_integration.zsh"; then
+#     source "${HOME}/.iterm2_shell_integration.zsh"
+# fi
+
+# For Emacs vterm
 if [ -n "$INSIDE_EMACS" ]; then
     DISABLE_AUTO_TITLE="true"
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=gray,underline'
