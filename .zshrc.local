@@ -21,7 +21,7 @@ zinit light sindresorhus/pure
 
 # zinit as"completion" wait lucid for \
     #       OMZP::docker/_docker \
-    #       https://github.com/ohmyzsh/ohmyzsh/raw/master/plugins/rust/_rustc
+    #       OMZP::rust/_rustc
 
 # Show system information
 # if (( $+commands[neofetch] )); then
