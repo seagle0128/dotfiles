@@ -58,7 +58,7 @@ zinit wait lucid light-mode depth"1" for \
       hlissner/zsh-autopair \
       agkozak/zsh-z
 
-if [[ ! $OSTYPE == linux* && $CPUTYPE == aarch* ]]; then
+if [[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]; then
     zinit ice wait lucid from'gh-r' as'program'
     zinit light sei40kr/fast-alias-tips-bin
     zinit ice wait lucid depth"1"
