@@ -77,6 +77,17 @@ zinit light tj/git-extras
 
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
+if (( $+commands[gls] )); then
+    alias ls='gls --color=tty --group-directories-first'
+else
+    alias ls='ls --color=tty --group-directories-first'
+fi
+
+if [[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]; then
+    zinit ice as"null" from"gh-r" atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv'**/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa' sbin"**/exa"
+    zinit light ogham/exa
+fi
+
 zinit as"null" wait lucid from"gh-r" for \
       atload"alias cat='bat -p --wrap character'" mv"**/bat.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
       mv"**/fd.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
@@ -100,17 +111,6 @@ zinit light microsoft/ripgrep-prebuilt
 zinit ice as"null" from"gh-r" wait lucid cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]"
 zinit light BurntSushi/ripgrep
 
-if (( $+commands[gls] )); then
-    alias ls='gls --color=tty --group-directories-first'
-else
-    alias ls='ls --color=tty --group-directories-first'
-fi
-
-if [[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]; then
-    zinit ice as"null" from"gh-r" atload"alias ls='exa --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv'**/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa' sbin"**/exa"
-    zinit light ogham/exa
-fi
-
 # For GNU ls (the binaries can be gls, gdircolors, e.g. on OS X when installing the
 # coreutils package from Homebrew; you can also use https://github.com/ogham/exa)
 # (( $+commands[gdircolors] )) && alias dircolors=gdircolors
@@ -119,15 +119,17 @@ fi
 
 # FZF: fuzzy finder
 if [[ $CPUTYPE == arm* || $CPUTYPE == aarch* ]]; then
-    zinit ice id-as"fzf-bin" as"null" wait lucid from"gh-r" bpick"*arm*" sbin
+    zinit ice id-as"junegunn/fzf-bin" as"null" wait lucid from"gh-r" bpick"*arm*" sbin
 else
-    zinit ice id-as"fzf-bin" as"null" wait lucid from"gh-r" sbin
+    zinit ice id-as"junegunn/fzf-bin" as"null" wait lucid from"gh-r" sbin
 fi
 zinit light junegunn/fzf
 
-zinit ice wait lucid depth"1" as"null" \
-      mv"**/fzf-tmux fzf-tmux" \
-      cp"man/man.1/fzf* -> $ZPFX/share/man/man1" \
+zinit ice wait lucid depth"1" as"null" nocompile \
+      atclone'cp shell/completion.zsh _fzf_completion;
+              cp -vf bin/fzf(|-tmux) $ZPFX/bin;
+              cp -vf man/man1/fzf(|-tmux).1 $ZPFX/share/man/man1' \
+      atpull'%atclone' \
       src'shell/key-bindings.zsh'
 zinit light junegunn/fzf
 
