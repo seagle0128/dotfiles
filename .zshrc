@@ -100,7 +100,7 @@ zinit as"null" wait lucid from"gh-r" for \
       atload"unalias duf; alias df=duf" bpick"*(.zip|tar.gz)" sbin muesli/duf \
       atload"alias du=dust" sbin"**/dust" bootandy/dust \
       atload"alias ping=gping" sbin orf/gping \
-      atload"alias ps=procs" bpick"*.zip" sbin if'[[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]' dalance/procs
+      bpick"*.zip" sbin if'[[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]' dalance/procs
 
 # Don't use sbin or fbin since it's incompatible with magit-todos
 if [[ $CPUTYPE == arm* || $CPUTYPE == aarch* ]]; then
@@ -140,13 +140,17 @@ zinit light junegunn/fzf
 zinit ice wait lucid depth"1" atload"zicompinit; zicdreplay" blockf
 zinit light Aloxaf/fzf-tab
 
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:complete:*:options' sort false
-zstyle ':completion:*:git-checkout:*' sort false
-zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'
-zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':fzf-tab:complete:(cd|ls|exa|bat|cat|emacs|nano|vi|vim):*' fzf-preview 'ls -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
+	   fzf-preview 'echo ${(P)word}'
+
+# Preivew `kill` and `ps` commands
+zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
        '[[ $group == "[process ID]" ]] &&
         if [[ $OSTYPE == darwin* ]]; then
@@ -156,6 +160,30 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
         fi'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags '--preview-window=down:3:wrap'
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
+
+# Preivew `git` commands
+zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
+	   'git diff $word | delta'
+zstyle ':fzf-tab:complete:git-log:*' fzf-preview \
+	   'git log --color=always $word'
+zstyle ':fzf-tab:complete:git-help:*' fzf-preview \
+	   'git help $word | bat -plman --color=always'
+zstyle ':fzf-tab:complete:git-show:*' fzf-preview \
+	   'case "$group" in
+	"commit tag") git show --color=always $word ;;
+	*) git show --color=always $word | delta ;;
+	esac'
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
+	   'case "$group" in
+	"modified file") git diff $word | delta ;;
+	"recent commit object name") git show --color=always $word | delta ;;
+	*) git log --color=always $word ;;
+	esac'
+
+# Privew help
+zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
+zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --files --hidden --follow --glob '!.git' || find ."
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -250,9 +278,9 @@ elif [[ $OSTYPE == linux* ]]; then
         zinit snippet OMZP::ubuntu
         alias agua='aguu -y && agar -y && aga -y'
         alias kclean+='sudo aptitude remove -P "?and(~i~nlinux-(ima|hea),\
-                                ?not(?or(~n`uname -r | cut -d'\''-'\'' -f-2`,\
-                                ~nlinux-generic,\
-                                ~n(linux-(virtual|headers-virtual|headers-generic|image-virtual|image-generic|image-`dpkg --print-architecture`)))))"'
+                            ?not(?or(~n`uname -r | cut -d'\''-'\'' -f-2`,\
+                            ~nlinux-generic,\
+                            ~n(linux-(virtual|headers-virtual|headers-generic|image-virtual|image-generic|image-`dpkg --print-architecture`)))))"'
     elif (( $+commands[pacman] )); then
         zinit snippet OMZP::archlinux
     fi
