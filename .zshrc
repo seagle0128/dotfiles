@@ -44,11 +44,6 @@ zinit wait lucid for \
       OMZP::git \
       OMZP::sudo
 
-# Bing GNU coreutils
-if type gls &>/dev/null; then
-    zinit wait lucid for OMZP::gnu-utils
-fi
-
 # Completion enhancements
 zinit wait lucid depth"1" for \
       atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
@@ -79,6 +74,13 @@ fi
 # `make"install PREFIX=$ZPFX"`, if "install" wouldn't be the only, default target.
 zinit ice wait lucid as"program" depth"1" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
+
+# Prettify ls
+if (( $+commands[gls] )); then
+    alias ls='gls --color=tty --group-directories-first'
+else
+    alias ls='ls --color=tty --group-directories-first'
+fi
 
 # Homebrew completion
 if type brew &>/dev/null; then
@@ -294,9 +296,6 @@ fi
 alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
 alias h='history'
 alias c='clear'
-
-# ls
-alias ls='ls --color=auto --group-directories-first'
 
 # Git
 alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
