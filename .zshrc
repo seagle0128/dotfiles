@@ -271,9 +271,9 @@ join-lines() {
 if [[ $OSTYPE == darwin* ]]; then
     zinit snippet PZTM::osx
     if (( $+commands[brew] )); then
-        alias bu='brew update && brew upgrade'
+        alias bu='brew update; brew upgrade'
         alias bcu='brew cu --all --yes --cleanup'
-        alias bua='bu && bcu'
+        alias bua='bu; bcu'
     fi
 elif [[ $OSTYPE == linux* ]]; then
     if (( $+commands[apt-get] )); then
