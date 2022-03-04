@@ -118,7 +118,9 @@ zinit light BurntSushi/ripgrep
 # For GNU ls (the binaries can be gls, gdircolors, e.g. on OS X when installing the
 # coreutils package from Homebrew; you can also use https://github.com/ogham/exa)
 # (( $+commands[gdircolors] )) && alias dircolors=gdircolors
-# zinit ice depth"1" atclone"dircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
+# zinit ice depth="1" atclone"dircolors -b LS_COLORS > clrs.zsh" \
+    #       atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+    #       atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
 # zinit light trapd00r/LS_COLORS
 
 # FZF: fuzzy finder
