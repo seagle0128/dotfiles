@@ -75,6 +75,14 @@ fi
 zinit ice wait lucid as"program" depth"1" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 
+# Lazygit
+if [[ $CPUTYPE == arm* || $CPUTYPE == aarch* ]]; then
+    zinit ice as"program" from"gh-r" wait lucid bpick"*arm*" sbin atload"alias lg=lazygit"
+else
+    zinit ice as"program" from"gh-r" wait lucid sbin atload"alias lg=lazygit"
+fi
+zinit light jesseduffield/lazygit
+
 # Prettify ls
 if (( $+commands[gls] )); then
     alias ls='gls --color=tty --group-directories-first'
