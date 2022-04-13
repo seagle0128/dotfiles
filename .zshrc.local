@@ -36,7 +36,7 @@ zinit light sindresorhus/pure
 # For Emacs vterm
 if [ -n "$INSIDE_EMACS" ]; then
     DISABLE_AUTO_TITLE="true"
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=gray,underline'
+    # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=gray,underline'
 
     # VTerm
     if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
