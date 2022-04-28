@@ -106,8 +106,8 @@ zinit wait lucid as"null" from"gh-r" for \
       atload"alias ping=gping" sbin orf/gping \
       bpick"*.zip" sbin if'[[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]' dalance/procs
 
-# NOTE: DO NOT use sbin or fbin since it's incompatible with magit-todos
-zinit ice wait lucid as"program" from"gh-r"
+# NOTE: DO NOT use sbin/fbin and lucid since it's incompatible with magit-todos
+zinit lucid as"program" from"gh-r"
 zinit light microsoft/ripgrep-prebuilt
 
 zinit ice wait lucid as"null" from"gh-r" cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]"
