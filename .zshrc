@@ -69,14 +69,12 @@ fi
 # Utilities
 #
 
-# Scripts that are built at install (there's single default make target, "install",
-# and it constructs scripts by `cat'ing a few files). The make'' ice could also be:
-# `make"install PREFIX=$ZPFX"`, if "install" wouldn't be the only, default target.
-zinit ice wait lucid as"program" depth"1" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
+# Git extras
+zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 
 # Lazygit
-zinit ice as"program" from"gh-r" wait lucid sbin atload"alias lg=lazygit"
+zinit ice wait lucid as"program" from"gh-r" sbin atload"alias lg=lazygit"
 zinit light jesseduffield/lazygit
 
 # Prettify ls
@@ -95,7 +93,7 @@ fi
 
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
-zinit as"null" wait lucid from"gh-r" for \
+zinit wait lucid as"null" from"gh-r" for \
       atload"alias ls='exa --color=auto --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv"**/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa" sbin"**/exa" if'[[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]' ogham/exa \
       atload"alias cat='bat -p --wrap character'" mv"**/bat.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
       mv"**/fd.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
@@ -109,10 +107,10 @@ zinit as"null" wait lucid from"gh-r" for \
       bpick"*.zip" sbin if'[[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]' dalance/procs
 
 # NOTE: DO NOT use sbin or fbin since it's incompatible with magit-todos
-zinit ice as"program" from"gh-r" wait lucid
+zinit ice wait lucid as"program" from"gh-r"
 zinit light microsoft/ripgrep-prebuilt
 
-zinit ice as"null" from"gh-r" wait lucid cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]"
+zinit ice wait lucid as"null" from"gh-r" cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]"
 zinit light BurntSushi/ripgrep
 
 # For GNU ls (the binaries can be gls, gdircolors, e.g. on OS X when installing the
@@ -124,7 +122,7 @@ zinit light BurntSushi/ripgrep
 # zinit light trapd00r/LS_COLORS
 
 # FZF: fuzzy finder
-zinit ice from"gh-r" lucid nocompile src'key-bindings.zsh' sbin \
+zinit ice wait lucid from"gh-r" nocompile src'key-bindings.zsh' sbin \
       dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf_completion;
          https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh;
          https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf-tmux.1 -> $ZPFX/share/man/man1/fzf-tmux.1;
