@@ -76,11 +76,7 @@ zinit ice wait lucid as"program" depth"1" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPF
 zinit light tj/git-extras
 
 # Lazygit
-if [[ $CPUTYPE == arm* || $CPUTYPE == aarch* ]]; then
-    zinit ice as"program" from"gh-r" wait lucid bpick"*arm*" sbin atload"alias lg=lazygit"
-else
-    zinit ice as"program" from"gh-r" wait lucid sbin atload"alias lg=lazygit"
-fi
+zinit ice as"program" from"gh-r" wait lucid sbin atload"alias lg=lazygit"
 zinit light jesseduffield/lazygit
 
 # Prettify ls
@@ -112,12 +108,8 @@ zinit as"null" wait lucid from"gh-r" for \
       atload"alias ping=gping" sbin orf/gping \
       bpick"*.zip" sbin if'[[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]' dalance/procs
 
-# Don't use sbin or fbin since it's incompatible with magit-todos
-if [[ $CPUTYPE == arm* || $CPUTYPE == aarch* ]]; then
-    zinit ice as"program" from"gh-r" bpick"*aarch*"
-else
-    zinit ice as"program" from"gh-r"
-fi
+# NOTE: DO NOT use sbin or fbin since it's incompatible with magit-todos
+zinit ice as"program" from"gh-r" wait lucid
 zinit light microsoft/ripgrep-prebuilt
 
 zinit ice as"null" from"gh-r" wait lucid cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]"
@@ -132,21 +124,11 @@ zinit light BurntSushi/ripgrep
 # zinit light trapd00r/LS_COLORS
 
 # FZF: fuzzy finder
-if [[ $CPUTYPE == arm* || $CPUTYPE == aarch* ]]; then
-    zinit ice \
-          dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf_completion;
-             https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh;
-             https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf-tmux.1 -> $ZPFX/share/man/man1/fzf-tmux.1;
-             https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZPFX/share/man/man1/fzf.1' \
-          from"gh-r" lucid nocompile src'key-bindings.zsh' bpick"*arm*" sbin
-else
-    zinit ice \
-          dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf_completion;
-             https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh;
-             https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf-tmux.1 -> $ZPFX/share/man/man1/fzf-tmux.1;
-             https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZPFX/share/man/man1/fzf.1' \
-          from"gh-r" lucid nocompile src'key-bindings.zsh' sbin
-fi
+zinit ice from"gh-r" lucid nocompile src'key-bindings.zsh' sbin \
+      dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf_completion;
+         https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh;
+         https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf-tmux.1 -> $ZPFX/share/man/man1/fzf-tmux.1;
+         https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZPFX/share/man/man1/fzf.1'
 zinit light junegunn/fzf
 
 zinit ice wait lucid depth"1" atload"zicompinit; zicdreplay" blockf
