@@ -122,11 +122,21 @@ zinit light BurntSushi/ripgrep
 # zinit light trapd00r/LS_COLORS
 
 # FZF: fuzzy finder
-zinit ice wait lucid from"gh-r" nocompile src'key-bindings.zsh' sbin \
-      dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf_completion;
-         https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh;
-         https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf-tmux.1 -> $ZPFX/share/man/man1/fzf-tmux.1;
-         https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZPFX/share/man/man1/fzf.1'
+if [[ $CPUTYPE == arm* || $CPUTYPE == aarch* ]]; then
+    zinit ice \
+          dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf_completion;
+             https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh;
+             https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf-tmux.1 -> $ZPFX/share/man/man1/fzf-tmux.1;
+             https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZPFX/share/man/man1/fzf.1' \
+                 from"gh-r" lucid nocompile src'key-bindings.zsh' bpick"*arm*" sbin
+else
+    zinit ice \
+          dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf_completion;
+             https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh;
+             https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf-tmux.1 -> $ZPFX/share/man/man1/fzf-tmux.1;
+             https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZPFX/share/man/man1/fzf.1' \
+                 from"gh-r" lucid nocompile src'key-bindings.zsh' sbin
+fi
 zinit light junegunn/fzf
 
 zinit ice wait lucid depth"1" atload"zicompinit; zicdreplay" blockf
