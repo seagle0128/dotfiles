@@ -80,12 +80,10 @@ function install {
         fonts=(
             # font-source-code-pro
             # font-dejavu-sans
-            font-inconsolata
+            # font-inconsolata
+            font-cascadia-code
+            font-fira-code
             font-hack-nerd-font
-
-            # font-wenquanyi-micro-hei
-            # font-wenquanyi-micro-hei-lite
-            # font-wenquanyi-zen-hei
         )
 
         if [ ! -f "${font_dir}/SourceCodePro-Regular.otf" ]; then
