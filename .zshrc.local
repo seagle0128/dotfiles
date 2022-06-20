@@ -105,9 +105,13 @@ fi
 
 # Golang
 if (( $+commands[go] )); then
-    export GOPROXY=https://goproxy.cn
-    # export GOPROXY=https://goproxy.io
-    # export GOPROXY=https://athens.azurefd.net
+    # Go Proxy
+    export GOPROXY=https://proxy.golang.com.cn,direct
+    # export GOPROXY=https://goproxy.cn,direct
+    # export GOPROXY=https://goproxy.io,direct
+
+    # Go Private
+    # export GOPRIVATE=
 
     function goclean() {
         go clean -i -n $1
