@@ -70,19 +70,11 @@ function install() {
 }
 
 function goclean() {
-    go clean -i -n $1
-    go clean -i $1
     rm -rf $GOPATH/src/$1
-    if [ -d $GOPATH/pkg/${sysOS:l}_amd64/$1 ]; then
-        rm -rf $GOPATH/pkg/${sysOS:l}_amd64/$1;
-    fi
+    rm -rf $GOPATH/pkg/mod/{$1}*
 }
 
 function clean() {
-    for p in ${x_tools[@]}; do
-        goclean ${p}
-    done
-
     for p in ${packages[@]}; do
         goclean ${p}
     done
@@ -90,13 +82,7 @@ function clean() {
 
 function main() {
     check
-
-    promote_yn "Clean all packages?" "continue"
-    if [ $continue -eq $YES ]; then
-        clean
-    else
-        install
-    fi
+    install
 }
 
 main
