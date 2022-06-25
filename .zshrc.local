@@ -117,7 +117,7 @@ if [[ $OSTYPE == darwin* ]]; then
     set_homebrew_env
 
     # For Apple Silicon CPU
-    [[ $CPUTYPE == arm* ]] && eval "$(/opt/homebrew/bin/brew shellen)"
+    [[ $CPUTYPE == arm* ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Golang
