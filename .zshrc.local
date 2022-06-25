@@ -77,16 +77,17 @@ fi
 if [[ $OSTYPE == darwin* ]]; then
     function set_homebrew_env()
     {
-        export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
-        export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
-        export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
+        export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.bfsu.edu.cn/git/homebrew/brew.git"
+        export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.bfsu.edu.cn/git/homebrew/homebrew-core.git"
+        export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.bfsu.edu.cn/homebrew-bottles"
     }
 
     function set_homebrew_mirror() {
         set_homebrew_env
 
-        brew tap --custom-remote --force-auto-update homebrew/cask https://mirrors.ustc.edu.cn/homebrew-cask.git
-        brew tap --custom-remote --force-auto-update homebrew/cask-versions https://mirrors.ustc.edu.cn/homebrew-cask-versions.git
+        for tap in core cask{,-fonts,-drivers,-versions} command-not-found; do
+            brew tap --custom-remote --force-auto-update "homebrew/${tap}" "https://mirrors.bfsu.edu.cn/git/homebrew/homebrew-${tap}.git"
+        done
 
         brew update
     }
@@ -100,15 +101,23 @@ if [[ $OSTYPE == darwin* ]]; then
     function reset_homebrew_mirror() {
         reset_homebrew_env
 
-        brew tap --custom-remote homebrew/core https://github.com/Homebrew/homebrew-core
-        brew tap --custom-remote --force-auto-update homebrew/cask https://github.com/Homebrew/homebrew-cask
-        brew tap --custom-remote --force-auto-update homebrew/cask-versions https://github.com/Homebrew/homebrew-cask-versions
+        git -C "$(brew --repo)" remote set-url origin https://github.com/Homebrew/brew
+
+        BREW_TAPS="$(BREW_TAPS="$(brew tap 2>/dev/null)"; echo -n "${BREW_TAPS//$'\n'/:}")"
+        for tap in core cask{,-fonts,-drivers,-versions} command-not-found; do
+            if [[ ":${BREW_TAPS}:" == *":homebrew/${tap}:"* ]]; then
+                brew tap --custom-remote "homebrew/${tap}" "https://github.com/Homebrew/homebrew-${tap}"
+            fi
+        done
 
         brew update
     }
 
     # Use mirror env by default
     set_homebrew_env
+
+    # For Apple Silicon CPU
+    [[ $CPUTYPE == arm* ]] && eval "$(/opt/homebrew/bin/brew shellen)"
 fi
 
 # Golang
