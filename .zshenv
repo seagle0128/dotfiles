@@ -11,7 +11,7 @@ export PATH=$HOME/.cask/bin:$PATH
 
 # Golang
 export GO111MODULE=auto
-export GOPROXY=https://goproxy.cn # https://athens.azurefd.net
+export GOPROXY=https://goproxy.io,direct
 export GOPATH=$HOME/go
 export PATH=${GOPATH//://bin:}/bin:$PATH
 
