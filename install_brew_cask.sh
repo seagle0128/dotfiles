@@ -7,7 +7,7 @@
 
 # Cask applications
 apps=(
-    betterdummy              # Retina display management: avibrazil-rdm
+    betterdisplay              # Retina display management: avibrazil-rdm
     captin                     # Caps Lock status
     cheatsheet
     maccy                      # Clipboard: clipy
