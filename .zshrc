@@ -22,8 +22,7 @@ autoload -Uz _zinit
 zinit light-mode depth"1" for \
       zdharma-continuum/zinit-annex-as-monitor \
       zdharma-continuum/zinit-annex-bin-gem-node \
-      zdharma-continuum/zinit-annex-patch-dl \
-      zdharma-continuum/zinit-annex-rust
+      zdharma-continuum/zinit-annex-patch-dl
 
 ### End of Zinit's installer chunk
 
@@ -123,7 +122,7 @@ zinit light BurntSushi/ripgrep
 
 # FZF: fuzzy finder
 zinit ice wait lucid from"gh-r" nocompile src'key-bindings.zsh' sbin \
-      dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf_completion;
+      dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> $ZPFX/completions/_fzf_completion;
          https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh;
          https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf-tmux.1 -> $ZPFX/share/man/man1/fzf-tmux.1;
          https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZPFX/share/man/man1/fzf.1'
