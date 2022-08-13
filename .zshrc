@@ -286,6 +286,17 @@ alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
 alias h='history'
 alias c='clear'
 
+# Ugrep
+if (( $+commands[ugrep] )) ; then
+    alias grep='ugrep -G -U -Y -. --sort -Dread -dread'
+    alias egrep='ugrep -E -U -Y -. --sort -Dread -dread'
+    alias fgrep='ugrep -F -U -Y -. --sort -Dread -dread'
+
+    alias zgrep='ugrep -z -G -U -Y -. --sort -Dread -dread'
+    alias zegrep='ugrep -z -E -U -Y -. --sort -Dread -dread'
+    alias zfgrep='ugrep -z -F -U -Y -. --sort -Dread -dread'
+fi
+
 # Git
 alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
