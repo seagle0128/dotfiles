@@ -20,7 +20,6 @@ autoload -Uz _zinit
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode depth"1" for \
-      zdharma-continuum/zinit-annex-as-monitor \
       zdharma-continuum/zinit-annex-bin-gem-node \
       zdharma-continuum/zinit-annex-patch-dl
 
@@ -122,10 +121,10 @@ zinit light BurntSushi/ripgrep
 
 # FZF: fuzzy finder
 zinit ice wait lucid from"gh-r" nocompile src'key-bindings.zsh' sbin \
-      dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> $ZPFX/completions/_fzf_completion;
-         https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh -> key-bindings.zsh;
-         https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf-tmux.1 -> $ZPFX/share/man/man1/fzf-tmux.1;
-         https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZPFX/share/man/man1/fzf.1'
+      dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh;
+         https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> $ZPFX/completions/_fzf_completion;
+         https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZPFX/share/man/man1/fzf.1
+         https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf-tmux.1 -> $ZPFX/share/man/man1/fzf-tmux.1;'
 zinit light junegunn/fzf
 
 zinit ice wait lucid depth"1" atload"zicompinit; zicdreplay" blockf
