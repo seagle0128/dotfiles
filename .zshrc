@@ -99,7 +99,7 @@ zinit wait lucid as"null" from"gh-r" for \
       cp"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" sbin ClementTsang/bottom \
       atload"alias help=cheat" mv"cheat* -> cheat" sbin cheat/cheat \
       atload"alias diff=delta" sbin"**/delta" dandavison/delta \
-      atload"unalias duf; alias df=duf" bpick"*(.zip|tar.gz)" sbin muesli/duf \
+      atload"alias df=duf" bpick"*(.zip|tar.gz)" sbin muesli/duf \
       atload"alias du=dust" sbin"**/dust" bootandy/dust \
       atload"alias ping=gping" sbin orf/gping \
       bpick"*.zip" sbin if'[[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]' dalance/procs
