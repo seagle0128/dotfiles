@@ -34,7 +34,7 @@ apps=(
     # netspot                    # Wifi signal analysis and scanner
     macfuse                    # File system
     veracrypt                  # File crypt
-    # vox                        # Music player
+    # foobar2000               # Music player: vox
     squirrel                   # Pinyin Input: sogouinput
     handbrake                  # Video Transcoder: transcoder
 
