@@ -325,7 +325,7 @@ alias upgrade_repo='git pull --rebase --stat origin master'
 alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
 alias upgrade_emacs='emacs -Q --batch -L "$EMACSD/lisp/" -l "init-package.el" --eval "(progn (package-initialize) (update-config-and-packages t t))"'
 alias upgrade_omt='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
-alias upgrade_zinit='zinit self-update && zinit update'
+alias upgrade_zinit='zinit self-update && zinit update -a -p'
 alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
 
 (( $+commands[cargo] )) && alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update
