@@ -4,10 +4,10 @@
 [user]
 	name =
 	email =
-[credential]
-	helper = osxkeychain
 [github]
 	user =
 	oauth-token =
+# [credential]
+# 	helper = osxkeychain
 # [http "https://github.com"]
 	# proxy = http://127.0.0.1:7890

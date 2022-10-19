@@ -7,6 +7,8 @@
 	editor = emacsclient -a=\\\"\\\"
 	quotepath = false
 	pager = delta
+[credential]
+	helper = manager-core
 [interactive]
 	diffFilter = delta --color-only
 [color]

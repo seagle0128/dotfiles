@@ -1,15 +1,15 @@
 # -*- mode: gitconfig -*-
 [include]
 	path = ~/.gitconfig_global
+[core]
+	filemode = false
 [user]
 	name =
 	email =
-[credential]
-	helper = cache --timeout=3600
-[core]
-	filemode = false
 [github]
 	user =
 	oauth-token =
+# [credential]
+# 	helper = cache --timeout=3600
 # [http "https://github.com"]
 	# proxy = http://127.0.0.1:7890
