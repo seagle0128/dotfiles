@@ -1,4 +1,4 @@
-# Put this profile to $PSHOME\Profile.ps1 or $Home\Documents\PowerShell\Profile.ps1
+# Put this profile to $PROFILE
 
 # Prerequisites:
 # scoop install psfzf
@@ -7,7 +7,7 @@
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 
 # example command - use $Location with a different command:
-$commandOverride = [ScriptBlock]{ param($Location) Write-Host $Location }
+$commandOverride = [ScriptBlock] { param($Location) Write-Host $Location }
 # pass your override to PSFzf:
 Set-PsFzfOption -AltCCommand $commandOverride
 
