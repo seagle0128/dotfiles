@@ -6,9 +6,6 @@
 
 # Packages
 $packages = (
-    # Prerequists
-    "psfzf", "starship",
-
     # Utilities
     "7zip", "everything", "totalcommander",
     # "clipx", "putty"
@@ -37,14 +34,19 @@ function check {
     if (-Not (Get-Command 'scoop' -errorAction SilentlyContinue)) {
         Write-Host "`n-> Installing Scoop..."
         Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
-        irm get.scoop.sh | iex
+        Invoke-RestMethod get.scoop.sh | Invoke-Expression
         scoop bucket add extras
 
-        Install-Module -Name PSFzf
-        Install-Module ZLocation -Scope CurrentUser
-
         if (-Not (Test-Path $PROFILE)) {
-            cp Microsoft.PowerShell_profile.ps1 $PROFILE
+            Copy-Item Microsoft.PowerShell_profile.ps1 $PROFILE
+
+            # Prerequisit
+            scoop install starship
+            Install-Module -Name PSFzf
+            Install-Module ZLocation -Scope CurrentUser
+
+            # Reload
+            . $PROFILE
         }
     }
 }

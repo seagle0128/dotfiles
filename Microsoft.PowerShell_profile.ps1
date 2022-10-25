@@ -4,7 +4,7 @@
 Invoke-Expression (&starship init powershell)
 
 # Readline
-# Shows navigable menu of all options when hitting Tab
+Set-PSReadLineOption -EditMode Emacs
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
 # Fish-like Autosuggest
