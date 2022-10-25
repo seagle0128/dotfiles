@@ -1,22 +1,29 @@
 # Copy to $PROFILE
 
-# Prerequisites:
-# scoop install psfzf
-# scoop install starship
-
 # Starship
 Invoke-Expression (&starship init powershell)
 
-# Autosuggest
+# Readline
+# Shows navigable menu of all options when hitting Tab
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+
+# Fish-like Autosuggest
 Set-PSReadLineOption -PredictionSource History
 
-# replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
+# FZF
+# Replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
-
-# example command - use $Location with a different command:
-$commandOverride = [ScriptBlock] { param($Location) Write-Host $Location }
-# pass your override to PSFzf:
-Set-PsFzfOption -AltCCommand $commandOverride
 
 # Replace Tab
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
+
+Set-PsFzfOption -TabExpansion
+
+# Aliases
+Set-PsFzfOption -EnableAliasFuzzyEdit          # fe
+Set-PsFzfOption -EnableAliasFuzzyHistory       # fh
+Set-PsFzfOption -EnableAliasFuzzyKillProcess   # fkill
+Set-PsFzfOption -EnableAliasFuzzyScoop         # fs
+Set-PsFzfOption -EnableAliasFuzzyGitStatus     # fgs
+Set-PsFzfOption -EnableAliasFuzzySetEverything # cde
+Set-PsFzfOption -EnableAliasFuzzyZLocation     # fz
