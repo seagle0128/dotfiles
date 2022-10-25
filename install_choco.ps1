@@ -8,7 +8,7 @@
 $packages = (
     "chocholatey",
 
-    # Utility
+    # Utilities
     "7zip", "clipx", "everything", "putty",
     "totalcommander", "wox", "ccleaner",
     "git", "tortoisegit", "fork",
@@ -30,8 +30,7 @@ $packages = (
     "sysinternals", "dependecywalker"
 );
 
-function Test-Administrator
-{
+function Test-Administrator {
     $user = [Security.Principal.WindowsIdentity]::GetCurrent();
     (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
@@ -51,7 +50,7 @@ function check {
 }
 
 function install {
-    foreach($p in $packages){
+    foreach ($p in $packages) {
         Write-Host "`n-> Installing $p..."
         choco upgrade ${p} -y
     }

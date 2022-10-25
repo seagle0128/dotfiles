@@ -8,7 +8,6 @@
 Invoke-Expression (&starship init powershell)
 
 # Autosuggest
-Import-Module PSReadLine
 Set-PSReadLineOption -PredictionSource History
 
 # replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
