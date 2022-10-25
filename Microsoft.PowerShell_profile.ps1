@@ -1,7 +1,15 @@
-# Put this profile to $PROFILE
+# Copy to $PROFILE
 
 # Prerequisites:
 # scoop install psfzf
+# scoop install starship
+
+# Starship
+Invoke-Expression (&starship init powershell)
+
+# Autosuggest
+Import-Module PSReadLine
+Set-PSReadLineOption -PredictionSource History
 
 # replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
