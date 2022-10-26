@@ -7,14 +7,14 @@ and Cygwin.
 
 ## Prerequisite
 
-- GNU Linux, macOS, Cygwin
-- git, zsh, curl/wget
+- GNU Linux, macOS, Windows, Cygwin
+- Git, Zsh/Powershell, curl/wget
 - Recommend: GNU Emacs, tmux
 - Optional: Vim
 
 ## Quickstart
 
-Run this command in the console.
+### Linux, macOS and Cygwin
 
 ``` shell
 sh -c "$(curl -fsSL https://github.com/seagle0128/dotfiles/raw/master/install.sh)"
@@ -24,6 +24,22 @@ or
 
 ``` shell
 sh -c "$(wget https://github.com/seagle0128/dotfiles/raw/master/install.sh -O -)"
+```
+
+or
+
+``` shell
+git clone https://github.com/seagle0128/dotfiles.git ~/.dotfiles  # or download the zip package
+cd ~/.dotfiles
+./install.sh
+```
+
+### Windows (Powershell)
+
+``` powershell
+git clone https://github.com/seagle0128/dotfiles.git ~/.dotfiles  # or download the zip package
+cd ~/.dotfiles
+install_scoop.ps1  # or install_choco.ps1
 ```
 
 ## Docker
