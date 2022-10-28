@@ -11,8 +11,10 @@ $packages = (
     # "clipx", "putty"
     # "wox", "ccleaner", "fork",
     "git", "lazygit", "gow", "less",
-    "bat", "fzf", "fd", "ripgrep", "ugrep",
     "aspell", "universal-ctags",
+
+    "bat", "fzf", "fd", "ripgrep", "ugrep",
+    "btop", "dust", "gping",
 
     # Editor
     "emacs", "vscode",

@@ -4,7 +4,9 @@ Set-Variable DOTFILES "$env:APPDATA\.dotfiles"
 Set-Variable EMACSD "$env:APPDATA\.emacs.d"
 Set-Variable EDITOR 'emacsclientw -a ""'
 
+#
 # Functions
+#
 function Open-Mini-Emacs {
     Invoke-Expression 'runemacs -Q -l "$EMACSD\init-mini.el"'
 }
@@ -33,13 +35,22 @@ function Open-Terminal-Emacs {
     Invoke-Expression 'emacs -Q -nw $FileName'
 }
 
+#
 # Aliases
+#
+# Emacs
 Set-Alias -Name me  -Value Open-Mini-Emacs
 Set-Alias -Name mte -Value Open-Mini-Terminal-Emacs
 Set-Alias -Name e   -Value Open-Emacs-Client-Nowait
 Set-Alias -Name ec  -Value Open-Emacs-Client-Frame-Nowait
 Set-Alias -Name ef  -Value Open-Emacs-Client-Frame
 Set-Alias -Name te  -Value Open-Terminal-Emacs
+
+# Utilities
+Set-Alias -Name cat   -Value bat
+Set-Alias -Name du   -Value dust
+Set-Alias -Name ping -Value gping
+Set-Alias -Name top  -Value btop
 
 # Starship
 Invoke-Expression (&starship init powershell)
