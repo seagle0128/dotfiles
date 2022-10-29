@@ -45,7 +45,7 @@ function check {
             # Prerequisit
             scoop install starship
             Install-Module -Name PSFzf
-            Install-Module ZLocation -Scope CurrentUser
+            Install-Module -Name ZLocation
 
             # Reload
             . $PROFILE
