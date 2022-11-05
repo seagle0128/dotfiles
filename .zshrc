@@ -332,8 +332,20 @@ alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
 (( $+commands[gem] )) && alias upgrade_gem='gem update && gem cleanup'
 (( $+commands[go] )) && alias upgrade_go='GO111MODULE=on && $DOTFILES/install_go.sh'
 (( $+commands[npm] )) && alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2); do npm -g install "$package"; done'
-(( $+commands[pip] )) && alias upgrade_pip="pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U"
-(( $+commands[pip3] )) && alias upgrade_pip3="pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install -U"
+(( $+commands[pip] )) && alias upgrade_pip="pip list --outdated --format=json | python -c '
+import json
+import sys
+
+for item in json.loads(sys.stdin.read()):
+    print(\"=\".join([item[\"name\"], item[\"latest_version\"]]))
+' | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U"
+(( $+commands[pip3] )) && alias upgrade_pip="pip3 list --outdated --format=json | python3 -c '
+import json
+import sys
+
+for item in json.loads(sys.stdin.read()):
+    print(\"=\".join([item[\"name\"], item[\"latest_version\"]]))
+' | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U"
 (( $+commands[brew] )) && alias upgrade_brew='brew update'; alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
 
 # Proxy
