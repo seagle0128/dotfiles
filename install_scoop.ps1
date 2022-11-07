@@ -8,9 +8,8 @@
 $packages = (
     # Utilities
     "7zip", "everything", "totalcommander",
-    # "clipx", "putty"
-    # "wox", "ccleaner", "fork",
-    "git", "lazygit", "gow", "less",
+    # "clipx", "putty", "ccleaner", "fork",
+    "git", "lazygit", "gow", "gsudo", "less",
     "aspell", "universal-ctags",
 
     "bat", "fzf", "fd", "ripgrep", "ugrep",
