@@ -47,7 +47,7 @@ Set-Alias -Name ef  -Value Open-Emacs-Client-Frame
 Set-Alias -Name te  -Value Open-Terminal-Emacs
 
 # Utilities
-Set-Alias -Name cat   -Value bat
+Set-Alias -Name cat  -Value bat
 Set-Alias -Name du   -Value dust
 Set-Alias -Name ping -Value gping
 Set-Alias -Name top  -Value btop
