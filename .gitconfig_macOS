@@ -1,6 +1,8 @@
 # -*- mode: gitconfig -*-
 [include]
 	path = ~/.gitconfig_global
+[credential]
+	helper = osxkeychain
 [user]
 	name =
 	email =
