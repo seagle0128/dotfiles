@@ -91,39 +91,25 @@ fi
 
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
-zinit wait lucid as"null" from"gh-r" for \
-      atload"alias ls='exa --color=auto --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv"**/exa.zsh -> $ZINIT[COMPLETIONS_DIR]/_exa" sbin"**/exa" if'[[ $CPUTYPE != aarch* ]]' ogham/exa \
-      atload"alias cat='bat -p --wrap character'" mv"**/bat.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/bat.zsh -> $ZINIT[COMPLETIONS_DIR]/_bat" sbin"**/bat" @sharkdp/bat \
-      mv"**/fd.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/_fd -> $ZINIT[COMPLETIONS_DIR]" sbin"**/fd" @sharkdp/fd \
-      mv"**/hyperfine.1 -> $ZPFX/share/man/man1" cp"**/autocomplete/_hyperfine -> $ZINIT[COMPLETIONS_DIR]" sbin"**/hyperfine" @sharkdp/hyperfine \
-      cp"**/completion/_btm -> $ZINIT[COMPLETIONS_DIR]" atload"alias top=btm" sbin ClementTsang/bottom \
-      atload"alias help=cheat" mv"cheat* -> cheat" sbin cheat/cheat \
+zinit wait as"null" lucid from"gh-r" for \
+      atload"alias ls='exa --color=auto --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv"completions/exa.zsh -> _exa" completions sbin"**/exa" if'[[ $CPUTYPE != aarch* ]]' ogham/exa \
+      atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> _bat" completions sbin"**/bat" @sharkdp/bat \
+      cp"**/fd.1 -> $ZPFX/share/man/man1" completions sbin"**/fd" @sharkdp/fd \
+      cp"**/hyperfine.1 -> $ZPFX/share/man/man1" completions sbin"**/hyperfine" @sharkdp/hyperfine \
+      cp"**/doc/rg.1 -> $ZPFX/share/man/man1" completions sbin"**/rg" BurntSushi/ripgrep \
+      atload"alias top=btm" completions sbin ClementTsang/bottom \
+      atload"alias help=tldr" mv"tealdeer* -> tldr" dl'https://github.com/dbrgn/tealdeer/releases/latest/download/completions_zsh -> _tldr;' completions sbin dbrgn/tealdeer \
       atload"alias diff=delta" sbin"**/delta" dandavison/delta \
       atload"alias df=duf" bpick"*(.zip|tar.gz)" sbin muesli/duf \
       atload"alias du=dust" sbin"**/dust" bootandy/dust \
       atload"alias ping=gping" sbin orf/gping \
       bpick"*.zip" sbin if'[[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]' dalance/procs
 
-# NOTE: DO NOT use sbin/fbin and lucid since it's incompatible with magit-todos
-zinit ice as"program" from"gh-r"
-zinit light microsoft/ripgrep-prebuilt
-
-zinit ice wait lucid as"null" from"gh-r" cp"**/doc/rg.1 -> $ZPFX/share/man/man1" mv"**/complete/_rg -> $ZINIT[COMPLETIONS_DIR]"
-zinit light BurntSushi/ripgrep
-
-# For GNU ls (the binaries can be gls, gdircolors, e.g. on OS X when installing the
-# coreutils package from Homebrew; you can also use https://github.com/ogham/exa)
-# (( $+commands[gdircolors] )) && alias dircolors=gdircolors
-# zinit ice depth="1" atclone"dircolors -b LS_COLORS > clrs.zsh" \
-    #       atpull'%atclone' pick"clrs.zsh" nocompile'!' \
-    #       atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
-# zinit light trapd00r/LS_COLORS
-
-# FZF: fuzzy finder
-zinit ice wait lucid from"gh-r" nocompile src'key-bindings.zsh' sbin \
+# FZF: fuzzy finderls
+zinit ice wait lucid as"null" from"gh-r" src'key-bindings.zsh' completions sbin \
       dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh;
-         https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> $ZPFX/completions/_fzf_completion;
-         https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZPFX/share/man/man1/fzf.1
+         https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf;
+         https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZPFX/share/man/man1/fzf.1;
          https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf-tmux.1 -> $ZPFX/share/man/man1/fzf-tmux.1;'
 zinit light junegunn/fzf
 
@@ -277,94 +263,94 @@ elif [[ $OSTYPE == linux* ]]; then
 fi
 
 #
-# Aliases
-#
+ # Aliases
+ #
 
-# General
-alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
-alias h='history'
-alias c='clear'
+ # General
+ alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
+ alias h='history'
+ alias c='clear'
 
-# Ugrep
-if (( $+commands[ugrep] )) ; then
-    alias uq='ug -Q'       # short & quick query TUI (interactive, uses .ugrep config)
-    alias ux='ug -UX'      # short & quick binary pattern search (uses .ugrep config)
-    alias uz='ug -z'       # short & quick compressed files and archives search (uses .ugrep config)
+ # Ugrep
+ if (( $+commands[ugrep] )) ; then
+     alias uq='ug -Q'       # short & quick query TUI (interactive, uses .ugrep config)
+     alias ux='ug -UX'      # short & quick binary pattern search (uses .ugrep config)
+     alias uz='ug -z'       # short & quick compressed files and archives search (uses .ugrep config)
 
-    alias ugit='ug -R --ignore-files' # works like git-grep & define your preferences in .ugrep config
+     alias ugit='ug -R --ignore-files' # works like git-grep & define your preferences in .ugrep config
 
-    alias grep='ugrep -G'    # search with basic regular expressions (BRE)
-    alias egrep='ugrep -E'    # search with extended regular expressions (ERE)
-    alias fgrep='ugrep -F'    # find string(s)
-    alias pgrep='ugrep -P'    # search with Perl regular expressions
-    alias xgrep='ugrep -W'    # search (ERE) and output text or hex for binary
+     alias grep='ugrep -G'    # search with basic regular expressions (BRE)
+     alias egrep='ugrep -E'    # search with extended regular expressions (ERE)
+     alias fgrep='ugrep -F'    # find string(s)
+     alias pgrep='ugrep -P'    # search with Perl regular expressions
+     alias xgrep='ugrep -W'    # search (ERE) and output text or hex for binary
 
-    alias zgrep='ugrep -zG'   # search compressed files and archives with BRE
-    alias zegrep='ugrep -zE'   # search compressed files and archives with ERE
-    alias zfgrep='ugrep -zF'   # find string(s) in compressed files and/or archives
-    alias zpgrep='ugrep -zP'   # search compressed files and archives with Perl regular expressions
-    alias zxgrep='ugrep -zW'   # search (ERE) compressed files/archives and output text or hex for binary
+     alias zgrep='ugrep -zG'   # search compressed files and archives with BRE
+     alias zegrep='ugrep -zE'   # search compressed files and archives with ERE
+     alias zfgrep='ugrep -zF'   # find string(s) in compressed files and/or archives
+     alias zpgrep='ugrep -zP'   # search compressed files and archives with Perl regular expressions
+     alias zxgrep='ugrep -zW'   # search (ERE) compressed files/archives and output text or hex for binary
 
-    alias xdump='ugrep -X ""' # hexdump files without searching
-fi
+     alias xdump='ugrep -X ""' # hexdump files without searching
+ fi
 
-# Git
-alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
+ # Git
+ alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
-# Emacs
-alias me="emacs -Q -l $EMACSD/init-mini.el" # mini emacs
-alias mte="emacs -Q -nw -l $EMACSD/init-mini.el" # mini terminal emacs
-alias e="$EDITOR -n"
-alias ec="$EDITOR -n -c"
-alias ef="$EDITOR -c"
-alias te="$EDITOR -nw"
-alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))' && te"
+ # Emacs
+ alias me="emacs -Q -l $EMACSD/init-mini.el" # mini emacs
+ alias mte="emacs -Q -nw -l $EMACSD/init-mini.el" # mini terminal emacs
+ alias e="$EDITOR -n"
+ alias ec="$EDITOR -n -c"
+ alias ef="$EDITOR -c"
+ alias te="$EDITOR -nw"
+ alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))' && te"
 
-# Upgrade
-alias upgrade_repo='git pull --rebase --stat origin master'
-alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
-alias upgrade_emacs='emacs -Q --batch -L "$EMACSD/lisp/" -l "init-package.el" --eval "(progn (package-initialize) (update-config-and-packages t t))"'
-alias upgrade_omt='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
-alias upgrade_zinit='zinit self-update && zinit update -a -p'
-alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
+ # Upgrade
+ alias upgrade_repo='git pull --rebase --stat origin master'
+ alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
+ alias upgrade_emacs='emacs -Q --batch -L "$EMACSD/lisp/" -l "init-package.el" --eval "(progn (package-initialize) (update-config-and-packages t t))"'
+ alias upgrade_omt='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
+ alias upgrade_zinit='zinit self-update && zinit update -a -p'
+ alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
 
-(( $+commands[cargo] )) && alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update
-(( $+commands[gem] )) && alias upgrade_gem='gem update && gem cleanup'
-(( $+commands[go] )) && alias upgrade_go='GO111MODULE=on && $DOTFILES/install_go.sh'
-(( $+commands[npm] )) && alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2); do npm -g install "$package"; done'
-(( $+commands[pip] )) && alias upgrade_pip="pip list --outdated --format=json | python -c '
+ (( $+commands[cargo] )) && alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update
+ (( $+commands[gem] )) && alias upgrade_gem='gem update && gem cleanup'
+ (( $+commands[go] )) && alias upgrade_go='GO111MODULE=on && $DOTFILES/install_go.sh'
+ (( $+commands[npm] )) && alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2); do npm -g install "$package"; done'
+ (( $+commands[pip] )) && alias upgrade_pip="pip list --outdated --format=json | python -c '
 import json
 import sys
 
 for item in json.loads(sys.stdin.read()):
     print(\"=\".join([item[\"name\"], item[\"latest_version\"]]))
 ' | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U"
-(( $+commands[pip3] )) && alias upgrade_pip="pip3 list --outdated --format=json | python3 -c '
+ (( $+commands[pip3] )) && alias upgrade_pip="pip3 list --outdated --format=json | python3 -c '
 import json
 import sys
 
 for item in json.loads(sys.stdin.read()):
     print(\"=\".join([item[\"name\"], item[\"latest_version\"]]))
 ' | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U"
-(( $+commands[brew] )) && alias upgrade_brew='brew update'; alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
+ (( $+commands[brew] )) && alias upgrade_brew='brew update'; alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
 
-# Proxy
-PROXY=http://127.0.0.1:7890         # ss:1088, vr:8001
-PROXY2=http://127.0.0.1:8123
-SOCK_PROXY=socks5://127.0.0.1:7890  # ss:1086, vr:1081
-NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
-alias set_polipo_proxy='ps -ef | grep polipo | grep -v grep; [ $? -ne 0 ] && polipo socksParentProxy=192.168.31.1:1082 &'
-alias showproxy='echo "proxy=$http_proxy"'
-alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export no_proxy=$NO_PROXY; showproxy'
-alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; export no_proxy=$NO_PROXY; showproxy'
-alias unsetproxy='export http_proxy=; export https_proxy=; export all_proxy=; export no_proxy=; showproxy'
-alias unsetproxy2=unsetproxy
-alias kill_polipo_proxy='killall polipo'
-alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
-alias toggleproxy2='if [ -n "$http_proxy" ]; then unsetproxy2; else setproxy2; fi'
-alias set_sock_proxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_PROXY; all_proxy=$SOCK_PROXY; export no_proxy=$NO_PROXY; showproxy'
-alias unset_sock_proxy=unsetproxy
-alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else set_sock_proxy; fi'
+ # Proxy
+ PROXY=http://127.0.0.1:7890         # ss:1088, vr:8001
+ PROXY2=http://127.0.0.1:8123
+ SOCK_PROXY=socks5://127.0.0.1:7890  # ss:1086, vr:1081
+ NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
+ alias set_polipo_proxy='ps -ef | grep polipo | grep -v grep; [ $? -ne 0 ] && polipo socksParentProxy=192.168.31.1:1082 &'
+ alias showproxy='echo "proxy=$http_proxy"'
+ alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export no_proxy=$NO_PROXY; showproxy'
+ alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; export no_proxy=$NO_PROXY; showproxy'
+ alias unsetproxy='export http_proxy=; export https_proxy=; export all_proxy=; export no_proxy=; showproxy'
+ alias unsetproxy2=unsetproxy
+ alias kill_polipo_proxy='killall polipo'
+ alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
+ alias toggleproxy2='if [ -n "$http_proxy" ]; then unsetproxy2; else setproxy2; fi'
+ alias set_sock_proxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_PROXY; all_proxy=$SOCK_PROXY; export no_proxy=$NO_PROXY; showproxy'
+ alias unset_sock_proxy=unsetproxy
+ alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else set_sock_proxy; fi'
 
-# Local customizations, e.g. theme, plugins, aliases, etc.
-[ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
+ # Local customizations, e.g. theme, plugins, aliases, etc.
+ [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
