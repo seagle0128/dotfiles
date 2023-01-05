@@ -72,7 +72,7 @@ zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-comple
 zinit light tj/git-extras
 
 # Lazygit
-zinit ice wait lucid as"program" from"gh-r" sbin atload"alias lg=lazygit"
+zinit ice wait lucid as"null" from"gh-r" sbin atload"alias lg=lazygit"
 zinit light jesseduffield/lazygit
 
 # Prettify ls
