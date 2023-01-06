@@ -13,7 +13,7 @@ $packages = (
     "aspell", "universal-ctags",
 
     "bat", "fzf", "fd", "ripgrep", "ugrep",
-    "btop", "dust", "gping",
+    "btop", "dust", "gping", "tealdeer",
 
     # Editor
     "emacs", "vscode",
@@ -27,7 +27,7 @@ $packages = (
     # Misc
     # "go", "python", "ruby", "nodejs-lts",
     # "sysinternals", "dependecywalker"
-    "clash-mini"
+    # "clash-mini"
 );
 
 function check {
