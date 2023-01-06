@@ -7,6 +7,10 @@ Set-Variable EDITOR 'emacsclientw -a ""'
 #
 # Functions
 #
+function Scoop-Update-Clean {
+    Invoke-Expression 'scoop update --all && scoop cleanup --all'
+}
+
 function Open-Mini-Emacs {
     Invoke-Expression 'runemacs -Q -l "$EMACSD\init-mini.el"'
 }
@@ -38,6 +42,8 @@ function Open-Terminal-Emacs {
 #
 # Aliases
 #
+Set-Alias -Name suc -Value Scoop-Update-Clean
+
 # Emacs
 Set-Alias -Name me  -Value Open-Mini-Emacs
 Set-Alias -Name mte -Value Open-Mini-Terminal-Emacs
