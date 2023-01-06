@@ -98,7 +98,7 @@ zinit wait as"null" lucid from"gh-r" for \
       cp"**/hyperfine.1 -> $ZPFX/share/man/man1" completions sbin"**/hyperfine" @sharkdp/hyperfine \
       cp"**/doc/rg.1 -> $ZPFX/share/man/man1" completions sbin"**/rg" BurntSushi/ripgrep \
       atload"alias top=btm" completions sbin ClementTsang/bottom \
-      atload"alias help=tldr" mv"tealdeer* -> tldr" dl'https://github.com/dbrgn/tealdeer/releases/latest/download/completions_zsh -> _tldr;' completions sbin dbrgn/tealdeer \
+      atload"alias help=tldr" mv"tealdeer* -> tldr" dl'https://github.com/dbrgn/tealdeer/releases/latest/download/completions_zsh -> _tldr;' completions sbin"tldr" dbrgn/tealdeer \
       atload"alias diff=delta" sbin"**/delta" dandavison/delta \
       atload"alias df=duf" bpick"*(.zip|tar.gz)" sbin muesli/duf \
       atload"alias du=dust" sbin"**/dust" bootandy/dust \
