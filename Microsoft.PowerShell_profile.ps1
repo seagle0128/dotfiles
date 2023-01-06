@@ -1,4 +1,6 @@
-# Copy to $PROFILE
+# PowerShell user profile
+# Copy to $PROFILE to enable:
+#   cp Microsoft.PowerShell_profile.ps1 $PROFILE
 
 Set-Variable DOTFILES "$env:APPDATA\.dotfiles"
 Set-Variable EMACSD "$env:APPDATA\.emacs.d"
