@@ -27,7 +27,7 @@ $packages = (
     # Misc
     # "go", "python", "ruby", "nodejs-lts",
     # "sysinternals", "dependecywalker"
-    # "clash-mini"
+    "clash-mini"
 );
 
 function check {
