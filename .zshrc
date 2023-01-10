@@ -71,9 +71,9 @@ fi
 zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX"
 zinit light tj/git-extras
 
-# Lazygit
-zinit ice wait lucid as"null" from"gh-r" sbin atload"alias lg=lazygit"
-zinit light jesseduffield/lazygit
+# Git UI
+zinit ice wait lucid as"null" from"gh-r" sbin
+zinit light extrawurst/gitui
 
 # Prettify ls
 if (( $+commands[gls] )); then
