@@ -41,6 +41,14 @@ function Open-Terminal-Emacs {
     Invoke-Expression 'emacs -Q -nw $FileName'
 }
 
+function Git-Log {
+    Invoke-Expression 'git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
+}
+
+function Git-Log-All {
+    Invoke-Expression 'git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --all'
+}
+
 #
 # Aliases
 #
@@ -53,6 +61,10 @@ Set-Alias -Name e   -Value Open-Emacs-Client-Nowait
 Set-Alias -Name ec  -Value Open-Emacs-Client-Frame-Nowait
 Set-Alias -Name ef  -Value Open-Emacs-Client-Frame
 Set-Alias -Name te  -Value Open-Terminal-Emacs
+
+# Git
+Set-Alias -Name glol -value Git-Log
+Set-Alias -Name glola -value Git-Log-All
 
 # Utilities
 Set-Alias -Name cat  -Value bat
