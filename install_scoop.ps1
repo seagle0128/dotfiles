@@ -9,7 +9,7 @@ $packages = (
     # Utilities
     "7zip", "everything", "totalcommander",
     # "clipx", "putty", "ccleaner", "fork",
-    "git", "lazygit", "gow", "gsudo", "less",
+    "git", "gitui", "gow", "gsudo", "less",
     "aspell", "universal-ctags",
 
     "bat", "fzf", "fd", "ripgrep", "ugrep",
@@ -45,6 +45,7 @@ function check {
             scoop install starship
             Install-Module -Name PSFzf
             Install-Module -Name ZLocation
+            Install-Module -Name git-aliases -AllowClobber
 
             # Reload
             . $PROFILE
