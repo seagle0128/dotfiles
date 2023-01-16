@@ -60,6 +60,9 @@ Set-Alias -Name du   -Value dust
 Set-Alias -Name ping -Value gping
 Set-Alias -Name top  -Value btop
 
+# Git
+Import-Module git-aliases -DisableNameChecking
+
 # Starship
 Invoke-Expression (&starship init powershell)
 

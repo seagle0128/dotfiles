@@ -45,7 +45,7 @@ function check {
             scoop install starship
             Install-Module -Name PSFzf
             Install-Module -Name ZLocation
-            Install-Module -Name git-aliases -AllowClobber
+            Install-Module -Name git-aliases
 
             # Reload
             . $PROFILE
