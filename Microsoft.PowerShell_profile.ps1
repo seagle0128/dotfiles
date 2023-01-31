@@ -41,6 +41,14 @@ function Open-Terminal-Emacs {
     Invoke-Expression 'emacs -Q -nw $FileName'
 }
 
+function Enable-Http-Proxy {
+    $Env:http_proxy="http://127.0.0.1:7890";$Env:https_proxy="http://127.0.0.1:7890"
+}
+
+function Disable-Http-Proxy {
+    $Env:http_proxy="";$Env:https_proxy=""
+}
+
 #
 # Aliases
 #
