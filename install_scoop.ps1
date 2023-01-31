@@ -35,7 +35,9 @@ function check {
     if (-Not (Get-Command 'scoop' -errorAction SilentlyContinue)) {
         Write-Host "`n-> Installing Scoop..."
         Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
-        Invoke-RestMethod get.scoop.sh | Invoke-Expression
+        # Invoke-RestMethod get.scoop.sh | Invoke-Expression
+        Invoke-WebRequest -useb scoop.201704.xyz | Invoke-Expression
+        scoop config SCOOP_REPO 'https://gitee.com/glsnames/scoop-installer'
         scoop bucket add extras
 
         if (-Not (Test-Path $PROFILE)) {
