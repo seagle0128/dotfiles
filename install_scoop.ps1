@@ -12,7 +12,7 @@ $packages = (
     "git", "gitui", "gow", "gsudo", "less",
     "aspell", "universal-ctags",
 
-    "bat", "fzf", "fd", "ripgrep", "ugrep",
+    "fzf", "fd", "ripgrep", "ugrep",
     "btop", "dust", "gping", "tealdeer",
 
     # Editor
