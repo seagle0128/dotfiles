@@ -64,6 +64,7 @@ Set-Alias -Name te  -Value Open-Terminal-Emacs
 
 # Utilities
 Remove-Alias diff -Force
+Set-Alias -Name cat  -Value bat # Use the latest less or --paging=never
 Set-Alias -Name du   -Value dust
 Set-Alias -Name ping -Value gping
 Set-Alias -Name top  -Value btop
