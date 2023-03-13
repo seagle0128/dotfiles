@@ -9,7 +9,7 @@ Set-Variable EDITOR 'emacsclientw -a ""'
 #
 # Functions
 #
-function Scoop-Update-Clean {
+function Update-Scoop-All {
     Invoke-Expression 'scoop update --all && scoop cleanup --all'
 }
 
@@ -52,7 +52,7 @@ function Disable-Http-Proxy {
 #
 # Aliases
 #
-Set-Alias -Name suc -Value Scoop-Update-Clean
+Set-Alias -Name sua -Value Update-Scoop-All
 
 # Emacs
 Set-Alias -Name me  -Value Open-Mini-Emacs
