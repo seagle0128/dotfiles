@@ -72,7 +72,7 @@ zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-comple
 zinit light tj/git-extras
 
 # Git UI
-zinit ice wait lucid as"null" from"gh-r" sbin
+zinit ice wait lucid as"null" from"gh-r" sbin"**/gitui"
 zinit light extrawurst/gitui
 
 # Prettify ls
@@ -97,13 +97,13 @@ zinit wait as"null" lucid from"gh-r" for \
       cp"**/fd.1 -> $ZPFX/share/man/man1" completions sbin"**/fd" @sharkdp/fd \
       cp"**/hyperfine.1 -> $ZPFX/share/man/man1" completions sbin"**/hyperfine" @sharkdp/hyperfine \
       cp"**/doc/rg.1 -> $ZPFX/share/man/man1" completions sbin"**/rg" BurntSushi/ripgrep \
-      atload"alias top=btm" completions sbin ClementTsang/bottom \
+      atload"alias top=btm" completions sbin"**/btm" ClementTsang/bottom \
       atload"alias help=tldr" mv"tealdeer* -> tldr" dl'https://github.com/dbrgn/tealdeer/releases/latest/download/completions_zsh -> _tldr;' completions sbin"tldr" dbrgn/tealdeer \
       atload"alias diff=delta" sbin"**/delta" dandavison/delta \
       atload"alias df=duf" bpick"*(.zip|tar.gz)" sbin muesli/duf \
       atload"alias du=dust" sbin"**/dust" bootandy/dust \
-      atload"alias ping=gping" sbin orf/gping \
-      bpick"*.zip" sbin if'[[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]' dalance/procs
+      atload"alias ping=gping" sbin"**/gping" orf/gping \
+      bpick"*.zip" sbin"**/procs" if'[[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]' dalance/procs
 
 # FZF: fuzzy finderls
 zinit ice wait lucid as"null" from"gh-r" src'key-bindings.zsh' completions sbin'**/fzf' \
