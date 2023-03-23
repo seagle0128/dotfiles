@@ -68,10 +68,8 @@ fi
 #
 
 # Git extras
-if (( $+commands[make] )); then
-    zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX"
-    zinit light tj/git-extras
-fi
+zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" if'(( $+commands[make] ))'
+zinit light tj/git-extras
 
 # Git UI
 zinit ice wait lucid as"null" from"gh-r" sbin
@@ -94,7 +92,7 @@ fi
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
 zinit wait as"null" lucid from"gh-r" for \
-      atload"alias ls='exa --color=auto --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv"completions/exa.zsh -> _exa" completions sbin"**/exa" if'[[ $CPUTYPE != aarch* ]]' ogham/exa \
+      atload"alias ls='exa --color=auto --group-directories-first'; alias la='ls -laFh'" cp"**/exa.1 -> $ZPFX/share/man/man1" mv"completions/exa.zsh -> _exa" completions sbin"**/exa" if'[[ $CPUTYPE != aarch* ]] && (( $+commands[unzip] ))' ogham/exa \
       atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> _bat" completions sbin"**/bat" @sharkdp/bat \
       cp"**/fd.1 -> $ZPFX/share/man/man1" completions sbin"**/fd" @sharkdp/fd \
       cp"**/hyperfine.1 -> $ZPFX/share/man/man1" completions sbin"**/hyperfine" @sharkdp/hyperfine \
@@ -108,7 +106,7 @@ zinit wait as"null" lucid from"gh-r" for \
       bpick"*.zip" sbin if'[[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]' dalance/procs
 
 # FZF: fuzzy finderls
-zinit ice wait lucid as"null" from"gh-r" src'key-bindings.zsh' completions sbin \
+zinit ice wait lucid as"null" from"gh-r" src'key-bindings.zsh' completions sbin'**/fzf' \
       dl'https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh;
          https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf;
          https://raw.githubusercontent.com/junegunn/fzf/master/man/man1/fzf.1 -> $ZPFX/share/man/man1/fzf.1;
@@ -123,7 +121,7 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:complete:*:options' sort false
-zstyle ':fzf-tab:complete:(cd|ls|exa|bat|cat|emacs|nano|vi|vim):*' fzf-preview 'exa -1 --color=always $realpath 2>/dev/null|| ls -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:(cd|ls|exa|bat|cat|emacs|nano|vi|vim):*' fzf-preview 'exa -1 --color=always $realpath 2>/dev/null || ls -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
 	   fzf-preview 'echo ${(P)word}'
 

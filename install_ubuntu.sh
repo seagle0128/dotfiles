@@ -10,6 +10,7 @@ packages=(
     build-essential
     git
     zsh
+    unzip
 
     # sudo add-apt-repository -y ppa:kelleyk/emacs
     emacs                       # emacs-snapshot
