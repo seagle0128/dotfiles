@@ -68,8 +68,10 @@ fi
 #
 
 # Git extras
-zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX"
-zinit light tj/git-extras
+if (( $+commands[make] )); then
+    zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX"
+    zinit light tj/git-extras
+fi
 
 # Git UI
 zinit ice wait lucid as"null" from"gh-r" sbin
@@ -263,10 +265,10 @@ elif [[ $OSTYPE == linux* ]]; then
 fi
 
 #
- # Aliases
- #
+# Aliases
+#
 
- # General
+# General
  alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
  alias h='history'
  alias c='clear'

@@ -12,7 +12,7 @@ packages=(
     zsh
 
     # sudo add-apt-repository -y ppa:kelleyk/emacs
-    emacs26                     # emacs-snapshot
+    emacs                       # emacs-snapshot
 
     aspell                      # hunspell
     parcellite                  # clipit
@@ -23,7 +23,7 @@ packages=(
 
     # Quick launcher: synapse/albert/Ulauncher
     # sudo add-apt-repository ppa:agornostal/ulauncher
-    ulauncher
+    # ulauncher
 )
 
 # Get OS name
