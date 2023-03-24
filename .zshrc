@@ -103,7 +103,7 @@ zinit wait as"null" lucid from"gh-r" for \
       atload"alias df=duf" bpick"*(.zip|tar.gz)" sbin muesli/duf \
       atload"alias du=dust" sbin"**/dust" bootandy/dust \
       atload"alias ping=gping" sbin"**/gping" orf/gping \
-      bpick"*.zip" sbin"**/procs" if'[[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]' dalance/procs
+      bpick"*.zip" sbin"**/procs" if'(( $+commands[unzip] )) && [[ $CPUTYPE != aarch* ]]' dalance/procs
 
 # FZF: fuzzy finderls
 zinit ice wait lucid as"null" from"gh-r" src'key-bindings.zsh' completions sbin'**/fzf' \
