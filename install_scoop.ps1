@@ -49,6 +49,7 @@ function check {
             Install-Module -Name PSFzf
             Install-Module -Name ZLocation
             Install-Module -Name git-aliases
+            Install-Module -Name Terminal-Icons -Repository PSGallery
 
             # Reload
             . $PROFILE

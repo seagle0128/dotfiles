@@ -72,6 +72,9 @@ Set-Alias -Name top  -Value btop
 # Git
 Import-Module git-aliases -DisableNameChecking
 
+# Icons
+Import-Module -Name Terminal-Icons
+
 # Starship
 Invoke-Expression (&starship init powershell)
 
