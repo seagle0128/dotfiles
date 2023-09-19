@@ -79,11 +79,14 @@ Import-Module -Name Terminal-Icons
 Invoke-Expression (&starship init powershell)
 
 # Readline
+Import-Module PSReadLine
 Set-PSReadLineOption -EditMode Emacs
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
-
 # Fish-like Autosuggest
-Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineOption -PredictionSource History -HistoryNoDuplicates
+
+# Starship
+Invoke-Expression (&starship init powershell)
 
 # FZF
 # Replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
