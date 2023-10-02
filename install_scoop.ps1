@@ -8,13 +8,10 @@
 $packages = (
     # Utilities
     "7zip", "everything", "totalcommander",
-    # "clipx", "putty", "ccleaner", "fork",
+    # "aspell", "clipx", "putty", "ccleaner", "fork",
     "git", "gitui", "gow", "gsudo", "less",
-
-    # "aspell",
     "bat", "fzf", "fd", "ripgrep", "ugrep",
-    "btop", "dust", "gping", "tealdeer",
-    "universal-ctags",
+    "btop", "dust", "eza", "gping", "tealdeer",
 
     # Editor
     "emacs", "vscode",
@@ -28,7 +25,7 @@ $packages = (
     # Misc
     # "go", "python", "ruby", "nodejs-lts",
     # "sysinternals", "dependecywalker"
-    "clash-mini"
+    "clash-verge"
 );
 
 function check {
