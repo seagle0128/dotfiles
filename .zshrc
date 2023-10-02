@@ -92,7 +92,7 @@ fi
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
 zinit wait as"null" lucid from"gh-r" for \
-      atload"alias ls='eza --color=auto --group-directories-first'; alias la='ls -laFh'" sbin"**/eza" if'[[ $OSTYPE != darwin* ]] (( $+commands[unzip] ))' eza-community/eza \
+      atload"alias ls='eza --color=auto --group-directories-first'; alias la='ls -laFh'" sbin"**/eza" if'[[ $OSTYPE != darwin* ]] && (( $+commands[unzip] ))' eza-community/eza \
       atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> _bat" completions sbin"**/bat" @sharkdp/bat \
       cp"**/fd.1 -> $ZPFX/share/man/man1" completions sbin"**/fd" @sharkdp/fd \
       cp"**/hyperfine.1 -> $ZPFX/share/man/man1" completions sbin"**/hyperfine" @sharkdp/hyperfine \
@@ -121,7 +121,7 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:complete:*:options' sort false
-zstyle ':fzf-tab:complete:(cd|ls|eza|bat|cat|emacs|nano|vi|vim):*' fzf-preview 'eza -1 --color=always $realpath 2>/dev/null || ls -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:(cd|ls|exa|eza|bat|cat|emacs|nano|vi|vim):*' fzf-preview 'eza -1 --color=always $realpath 2>/dev/null || ls -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
 	   fzf-preview 'echo ${(P)word}'
 
