@@ -272,6 +272,10 @@ fi
  alias h='history'
  alias c='clear'
 
+ if (( $+commands[eza] )) ; then
+     alias ls='eza --color=auto --group-directories-first'; alias la='ls -laFh'
+ fi
+
  # Ugrep
  if (( $+commands[ugrep] )) ; then
      alias uq='ug -Q'       # short & quick query TUI (interactive, uses .ugrep config)
