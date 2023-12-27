@@ -49,6 +49,15 @@ function Disable-Http-Proxy {
     $Env:http_proxy="";$Env:https_proxy=""
 }
 
+function List-Files {
+    param ([string]$Dir = ".")
+    Invoke-Expression 'lsd -l $Dir'
+}
+
+function List-All-Files {
+    param ([string]$Dir = ".")
+    Invoke-Expression 'lsd -la $Dir'
+}
 #
 # Aliases
 #
@@ -68,6 +77,9 @@ Set-Alias -Name cat  -Value bat # Use the latest less or --paging=never
 Set-Alias -Name df   -Value duf
 Set-Alias -Name du   -Value dust
 Set-Alias -Name ls   -Value lsd
+Set-Alias -Name l    -Value List-Files
+Set-Alias -Name ll   -Value List-Files
+Set-Alias -Name la   -Value List-All-Files
 Set-Alias -Name ping -Value gping
 Set-Alias -Name top  -Value btop
 
