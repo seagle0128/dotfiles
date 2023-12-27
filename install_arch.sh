@@ -30,14 +30,6 @@ packages=(
     sd
     tealdeer
     zoxide
-
-    emacs
-    # npm
-    # python-pip
-
-    # Fonts
-    wqy-microhei
-    wqy-zenhei
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
@@ -62,26 +54,20 @@ else
 fi
 
 function check() {
-    if ! command -v yay >/dev/null 2>&1 && ! command -v pacman >/dev/null 2>&1; then
+    if ! command -v pacman >/dev/null 2>&1; then
         echo "${RED}Error: not Archlinux or its devrived edition.${NORMAL}" >&2
         exit 1
     fi
 }
 
 function install() {
-    CMD=''
-    if command -v yay >/dev/null 2>&1; then
-        CMD='yay -Ssu --noconfirm'
-    elif command -v pacman >/dev/null 2>&1; then
-        CMD='sudo pacman -Ssu --noconfirm'
-    else
-        echo "${RED}Error: not Archlinux or its devrived edition.${NORMAL}" >&2
-        exit 1
-    fi
+    printf "\n${BLUE}➜ Refreshing database...${NORMAL}\n"
+    sudo pacman -Syu
+    printf "\n"
 
     for p in ${packages[@]}; do
         printf "\n${BLUE}➜ Installing ${p}...${NORMAL}\n"
-        ${CMD} ${p}
+        sudo pacman -Sc --needed --noconfirm ${p}
     done
 }
 
