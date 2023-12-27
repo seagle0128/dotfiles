@@ -92,17 +92,19 @@ fi
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
 zinit wait as"null" lucid from"gh-r" for \
-      atload"alias ls='eza --color=auto --group-directories-first'; alias la='ls -laFh'" sbin"**/eza" if'[[ $OSTYPE != darwin* ]]' eza-community/eza \
-      atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/autocomplete/bat.zsh -> _bat" completions sbin"**/bat" @sharkdp/bat \
-      cp"**/fd.1 -> $ZPFX/share/man/man1" completions sbin"**/fd" @sharkdp/fd \
-      cp"**/hyperfine.1 -> $ZPFX/share/man/man1" completions sbin"**/hyperfine" @sharkdp/hyperfine \
-      cp"**/doc/rg.1 -> $ZPFX/share/man/man1" completions sbin"**/rg" BurntSushi/ripgrep \
+      atload"alias ls='eza --color=auto --icons --group-directories-first'; alias la='ls -laFh'; alias tree='ls --tree'" sbin"**/eza" if'[[ $OSTYPE != darwin* ]]' eza-community/eza \
+      atload"alias ls='lsd --group-directories-first'; alias la='ls -laFh'; alias tree='ls --tree'" cp"**/lsd.1 -> $ZPFX/share/man/man1" completions"**/_lsd" sbin"**/lsd" lsd-rs/lsd \
+      atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/bat.zsh -> _bat" completions sbin"**/bat" @sharkdp/bat \
+      atload"alias find=fd" cp"**/fd.1 -> $ZPFX/share/man/man1" completions sbin"**/fd" @sharkdp/fd \
       atload"alias top=btm" completions sbin"**/btm" ClementTsang/bottom \
+      atload"alias grep=rg" cp"**/doc/rg.1 -> $ZPFX/share/man/man1" completions sbin"**/rg" BurntSushi/ripgrep \
       atload"alias help=tldr" mv"tealdeer* -> tldr" dl'https://github.com/dbrgn/tealdeer/releases/latest/download/completions_zsh -> _tldr;' completions sbin"tldr" dbrgn/tealdeer \
       atload"alias diff=delta" sbin"**/delta" dandavison/delta \
       atload"alias df=duf" bpick"*(.zip|tar.gz)" sbin muesli/duf \
       atload"alias du=dust" sbin"**/dust" bootandy/dust \
+      atload"alias sed=sd" completions"**/_sd" sbin"**/sd" chmln/sd \
       atload"alias ping=gping" sbin"**/gping" orf/gping \
+      cp"**/hyperfine.1 -> $ZPFX/share/man/man1" completions sbin"**/hyperfine" @sharkdp/hyperfine \
       bpick"*.zip" sbin"**/procs" if'(( $+commands[unzip] )) && [[ $CPUTYPE != aarch* ]]' dalance/procs
 
 # FZF: fuzzy finderls
@@ -276,29 +278,6 @@ fi
      alias ls='eza --color=auto --group-directories-first'; alias la='ls -laFh'
  fi
 
- # Ugrep
- if (( $+commands[ugrep] )) ; then
-     alias uq='ug -Q'       # short & quick query TUI (interactive, uses .ugrep config)
-     alias ux='ug -UX'      # short & quick binary pattern search (uses .ugrep config)
-     alias uz='ug -z'       # short & quick compressed files and archives search (uses .ugrep config)
-
-     alias ugit='ug -R --ignore-files' # works like git-grep & define your preferences in .ugrep config
-
-     alias grep='ugrep -G'    # search with basic regular expressions (BRE)
-     alias egrep='ugrep -E'    # search with extended regular expressions (ERE)
-     alias fgrep='ugrep -F'    # find string(s)
-     alias pgrep='ugrep -P'    # search with Perl regular expressions
-     alias xgrep='ugrep -W'    # search (ERE) and output text or hex for binary
-
-     alias zgrep='ugrep -zG'   # search compressed files and archives with BRE
-     alias zegrep='ugrep -zE'   # search compressed files and archives with ERE
-     alias zfgrep='ugrep -zF'   # find string(s) in compressed files and/or archives
-     alias zpgrep='ugrep -zP'   # search compressed files and archives with Perl regular expressions
-     alias zxgrep='ugrep -zW'   # search (ERE) compressed files/archives and output text or hex for binary
-
-     alias xdump='ugrep -X ""' # hexdump files without searching
- fi
-
  # Git
  alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
@@ -316,7 +295,7 @@ fi
  alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
  alias upgrade_emacs='emacs -Q --batch -L "$EMACSD/lisp/" -l "init-package.el" --eval "(progn (package-initialize) (update-config-and-packages t t))"'
  alias upgrade_omt='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
- alias upgrade_zinit='zinit self-update && zinit update -a -p'
+ alias upgrade_zinit='zinit self-update && zinit update -a -p && zinit compinit'
  alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
 
  (( $+commands[cargo] )) && alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update

@@ -66,6 +66,7 @@ Set-Alias -Name te  -Value Open-Terminal-Emacs
 Remove-Alias diff -Force
 Set-Alias -Name cat  -Value bat # Use the latest less or --paging=never
 Set-Alias -Name du   -Value dust
+Set-Alias -Name ls   -Value lsd
 Set-Alias -Name ping -Value gping
 Set-Alias -Name top  -Value btop
 
@@ -73,7 +74,7 @@ Set-Alias -Name top  -Value btop
 Import-Module git-aliases -DisableNameChecking
 
 # Icons
-Import-Module -Name Terminal-Icons
+# Import-Module -Name Terminal-Icons
 
 # Starship
 Invoke-Expression (&starship init powershell)

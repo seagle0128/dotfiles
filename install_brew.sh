@@ -1,13 +1,13 @@
 #!/bin/bash
 #############################################################
-# Install packages for Archlinux or its derived editions (e.g. Manjaro).
+# Install macOS via brew cask
 # Author: Vincent Zhang <seagle0128@gmail.com>
 # URL: https://github.com/seagle0128/dotfiles
 #############################################################
 
-# Packages
+# Cask applications
 packages=(
-    #prerequisite
+    # prerequisite
     git
     zsh
     unzip
@@ -30,14 +30,6 @@ packages=(
     sd
     tealdeer
     zoxide
-
-    emacs
-    # npm
-    # python-pip
-
-    # Fonts
-    wqy-microhei
-    wqy-zenhei
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
@@ -61,33 +53,37 @@ else
     NORMAL=""
 fi
 
-function check() {
-    if ! command -v yay >/dev/null 2>&1 && ! command -v pacman >/dev/null 2>&1; then
-        echo "${RED}Error: not Archlinux or its devrived edition.${NORMAL}" >&2
+function check {
+    # Check OS
+    if [[ $OSTYPE != darwin* ]]; then
+        echo "${RED}Error: only install software via brew on macOS.${NORMAL}" >&2
         exit 1
+    fi
+
+    # Check brew
+    if ! command -v brew >/dev/null 2>&1; then
+        printf "${BLUE} ➜  Installing Homebrew...${NORMAL}\n"
+
+        xcode-select --install
+        /bin/bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/Homebrew/install@HEAD/install.sh)"
     fi
 }
 
-function install() {
-    CMD=''
-    if command -v yay >/dev/null 2>&1; then
-        CMD='yay -Ssu --noconfirm'
-    elif command -v pacman >/dev/null 2>&1; then
-        CMD='sudo pacman -Ssu --noconfirm'
-    else
-        echo "${RED}Error: not Archlinux or its devrived edition.${NORMAL}" >&2
-        exit 1
-    fi
-
-    for p in ${packages[@]}; do
-        printf "\n${BLUE}➜ Installing ${p}...${NORMAL}\n"
-        ${CMD} ${p}
+function install () {
+    for app in ${packages[@]}; do
+        printf "${BLUE} ➜  Installing ${app}...${NORMAL}\n"
+        brew install ${app}
     done
 }
 
-function main() {
+function cleanup {
+    brew cleanup
+}
+
+function main {
     check
     install
+    cleanup
 }
 
 main
