@@ -91,7 +91,7 @@ fi
 
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
-zinit wait as"null" lucid from"gh-r" for \
+zinit wait lucid as"null" from"gh-r" for \
       atload"alias ls='eza --color=auto --icons --group-directories-first'; alias la='ls -laFh'; alias tree='ls --tree'" dl"https://github.com/eza-community/eza/raw/main/completions/zsh/_eza -> _eza" completions sbin"**/eza" if'[[ $OSTYPE != darwin* ]]' eza-community/eza \
       atload"alias ls='lsd --group-directories-first'; alias la='ls -laFh'; alias tree='ls --tree'" cp"**/lsd.1 -> $ZPFX/share/man/man1" completions"**/_lsd" sbin"**/lsd" lsd-rs/lsd \
       atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/bat.zsh -> _bat" completions sbin"**/bat" @sharkdp/bat \
@@ -101,11 +101,15 @@ zinit wait as"null" lucid from"gh-r" for \
       atload"alias help=tldr" mv"tealdeer* -> tldr" dl"https://github.com/dbrgn/tealdeer/releases/latest/download/completions_zsh -> _tldr;" completions sbin"tldr" dbrgn/tealdeer \
       atload"alias diff=delta" dl"https://github.com/dandavison/delta/raw/main/etc/completion/completion.zsh -> _delta" completions sbin"**/delta" dandavison/delta \
       atload"alias df=duf" dl"https://github.com/muesli/duf/raw/master/duf.1 -> $ZPFX/share/man/man1/duf.1" sbin"**/duf" muesli/duf \
-      atload"alias du=dust" dl"https://github.com/bootandy/dust/raw/master/man-page/dust.1 -> $ZPFX/share/man/man1/dust.1; https://github.com/bootandy/dust/raw/master/completions/_dust -> _dust" completions sbin"**/dust" bootandy/dust \
-      atload"alias sed=sd" cp"**/sd.1 -> $ZPFX/share/man/man1"  completions"**/_sd" sbin"**/sd" chmln/sd \
+      atload"alias sed=sd" cp"**/sd.1 -> $ZPFX/share/man/man1" completions"**/_sd" sbin"**/sd" chmln/sd \
       atload"alias ping=gping" dl"https://github.com/orf/gping/raw/master/gping.1 -> $ZPFX/share/man/man1/gping.1" sbin"**/gping" orf/gping \
       atload"alias benchmark=hyperfine" cp"**/hyperfine.1 -> $ZPFX/share/man/man1" completions"**/_hyperfine" sbin"**/hyperfine" @sharkdp/hyperfine \
       bpick"*.zip" sbin"**/procs" if'(( $+commands[unzip] )) && [[ $CPUTYPE != aarch* ]]' dalance/procs
+
+zinit ice wait lucid as"null" from"gh-r" atload"alias du=dust" completions sbin"**/dust" \
+      dl'https://github.com/bootandy/dust/raw/master/man-page/dust.1 -> $ZPFX/share/man/man1/dust.1;
+         https://github.com/bootandy/dust/raw/master/completions/_dust -> _dust;'
+zinit light bootandy/dust
 
 # FZF: fuzzy finderls
 zinit ice wait lucid as"null" from"gh-r" src'key-bindings.zsh' completions sbin'**/fzf' \
@@ -133,9 +137,9 @@ zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w 
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
        '[[ $group == "[process ID]" ]] &&
         if [[ $OSTYPE == darwin* ]]; then
-           ps -p $word -o comm="" -w -w
+            ps -p $word -o comm="" -w -w
         elif [[ $OSTYPE == linux* ]]; then
-           ps --pid=$word -o cmd --no-headers -w -w
+            ps --pid=$word -o cmd --no-headers -w -w
         fi'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags '--preview-window=down:3:wrap'
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
