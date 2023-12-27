@@ -100,7 +100,7 @@ zinit wait as"null" lucid from"gh-r" for \
       atload"alias grep=rg" cp"**/doc/rg.1 -> $ZPFX/share/man/man1" completions sbin"**/rg" BurntSushi/ripgrep \
       atload"alias help=tldr" mv"tealdeer* -> tldr" dl'https://github.com/dbrgn/tealdeer/releases/latest/download/completions_zsh -> _tldr;' completions sbin"tldr" dbrgn/tealdeer \
       atload"alias diff=delta" sbin"**/delta" dandavison/delta \
-      atload"alias df=duf" bpick"*(.zip|tar.gz)" sbin muesli/duf \
+      atload"alias df=duf" sbin"**/duf" muesli/duf \
       atload"alias du=dust" sbin"**/dust" bootandy/dust \
       atload"alias sed=sd" completions"**/_sd" sbin"**/sd" chmln/sd \
       atload"alias ping=gping" sbin"**/gping" orf/gping \
