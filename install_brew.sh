@@ -16,7 +16,7 @@ packages=(
     bat
     bottom
     btop
-    delta
+    git-delta
     duf
     dust
     fd
