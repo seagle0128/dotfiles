@@ -85,7 +85,7 @@ sync_repo() {
 install_package() {
     if ! command -v ${1} >/dev/null 2>&1; then
         if is_mac; then
-            brew install ${1}
+            brew -q install ${1}
         elif is_debian; then
             sudo apt-get install -y ${1}
         elif is_arch; then
@@ -95,7 +95,7 @@ install_package() {
         fi
     else
         if is_mac; then
-            brew upgrade ${1}
+            brew upgrade -q ${1}
         elif is_debian; then
             sudo apt-get upgrade -y ${1}
         elif is_arch; then
@@ -144,7 +144,7 @@ promote_yn() {
 
 # Clean or not?
 if [ -d $ZSH ] || [ -d $TMUX ] || [ -d $EMACSD ]; then
-    promote_yn "Do you want to reset all configurations?" "continue"
+    promote_yn "${YELLOW}Do you want to reset all configurations?${NORMAL}" "continue"
     if [ $continue -eq $YES ]; then
         clean_dotfiles
     fi
@@ -180,30 +180,30 @@ fi
 
 # Check git
 if ! command -v git >/dev/null 2>&1; then
+    printf "${GREEN}▓▒░ Installing git...${NORMAL}\n"
     install_package git
 fi
 
 # Check curl
 if ! command -v curl >/dev/null 2>&1; then
+    printf "${GREEN}▓▒░ Installing curl...${NORMAL}\n"
     install_package curl
 fi
 
 # Check zsh
 if ! command -v zsh >/dev/null 2>&1; then
+    printf "${GREEN}▓▒░ Installing zsh...${NORMAL}\n"
     install_package zsh
 fi
 
 if is_mac && ! command -v tree >/dev/null 2>&1; then
+    printf "${GREEN}▓▒░ Installing tree...${NORMAL}\n"
     install_package tree
 fi
 
 # ZSH plugin manager
 printf "${GREEN}▓▒░ Installing Zinit...${NORMAL}\n"
-if ! command -v zinit >/dev/null 2>&1; then
-    sh -c "$(curl -fsSL https://git.io/zinit-install)"
-else
-    zinit self-update
-fi
+sh -c "$(curl -fsSL https://git.io/zinit-install)"
 
 # Dotfiles
 printf "${GREEN}▓▒░ Installing Dotfiles...${NORMAL}\n"
@@ -248,8 +248,20 @@ printf "${GREEN}▓▒░ Installing Oh My Tmux...${NORMAL}\n"
 sync_repo gpakosz/.tmux $TMUX
 ln -sf $TMUX/.tmux.conf $HOME/.tmux.conf
 
+# Packages
+printf "${GREEN}▓▒░ Installing packages...${NORMAL}\n"
+if is_mac; then
+    ./install_brew.sh
+elif is_arch; then
+    ./install_arch.sh
+elif is_debian; then
+    ./install_debian.sh
+else
+    printf "Noting to install!"
+fi
+
 # Entering zsh
-printf "Done. Enjoy!\n"
+printf "${GREEN}▓▒░ Done. Enjoy!${NORMAL}\n"
 if command -v zsh >/dev/null 2>&1; then
     if is_cygwin && [ "$SHELL" != "$(which zsh)" ]; then
         chsh -s $(which zsh)

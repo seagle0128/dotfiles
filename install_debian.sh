@@ -1,6 +1,6 @@
 #!/bin/bash
 #############################################################
-# Install and update packages for ubuntu or its derived editions.
+# Install packages for Debian or its derived editions (e.g. Ubuntu, Mint).
 # Author: Vincent Zhang <seagle0128@gmail.com>
 # URL: https://github.com/seagle0128/dotfiles
 #############################################################

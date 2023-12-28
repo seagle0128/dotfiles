@@ -5,17 +5,13 @@
 # URL: https://github.com/seagle0128/dotfiles
 #############################################################
 
-# Cask applications
+# Packages
 packages=(
-    # prerequisite
-    git
-    zsh
-    unzip
-
     # modern tools
     bat
     bottom
     btop
+    eza
     git-delta
     duf
     dust
@@ -24,6 +20,7 @@ packages=(
     gitui
     gping
     hyperfine
+    lsd
     neofetch
     procs
     ripgrep
@@ -72,7 +69,7 @@ function check {
 function install () {
     for app in ${packages[@]}; do
         printf "${BLUE} ➜  Installing ${app}...${NORMAL}\n"
-        brew install ${app}
+        brew install -q ${app}
     done
 }
 

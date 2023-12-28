@@ -7,11 +7,6 @@
 
 # Packages
 packages=(
-    #prerequisite
-    git
-    zsh
-    unzip
-
     # modern tools
     bat
     bottom
@@ -19,11 +14,13 @@ packages=(
     delta
     duf
     dust
+    eza
     fd
     fzf
     gitui
     gping
     hyperfine
+    lsd
     neofetch
     procs
     ripgrep
