@@ -79,6 +79,15 @@ if type brew &>/dev/null; then
     compinit
 fi
 
+# FZF: fuzzy finderls
+if [[ -f "/usr/local/opt/fzf/shell/completion.zsh" ]]; then
+    source "/usr/local/opt/fzf/shell/completion.zsh"
+fi
+
+if [[ -f "/usr/local/opt/fzf/shell/key-bindings.zsh" ]]; then
+    source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+fi
+
 zinit ice wait lucid depth"1" atload"zicompinit; zicdreplay" blockf
 zinit light Aloxaf/fzf-tab
 
