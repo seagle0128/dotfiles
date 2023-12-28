@@ -50,12 +50,12 @@ function Disable-Http-Proxy {
 }
 
 function List-Files {
-    param ([string]$Dir = ".")
+    param ([string]$Dir = "")
     Invoke-Expression 'lsd -l $Dir'
 }
 
 function List-All-Files {
-    param ([string]$Dir = ".")
+    param ([string]$Dir = "")
     Invoke-Expression 'lsd -la $Dir'
 }
 #
