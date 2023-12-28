@@ -52,16 +52,10 @@ zinit wait lucid depth"1" for \
       zsh-users/zsh-autosuggestions
 
 zinit wait lucid light-mode depth"1" for \
+      djui/alias-tips \
       zsh-users/zsh-history-substring-search \
       hlissner/zsh-autopair \
       agkozak/zsh-z
-
-if [[ $OSTYPE != linux* && $CPUTYPE != aarch* ]]; then
-    zinit ice wait lucid from"gh-r" as"program"
-    zinit light sei40kr/fast-alias-tips-bin
-    zinit ice wait lucid depth"1"
-    zinit light sei40kr/zsh-fast-alias-tips
-fi
 
 #
 # Utilities
@@ -70,10 +64,6 @@ fi
 # Git extras
 zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" if'(( $+commands[make] ))'
 zinit light tj/git-extras
-
-# Git UI
-zinit ice wait lucid as"null" from"gh-r" sbin"**/gitui"
-zinit light extrawurst/gitui
 
 # Prettify ls
 if (( $+commands[gls] )); then
@@ -88,36 +78,6 @@ if type brew &>/dev/null; then
     autoload -Uz compinit
     compinit
 fi
-
-# Modern Unix commands
-# See https://github.com/ibraheemdev/modern-unix
-zinit wait lucid as"null" from"gh-r" for \
-      atload"alias ls='eza --color=auto --icons --group-directories-first'; alias la='ls -laFh'; alias tree='ls --tree'" dl"https://github.com/eza-community/eza/raw/main/completions/zsh/_eza -> _eza" completions sbin"**/eza" if'[[ $OSTYPE != darwin* ]]' eza-community/eza \
-      atload"alias ls='lsd --group-directories-first'; alias la='ls -laFh'; alias tree='ls --tree'" cp"**/lsd.1 -> $ZPFX/share/man/man1" completions"**/_lsd" sbin"**/lsd" lsd-rs/lsd \
-      atload"alias cat='bat -p --wrap character'" cp"**/bat.1 -> $ZPFX/share/man/man1" mv"**/bat.zsh -> _bat" completions sbin"**/bat" @sharkdp/bat \
-      atload"alias find=fd" cp"**/fd.1 -> $ZPFX/share/man/man1" completions"**/_fd" sbin"**/fd" @sharkdp/fd \
-      atload"alias top=btm" completions"**/_btm" sbin"**/btm" ClementTsang/bottom \
-      atload"alias grep=rg" cp"**/doc/rg.1 -> $ZPFX/share/man/man1" completions sbin"**/rg" BurntSushi/ripgrep \
-      atload"alias help=tldr" mv"tealdeer* -> tldr" dl"https://github.com/dbrgn/tealdeer/releases/latest/download/completions_zsh -> _tldr;" completions sbin"tldr" dbrgn/tealdeer \
-      atload"alias diff=delta" dl"https://github.com/dandavison/delta/raw/main/etc/completion/completion.zsh -> _delta" completions sbin"**/delta" dandavison/delta \
-      atload"alias df=duf" dl"https://github.com/muesli/duf/raw/master/duf.1 -> $ZPFX/share/man/man1/duf.1" sbin"**/duf" muesli/duf \
-      atload"alias sed=sd" cp"**/sd.1 -> $ZPFX/share/man/man1" completions"**/_sd" sbin"**/sd" chmln/sd \
-      atload"alias ping=gping" dl"https://github.com/orf/gping/raw/master/gping.1 -> $ZPFX/share/man/man1/gping.1" sbin"**/gping" orf/gping \
-      atload"alias benchmark=hyperfine" cp"**/hyperfine.1 -> $ZPFX/share/man/man1" completions"**/_hyperfine" sbin"**/hyperfine" @sharkdp/hyperfine \
-      bpick"*.zip" sbin"**/procs" if'(( $+commands[unzip] )) && [[ $CPUTYPE != aarch* ]]' dalance/procs
-
-zinit ice wait lucid as"null" from"gh-r" atload"alias du=dust" completions sbin"**/dust" \
-      dl'https://github.com/bootandy/dust/raw/master/man-page/dust.1 -> $ZPFX/share/man/man1/dust.1;
-         https://github.com/bootandy/dust/raw/master/completions/_dust -> _dust;'
-zinit light bootandy/dust
-
-# FZF: fuzzy finderls
-zinit ice wait lucid as"null" from"gh-r" src'key-bindings.zsh' completions sbin'**/fzf' \
-      dl'https://github.com/junegunn/fzf/raw/master/shell/key-bindings.zsh;
-         https://github.com/junegunn/fzf/raw/master/shell/completion.zsh -> _fzf;
-         https://github.com/junegunn/fzf/raw/master/man/man1/fzf.1-> $ZPFX/share/man/man1/fzf.1;
-         https://github.com/junegunn/fzf/raw/master/man/man1/fzf-tmux.1 -> $ZPFX/share/man/man1/fzf-tmux.1;'
-zinit light junegunn/fzf
 
 zinit ice wait lucid depth"1" atload"zicompinit; zicdreplay" blockf
 zinit light Aloxaf/fzf-tab
@@ -278,9 +238,21 @@ fi
  alias h='history'
  alias c='clear'
 
- if (( $+commands[eza] )) ; then
-     alias ls='eza --color=auto --group-directories-first'; alias la='ls -laFh'
- fi
+ # Modern Unix commands
+ # See https://github.com/ibraheemdev/modern-unix
+ alias ls='eza --color=auto --icons --group-directories-first'
+ # alias ls='lsd --group-directories-first'
+ alias tree='ls --tree'
+ alias cat='bat -p --wrap character'
+ alias find=fd
+ alias top=btm
+ alias grep=rg
+ alias help=tldr
+ alias diff=delta
+ alias df=duf
+ alias du=dust
+ alias sed=su
+ alias benchmark=hyperfine
 
  # Git
  alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
