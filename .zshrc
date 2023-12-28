@@ -249,19 +249,19 @@ fi
 
  # Modern Unix commands
  # See https://github.com/ibraheemdev/modern-unix
- alias ls='eza --color=auto --icons --group-directories-first'
- # alias ls='lsd --group-directories-first'
- alias tree='ls --tree'
- alias cat='bat -p --wrap character'
- alias find=fd
- alias top=btm
- alias grep=rg
- alias help=tldr
- alias diff=delta
- alias df=duf
- alias du=dust
- alias sed=su
- alias benchmark=hyperfine
+ # (( $+commands[lsd] )) && alias ls='lsd --group-directories-first'
+ (( $+commands[eza] )) && alias ls='eza --color=auto --icons --group-directories-first'
+ (( $+commands[bat] )) && alias cat='bat -p --wrap character'
+ (( $+commands[fd] )) && alias find=fd
+ (( $+commands[btm] )) && alias top=btm
+ (( $+commands[rg] )) && alias grep=rg
+ (( $+commands[tldr] )) && alias help=tldr
+ (( $+commands[delta] )) && alias diff=delta
+ (( $+commands[duf] )) && alias df=duf
+ (( $+commands[dust] )) && alias du=dust
+ (( $+commands[sd] )) && alias sed=sd
+ (( $+commands[hyperfine] )) && alias benchmark=hyperfine
+ (( $+commands[gping] )) && alias ping=gping
 
  # Git
  alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
