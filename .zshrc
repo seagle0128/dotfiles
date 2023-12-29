@@ -253,7 +253,7 @@ fi
  (( $+commands[eza] )) && alias la='ls -lAFh'
  (( $+commands[bat] )) && alias cat='bat -p --wrap character'
  (( $+commands[fd] )) && alias find=fd
- (( $+commands[btm] )) && alias top=btm
+ (( $+commands[btop] )) && alias top=btop
  (( $+commands[rg] )) && alias grep=rg
  (( $+commands[tldr] )) && alias help=tldr
  (( $+commands[delta] )) && alias diff=delta

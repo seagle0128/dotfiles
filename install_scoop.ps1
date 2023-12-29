@@ -12,7 +12,7 @@ $packages = (
     "git", "gitui", "gow", "gsudo", "less",
     "bat", "fzf", "fd", "ripgrep",
     "btop", "duf", "dust", "eza",
-    "gping", "tealdeer",
+    "gping", "tealdeer", "hyperfine"
 
     # Editor
     "emacs", "vscode",
@@ -25,8 +25,8 @@ $packages = (
 
     # Misc
     # "go", "python", "ruby", "nodejs-lts",
-    # "sysinternals", "dependecywalker"
-    "clash-verge"
+    # "sysinternals", "dependecywalker",
+    "clash-verge", "v2rayn"
 );
 
 function check {
