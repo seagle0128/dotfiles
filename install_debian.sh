@@ -9,19 +9,34 @@
 packages=(
     # prerequisite
     build-essential
-    git
-    zsh
-    unzip
+
+    # modern tools
+    bat
+    # bottom
+    btop
+    # delta
+    duf
+    # dust
+    exa                         # eza
+    # fd
+    fzf
+    # gitui
+    # gping
+    # hyperfine
+    neofetch
+    # procs
+    ripgrep
+    # sd
+    # tealdeer
+    # zoxide
 
     # sudo add-apt-repository -y ppa:kelleyk/emacs
     # emacs                       # emacs-snapshot
 
     aspell                      # hunspell
-    parcellite                  # clipit
-    peek
-    screenkey
-
-    neofetch                    # screenfetch
+    # parcellite                  # clipit
+    # peek
+    # screenkey
 
     # Quick launcher: synapse/albert/Ulauncher
     # sudo add-apt-repository ppa:agornostal/ulauncher
@@ -65,7 +80,7 @@ function check {
     fi
 
     if [ ! "$SYSTEM" = "Linux" ] || [ -z "$APT" ]; then
-        echo "${RED}Error: Not Ubuntu or its derived edition${NORMAL}" >&2
+        echo "${RED}Error: Not Debian or its derived edition${NORMAL}" >&2
         exit 1
     fi
 }

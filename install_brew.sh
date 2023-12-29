@@ -20,7 +20,6 @@ packages=(
     gitui
     gping
     hyperfine
-    lsd
     neofetch
     procs
     ripgrep

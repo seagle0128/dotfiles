@@ -11,7 +11,7 @@ $packages = (
     # "aspell", "clipx", "putty", "ccleaner", "fork",
     "git", "gitui", "gow", "gsudo", "less",
     "bat", "fzf", "fd", "ripgrep",
-    "btop", "duf", "dust", "eza", "lsd",
+    "btop", "duf", "dust", "eza",
     "gping", "tealdeer",
 
     # Editor

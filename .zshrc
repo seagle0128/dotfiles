@@ -249,8 +249,8 @@ fi
 
  # Modern Unix commands
  # See https://github.com/ibraheemdev/modern-unix
- # (( $+commands[lsd] )) && alias ls='lsd --group-directories-first'
- (( $+commands[eza] )) && alias ls='eza --color=auto --icons --group-directories-first'
+ (( $+commands[exa] )) && alias ls='exa --color=auto --icons --group-directories-first'; alias la='ls -laFh'
+ (( $+commands[eza] )) && alias la='ls -lAFh'
  (( $+commands[bat] )) && alias cat='bat -p --wrap character'
  (( $+commands[fd] )) && alias find=fd
  (( $+commands[btm] )) && alias top=btm
