@@ -79,10 +79,10 @@ Set-Alias -Name te  -Value Open-Terminal-Emacs
 
 # Utilities
 if (Get-Alias -Name "diff" -ErrorAction SilentlyContinue) {
-    Remove-Alias diff
+    Remove-Alias diff -Force
 }
 if (Get-Alias -Name "rm" -ErrorAction SilentlyContinue) {
-    Remove-Alias rm
+    Remove-Alias rm -Force
 }
 Set-Alias -Name cat  -Value bat # Use the latest less or --paging=never
 Set-Alias -Name df   -Value duf
