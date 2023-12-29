@@ -150,7 +150,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--height 40% --border'
 export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || cat {} || tree -NC {}) 2> /dev/null | head -200'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --exact"
-export FZF_ALT_C_OPTS="--preview 'tree -NC {} | head -200'"
+export FZF_ALT_C_OPTS="--preview '(exa --tree --group-directories-first {} || tree -NC {}) | head -200'"
 
 # GIT heart FZF
 # @see https://junegunn.kr/2016/07/fzf-git/
@@ -257,7 +257,7 @@ fi
 
  # Modern Unix commands
  # See https://github.com/ibraheemdev/modern-unix
- (( $+commands[exa] )) && alias ls='exa --color=auto --icons --group-directories-first'; alias la='ls -laFh'
+ (( $+commands[exa] )) && alias ls='exa --color=auto --icons --group-directories-first'; alias la='ls -laFh'; alias tree='ls --tree'
  (( $+commands[eza] )) && alias la='ls -lAFh'
  (( $+commands[bat] )) && alias cat='bat -p --wrap character'
  (( $+commands[fd] )) && alias find=fd

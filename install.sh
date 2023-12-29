@@ -196,11 +196,6 @@ if ! command -v zsh >/dev/null 2>&1; then
     install_package zsh
 fi
 
-if is_mac && ! command -v tree >/dev/null 2>&1; then
-    printf "${GREEN}▓▒░ Installing tree...${NORMAL}\n"
-    install_package tree
-fi
-
 # ZSH plugin manager
 printf "${GREEN}▓▒░ Installing Zinit...${NORMAL}\n"
 sh -c "$(curl -fsSL https://git.io/zinit-install)"
