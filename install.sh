@@ -62,7 +62,7 @@ is_debian() {
 }
 
 is_arch() {
-    command -v yay >/dev/null 2>&1 || command -v pacman >/dev/null 2>&1
+    command -v pacman >/dev/null 2>&1
 }
 
 sync_repo() {

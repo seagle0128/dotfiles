@@ -80,12 +80,20 @@ if type brew &>/dev/null; then
 fi
 
 # FZF: fuzzy finderls
-if [[ -f "/usr/local/opt/fzf/shell/completion.zsh" ]]; then
-    source "/usr/local/opt/fzf/shell/completion.zsh"
+if [[ $OSTYPE == darwin* ]]; then
+    FZF="/usr/local/opt/fzf/shell/"
+elif (( $+commands[apt-get] )); then
+    FZF="/usr/share/doc/fzf/examples/"
+else
+    FZF="/usr/share/fzf/"
 fi
 
-if [[ -f "/usr/local/opt/fzf/shell/key-bindings.zsh" ]]; then
-    source "/usr/local/opt/fzf/shell/key-bindings.zsh"
+if [[ -f "$FZF/completion.zsh" ]]; then
+    source "$FZF/completion.zsh"
+fi
+
+if [[ -f "$FZF/key-bindings.zsh" ]]; then
+    source "$FZF/key-bindings.zsh"
 fi
 
 zinit ice wait lucid depth"1" atload"zicompinit; zicdreplay" blockf
