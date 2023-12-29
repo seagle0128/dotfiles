@@ -104,8 +104,8 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:complete:*:options' sort false
-zstyle ':fzf-tab:complete:(cd|ls|exa|eza|bat|cat|emacs|nano|vi|vim):*' \
-       fzf-preview 'eza -1 --color=always $realpath 2>/dev/null || ls -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:(cd|ls|lsd|exa|eza|bat|cat|emacs|nano|vi|vim):*' \
+       fzf-preview 'eza -1 --icons --color=always $realpath 2>/dev/null || ls -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
 	   fzf-preview 'echo ${(P)word}'
 
@@ -150,7 +150,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--height 40% --border'
 export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || cat {} || tree -NC {}) 2> /dev/null | head -200'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --exact"
-export FZF_ALT_C_OPTS="--preview '(exa --tree --group-directories-first {} || tree -NC {}) | head -200'"
+export FZF_ALT_C_OPTS="--preview '(eza --tree --icons --color=always --group-directories-first {} || tree -NC {}) | head -200'"
 
 # GIT heart FZF
 # @see https://junegunn.kr/2016/07/fzf-git/
@@ -251,83 +251,90 @@ fi
 #
 
 # General
- alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
- alias h='history'
- alias c='clear'
+alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
+alias h='history'
+alias c='clear'
 
- # Modern Unix commands
- # See https://github.com/ibraheemdev/modern-unix
- (( $+commands[exa] )) && alias ls='exa --color=auto --icons --group-directories-first'; alias la='ls -laFh'; alias tree='ls --tree'
- (( $+commands[eza] )) && alias la='ls -lAFh'
- (( $+commands[bat] )) && alias cat='bat -p --wrap character'
- (( $+commands[fd] )) && alias find=fd
- (( $+commands[btop] )) && alias top=btop
- (( $+commands[rg] )) && alias grep=rg
- (( $+commands[tldr] )) && alias help=tldr
- (( $+commands[delta] )) && alias diff=delta
- (( $+commands[duf] )) && alias df=duf
- (( $+commands[dust] )) && alias du=dust
- (( $+commands[sd] )) && alias sed=sd
- (( $+commands[hyperfine] )) && alias benchmark=hyperfine
- (( $+commands[gping] )) && alias ping=gping
+# Modern Unix commands
+# See https://github.com/ibraheemdev/modern-unix
+if (( $+commands[eza] )); then
+    alias ls='eza --color=auto --icons --group-directories-first'
+    alias tree='ls --tree'
+elif (( $+commands[exa] )); then
+    alias ls='exa --color=auto --icons --group-directories-first'
+    alias la='ls -laFh'
+    alias tree='ls --tree'
+fi
+(( $+commands[bat] )) && alias cat='bat -p --wrap character'
+(( $+commands[fd] )) && alias find=fd
+(( $+commands[btop] )) && alias top=btop
+(( $+commands[rg] )) && alias grep=rg
+(( $+commands[tldr] )) && alias help=tldr
+(( $+commands[delta] )) && alias diff=delta
+(( $+commands[duf] )) && alias df=duf
+(( $+commands[dust] )) && alias du=dust
+(( $+commands[sd] )) && alias sed=sd
+(( $+commands[hyperfine] )) && alias benchmark=hyperfine
+(( $+commands[gping] )) && alias ping=gping
 
- # Git
- alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
+# Git
+alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
- # Emacs
- alias me="emacs -Q -l $EMACSD/init-mini.el" # mini emacs
- alias mte="emacs -Q -nw -l $EMACSD/init-mini.el" # mini terminal emacs
- alias e="$EDITOR -n"
- alias ec="$EDITOR -n -c"
- alias ef="$EDITOR -c"
- alias te="$EDITOR -nw"
- alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))' && te"
+# Emacs
+alias me="emacs -Q -l $EMACSD/init-mini.el" # mini emacs
+alias mte="emacs -Q -nw -l $EMACSD/init-mini.el" # mini terminal emacs
+alias e="$EDITOR -n"
+alias ec="$EDITOR -n -c"
+alias ef="$EDITOR -c"
+alias te="$EDITOR -nw"
+alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))' && te"
 
- # Upgrade
- alias upgrade_repo='git pull --rebase --stat origin master'
- alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
- alias upgrade_emacs='emacs -Q --batch -L "$EMACSD/lisp/" -l "init-package.el" --eval "(progn (package-initialize) (update-config-and-packages t t))"'
- alias upgrade_omt='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
- alias upgrade_zinit='zinit self-update && zinit update -a -p && zinit compinit'
- alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
+# Upgrade
+alias upgrade_repo='git pull --rebase --stat origin master'
+alias upgrade_dotfiles='cd $DOTFILES && upgrade_repo; cd - >/dev/null'
+alias upgrade_emacs='emacs -Q --batch -L "$EMACSD/lisp/" -l "init-package.el" \
+                           --eval "(progn (package-initialize) (update-config-and-packages t t))"'
+alias upgrade_omt='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
+alias upgrade_zinit='zinit self-update && zinit update -a -p && zinit compinit'
+alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
 
- (( $+commands[cargo] )) && alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update
- (( $+commands[gem] )) && alias upgrade_gem='gem update && gem cleanup'
- (( $+commands[go] )) && alias upgrade_go='GO111MODULE=on && $DOTFILES/install_go.sh'
- (( $+commands[npm] )) && alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2); do npm -g install "$package"; done'
- (( $+commands[pip] )) && alias upgrade_pip="pip list --outdated --format=json | python -c '
+(( $+commands[cargo] )) && alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update
+(( $+commands[gem] )) && alias upgrade_gem='gem update && gem cleanup'
+(( $+commands[go] )) && alias upgrade_go='GO111MODULE=on && $DOTFILES/install_go.sh'
+(( $+commands[npm] )) && alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2); do npm -g install "$package"; done'
+(( $+commands[pip] )) && alias upgrade_pip="pip list --outdated --format=json | python -c '
 import json
 import sys
 
 for item in json.loads(sys.stdin.read()):
     print(\"=\".join([item[\"name\"], item[\"latest_version\"]]))
 ' | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip install -U"
- (( $+commands[pip3] )) && alias upgrade_pip="pip3 list --outdated --format=json | python3 -c '
+(( $+commands[pip3] )) && alias upgrade_pip="pip3 list --outdated --format=json | python3 -c '
 import json
 import sys
 
 for item in json.loads(sys.stdin.read()):
     print(\"=\".join([item[\"name\"], item[\"latest_version\"]]))
 ' | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U"
- (( $+commands[brew] )) && alias upgrade_brew='brew update'; alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
+(( $+commands[brew] )) && alias upgrade_brew='brew update'; alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
 
- # Proxy
- PROXY=http://127.0.0.1:7890         # ss:1088, vr:8001
- PROXY2=http://127.0.0.1:8123
- SOCK_PROXY=socks5://127.0.0.1:7890  # ss:1086, vr:1081
- NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
- alias set_polipo_proxy='ps -ef | grep polipo | grep -v grep; [ $? -ne 0 ] && polipo socksParentProxy=192.168.31.1:1082 &'
- alias showproxy='echo "proxy=$http_proxy"'
- alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export no_proxy=$NO_PROXY; showproxy'
- alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; export no_proxy=$NO_PROXY; showproxy'
- alias unsetproxy='export http_proxy=; export https_proxy=; export all_proxy=; export no_proxy=; showproxy'
- alias unsetproxy2=unsetproxy
- alias kill_polipo_proxy='killall polipo'
- alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
- alias toggleproxy2='if [ -n "$http_proxy" ]; then unsetproxy2; else setproxy2; fi'
- alias set_sock_proxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_PROXY; all_proxy=$SOCK_PROXY; export no_proxy=$NO_PROXY; showproxy'
- alias unset_sock_proxy=unsetproxy
- alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else set_sock_proxy; fi'
+# Proxy
+PROXY=http://127.0.0.1:7890         # ss:1088, vr:8001
+PROXY2=http://127.0.0.1:8123
+SOCK_PROXY=socks5://127.0.0.1:7890  # ss:1086, vr:1081
+NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
+alias set_polipo_proxy='ps -ef | grep polipo | grep -v grep; [ $? -ne 0 ] && polipo socksParentProxy=192.168.31.1:1082 &'
+alias showproxy='echo "proxy=$http_proxy"'
+alias setproxy='export http_proxy=$PROXY; export https_proxy=$PROXY; export no_proxy=$NO_PROXY; showproxy'
+alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; export no_proxy=$NO_PROXY; showproxy'
+alias unsetproxy='export http_proxy=; export https_proxy=; export all_proxy=; export no_proxy=; showproxy'
+alias unsetproxy2=unsetproxy
+alias kill_polipo_proxy='killall polipo'
+alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
+alias toggleproxy2='if [ -n "$http_proxy" ]; then unsetproxy2; else setproxy2; fi'
+alias set_sock_proxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_PROXY; all_proxy=$SOCK_PROXY; export no_proxy=$NO_PROXY; showproxy'
+alias unset_sock_proxy=unsetproxy
+alias toggle_sock_proxy='if [ -n "$http_proxy" ]; then unset_sock_proxy; else set_sock_proxy; fi'
 
- # Local customizations, e.g. theme, plugins, aliases, etc.
- [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
+# Local customizations, e.g. theme, plugins, aliases, etc.
+[ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
