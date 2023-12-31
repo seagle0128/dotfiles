@@ -9,7 +9,7 @@
 packages=(
     # modern tools
     bat
-    bottom
+    # bottom
     btop
     delta
     duf

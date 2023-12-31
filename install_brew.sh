@@ -9,7 +9,7 @@
 packages=(
     # modern tools
     bat
-    bottom
+    # bottom
     btop
     eza
     git-delta
@@ -25,7 +25,7 @@ packages=(
     ripgrep
     sd
     tealdeer
-    zoxide
+    # zoxide
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
