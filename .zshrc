@@ -61,7 +61,12 @@ zinit wait lucid light-mode depth"1" for \
 #
 
 # Z
-(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+if (( $+commands[zoxide] )); then
+    eval "$(zoxide init zsh)"
+else
+    zinit ice wait lucid depth"1"
+    zinit light agkozak/zsh-z
+fi
 
 # Git extras
 zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" if'(( $+commands[make] ))'
