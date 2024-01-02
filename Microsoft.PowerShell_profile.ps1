@@ -110,9 +110,6 @@ Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 # Fish-like Autosuggest
 Set-PSReadLineOption -PredictionSource History -HistoryNoDuplicates
 
-# Starship
-Invoke-Expression (&starship init powershell)
-
 # FZF
 # Replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
