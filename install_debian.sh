@@ -28,7 +28,7 @@ packages=(
     ripgrep
     # sd
     # tealdeer
-    # zoxide
+    zoxide
 
     # sudo add-apt-repository -y ppa:kelleyk/emacs
     # emacs                       # emacs-snapshot

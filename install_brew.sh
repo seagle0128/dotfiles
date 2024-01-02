@@ -24,6 +24,7 @@ packages=(
     procs
     ripgrep
     sd
+    starship
     tealdeer
     zoxide
 )

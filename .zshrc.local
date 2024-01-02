@@ -4,6 +4,7 @@
 if (( $+commands[starship] )); then
     # Load starship theme (requires nerd fonts)
     eval $(starship init zsh)
+else
     # Load the pure theme, with zsh-async library that's bundled with it.
     zinit ice depth"1" pick"async.zsh" src"pure.zsh"
     zinit light sindresorhus/pure
