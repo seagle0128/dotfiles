@@ -97,11 +97,9 @@ Set-Alias -Name top  -Value btop
 # Git
 Import-Module git-aliases -DisableNameChecking
 
-# Icons
-# Import-Module -Name Terminal-Icons
-
-# Starship
-Invoke-Expression (&starship init powershell)
+#
+# Customizations
+#
 
 # Readline
 Import-Module PSReadLine
@@ -110,7 +108,18 @@ Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 # Fish-like Autosuggest
 Set-PSReadLineOption -PredictionSource History -HistoryNoDuplicates
 
+# Icons
+# Import-Module -Name Terminal-Icons
+
+# Starship
+Invoke-Expression (&starship init powershell)
+
+# Z
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
+
+#
 # FZF
+#
 # Replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 

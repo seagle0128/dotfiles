@@ -1,14 +1,13 @@
 # Local configurations -*- mode: sh -*-
 
 # Theme
-# Load the pure theme, with zsh-async library that's bundled with it.
-zinit ice depth"1" pick"async.zsh" src"pure.zsh"
-zinit light sindresorhus/pure
-
-# Load starship theme (requires nerd fonts)
-# zinit ice as"program" wait lucid from"gh-r"
-# zinit light starship/starship
-# (( $+commands[starship] )) && eval $(starship init zsh)
+if (( $+commands[starship] )); then
+    # Load starship theme (requires nerd fonts)
+    eval $(starship init zsh)
+    # Load the pure theme, with zsh-async library that's bundled with it.
+    zinit ice depth"1" pick"async.zsh" src"pure.zsh"
+    zinit light sindresorhus/pure
+fi
 
 # Plugins
 # zinit wait lucid for \
@@ -24,9 +23,7 @@ zinit light sindresorhus/pure
     #       OMZP::rust/_rustc
 
 # Show system information
-# if (( $+commands[neofetch] )); then
-#     neofetch
-# fi
+# (( $+commands[neofetch] )) && neofetch
 
 # iTerm2 shell integration
 # if test -e "${HOME}/.iterm2_shell_integration.zsh"; then

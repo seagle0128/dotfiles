@@ -54,12 +54,14 @@ zinit wait lucid depth"1" for \
 zinit wait lucid light-mode depth"1" for \
       djui/alias-tips \
       zsh-users/zsh-history-substring-search \
-      hlissner/zsh-autopair \
-      agkozak/zsh-z
+      hlissner/zsh-autopair
 
 #
 # Utilities
 #
+
+# Z
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
 
 # Git extras
 zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" if'(( $+commands[make] ))'

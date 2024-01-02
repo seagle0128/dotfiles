@@ -10,7 +10,7 @@ $packages = (
     "7zip", "everything", "totalcommander",
     # "aspell", "clipx", "putty", "ccleaner", "fork",
     "git", "gitui", "gow", "gsudo", "less",
-    "bat", "fzf", "fd", "ripgrep",
+    "bat", "fzf", "fd", "ripgrep", "zoxide",
     "btop", "duf", "dust", "eza",
     "gping", "tealdeer", "hyperfine"
 
