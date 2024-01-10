@@ -275,13 +275,12 @@ elif (( $+commands[exa] )); then
 fi
 (( $+commands[bat] )) && alias cat='bat -p --wrap character'
 (( $+commands[fd] )) && alias find=fd
-(( $+commands[btop] )) && alias top=btop
+(( $+commands[btm] )) && alias top=btm
 (( $+commands[rg] )) && alias grep=rg
 (( $+commands[tldr] )) && alias help=tldr
 (( $+commands[delta] )) && alias diff=delta
 (( $+commands[duf] )) && alias df=duf
 (( $+commands[dust] )) && alias du=dust
-(( $+commands[sd] )) && alias sed=sd
 (( $+commands[hyperfine] )) && alias benchmark=hyperfine
 (( $+commands[gping] )) && alias ping=gping
 
