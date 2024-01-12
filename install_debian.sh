@@ -20,6 +20,7 @@ packages=(
     exa                         # eza
     # fd
     fzf
+    # git-delta
     # gitui
     # gping
     # hyperfine
