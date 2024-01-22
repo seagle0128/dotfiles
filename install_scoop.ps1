@@ -7,8 +7,10 @@
 # Packages
 $packages = (
     # Utilities
-    "7zip", "everything", "totalcommander",
+    "7zip", "everything", "totalcommander", "starship",
     # "aspell", "clipx", "putty", "ccleaner", "fork",
+
+    # Morden tools
     "git", "gitui", "gow", "gsudo", "less",
     "bat", "fzf", "fd", "ripgrep", "zoxide",
     "btop", "delta","duf", "dust", "eza",
@@ -43,7 +45,6 @@ function check {
             Copy-Item Microsoft.PowerShell_profile.ps1 $PROFILE
 
             # Prerequisit
-            scoop install starship
             Install-Module -Name PSFzf
             Install-Module -Name ZLocation
             Install-Module -Name git-aliases
