@@ -69,6 +69,10 @@ else
     zinit light agkozak/zsh-z
 fi
 
+# Git extras
+zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" if'(( $+commands[make] ))'
+zinit light tj/git-extras
+
 # Prettify ls
 if (( $+commands[gls] )); then
     alias ls='gls --color=tty --group-directories-first'

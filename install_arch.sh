@@ -18,7 +18,6 @@ packages=(
     fd
     fzf
     git-delta
-    git-extras
     gitui
     gping
     hyperfine
