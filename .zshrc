@@ -163,6 +163,28 @@ export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || cat
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --exact"
 export FZF_ALT_C_OPTS="--preview '(eza --tree --icons --level 3 --color=always --group-directories-first {} || tree -NC {} || ls --color=always --group-directories-first {}) 2>/dev/null | head -200'"
 
+
+# OS bundles
+if [[ $OSTYPE == darwin* ]]; then
+    zinit snippet PZTM::osx
+    if (( $+commands[brew] )); then
+        alias bu='brew update; brew upgrade; brew cleanup'
+        alias bcu='brew cu --all --yes --cleanup'
+        alias bua='bu; bcu'
+    fi
+elif [[ $OSTYPE == linux* ]]; then
+    if (( $+commands[apt-get] )); then
+        zinit snippet OMZP::ubuntu
+        alias agua='aguu -y && agar -y && aga -y'
+        alias kclean+='sudo aptitude remove -P "?and(~i~nlinux-(ima|hea),\
+                            ?not(?or(~n`uname -r | cut -d'\''-'\'' -f-2`,\
+                            ~nlinux-generic,\
+                            ~n(linux-(virtual|headers-virtual|headers-generic|image-virtual|image-generic|image-`dpkg --print-architecture`)))))"'
+    elif (( $+commands[pacman] )); then
+        zinit snippet OMZP::archlinux
+    fi
+fi
+
 #
 # Aliases
 #
