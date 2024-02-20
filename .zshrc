@@ -198,6 +198,7 @@ alias c='clear'
 # See https://github.com/ibraheemdev/modern-unix
 if (( $+commands[eza] )); then
     alias ls='eza --color=auto --icons --group-directories-first'
+    alias l='ls -lhF'
     alias la='ls -lhAF'
     alias tree='ls --tree'
 elif (( $+commands[exa] )); then
