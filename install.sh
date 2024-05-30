@@ -214,20 +214,20 @@ ln -sf $DOTFILES/.vimrc $HOME/.vimrc
 ln -sf $DOTFILES/.tmux.conf.local $HOME/.tmux.conf.local
 ln -sf $DOTFILES/.markdownlintrc $HOME/.markdownlintrc
 
-cp -n $DOTFILES/.npmrc $HOME/.npmrc
-cp -n $DOTFILES/.gemrc $HOME/.gemrc
-mkdir -p $HOME/.cargo && cp -n $DOTFILES/cargo.config $HOME/.cargo/config
-cp -n $DOTFILES/.zshrc.local $HOME/.zshrc.local
-mkdir -p $HOME/.pip; cp -n $DOTFILES/.pip.conf $HOME/.pip/pip.conf
+cp -u $DOTFILES/.npmrc $HOME/.npmrc
+cp -u $DOTFILES/.gemrc $HOME/.gemrc
+mkdir -p $HOME/.cargo && cp -u $DOTFILES/cargo.config $HOME/.cargo/config
+cp -u $DOTFILES/.zshrc.local $HOME/.zshrc.local
+mkdir -p $HOME/.pip; cp -u $DOTFILES/.pip.conf $HOME/.pip/pip.conf
 
 ln -sf $DOTFILES/.gitignore_global $HOME/.gitignore_global
 ln -sf $DOTFILES/.gitconfig_global $HOME/.gitconfig_global
 if is_mac; then
-    cp -n $DOTFILES/.gitconfig_macOS $HOME/.gitconfig
+    cp -u $DOTFILES/.gitconfig_macOS $HOME/.gitconfig
 elif is_cygwin; then
-    cp -n $DOTFILES/.gitconfig_cygwin $HOME/.gitconfig
+    cp -u $DOTFILES/.gitconfig_cygwin $HOME/.gitconfig
 else
-    cp -n $DOTFILES/.gitconfig_linux $HOME/.gitconfig
+    cp -u $DOTFILES/.gitconfig_linux $HOME/.gitconfig
 fi
 
 if is_cygwin; then
