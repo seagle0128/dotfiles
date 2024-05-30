@@ -65,8 +65,11 @@ fi
 
 # Env
 # export EDITOR=vim
-# PROXY=http://127.0.0.1:8001
+PROXY=http://127.0.0.1:7890
+SOCK_PROXY=sock5://127.0.0.1:7890
 # PROXY2=http://127.0.0.1:8123
+# SOCK_PROXY=sock5://127.0.0.1:8124
+
 
 # Aliases
 # alias flush_dns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
