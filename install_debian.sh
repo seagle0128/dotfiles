@@ -1,6 +1,7 @@
 #!/bin/bash
 #############################################################
 # Install packages for Debian or its derived editions (e.g. Ubuntu, Mint).
+# Support Ubuntu 24.04+
 # Author: Vincent Zhang <seagle0128@gmail.com>
 # URL: https://github.com/seagle0128/dotfiles
 #############################################################
@@ -12,18 +13,17 @@ packages=(
 
     # modern tools
     bat
-    # bottom
+    btm
     btop
-    # delta
     duf
     # dust
-    exa                         # eza
-    # fd
+    eza                         # exa
+    fd-find
     fzf
-    # git-delta
-    # gitui
-    # gping
-    # hyperfine
+    git-delta
+    tig                         # gitui
+    gping
+    hyperfine
     neofetch
     # procs
     ripgrep

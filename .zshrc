@@ -208,7 +208,11 @@ elif (( $+commands[exa] )); then
 fi
 (( $+commands[bat] )) && alias cat='bat -p --wrap character'
 (( $+commands[fd] )) && alias find=fd
-(( $+commands[btm] )) && alias top=btm
+if (( $+commands[btop] )); then
+    alias top=btop
+elif (( $+commands[btm] )); then
+    alias top=btm
+fi
 (( $+commands[rg] )) && alias grep=rg
 (( $+commands[tldr] )) && alias help=tldr
 (( $+commands[delta] )) && alias diff=delta
