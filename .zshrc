@@ -264,19 +264,12 @@ for item in json.loads(sys.stdin.read()):
 
 # Proxy
 PROXY=http://127.0.0.1:7890         # ss:1088, vr:8001
-PROXY2=http://127.0.0.1:8123
 SOCK_PROXY=socks5://127.0.0.1:7890  # ss:1086, vr:1081
-SOCK_PROXY2=socks5://127.0.0.1:8124 # ss:1086, vr:1081
 NO_PROXY=10.*.*.*,192.168.*.*,*.local,localhost,127.0.0.1
-alias set_polipo_proxy='ps -ef | grep polipo | grep -v grep; [ $? -ne 0 ] && polipo socksParentProxy=192.168.31.1:1082 &'
 alias showproxy='echo "proxy=$http_proxy"'
 alias setproxy='export http_proxy=$SOCK_PROXY; export https_proxy=$SOCK_PROXY; all_proxy=$SOCK_PROXY; export no_proxy=$NO_PROXY; showproxy'
-alias setproxy2='set_polipo_proxy; export http_proxy=$PROXY2; export https_proxy=$PROXY2; all_proxy=$SOCK_PROXY2; export no_proxy=$NO_PROXY; showproxy'
 alias unsetproxy='export http_proxy=; export https_proxy=; export all_proxy=; export no_proxy=; showproxy'
-alias unsetproxy2=unsetproxy
-alias kill_polipo_proxy='killall polipo'
 alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
-alias toggleproxy2='if [ -n "$http_proxy" ]; then unsetproxy2; else setproxy2; fi'
 
 # Local customizations, e.g. theme, plugins, aliases, etc.
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
