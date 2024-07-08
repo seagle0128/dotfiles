@@ -124,12 +124,14 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 # zstyle ':fzf-tab:complete:(cd|ls|lsd|exa|eza|bat|cat|emacs|nano|vi|vim):*' \
     #        fzf-preview 'eza -1 --icons --color=always --group-directories-first $realpath 2>/dev/null || \
     #                     ls -1 --color=always --group-directories-first $realpath'
-zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
-       fzf-preview 'echo ${(P)word}'
 
 # Preview contents
 zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
 export LESSOPEN='|~/.dotfiles/.lessfilter %s'
+
+# Preview environment vareiables
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
+       fzf-preview 'echo ${(P)word}'
 
 # Preivew `kill` and `ps` commands
 zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'
@@ -166,6 +168,10 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 # Privew help
 zstyle ':fzf-tab:complete:(\\|)run-help:*' fzf-preview 'run-help $word'
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word'
+zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color always $word'
+
+# Preview brew
+zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview 'brew info $word'
 
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --files --hidden --follow --glob '!.git' || find ."
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
