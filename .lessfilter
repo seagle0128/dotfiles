@@ -4,7 +4,7 @@ mime=$(file -bL --mime-type "$1")
 category=${mime%%/*}
 kind=${mime##*/}
 if [ -d "$1" ]; then
-    eza -1 --icons --color=always --group-directories-first "$1"
+    eza --git -hl --icons --color=always --group-directories-first "$1"
 elif [ "$category" = text ]; then
 	bat -p --color=always "$1"
 elif [ "$category" = image ]; then
