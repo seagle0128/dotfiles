@@ -70,7 +70,7 @@ else
 fi
 
 # Git extras
-zinit ice wait lucid as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" if'(( $+commands[make] ))'
+zinit ice wait lucid depth"1" as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" if'(( $+commands[make] ))'
 zinit light tj/git-extras
 
 # Prettify ls
@@ -104,17 +104,23 @@ if [[ -f "$FZF/key-bindings.zsh" ]]; then
     source "$FZF/key-bindings.zsh"
 fi
 
+# Git utilities powered by FZF
 zinit ice wait lucid depth"1"
 zinit light wfxr/forgit
 
+# Replace zsh's default completion selection menu with fzf
 zinit ice wait lucid depth"1" atload"zicompinit; zicdreplay" blockf
 zinit light Aloxaf/fzf-tab
 
-zstyle ':fzf-tab:*' switch-group ',' '.'
-
+zstyle ':completion:*' menu no
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:complete:*:options' sort false
+
+# Switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
+
+# Preview directory's content
 zstyle ':fzf-tab:complete:(cd|ls|lsd|exa|eza|bat|cat|emacs|nano|vi|vim):*' \
        fzf-preview 'eza -1 --icons --color=always $realpath 2>/dev/null || ls -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
