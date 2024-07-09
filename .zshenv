@@ -1,10 +1,14 @@
 # ZSH envioronment
 
 export LANG="en_US.UTF-8"
+export LC_ALL=C
 export TERM=xterm-256color
 export DEFAULT_USER=$USER
 export EDITOR='emacsclient -a ""'
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/sbin:$PATH
+
+# Zinit
+export PATH=$ZPFX/bin:$PATH
 
 # Cask
 export PATH=$HOME/.cask/bin:$PATH

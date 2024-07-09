@@ -202,7 +202,7 @@ elif [[ $OSTYPE == linux* ]]; then
 fi
 
 # lsp booster
-zinit ice wait lucid depth"1" as"program" from"gh-r" sbin"**/emacs-lsp-booster"
+zinit ice wait lucid depth"1" from"gh-r" sbin"**/emacs-lsp-booster"
 zinit light blahgeek/emacs-lsp-booster
 
 #
