@@ -150,6 +150,11 @@ if [ -d $ZSH ] || [ -d $TMUX ] || [ -d $EMACSD ]; then
     fi
 fi
 
+# Generate locale
+if is_linux; then
+    locale -a | grep en_US.utf8 > /dev/null || localedef -v -c -i en_US -f UTF-8 en_US.UTF-8
+fi
+
 # Install Brew/apt-cyg
 if is_mac && ! command -v brew >/dev/null 2>&1; then
     printf "${GREEN}▓▒░ Installing Homebrew...${NORMAL}\n"
