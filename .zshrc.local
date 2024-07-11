@@ -34,14 +34,13 @@ fi
 # For Emacs vterm
 if [ -n "$INSIDE_EMACS" ]; then
     DISABLE_AUTO_TITLE="true"
-    # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=gray,underline'
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#525252'
 
     # VTerm
     if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
-        function vterm_printf(){
-            if [ -n "$TMUX" ]; then
-                # tell tmux to pass the escape sequences through
-                # (Source: http://permalink.gmane.org/gmane.comp.terminal-emulators.tmux.user/1324)
+        vterm_printf() {
+            if [ -n "$TMUX" ] && ([ "${TERM%%-*}" = "tmux" ] || [ "${TERM%%-*}" = "screen" ]); then
+                # Tell tmux to pass the escape sequences through
                 printf "\ePtmux;\e\e]%s\007\e\\" "$1"
             elif [ "${TERM%%-*}" = "screen" ]; then
                 # GNU screen (screen, screen-256color, screen-256color-bce)
@@ -51,15 +50,7 @@ if [ -n "$INSIDE_EMACS" ]; then
             fi
         }
 
-        function vterm_prompt_end() {
-            vterm_printf "51;A$(whoami)@$(hostname):$(pwd)";
-        }
-
-        setopt PROMPT_SUBST
-        PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
-
         alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
-        alias reset='vterm_printf "51;Evterm-clear-scrollback";tput clear'
     fi
 fi
 
