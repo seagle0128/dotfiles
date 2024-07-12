@@ -6,7 +6,7 @@ kind=${mime##*/}
 if [ -d "$1" ]; then
     eza --git -hl --icons --color=always --group-directories-first "$1"
 elif [ "$category" = text ]; then
-	bat -p --color=always "$1"
+	bat --style=numbers --color=always "$1"
 elif [ "$category" = image ]; then
     if ! command -v chafa >/dev/null 2>&1; then
         chafa "$1"
@@ -14,8 +14,8 @@ elif [ "$category" = image ]; then
     if ! command -v exiftool >/dev/null 2>&1; then
         exiftool "$1"
     else
-        bat -p --color=always "$1"
+        bat --style=numbers --color=always "$1"
     fi
 else
-	bat -p --color=always "$1"
+	bat --style=numbers --color=always "$1"
 fi
