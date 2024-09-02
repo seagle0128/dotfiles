@@ -31,6 +31,12 @@ fi
 #     source "${HOME}/.iterm2_shell_integration.zsh"
 # fi
 
+# For Tmux
+if [ -n "$TMUX" ]; then
+    # Enable extended-keys
+    printf '\033[>4;1m'
+fi
+
 # For Emacs vterm
 if [ -n "$INSIDE_EMACS" ]; then
     DISABLE_AUTO_TITLE="true"
