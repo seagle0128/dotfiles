@@ -70,6 +70,9 @@ PROXY=http://127.0.0.1:7890
 
 # Homebrew
 if [[ $OSTYPE == darwin* ]]; then
+    # For Apple Silicon CPU
+    [[ $CPUTYPE == arm* ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
     function set_homebrew_env()
     {
         # https://mirrors.ustc.edu.cn/
@@ -115,9 +118,6 @@ if [[ $OSTYPE == darwin* ]]; then
 
     # Use mirror env by default
     set_homebrew_env
-
-    # For Apple Silicon CPU
-    [[ $CPUTYPE == arm* ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Golang
