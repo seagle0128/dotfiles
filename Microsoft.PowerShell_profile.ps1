@@ -49,19 +49,14 @@ function Disable-Http-Proxy {
     $Env:http_proxy="";$Env:https_proxy=""
 }
 
-function List-Files-Simple {
-    param ([string]$Files = ".")
-    Invoke-Expression 'exa --icons --group-directories-first $Files'
-}
-
 function List-Files {
-    param ([string]$Files = ".")
-    Invoke-Expression 'exa -lhF --icons --group-directories-first $Files'
+    param ([string]$Path)
+    Invoke-Expression "eza -lhF --icons --group-directories-first $Path"
 }
 
 function List-All-Files {
-    param ([string]$Files = ".")
-    Invoke-Expression 'exa -lAhF --group-directories-first --icons $Files'
+    param ([string]$Path)
+    Invoke-Expression "eza -lAhF --icons --group-directories-first $Path"
 }
 
 #
@@ -87,7 +82,7 @@ if (Get-Alias -Name "rm" -ErrorAction SilentlyContinue) {
 Set-Alias -Name cat  -Value bat # Use the latest less or --paging=never
 Set-Alias -Name df   -Value duf
 Set-Alias -Name du   -Value dust
-Set-Alias -Name ls   -Value List-Files-Simple
+Set-Alias -Name ls   -Value List-Files
 Set-Alias -Name l    -Value List-Files
 Set-Alias -Name ll   -Value List-Files
 Set-Alias -Name la   -Value List-All-Files
