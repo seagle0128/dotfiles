@@ -117,17 +117,22 @@ clean_dotfiles() {
     .zshenv
     .zshrc
     .zshrc.local
+    starship.toml
     "
     for c in ${confs}; do
         [ -f $HOME/${c} ] && mv $HOME/${c} $HOME/${c}.bak
     done
 
+    if [ -f $HOME/.config/starship.toml ]; then
+        mv $HOME/.config/starship.toml $HOME/.config/starship.toml.bak
+    fi
+
     [ -d $EMACSD ] && mv $EMACSD $EMACSD.bak
 
     rm -rf $ZSH $TMUX $DOTFILES
 
-    rm -f $HOME/.gitignore_global $HOME/.gitconfig_global
-    rm -f $HOME/.tmux.conf $HOME/.tmux.local
+    rm -f $HOME/.gitignore_global
+    rm -f $HOME/.tmux.conf
 }
 
 YES=0
@@ -168,10 +173,7 @@ if is_mac && ! command -v brew >/dev/null 2>&1; then
     # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     /bin/bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/Homebrew/install@HEAD/install.sh)"
 
-    # Tap cask and cask-upgrade
-    brew tap homebrew/cask
-    brew tap homebrew/cask-versions
-    brew tap homebrew/cask-fonts
+    # Tap cask-upgrade
     brew tap buo/cask-upgrade
 
     # Install GNU utilities
@@ -218,6 +220,7 @@ ln -sf $DOTFILES/.zshrc $HOME/.zshrc
 ln -sf $DOTFILES/.vimrc $HOME/.vimrc
 ln -sf $DOTFILES/.tmux.conf.local $HOME/.tmux.conf.local
 ln -sf $DOTFILES/.markdownlintrc $HOME/.markdownlintrc
+ln -sf $DOTFILES/starship.toml $HOME/.config/starship.toml
 
 cp -u $DOTFILES/.npmrc $HOME/.npmrc
 cp -u $DOTFILES/.gemrc $HOME/.gemrc

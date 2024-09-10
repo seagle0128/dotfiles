@@ -100,10 +100,6 @@ function check {
 
         xcode-select --install
         /bin/bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/Homebrew/install@HEAD/install.sh)"
-
-        brew tap homebrew/cask
-        brew tap homebrew/cask-versions
-        brew tap homebrew/cask-fonts
         brew tap buo/cask-upgrade
     fi
 }
