@@ -63,14 +63,22 @@ zinit wait lucid light-mode depth"1" for \
 # Z
 if (( $+commands[zoxide] )); then
     eval "$(zoxide init zsh)"
-    export _ZO_FZF_OPTS="--scheme=path --tiebreak=end,chunk,index --bind=ctrl-z:ignore,btab:up,tab:down --cycle --keep-right --border=sharp --height=45% --info=inline --layout=reverse --tabstop=1 --exit-0 --select-1 --preview '(eza --tree --icons --level 3 --color=always --group-directories-first {2} || tree -NC {2} || ls --color=always --group-directories-first {2}) 2>/dev/null | head -200'"
+    export _ZO_FZF_OPTS="--scheme=path --tiebreak=end,chunk,index \
+           --bind=ctrl-z:ignore,btab:up,tab:down --cycle --keep-right \
+           --border=sharp --height=45% --info=inline --layout=reverse \
+           --tabstop=1 --exit-0 --select-1 \
+           --preview '(eza --tree --icons --level 3 --color=always \
+           --group-directories-first {2} || tree -NC {2} || \
+           ls --color=always --group-directories-first {2}) 2>/dev/null | head -200'"
 else
     zinit ice wait lucid depth"1"
     zinit light agkozak/zsh-z
 fi
 
 # Git extras
-zinit ice wait lucid depth"1" as"program" pick"$ZPFX/bin/git-*" src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" if'(( $+commands[make] ))'
+zinit ice wait lucid depth"1" as"program" pick"$ZPFX/bin/git-*" \
+      src"etc/git-extras-completion.zsh" make"PREFIX=$ZPFX" \
+      if'(( $+commands[make] ))'
 zinit light tj/git-extras
 
 # Prettify ls
@@ -111,6 +119,18 @@ zinit light wfxr/forgit
 # Replace zsh's default completion selection menu with fzf
 zinit ice wait lucid depth"1" atload"zicompinit; zicdreplay" blockf
 zinit light Aloxaf/fzf-tab
+
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || \
+                               git ls-tree -r --name-only HEAD || \
+                               rg --files --hidden --follow --glob '!.git' || \
+                               find ."
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS='--height 40% --tmux 100%,60% --border'
+export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || \
+                       cat {} || tree -NC {}) 2>/dev/null | head -200'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --exact"
+export FZF_ALT_C_OPTS="--preview '(eza --tree --icons --level 3 --color=always --group-directories-first {} || \
+                       tree -NC {} || ls --color=always --group-directories-first {}) 2>/dev/null | head -200'"
 
 zstyle ':completion:*' menu no
 zstyle ':completion:*:descriptions' format '[%d]'
@@ -175,12 +195,16 @@ zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' 
 # Preview systemd
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
 
-export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git || git ls-tree -r --name-only HEAD || rg --files --hidden --follow --glob '!.git' || find ."
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS='--height 40% --border'
-export FZF_CTRL_T_OPTS="--preview '(bat --style=numbers --color=always {} || cat {} || tree -NC {}) 2>/dev/null | head -200'"
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --exact"
-export FZF_ALT_C_OPTS="--preview '(eza --tree --icons --level 3 --color=always --group-directories-first {} || tree -NC {} || ls --color=always --group-directories-first {}) 2>/dev/null | head -200'"
+# Ripgrep integration
+function rgv () {
+	rg --color=always --line-number --no-heading --smart-case "${*:-}" |
+        fzf --ansi --height 80% --tmux 100%,80% \
+            --color "hl:-1:underline,hl+:-1:underline:reverse" \
+            --delimiter : \
+            --preview 'bat --color=always {1} --highlight-line {2}' \
+            --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+            --bind 'enter:become(emacsclient -c -nw -a "vim" +{2} {1} || vim {1} +{2})'
+}
 
 # OS bundles
 if [[ $OSTYPE == darwin* ]]; then
