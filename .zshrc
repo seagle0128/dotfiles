@@ -266,6 +266,7 @@ fi
 (( $+commands[dust] )) && alias du=dust
 (( $+commands[hyperfine] )) && alias benchmark=hyperfine
 (( $+commands[gping] )) && alias ping=gping
+(( $+commands[paru] )) && alias yay=paru
 
 # Git
 alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote

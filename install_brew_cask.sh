@@ -14,21 +14,13 @@ apps=(
     maczip                     # Compress & extract
     fliqlo                     # Screen Saver
     paper                      # Wallpaper
-    alt-tab                    # hyperswitch
+    # alt-tab                    # hyperswitch
     iterm2                     # Terminal
-    # keepingyouawake
     keycastr                   # Show keys on the screen
     licecap                    # Recording screen as gif
-    # mounty                     # Mounty for NTFS read/write
-    monitorcontrol             # Controls external display brightness and volume
-    mos                        # Smooth and reverse scroll
-    # raycast                    # Spotlight/Alfred replacement.
-    rectangle                  # Window management
+    # rectangle                  # Window management
     hiddenbar                  # Hide menu bar icons. Alternative: bartender, vanilla
 
-    clashx                     # Proxy: v2rayx, shadowsocksx-ng-r
-    iina                       # Media player
-    microsoft-edge             # Browser: google-chrome
     karabiner-elements         # karabiner: Keboard remapping
     # hammersppon                # Ultimate tools
     # netspot                    # Wifi signal analysis and scanner
@@ -38,32 +30,30 @@ apps=(
     squirrel                   # Pinyin Input: sogouinput
     handbrake                  # Video Transcoder: transcoder
 
+    # Utilities
+    clash-rev-verge            # Proxy: v2rayx, shadowsocksx-ng-r
+    macgesture                 # Mouse gestures
+    monitorcontrol             # Controls external display brightness and volume
+    mos                        # Smooth and reverse scroll
+    motrix                     # Downloader: ariang
+    microsoft-edge             # Browser: google-chrome
+    qq wechat
+    tencent-lemon
+    youdaodict youdaonote
+
     # Audio
-    # soundflower
-    # soundflowerbed
+    # soundflower soundflowerbed
+
+    # Media player
+    neteasemusic
+    iina
+    listen1                    # yesplaymusic
+    zy-player
 
     # Development
-    # java                       # optional
     # docker                     # optional
     # fork                       # Git Client: gitkraken, sourcetree
-    # mark-text                    # Markdown editor: typora
     visual-studio-code
-
-    # Utilities
-    # aliwangwang
-    # baidunetdisk
-    motrix                     # Downloader: ariang
-    macgesture
-    qq
-    wechat
-    tencent-lemon
-
-    neteasemusic
-    youdaodict
-    youdaonote
-
-    yesplaymusic
-    zy-player
 )
 
 # Use colors, but only if connected to a terminal, and that terminal
