@@ -6,18 +6,20 @@
 
 # Packages
 $packages = (
+    # Prerequisites
+    "git", "gitui", "gow", "gsudo", "less",
+
     # Utilities
     "7zip", "everything", "totalcommander", "starship",
     # "aspell", "clipx", "putty", "ccleaner", "fork",
 
     # Morden tools
-    "git", "gitui", "gow", "gsudo", "less",
-    "bat", "fzf", "fd", "ripgrep", "zoxide",
-    "btop", "delta","duf", "dust", "eza",
-    "gping", "tealdeer", "hyperfine"
+    "bat", "bottom", "btop", "delta","duf", "dust", "eza", "fzf", "fd",
+    "gping", "hyperfine", "tealdeer", "ripgrep", "zoxide",
 
     # Editor
-    "emacs", "vscode",
+    "emacs", # "emacs-kl", "vim",
+    "vscode",
 
     # Screencast
     "licecap", "carnac",
@@ -28,7 +30,7 @@ $packages = (
     # Misc
     # "go", "python", "ruby", "nodejs-lts",
     # "sysinternals", "dependecywalker",
-    "clash-verge", "v2rayn"
+    # "clash-verge-rev", "v2rayn"
 );
 
 function check {
