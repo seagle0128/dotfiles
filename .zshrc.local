@@ -1,8 +1,8 @@
 # Local configurations -*- mode: sh -*-
 
 # Theme
-if (( $+commands[starship] )); then
-    # Load starship theme (requires nerd fonts)
+if (( $+commands[starship] )) && [ -z "$INSIDE_EMACS" ]; then
+        # Load starship theme (requires nerd fonts)
     eval "$(starship init zsh)"
 else
     # Load the pure theme, with zsh-async library that's bundled with it.

@@ -243,12 +243,20 @@ alias c='clear'
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
 if (( $+commands[eza] )); then
-    alias ls='eza --color=auto --icons --group-directories-first'
+    if [ -n "$INSIDE_EMACS" ]; then
+        alias ls='eza --color=auto --group-directories-first'
+    else
+        alias ls='eza --color=auto --icons --group-directories-first'
+    fi
     alias l='ls -lhF'
     alias la='ls -lhAF'
     alias tree='ls --tree'
 elif (( $+commands[exa] )); then
-    alias ls='exa --color=auto --icons --group-directories-first'
+    if [ -n "$INSIDE_EMACS" ]; then
+        alias ls='exa --color=auto --group-directories-first'
+    else
+        alias ls='exa --color=auto --icons --group-directories-first'
+    fi
     alias la='ls -lahF'
     alias tree='ls --tree'
 fi
