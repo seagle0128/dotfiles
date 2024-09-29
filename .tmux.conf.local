@@ -385,6 +385,9 @@ tmux_conf_urlscan_options="--compact --dedupe"
 #set -g status-keys vi
 #set -g mode-keys vi
 
+# enable entended-keys
+set -s extended-keys always
+
 # replace C-b by C-a instead of using both prefixes
 set -gu prefix2
 unbind C-a
