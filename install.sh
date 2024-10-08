@@ -224,7 +224,7 @@ ln -sf $DOTFILES/starship.toml $HOME/.config/starship.toml
 
 cp -u $DOTFILES/.npmrc $HOME/.npmrc
 cp -u $DOTFILES/.gemrc $HOME/.gemrc
-mkdir -p $HOME/.cargo && cp -u $DOTFILES/cargo.config $HOME/.cargo/config
+mkdir -p $HOME/.cargo && cp -u $DOTFILES/cargo.toml $HOME/.cargo/config.toml
 cp -u $DOTFILES/.zshrc.local $HOME/.zshrc.local
 mkdir -p $HOME/.pip; cp -u $DOTFILES/.pip.conf $HOME/.pip/pip.conf
 
