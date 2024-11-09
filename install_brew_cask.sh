@@ -28,12 +28,12 @@ apps=(
     veracrypt                  # File crypt
     # foobar2000               # Music player: vox
     squirrel                   # Pinyin Input: sogouinput
-    handbrake                  # Video Transcoder: transcoder
+    # handbrake                  # Video Transcoder: transcoder
 
     # Utilities
-    clash-rev-verge            # Proxy: v2rayx, shadowsocksx-ng-r
+    clash-verge-rev            # Proxy: v2rayx, shadowsocksx-ng-r
     macgesture                 # Mouse gestures
-    monitorcontrol             # Controls external display brightness and volume
+    # monitorcontrol             # Controls external display brightness and volume
     mos                        # Smooth and reverse scroll
     motrix                     # Downloader: ariang
     microsoft-edge             # Browser: google-chrome
@@ -48,7 +48,7 @@ apps=(
     neteasemusic
     iina
     listen1                    # yesplaymusic
-    zy-player
+    # streammusic zy-player
 
     # Development
     # docker                     # optional
