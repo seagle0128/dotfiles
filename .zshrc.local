@@ -81,10 +81,7 @@ if [[ $OSTYPE == darwin* ]]; then
 
     function set_homebrew_mirror() {
         set_homebrew_env
-
-        for tap in core cask command-not-found; do
-            brew tap --custom-remote --force-auto-update "homebrew/${tap}" "https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-${tap}.git"
-        done
+        brew tap --custom-remote --force-auto-update homebrew/command-not-found https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-command-not-found.git
         brew update
     }
 
