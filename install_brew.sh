@@ -63,6 +63,12 @@ function check {
 
         xcode-select --install
         /bin/bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/Homebrew/install@HEAD/install.sh)"
+
+        if is_arm64; then
+            echo >> $HOME/.zprofile
+            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+        fi
     fi
 }
 

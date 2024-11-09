@@ -65,6 +65,14 @@ is_arch() {
     command -v pacman >/dev/null 2>&1
 }
 
+is_x86_64() {
+    [ $(uname -m) = "x86_64" ]
+}
+
+is_arm64() {
+    [ $(uname -m) = "arm64" ]
+}
+
 sync_repo() {
     local repo_uri="$1"
     local repo_path="$2"
@@ -172,6 +180,12 @@ if is_mac && ! command -v brew >/dev/null 2>&1; then
 
     # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     /bin/bash -c "$(curl -fsSL https://cdn.jsdelivr.net/gh/Homebrew/install@HEAD/install.sh)"
+
+    if is_arm64; then
+        echo >> $HOME/.zprofile
+        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/.zprofile
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
 
     # Tap cask-upgrade
     brew tap buo/cask-upgrade
