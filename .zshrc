@@ -95,9 +95,9 @@ if type brew &>/dev/null; then
     compinit
 fi
 
-# FZF: fuzzy finderls
-if [[ $OSTYPE == darwin* ]]; then
-    FZF="/usr/local/opt/fzf/shell/"
+# FZF: fuzzy finder
+if (( $+commands[brew] )); then
+    FZF="$(brew --prefix)/opt/fzf/shell/"
 elif (( $+commands[apt-get] )); then
     FZF="/usr/share/doc/fzf/examples/"
 else
