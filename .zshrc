@@ -89,7 +89,7 @@ else
 fi
 
 # Homebrew completion
-if type brew &>/dev/null; then
+if (( $+commands[brew] )); then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
     autoload -Uz compinit
     compinit
@@ -228,8 +228,10 @@ elif [[ $OSTYPE == linux* ]]; then
 fi
 
 # lsp booster
-zinit ice wait lucid depth"1" from"gh-r" sbin"**/emacs-lsp-booster"
-zinit light blahgeek/emacs-lsp-booster
+if (( $+commands[emacs-lsp-booster] == 0 )); then
+    zinit ice wait lucid depth"1" from"gh-r" sbin"**/emacs-lsp-booster"
+    zinit light blahgeek/emacs-lsp-booster
+fi
 
 #
 # Aliases
