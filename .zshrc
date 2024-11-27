@@ -301,7 +301,7 @@ alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
 
 (( $+commands[cargo] )) && alias upgrade_cargo='cargo install-update -a' # cargo install cargo-update
 (( $+commands[gem] )) && alias upgrade_gem='gem update && gem cleanup'
-(( $+commands[go] )) && alias upgrade_go='GO111MODULE=on && $DOTFILES/install_go.sh'
+(( $+commands[go] )) && alias upgrade_go='$DOTFILES/install_go.sh'
 (( $+commands[npm] )) && alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2); do npm -g install "$package"; done'
 (( $+commands[pip] )) && alias upgrade_pip="pip list --outdated --format=json | python -c '
 import json

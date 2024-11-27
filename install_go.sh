@@ -7,13 +7,14 @@
 
 # Go packages
 packages=(
-    golang.org/x/tools/gopls
-    golang.org/x/tools/cmd/goimports
-    honnef.co/go/tools/cmd/staticcheck
+    # Essential
+    # golang.org/x/tools/gopls
+    # github.com/go-delve/delve/cmd/dlv
+    # honnef.co/go/tools/cmd/staticcheck
 
+    golang.org/x/tools/cmd/goimports
+    # github.com/aarzilli/gdlv
     github.com/zmb3/gogetdoc
-    github.com/go-delve/delve/cmd/dlv
-    github.com/aarzilli/gdlv
     github.com/josharian/impl
     github.com/cweill/gotests/...
     github.com/fatih/gomodifytags
