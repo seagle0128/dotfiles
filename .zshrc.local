@@ -56,8 +56,8 @@ fi
 
 # Env
 # export EDITOR=vim
-PROXY=http://127.0.0.1:7890
-# PROXY2=http://127.0.0.1:8123
+# PROXY=http://127.0.0.1:7897
+# setproxy
 
 # Aliases
 [[ $OSTYPE == darwin* ]] && alias flush_dns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
