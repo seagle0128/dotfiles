@@ -31,10 +31,9 @@ fi
 
 printf "${BLUE} ➜  Installing Emacs...${NORMAL}\n"
 if [ "$SYSTEM" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
-    # brew tap d12frosted/emacs-plus
-    # brew install emacs-plus --HEAD --with-jansson --without-spacemacs-icon --without-imagemagick@7 --with-cocoa --with-xwidgets
-
-    brew cask install emacs
+    brew tap d12frosted/emacs-plus
+    brew install emacs-plus@30 --with-xwidgets --with-savchenkovaleriy-big-sur-icon
+    # brew cask install emacs
 elif [ "$SYSTEM" = "Linux" ] && command -v add-apt-repository >/dev/null 2>&1; then
     sudo add-apt-repository -y ppa:kelleyk/emacs
     # sudo add-apt-repository -y ppa:ubuntu-elisp/ppa
