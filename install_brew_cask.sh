@@ -7,7 +7,7 @@
 
 # Cask applications
 apps=(
-    betterdisplay              # Retina display management: avibrazil-rdm
+    # betterdisplay              # Retina display management: avibrazil-rdm
     captin                     # Caps Lock status
     cheatsheet
     maccy                      # Clipboard: clipy
@@ -24,8 +24,8 @@ apps=(
     karabiner-elements         # karabiner: Keboard remapping
     # hammersppon                # Ultimate tools
     # netspot                    # Wifi signal analysis and scanner
-    macfuse                    # File system
-    veracrypt                  # File crypt
+    # macfuse                    # File system
+    # veracrypt                  # File crypt
     # foobar2000               # Music player: vox
     squirrel                   # Pinyin Input: sogouinput
     # handbrake                  # Video Transcoder: transcoder
@@ -33,10 +33,10 @@ apps=(
     # Utilities
     clash-verge-rev            # Proxy: v2rayx, shadowsocksx-ng-r
     macgesture                 # Mouse gestures
-    # monitorcontrol             # Controls external display brightness and volume
-    mos                        # Smooth and reverse scroll
-    motrix                     # Downloader: ariang
-    microsoft-edge             # Browser: google-chrome
+    monitorcontrol             # Controls external display brightness and volume
+    # mos                        # Smooth and reverse scroll
+    # motrix                     # Downloader: ariang
+    # microsoft-edge             # Browser: google-chrome
     qq wechat
     tencent-lemon
     youdaodict youdaonote
