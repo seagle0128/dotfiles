@@ -19,7 +19,7 @@ RUN apt-get install -y software-properties-common
 # Install Centaur Emacs
 RUN add-apt-repository -y ppa:kelleyk/emacs
 RUN apt-get update
-RUN apt-get install -y wget curl sudo git zsh emacs26-nox
+RUN apt-get install -y wget curl sudo git zsh emacs-nox
 RUN sh -c "$(wget https://github.com/seagle0128/dotfiles/raw/master/install.sh -O -)"
 
 ENV TERM xterm-256color
