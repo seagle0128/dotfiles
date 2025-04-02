@@ -15,4 +15,4 @@
 # 	# cd /usr/share/doc/git/contrib/credential/libsecret; sudo make
 # 	# helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
 # [http "https://github.com"]
-	# proxy = http://127.0.0.1:7890
+	# proxy = http://127.0.0.1:7897

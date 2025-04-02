@@ -14,4 +14,4 @@
 # [credential]
 # 	helper = cache --timeout=3600
 # [http "https://github.com"]
-	# proxy = http://127.0.0.1:7890
+	# proxy = http://127.0.0.1:7897
