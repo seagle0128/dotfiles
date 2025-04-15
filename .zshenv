@@ -8,7 +8,7 @@ export EDITOR='emacsclient -a ""'
 export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/sbin:$PATH
 
 # Zinit
-export PATH=$ZPFX/bin:$PATH
+export PATH=$HOME/.local/share/zinit/polaris/bin:$PATH
 
 # Cask
 export PATH=$HOME/.cask/bin:$PATH
