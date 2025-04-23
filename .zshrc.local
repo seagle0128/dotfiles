@@ -36,6 +36,10 @@ if [ -n "$INSIDE_EMACS" ]; then
     DISABLE_AUTO_TITLE="true"
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#525252'
 
+    # EAT
+    [ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
+        source "$EAT_SHELL_INTEGRATION_DIR/zsh"
+
     # VTerm
     if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
         vterm_printf() {
