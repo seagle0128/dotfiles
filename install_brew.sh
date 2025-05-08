@@ -15,12 +15,12 @@ packages=(
     git-delta
     duf
     dust
+    fastfetch # macchina
     fd
     fzf
     gitui
     gping
     hyperfine
-    neofetch
     procs
     ripgrep
     sd
