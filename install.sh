@@ -9,7 +9,7 @@
 DOTFILES=$HOME/.dotfiles
 EMACSD=$HOME/.emacs.d
 TMUX=$HOME/.tmux
-ZSH=$HOME/.zinit
+ZSH=$HOME/.local/share/zinit
 
 # Get OS informatio
 OS=`uname -s`
@@ -125,7 +125,7 @@ clean_dotfiles() {
     .zshenv
     .zshrc
     .zshrc.local
-    starship.toml
+    .Brewfile
     "
     for c in ${confs}; do
         [ -f $HOME/${c} ] && mv $HOME/${c} $HOME/${c}.bak
@@ -138,6 +138,7 @@ clean_dotfiles() {
     [ -d $EMACSD ] && mv $EMACSD $EMACSD.bak
 
     rm -rf $ZSH $TMUX $DOTFILES
+    rm -rf $HOME/.pip
 
     rm -f $HOME/.gitignore_global
     rm -f $HOME/.tmux.conf
@@ -225,12 +226,9 @@ sh -c "$(curl -fsSL https://git.io/zinit-install)"
 printf "${GREEN}▓▒░ Installing Dotfiles...${NORMAL}\n"
 sync_repo seagle0128/dotfiles $DOTFILES
 
-chmod +x $DOTFILES/install.sh
-chmod +x $DOTFILES/install_brew_cask.sh
-chmod +x $DOTFILES/install_go.sh
-
 ln -sf $DOTFILES/.zshenv $HOME/.zshenv
 ln -sf $DOTFILES/.zshrc $HOME/.zshrc
+ln -sf $DOTFILES/Brewfile $HOME/.Brewfile
 ln -sf $DOTFILES/.vimrc $HOME/.vimrc
 ln -sf $DOTFILES/.tmux.conf.local $HOME/.tmux.conf.local
 ln -sf $DOTFILES/.markdownlintrc $HOME/.markdownlintrc
@@ -268,7 +266,7 @@ ln -sf $TMUX/.tmux.conf $HOME/.tmux.conf
 # Packages
 printf "${GREEN}▓▒░ Installing packages...${NORMAL}\n"
 if is_mac; then
-    ./install_brew.sh
+    brew bundle --global
 elif is_arch; then
     ./install_arch.sh
 elif is_debian; then
