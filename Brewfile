@@ -43,7 +43,7 @@ brew "yaml-language-server"
 brew "yazi"
 brew "zlib"
 brew "zoxide"
-brew "d12frosted/emacs-plus/emacs-plus@30", args: ["with-native-comp", "with-nobu417-big-sur-icon", "with-xwidgets"]
+brew "d12frosted/emacs-plus/emacs-plus@30", args: ["with-c9rgreen-sonoma-icon", "with-xwidgets"]
 cask "captin"
 cask "cheatsheet"
 cask "fliqlo"
