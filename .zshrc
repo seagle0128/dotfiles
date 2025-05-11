@@ -317,7 +317,7 @@ import sys
 for item in json.loads(sys.stdin.read()):
     print(\"=\".join([item[\"name\"], item[\"latest_version\"]]))
 ' | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U"
-(( $+commands[brew] )) && alias upgrade_brew='brew update'; alias upgrade_brew_cask='$DOTFILES/install_brew_cask.sh'
+(( $+commands[brew] )) && alias upgrade_brew='brew bundle --file $DOTFILES/Brewfile'
 
 # Proxy
 PROXY=http://127.0.0.1:7897         # ss:1088, vr:8001
@@ -329,3 +329,6 @@ alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
 
 # Local customizations, e.g. theme, plugins, aliases, etc.
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
+
+export SCRCPY_SERVER_PATH=/Applications/极空间.app/Contents/Resources/app.asar.unpacked/bin/platform-tools/scrcpy-server
+export PATH=$PATH:/Applications/极空间.app/Contents/Resources/app.asar.unpacked/bin/platform-tools
