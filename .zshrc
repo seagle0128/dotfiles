@@ -317,7 +317,7 @@ import sys
 for item in json.loads(sys.stdin.read()):
     print(\"=\".join([item[\"name\"], item[\"latest_version\"]]))
 ' | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U"
-(( $+commands[brew] )) && alias upgrade_brew='brew bundle --file $DOTFILES/Brewfile'
+(( $+commands[brew] )) && alias upgrade_brew='brew bundle --global; bua'
 
 # Proxy
 PROXY=http://127.0.0.1:7897         # ss:1088, vr:8001
