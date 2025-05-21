@@ -73,26 +73,7 @@ function check {
 function install {
     printf "${BLUE} ➜  Installing fonts...${NORMAL}\n"
 
-    if [ "$SYSTEM" = "Darwin" ]; then
-        # macOS
-        font_dir="$HOME/Library/Fonts"
-
-        fonts=(
-            # font-source-code-pro
-            # font-dejavu-sans
-            # font-inconsolata
-            font-cascadia-code
-            font-fira-code
-            font-hack-nerd-font
-        )
-
-        if [ ! -f "${font_dir}/SourceCodePro-Regular.otf" ]; then
-            for f in ${fonts[@]}; do
-                brew install ${f}
-            done
-        fi
-        brew cleanup
-    elif [ "$SYSTEM" = "Linux" ]; then
+    if [ "$SYSTEM" = "Linux" ]; then
         # Linux
         font_dir="$HOME/.local/share/fonts"
         mkdir -p $font_dir
