@@ -250,11 +250,8 @@ if (( $+commands[eza] )); then
     alias la='ls -lhAF'
     alias tree='ls --tree'
 elif (( $+commands[exa] )); then
-    if [ -n "$INSIDE_EMACS" ]; then
-        alias ls='exa --color=auto --group-directories-first'
-    else
-        alias ls='exa --color=auto --icons --group-directories-first'
-    fi
+    alias ls='exa --color=auto --icons --group-directories-first'
+    alias l='ls -lhF'
     alias la='ls -lahF'
     alias tree='ls --tree'
 fi
