@@ -62,14 +62,14 @@ zinit wait lucid light-mode depth"1" for \
 
 # Z
 if (( $+commands[zoxide] )); then
-    eval "$(zoxide init zsh)"
     export _ZO_FZF_OPTS="--scheme=path --tiebreak=end,chunk,index \
            --bind=ctrl-z:ignore,btab:up,tab:down --cycle --keep-right \
            --border=sharp --height=45% --info=inline --layout=reverse \
            --tabstop=1 --exit-0 --select-1 \
-           --preview '(eza --tree --icons --level 3 --color=always \
+           --preview '(eza --tree --level 3 --color=always \
            --group-directories-first {2} || tree -NC {2} || \
            ls --color=always --group-directories-first {2}) 2>/dev/null | head -200'"
+    eval "$(zoxide init zsh)"
 else
     zinit ice wait lucid depth"1"
     zinit light agkozak/zsh-z
@@ -121,17 +121,15 @@ zinit ice wait lucid depth"1" atload"zicompinit; zicdreplay" blockf
 zinit light Aloxaf/fzf-tab
 
 export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden --follow --exclude .git || \
-  git ls-tree -r --name-only HEAD || \
-  rg --files --hidden --follow --glob '!.git' || \
-  find ."
+  rg --files --hidden --follow --glob '!.git'"
+export FZF_DEFAULT_OPTS='--height 40% --tmux bottom,40% --layout reverse --border'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS='--height 40% --tmux 100%,60% --border'
 export FZF_CTRL_T_OPTS="--walker-skip .git,node_modules,target
   --preview 'bat -n --color=always {} || cat {} || tree -NC {}'
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:wrap --bind '?:toggle-preview' --exact"
 export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,target
-  --preview '(eza --tree --icons --level 3 --color=always --group-directories-first {} || \
+  --preview '(eza --tree --level 3 --color=always --group-directories-first {} || \
   tree -NC {} || ls --color=always --group-directories-first {}) | head -200'"
 
 # disable sort when completing `git checkout`
@@ -251,14 +249,11 @@ alias c='clear'
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
 if (( $+commands[eza] )); then
-    alias ls='eza --color=auto --icons --group-directories-first'
+    alias ls='eza --color=auto --group-directories-first'
+    alias lsi='ls --icons'
     alias l='ls -lhF'
     alias la='ls -lhAF'
-    alias tree='ls --tree'
-elif (( $+commands[exa] )); then
-    alias ls='exa --color=auto --icons --group-directories-first'
-    alias l='ls -lhF'
-    alias la='ls -lahF'
+    alias li='ls -lhF --icons'
     alias tree='ls --tree'
 fi
 (( $+commands[bat] )) && alias cat='bat -p --wrap character'
