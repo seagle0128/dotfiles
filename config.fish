@@ -24,6 +24,20 @@ if type -q eza
     alias tree='ls --tree'
 end
 
+if type -q bat
+    alias cat='bat -p --wrap character'
+end
+
+if type -q fd
+    alias find=fd
+end
+
+if type -q top
+    alias top=btop
+else if type -q btm
+    alias top=btm
+end
+
 if type -q rg
     alias grep=rg
 end
