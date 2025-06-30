@@ -132,8 +132,6 @@ export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,target
   --preview '(eza --tree --level 3 --color=always --group-directories-first {} || \
   tree -NC {} || ls --color=always --group-directories-first {}) | head -200'"
 
-# disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
 # NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
 zstyle ':completion:*:descriptions' format '[%d]'
@@ -142,20 +140,20 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
 # preview directory's content with eza when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always --group-directories-first $realpath || \
+zstyle ':fzf-tab:complete:(cd|ls|lsd|exa|eza|bat|cat|emacs|nano|vi|vim):*' fzf-preview \
+       'eza -1 --color=always --group-directories-first $realpath || \
        ls -1 --color=always --group-directories-first $realpath'
 # custom fzf flags
 # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
-zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+# zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
 # To make fzf-tab follow FZF_DEFAULT_OPTS.
 # NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
 zstyle ':fzf-tab:*' use-fzf-default-opts yes
 # switch group using `<` and `>`
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
-# Preview environment vareiables
-zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
-       fzf-preview 'echo ${(P)word}'
+# Preview environment variables
+zstyle ':fzf-tab:complete:(export|unset|expand):*' fzf-preview 'echo ${(P)word}'
 
 # Preivew `kill` and `ps` commands
 zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'
