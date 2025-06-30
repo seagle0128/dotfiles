@@ -67,8 +67,8 @@ if (( $+commands[zoxide] )); then
            --border=sharp --height=45% --info=inline --layout=reverse \
            --tabstop=1 --exit-0 --select-1 \
            --preview '(eza --tree --level 3 --color=always \
-           --group-directories-first {2} || tree -NC {2} || \
-           ls --color=always --group-directories-first {2}) 2>/dev/null | head -200'"
+           --group-directories-first {2} || tree -NC {2}) 2>/dev/null'"
+    unalias zi
     eval "$(zoxide init zsh)"
 else
     zinit ice wait lucid depth"1"
