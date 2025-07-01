@@ -15,6 +15,14 @@ if status is-interactive
 end
 
 # Aliases
+alias reload='source $HOME/.config/fish/config.fish'
+alias h='history'
+alias c='clear'
+
+alias gl='git pull'
+alias gst='git status'
+alias gd='git diff'
+
 if type -q eza
     alias ls='eza --color=auto --group-directories-first'
     alias lsi='ls --icons'

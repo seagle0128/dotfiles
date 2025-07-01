@@ -241,6 +241,7 @@ fi
 
 # General
 alias zshconf="$EDITOR $HOME/.zshrc; $EDITOR $HOME/.zshrc.local"
+alias reload='exec zsh'
 alias h='history'
 alias c='clear'
 
