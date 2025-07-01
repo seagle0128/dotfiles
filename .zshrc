@@ -140,7 +140,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
 # preview directory's content with eza when completing cd
-zstyle ':fzf-tab:complete:(cd|ls|lsd|exa|eza|bat|cat|emacs|nano|vi|vim):*' fzf-preview \
+zstyle ':fzf-tab:complete:cd:*' fzf-preview \
        'eza -1 --color=always --group-directories-first $realpath || \
        ls -1 --color=always --group-directories-first $realpath'
 # custom fzf flags
