@@ -50,13 +50,18 @@ function Disable-Http-Proxy {
 }
 
 function List-Files {
-    param ([string]$Path)
-    Invoke-Expression "eza -lhF --icons --group-directories-first $Path"
+    param ([string]$Args="", [string]$Path)
+    Invoke-Expression "eza -lhF --group-directories-first $Args $Path"
 }
 
 function List-All-Files {
     param ([string]$Path)
-    Invoke-Expression "eza -lAhF --icons --group-directories-first $Path"
+    List-Files("-A", $Path)
+}
+
+function List-Git-Files {
+    param ([string]$Path)
+    List-Files("-A --icons", $Path)
 }
 
 #
@@ -86,6 +91,7 @@ Set-Alias -Name ls   -Value List-Files
 Set-Alias -Name l    -Value List-Files
 Set-Alias -Name ll   -Value List-Files
 Set-Alias -Name la   -Value List-All-Files
+Set-Alias -Name lg   -Value List-Git-Files
 Set-Alias -Name ping -Value gping
 Set-Alias -Name top  -Value btop
 
