@@ -252,6 +252,7 @@ if (( $+commands[eza] )); then
     alias lsi='ls --icons'
     alias l='ls -lhF'
     alias la='ls -lhAF'
+    alias lg='ls -lhAF --git'
     alias li='ls -lhF --icons'
     alias tree='ls --tree'
 fi

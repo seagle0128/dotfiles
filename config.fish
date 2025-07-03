@@ -19,15 +19,12 @@ alias reload='source $HOME/.config/fish/config.fish'
 alias h='history'
 alias c='clear'
 
-alias gl='git pull'
-alias gst='git status'
-alias gd='git diff'
-
 if type -q eza
     alias ls='eza --color=auto --group-directories-first'
     alias lsi='ls --icons'
     alias l='ls -lhF'
     alias la='ls -lhAF'
+    alias lg='ls -lhAF --git'
     alias li='ls -lhF --icons'
     alias tree='ls --tree'
 end
