@@ -127,7 +127,7 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--walker-skip .git,node_modules,target
   --preview 'bat -n --color=always {} || cat {} || tree -NC {}'
   --bind 'ctrl-/:change-preview-window(down|hidden|)'"
-export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:wrap --bind '?:toggle-preview' --exact"
+export FZF_CTRL_R_OPTS="--preview 'echo {} | cut -f 2 | bat --color=always --plain --language=sh' --preview-window down:3:wrap --bind '?:toggle-preview' --exact"
 export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,target
   --preview '(eza --tree --level 3 --color=always --group-directories-first {} || \
   tree -NC {} || ls --color=always --group-directories-first {}) | head -200'"
