@@ -165,7 +165,6 @@ zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
             ps --pid=$word -o cmd --no-headers -w -w
         fi'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-flags '--preview-window=down:3:wrap'
-zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
 
 # Preivew `git` commands
 zstyle ':fzf-tab:complete:git-(add|diff|restore):*' fzf-preview \
@@ -192,7 +191,8 @@ zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word | bat -plman --c
 zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color always $word'
 
 # Preview brew
-zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview 'brew info $word'
+zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview \
+       'brew info $word | bat -plhelp --color=always'
 
 # Preview systemd
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
