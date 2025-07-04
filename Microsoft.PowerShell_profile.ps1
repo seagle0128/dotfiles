@@ -61,7 +61,7 @@ function List-All-Files {
 
 function List-Git-Files {
     param ([string]$Path)
-    List-Files("-A --icons", $Path)
+    List-Files("-A --git", $Path)
 }
 
 #

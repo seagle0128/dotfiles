@@ -199,6 +199,12 @@ zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' 
 # Preview systemd
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
 
+# Commands
+zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
+       '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) ||
+        (out=$(man "$word" | bat -plman --color=always) 2>/dev/null && echo $out) ||
+        (out=$(which "$word") && echo $out) || echo "${(P)word}"'
+
 # Ripgrep integration
 function rgv () {
 	rg --color=always --line-number --no-heading --smart-case "${*:-}" |
