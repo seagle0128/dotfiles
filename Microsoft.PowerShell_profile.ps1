@@ -109,31 +109,34 @@ Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 # Fish-like Autosuggest
 Set-PSReadLineOption -PredictionSource History -HistoryNoDuplicates
 
-# Icons
-# Import-Module -Name Terminal-Icons
-
-# Starship
-Invoke-Expression (&starship init powershell)
+# Theme
+if (Get-Command starship -ErrorAction SilentlyContinue) {
+    Invoke-Expression (&starship init powershell)
+}
 
 # Z
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
+if (Get-Command zoxide -ErrorAction SilentlyContinue) {
+    Invoke-Expression (& { (zoxide init powershell | Out-String) })
+}
 
 #
 # FZF
 #
-# Replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
-Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+if (Get-Command fzf -ErrorAction SilentlyContinue) {
+    # Replace 'Ctrl+t' and 'Ctrl+r' with your preferred bindings:
+    Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 
-# Replace Tab
-Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
+    # Replace Tab
+    Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
-Set-PsFzfOption -TabExpansion
+    Set-PsFzfOption -TabExpansion
 
-# Options
-Set-PsFzfOption -EnableAliasFuzzyEdit          # fe
-Set-PsFzfOption -EnableAliasFuzzyHistory       # fh
-Set-PsFzfOption -EnableAliasFuzzyKillProcess   # fkill
-Set-PsFzfOption -EnableAliasFuzzyScoop         # fs
-Set-PsFzfOption -EnableAliasFuzzyGitStatus     # fgs
-Set-PsFzfOption -EnableAliasFuzzySetEverything # cde
-Set-PsFzfOption -EnableAliasFuzzyZLocation     # fz
+    # Options
+    Set-PsFzfOption -EnableAliasFuzzyEdit          # fe
+    Set-PsFzfOption -EnableAliasFuzzyHistory       # fh
+    Set-PsFzfOption -EnableAliasFuzzyKillProcess   # fkill
+    Set-PsFzfOption -EnableAliasFuzzyScoop         # fs
+    Set-PsFzfOption -EnableAliasFuzzyGitStatus     # fgs
+    Set-PsFzfOption -EnableAliasFuzzySetEverything # cde
+    Set-PsFzfOption -EnableAliasFuzzyZLocation     # fz
+}
