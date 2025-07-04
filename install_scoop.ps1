@@ -15,7 +15,7 @@ $packages = (
 
     # Morden tools
     "bat", "bottom", "btop", "delta","duf", "dust", "eza", "fzf", "fd",
-    "gping", "hyperfine", "tealdeer", "ripgrep", "zoxide",
+    "gping", "hyperfine", "procs", "tealdeer", "ripgrep", "zoxide",
 
     # Editor
     "emacs", # "emacs-kl", "vim",
@@ -25,7 +25,7 @@ $packages = (
     "licecap", "carnac",
 
     # Music
-    "mpc", "mpd", "foobar2000",
+    # "mpc", "mpd", "foobar2000",
 
     # Misc
     # "go", "python", "ruby", "nodejs-lts",
