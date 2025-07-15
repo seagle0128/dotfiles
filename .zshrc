@@ -237,12 +237,6 @@ elif [[ $OSTYPE == linux* ]]; then
     fi
 fi
 
-# lsp booster
-if (( $+commands[emacs-lsp-booster] == 0 )); then
-    zinit ice wait lucid depth"1" from"gh-r" sbin"**/emacs-lsp-booster"
-    zinit light blahgeek/emacs-lsp-booster
-fi
-
 #
 # Aliases
 #
@@ -331,3 +325,6 @@ alias toggleproxy='if [ -n "$http_proxy" ]; then unsetproxy; else setproxy; fi'
 
 # Local customizations, e.g. theme, plugins, aliases, etc.
 [ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
+
+export SCRCPY_SERVER_PATH=/Applications/极空间.app/Contents/Resources/app.asar.unpacked/bin/platform-tools/scrcpy-server
+export PATH=$PATH:/Applications/极空间.app/Contents/Resources/app.asar.unpacked/bin/platform-tools
