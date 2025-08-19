@@ -221,7 +221,7 @@ if [[ $OSTYPE == darwin* ]]; then
     zinit snippet PZTM::osx
     if (( $+commands[brew] )); then
         alias bu='brew update-if-needed; brew upgrade; brew cleanup --prune=all'
-        alias bcu='brew cu --all --yes --cleanup'
+        alias bcu='brew cu --all --include-mas --yes --cleanup'
         alias bua='bu; bcu'
     fi
 elif [[ $OSTYPE == linux* ]]; then
