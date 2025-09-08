@@ -20,8 +20,7 @@ alias h='history'
 alias c='clear'
 
 if type -q eza
-    alias ls='eza --color=auto --group-directories-first'
-    alias lsi='ls --icons'
+    alias ls='eza --color=auto --group-directories-first --icons'
     alias l='ls -lhF'
     alias la='ls -lhAF'
     alias lg='ls -lhAF --git'

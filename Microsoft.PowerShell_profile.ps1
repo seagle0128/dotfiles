@@ -51,7 +51,7 @@ function Disable-Http-Proxy {
 
 function List-Files {
     param ([string]$Args="", [string]$Path)
-    Invoke-Expression "eza -lhF --group-directories-first $Args $Path"
+    Invoke-Expression "eza -lhF --group-directories-first --icons $Args $Path"
 }
 
 function List-All-Files {
