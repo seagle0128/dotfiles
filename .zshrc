@@ -254,7 +254,6 @@ if (( $+commands[eza] )); then
     alias l='ls -lhF'
     alias la='ls -lhAF'
     alias lg='ls -lhAF --git'
-    alias li='ls -lhF --icons'
     alias tree='ls --tree'
 fi
 (( $+commands[bat] )) && alias cat='bat -p --wrap character'
