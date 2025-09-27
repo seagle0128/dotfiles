@@ -53,7 +53,7 @@ sync_repo() {
 
     if [ ! -e "$repo_path" ]; then
         mkdir -p "$repo_path"
-        git clone --depth 1 --branch $repo_branch "https://github.com/$repo_uri.git" "$repo_path"
+        git clone --depth 1 --single-branch --branch $repo_branch "https://github.com/$repo_uri.git" "$repo_path"
     else
         cd "$repo_path" && git pull --rebase --stat origin $repo_branch; cd - >/dev/null
     fi
