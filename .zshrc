@@ -144,6 +144,10 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview \
        'eza -1 --color=always --icons=auto --group-directories-first $realpath || \
        ls -1 --color=always --group-directories-first $realpath'
+# preview context of the file or directory
+zstyle ':fzf-tab:complete:(ls|exa|eza|bat|cat|vi|vim|nvim|emacs|code|cursor):*' fzf-preview \
+       'bat --color=always --plain --language=sh $realpath 2>/dev/null || \
+       eza -1 --color=always --icons=auto --group-directories-first $realpath'
 # custom fzf flags
 # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
 # zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
