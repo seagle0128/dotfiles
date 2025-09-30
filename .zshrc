@@ -251,9 +251,9 @@ alias c='clear'
 # See https://github.com/ibraheemdev/modern-unix
 if (( $+commands[eza] )); then
     alias ls='eza --color=auto --icons=auto --group-directories-first'
-    alias l='ls -lhF'
-    alias la='ls -lhAF'
-    alias lg='ls -lhAF --git'
+    alias l='ls -lh'
+    alias la='ls -lhA'
+    alias lg='ls -lhA --git'
     alias tree='ls --tree'
 fi
 (( $+commands[bat] )) && alias cat='bat -p --wrap character'
