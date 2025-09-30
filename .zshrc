@@ -130,7 +130,7 @@ export FZF_CTRL_T_OPTS="--walker-skip .git,node_modules,target
 export FZF_CTRL_R_OPTS="--preview 'echo {} | cut -f 2 | bat --color=always --plain --language=sh'
   --preview-window down:3:wrap --bind '?:toggle-preview' --exact"
 export FZF_ALT_C_OPTS="--walker-skip .git,node_modules,target
-  --preview '(eza --tree --level 3 --color=always --group-directories-first --icons {} || \
+  --preview '(eza --tree --level 3 --color=always --icons=auto --group-directories-first {} || \
   tree -NC {} || ls --color=always --group-directories-first {}) | head -200'"
 
 # set descriptions format to enable group support
@@ -142,7 +142,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu no
 # preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview \
-       'eza -1 --color=always --group-directories-first --icons $realpath || \
+       'eza -1 --color=always --icons=auto --group-directories-first $realpath || \
        ls -1 --color=always --group-directories-first $realpath'
 # custom fzf flags
 # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
@@ -250,7 +250,7 @@ alias c='clear'
 # Modern Unix commands
 # See https://github.com/ibraheemdev/modern-unix
 if (( $+commands[eza] )); then
-    alias ls='eza --color=auto --group-directories-first --icons'
+    alias ls='eza --color=auto --icons=auto --group-directories-first'
     alias l='ls -lhF'
     alias la='ls -lhAF'
     alias lg='ls -lhAF --git'
