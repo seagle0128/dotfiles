@@ -68,7 +68,7 @@ if (( $+commands[zoxide] )); then
            --tabstop=1 --exit-0 --select-1 \
            --preview '(eza --tree --level 3 --color=always \
            --group-directories-first {2} || tree -NC {2}) 2>/dev/null'"
-    unalias zi
+    type zi >/dev/null 2>&1 && unalias zi
     eval "$(zoxide init zsh)"
 else
     zinit ice wait lucid depth"1"
