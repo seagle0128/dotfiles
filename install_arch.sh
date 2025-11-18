@@ -28,7 +28,6 @@ packages=(
     sd
     starship
     tealdeer
-    topgrade
     zoxide
 )
 

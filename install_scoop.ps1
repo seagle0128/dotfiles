@@ -15,7 +15,7 @@ $packages = (
 
     # Morden tools
     "bat", "bottom", "btop", "delta","duf", "dust", "eza", "fzf", "fd",
-    "gping", "hyperfine", "procs", "tealdeer", "topgrade", "ripgrep", "zoxide",
+    "gping", "hyperfine", "procs", "tealdeer", "ripgrep", "zoxide",
 
     # Editor
     "emacs", # "emacs-kl", "vim",

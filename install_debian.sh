@@ -29,7 +29,6 @@ packages=(
     ripgrep
     # sd
     # tealdeer
-    topgrade
     zoxide
 
     # sudo add-apt-repository -y ppa:kelleyk/emacs
