@@ -44,9 +44,9 @@ function check {
         scoop bucket add extras
 
         if (-Not (Test-Path $PROFILE)) {
-            Copy-Item "$PSScriptRoot/Microsoft.PowerShell_profile.ps1" $PROFILE
+            Copy-Item "./Microsoft.PowerShell_profile.ps1" $PROFILE
 
-            # Prerequisit
+            # Prerequisite
             Install-Module -Name PSFzf
             Install-Module -Name ZLocation
             Install-Module -Name git-aliases
