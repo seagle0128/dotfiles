@@ -6,6 +6,10 @@
 # URL: https://github.com/seagle0128/dotfiles
 #############################################################
 
+# Source common functions and variables
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/common.sh"
+
 # Packages
 packages=(
     # prerequisite
@@ -45,31 +49,7 @@ packages=(
     # ulauncher
 )
 
-# Get OS name
-SYSTEM=`uname -s`
-
-# Use colors, but only if connected to a terminal, and that terminal
-# supports them.
-if command -v tput >/dev/null 2>&1; then
-    ncolors=$(tput colors)
-fi
-if [ -t 1 ] && [ -n "$ncolors" ] && [ "$ncolors" -ge 8 ]; then
-    RED="$(tput setaf 1)"
-    GREEN="$(tput setaf 2)"
-    YELLOW="$(tput setaf 3)"
-    BLUE="$(tput setaf 4)"
-    BOLD="$(tput bold)"
-    NORMAL="$(tput sgr0)"
-else
-    RED=""
-    GREEN=""
-    YELLOW=""
-    BLUE=""
-    BOLD=""
-    NORMAL=""
-fi
-
-function check {
+check() {
     if ! command -v git >/dev/null 2>&1; then
         echo "${RED}Error: git is not installed${NORMAL}" >&2
         exit 1
@@ -81,20 +61,20 @@ function check {
         APT=apt-get
     fi
 
-    if [ ! "$SYSTEM" = "Linux" ] || [ -z "$APT" ]; then
+    if [ ! "$OS" = "Linux" ] || [ -z "$APT" ]; then
         echo "${RED}Error: Not Debian or its derived edition${NORMAL}" >&2
         exit 1
     fi
 }
 
-function install {
+install() {
     for p in ${packages[@]}; do
         printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
         sudo $APT upgrade -y ${p}
     done
 }
 
-function main {
+main() {
     check
     install
 }
