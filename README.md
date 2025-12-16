@@ -2,7 +2,7 @@
 
 ![Centaur](logo.png)
 
-Full and clean configurations for development environment on GNU Linux, macOS and Cygwin.
+Full and clean configurations for development environment on GNU Linux and macOS.
 
 ## 🏗️ Project Structure
 
@@ -14,7 +14,6 @@ dotfiles/
 │   ├── .gitconfig_global # Global git configuration
 │   ├── .gitignore_global # Global gitignore patterns
 │   ├── .markdownlintrc  # Markdown linting rules
-│   ├── .minttyrc        # Cygwin terminal config
 │   ├── .npmrc           # Node.js package manager config
 │   ├── .pip.conf        # Python package manager config
 │   ├── .tmux.conf.local # Tmux configuration
@@ -53,7 +52,7 @@ dotfiles/
 
 ## 🚀 Quick Start
 
-### Linux, macOS and Cygwin
+### Linux & macOS
 
 ```shell
 sh -c "$(curl -fsSL https://github.com/seagle0128/dotfiles/raw/master/scripts/install.sh)"

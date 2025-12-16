@@ -14,10 +14,6 @@ check() {
         echo "${RED}Error: git is not installed${NORMAL}" >&2
         exit 1
     fi
-    if [ "$OSTYPE" = "cygwin" ]; then
-        echo "${RED}Error: Cygwin is not supported${NORMAL}" >&2
-        exit 1
-    fi
 }
 
 install() {

@@ -2,15 +2,15 @@
 
 # Common functions and variables for installation scripts
 
-DOTFILES=$HOME/.dotfiles
-EMACSD=$HOME/.emacs.d
-TMUX=$HOME/.tmux
-ZSH=$HOME/.local/share/zinit
+DOTFILES="$HOME"/.dotfiles
+EMACSD="$HOME"/.emacs.d
+TMUX="$HOME"/.tmux
+ZSH="$HOME"/.local/share/zinit
 
 # OS detection
-OS=`uname -s`
-OSREV=`uname -r`
-OSARCH=`uname -m`
+OS=$(uname -s)
+OSREV=$(uname -r)
+OSARCH=$(uname -m)
 
 # Color support
 if command -v tput >/dev/null 2>&1; then
@@ -37,10 +37,6 @@ is_mac() {
     [ "$OS" = "Darwin" ]
 }
 
-is_cygwin() {
-    [ "$OSTYPE" = "cygwin" ]
-}
-
 is_linux() {
     [ "$OS" = "Linux" ]
 }
@@ -54,18 +50,18 @@ is_arch() {
 }
 
 is_x86_64() {
-    [ $(uname -m) = "x86_64" ]
+    [ "$OSARCH" = "x86_64" ]
 }
 
 is_arm64() {
-    [ $(uname -m) = "arm64" ]
+    [ "$OSARCH" = "arm64" ]
 }
 
 # Utility functions
 sync_repo() {
-    local repo_uri="$1"
-    local repo_path="$2"
-    local repo_branch="$3"
+    repo_uri="${1}"
+    repo_path="${2}"
+    repo_branch="${3}"
 
     if [ -z "$repo_branch" ]; then
         repo_branch="master"
@@ -73,32 +69,28 @@ sync_repo() {
 
     if [ ! -e "$repo_path" ]; then
         mkdir -p "$repo_path"
-        git clone --depth 1 --single-branch --branch $repo_branch "https://github.com/$repo_uri.git" "$repo_path"
+        git clone --depth 1 --single-branch --branch "$repo_branch" "https://github.com/$repo_uri.git" "$repo_path"
     else
-        cd "$repo_path" && git pull --rebase --stat origin $repo_branch; cd - >/dev/null
+        cd "$repo_path" && git pull --rebase --stat origin "$repo_branch"; cd - || return
     fi
 }
 
 install_package() {
-    if ! command -v ${1} >/dev/null 2>&1; then
+    if ! command -v "${1}" >/dev/null 2>&1; then
         if is_mac; then
-            brew -q install ${1}
+            brew -q install "${1}"
         elif is_debian; then
-            sudo apt-get install -y ${1}
+            sudo apt-get install -y "${1}"
         elif is_arch; then
-            pacman -Ssu --noconfirm ${1}
-        elif is_cygwin; then
-            apt-cyg install -y ${1}
+            pacman -Ssu --noconfirm "${1}"
         fi
     else
         if is_mac; then
-            brew upgrade -q ${1}
+            brew upgrade -q "${1}"
         elif is_debian; then
-            sudo apt-get upgrade -y ${1}
+            sudo apt-get upgrade -y "${1}"
         elif is_arch; then
-            pacman -Ssu --noconfirm ${1}
-        elif is_cygwin; then
-            apt-cyg upgrade -y ${1}
+            pacman -Ssu --noconfirm "${1}"
         fi
     fi
 }
@@ -106,11 +98,11 @@ install_package() {
 YES=0
 NO=1
 promote_yn() {
-    eval ${2}=$NO
+    eval "${2}"="$NO"
     read -p "$1 [y/N]: " yn
     case $yn in
-        [Yy]* )    eval ${2}=$YES;;
-        [Nn]*|'' ) eval ${2}=$NO;;
-        *)         eval ${2}=$NO;;
+        [Yy]* )    eval "${2}"="$YES";;
+        [Nn]*|'' ) eval "${2}"="$NO";;
+        *)         eval "${2}"="$NO";;
     esac
 }

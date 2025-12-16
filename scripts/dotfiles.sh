@@ -31,15 +31,8 @@ setup_dotfiles() {
     ln -sf $DOTFILES/config/.gitconfig_global $HOME/.gitconfig_global
     if is_mac; then
         cp -n $DOTFILES/config/.gitconfig_macOS $HOME/.gitconfig
-    elif is_cygwin; then
-        cp -n $DOTFILES/config/.gitconfig_cygwin $HOME/.gitconfig
     else
         cp -n $DOTFILES/config/.gitconfig_linux $HOME/.gitconfig
-    fi
-
-    # Platform-specific configurations
-    if is_cygwin; then
-        ln -sf $DOTFILES/config/.minttyrc $HOME/.minttyrc
     fi
 }
 

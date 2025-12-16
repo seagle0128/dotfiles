@@ -26,15 +26,6 @@ install_homebrew() {
     fi
 }
 
-install_apt_cyg() {
-    if is_cygwin && ! command -v apt-cyg >/dev/null 2>&1; then
-        printf "${GREEN}▓▒░ Installing Apt-Cyg...${NORMAL}\n"
-        APT_CYG=/usr/local/bin/apt-cyg
-        curl -fsSL https://raw.githubusercontent.com/transcode-open/apt-cyg/master/apt-cyg > $APT_CYG
-        chmod +x $APT_CYG
-    fi
-}
-
 install_core_packages() {
     # Check git
     if ! command -v git >/dev/null 2>&1; then

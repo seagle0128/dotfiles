@@ -1,6 +1,6 @@
 #!/bin/sh
 #############################################################
-# Set development environment on Linux/macOS/Cygwin quickly.
+# Set development environment on Linux/macOS quickly.
 # Author: Vincent Zhang <seagle0128@gmail.com>
 # URL: https://github.com/seagle0128/dotfiles
 #############################################################
@@ -44,9 +44,9 @@ source "$SCRIPT_DIR/packages.sh"
 source "$SCRIPT_DIR/dotfiles.sh"
 
 # Clean or not?
-if [ -d $ZSH ] || [ -d $TMUX ] || [ -d $EMACSD ]; then
+if [ -d "$ZSH" ] || [ -d "$TMUX" ] || [ -d "$EMACSD" ]; then
     promote_yn "${YELLOW}Do you want to reset all configurations?${NORMAL}" "continue"
-    if [ $continue -eq $YES ]; then
+    if [ "$continue" -eq "$YES" ]; then
         clean_dotfiles
     fi
 fi
@@ -56,7 +56,6 @@ generate_locale
 
 # Install package managers
 install_homebrew
-install_apt_cyg
 
 # Install core packages
 install_core_packages
@@ -79,8 +78,8 @@ install_packages
 # Entering zsh
 printf "${GREEN}▓▒░ Done. Enjoy!${NORMAL}\n"
 if command -v zsh >/dev/null 2>&1; then
-    if is_cygwin && [ "$SHELL" != "$(which zsh)" ]; then
-        chsh -s $(which zsh)
+    if [ "$SHELL" != "$(which zsh)" ]; then
+        chsh -s "$(which zsh)"
         printf "${GREEN} You need to logout and login to enable zsh as the default shell.${NORMAL}\n"
     fi
     env zsh
