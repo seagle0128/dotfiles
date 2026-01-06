@@ -48,9 +48,9 @@ install() {
     sudo pacman -Syu
     printf "\n"
 
-    for p in ${packages[@]}; do
+    for p in "${packages[@]}"; do
         printf "\n${BLUE}➜ Installing ${p}...${NORMAL}\n"
-        sudo pacman -Sc --needed --noconfirm ${p}
+        sudo pacman -Sc --needed --noconfirm "${p}"
     done
 }
 

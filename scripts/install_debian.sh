@@ -68,9 +68,9 @@ check() {
 }
 
 install() {
-    for p in ${packages[@]}; do
+    for p in "${packages[@]}"; do
         printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
-        sudo $APT upgrade -y ${p}
+        sudo "$APT" upgrade -y "${p}"
     done
 }
 

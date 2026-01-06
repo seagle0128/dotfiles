@@ -43,8 +43,8 @@ install() {
                 # ttf-mscorefonts-installer
             )
 
-            for f in ${fonts[@]}; do
-                sudo apt-get upgrade -y ${f}
+            for f in "${fonts[@]}"; do
+                sudo apt-get upgrade -y "${f}"
             done
         else
             if [ ! -f "${font_dir}/Hack Regular Nerd Font Complete.ttf" ]; then

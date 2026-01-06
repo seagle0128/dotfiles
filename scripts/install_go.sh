@@ -35,9 +35,9 @@ function check() {
 }
 
 function install() {
-    for p in ${packages[@]}; do
+    for p in "${packages[@]}"; do
         printf "${BLUE} ➜  Installing ${p}...${NORMAL}\n"
-        GO111MODULE=on go install ${p}@latest
+        GO111MODULE=on go install "${p}"@latest
     done
 }
 
@@ -47,8 +47,8 @@ goclean() {
 }
 
 clean() {
-    for p in ${packages[@]}; do
-        goclean ${p}
+    for p in "${packages[@]}"; do
+        goclean "${p}"
     done
 }
 
