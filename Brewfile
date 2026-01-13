@@ -42,8 +42,8 @@ brew "yaml-language-server"
 
 brew "opencode"
 # brew "neovim"
-brew "d12frosted/emacs-plus/emacs-plus@30", args: ["with-c9rgreen-sonoma-icon", "with-xwidgets"]
 
+cask "emacs-plus-app"
 # cask "font-caskaydia-cove-nerd-font"
 cask "font-fira-code-nerd-font"
 # cask "font-hack-nerd-font"
@@ -52,7 +52,6 @@ cask "font-lxgw-wenkai"
 cask "font-sf-mono"
 cask "font-symbols-only-nerd-font"
 
-cask "captin"
 cask "fliqlo"
 cask "foobar2000"
 cask "hiddenbar"

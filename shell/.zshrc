@@ -280,13 +280,17 @@ fi
 alias gtr='git tag -d $(git tag) && git fetch --tags' # Refresh local tags from remote
 
 # Emacs
-alias me="emacs -Q -l $EMACSD/init-mini.el" # mini emacs
-alias mte="emacs -Q -nw -l $EMACSD/init-mini.el" # mini terminal emacs
+alias me="emacs -Q -l $EMACSD/init-mini.el" # minimal emacs
+alias mte="emacs -Q -nw -l $EMACSD/init-mini.el" # minimal terminal emacs
 alias e="$EDITOR -n"
 alias ec="$EDITOR -n -c"
 alias ef="$EDITOR -c"
-alias te="$EDITOR -nw"
-alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) (kill-emacs-query-functions nil)) (save-buffers-kill-emacs t))' && te"
+alias te="$EDITOR -nw"          # terminal emacs
+# restart terminal emacs
+alias rte="$EDITOR -e '(let ((last-nonmenu-event nil) \
+                   (kill-emacs-query-functions nil) \
+                   (confirm-kill-emacs nil)) \
+                   (save-buffers-kill-emacs t))' && te"
 
 # Upgrade
 alias upgrade_repo='git pull --rebase --stat origin master'
