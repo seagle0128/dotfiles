@@ -5,7 +5,7 @@ export LC_ALL="en_US.UTF-8"
 export TERM=xterm-256color
 export DEFAULT_USER=$USER
 export EDITOR='emacsclient -a ""'
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 # Zinit
 export PATH=$HOME/.local/share/zinit/polaris/bin:$PATH
