@@ -161,7 +161,7 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':fzf-tab:complete:(export|unset|expand):*' fzf-preview \
        'echo ${(P)word} | bat -plhelp --color=always'
 
-# Preivew `kill` and `ps` commands
+# Preview `kill` and `ps` commands
 zstyle ':completion:*:*:*:*:processes' command 'ps -u $USER -o pid,user,comm -w -w'
 zstyle ':fzf-tab:complete:(kill|ps):argument-rest' fzf-preview \
        '[[ $group == "[process ID]" ]] &&
@@ -226,7 +226,7 @@ if [[ $OSTYPE == darwin* ]]; then
     if (( $+commands[brew] )); then
         alias bu='brew upgrade'
         alias bcu='brew cu --all --yes'
-        alias bua='bu; bcu; brew cleanup --prune=all'
+        alias bua='bu; bcu; brew cleanup --prune=30'
     fi
 elif [[ $OSTYPE == linux* ]]; then
     if (( $+commands[apt-get] )); then
