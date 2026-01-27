@@ -55,21 +55,29 @@ dotfiles/
 ### Linux & macOS
 
 ```shell
-sh -c "$(curl -fsSL https://github.com/seagle0128/dotfiles/raw/master/scripts/install.sh)"
-```
-
-or
-
-```shell
-sh -c "$(wget https://github.com/seagle0128/dotfiles/raw/master/scripts/install.sh -O -)"
-```
-
-or
-
-```shell
 git clone https://github.com/seagle0128/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-./scripts/install.sh
+make install
+```
+
+To get help
+
+```shell
+> make help
+
+Centaur Dotfiles Management
+
+Available commands:
+  install    Install all dotfiles and packages
+  update     Update all configurations and packages
+  clean      Clean backup files and old configurations
+  sync       Synchronize dotfiles with remote repository
+  test       Test configuration files
+  lint       Lint configuration files
+  dev-setup  Setup development environment
+  backup     Backup current configurations
+  restore    Restore from backup
+  help       Show this help message
 ```
 
 ### Windows (PowerShell)
