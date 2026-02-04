@@ -211,7 +211,7 @@ brew bundle --global
 If you're upgrading from an older version of these dotfiles:
 
 1. Backup your current configurations
-2. Run the new installer: `./scripts/install.sh`
+2. Run the new installer: `make install`
 3. The installer will automatically detect and handle existing configurations
 
 ## 🤝 Contributing
