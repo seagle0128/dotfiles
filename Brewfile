@@ -24,7 +24,7 @@ brew "rust"
 brew "sd"
 brew "starship"
 brew "tealdeer"
-brew "tmux"
+brew "tmux"                     # zellij
 brew "topgrade"
 brew "watchexec"
 brew "yazi"
