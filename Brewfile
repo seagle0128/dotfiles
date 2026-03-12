@@ -55,6 +55,7 @@ cask "fliqlo"                   # screensaver
 cask "foobar2000"
 cask "hiddenbar"
 cask "karabiner-elements"
+cask "keycastr"
 cask "licecap"
 cask "macgesture"
 cask "maczip"
