@@ -299,11 +299,11 @@ alias upgrade_emacs='emacs -Q --batch -L "$EMACSD/lisp/" -l "init-package.el" \
                            --eval "(progn (package-initialize) (update-config-and-packages))"'
 alias upgrade_omt='cd $HOME/.tmux && upgrade_repo; cd - >/dev/null'
 alias upgrade_zinit='zinit self-update && zinit update -a -p && zinit compinit && reload'
-alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/install.sh'
+alias upgrade_env='upgrade_dotfiles; sh $DOTFILES/scripts/install.sh'
 
 (( $+commands[cargo] )) && alias upgrade_cargo='cargo install cargo-update; cargo install-update -a'
 (( $+commands[gem] )) && alias upgrade_gem='gem update && gem cleanup'
-(( $+commands[go] )) && alias upgrade_go='$DOTFILES/install_go.sh'
+(( $+commands[go] )) && alias upgrade_go='$DOTFILES/scripts/install_go.sh'
 (( $+commands[npm] )) && alias upgrade_npm='for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f2); do npm -g install "$package"; done'
 (( ! $+commands[brew] )) && (( $+commands[pip] )) && alias upgrade_pip="pip list --outdated --format=json | python -c '
 import json
