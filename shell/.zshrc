@@ -144,10 +144,15 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview \
        'eza -1 --color=always --icons=auto --group-directories-first $realpath || \
        ls -1 --color=always --group-directories-first $realpath'
-# preview context of the file or directory
-zstyle ':fzf-tab:complete:(ls|exa|eza|bat|cat|vi|vim|nvim|emacs|code|cursor):*' fzf-preview \
-       'bat --color=always --plain --language=sh $realpath 2>/dev/null || \
-       eza -1 --color=always --icons=auto --group-directories-first $realpath'
+# previews file contents with syntax highlighting and directories with a modern list view
+zstyle ':fzf-tab:complete:*:argument-rest' fzf-preview \
+       'if [ -d $realpath ]; then \
+          eza -1 --color=always --icons=auto --group-directories-first $realpath || \
+          ls -1 --color=always --group-directories-first $realpat; \
+        else \
+          bat --color=always --plain --line-range :500 $realpath || \
+          cat $realpath; \
+        fi'
 # custom fzf flags
 # NOTE: fzf-tab does not follow FZF_DEFAULT_OPTS by default
 # zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
@@ -192,22 +197,22 @@ zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
 	*) git log --color=always $word ;;
 	esac'
 
-# Privew help
+# Preview help/tldr
 zstyle ':fzf-tab:complete:(\\|*/|)man:*' fzf-preview 'man $word | bat -plman --color=always'
 zstyle ':fzf-tab:complete:tldr:argument-1' fzf-preview 'tldr --color always $word'
 
-# Preview brew
+# Preview commands
+zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
+       '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) ||
+        (out=$(man "$word" | bat -plman --color=always) 2>/dev/null && echo $out) ||
+        (out=$(which "$word") && echo $out) || echo "${(P)word}"'
+
+# Preview Homebrew
 zstyle ':fzf-tab:complete:brew-(install|uninstall|search|info):*-argument-rest' fzf-preview \
        'brew info $word | bat -plhelp --color=always'
 
 # Preview systemd
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
-
-# Commands
-zstyle ':fzf-tab:complete:-command-:*' fzf-preview \
-       '(out=$(tldr --color always "$word") 2>/dev/null && echo $out) ||
-        (out=$(man "$word" | bat -plman --color=always) 2>/dev/null && echo $out) ||
-        (out=$(which "$word") && echo $out) || echo "${(P)word}"'
 
 # Ripgrep integration
 function rgv () {
