@@ -74,9 +74,10 @@ if [[ $OSTYPE == darwin* ]]; then
     function set_homebrew_mirror()
     {
         # Mirrors: https://mirrors.ustc.edu.cn/, https://mirrors.tnua.tsinghua.edu.cn/
-        export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
+        export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
+        export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.ustc.edu.cn/homebrew-core.git"
         export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
-        export HOMEBREW_PIP_INDEX_URL="https://mirrors.ustc.edu.cn/pypi/simple"
+        export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
     }
 
     function reset_homebrew_mirror {
