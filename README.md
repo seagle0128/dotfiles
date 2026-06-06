@@ -55,7 +55,7 @@ dotfiles/
 ### Linux & macOS
 
 ```shell
-git clone https://github.com/seagle0128/dotfiles.git ~/.dotfiles
+git clone --depth=1 https://github.com/seagle0128/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 make install
 ```
@@ -83,7 +83,7 @@ Available commands:
 ### Windows (PowerShell)
 
 ```powershell
-git clone https://github.com/seagle0128/dotfiles.git ~/.dotfiles
+git clone --depth=1 https://github.com/seagle0128/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 ./scripts/install_scoop.ps1
 ```
