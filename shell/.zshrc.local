@@ -71,8 +71,6 @@ if [[ $OSTYPE == darwin* ]]; then
     # For Apple Silicon CPU
     [[ $CPUTYPE == arm* ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    export HOMEBREW_REQUIRE_TAP_TRUST=1
-
     function set_homebrew_mirror()
     {
         # Mirrors: https://mirrors.ustc.edu.cn/, https://mirrors.tnua.tsinghua.edu.cn/
