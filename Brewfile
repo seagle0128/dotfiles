@@ -44,9 +44,10 @@ brew "vscode-langservers-extracted"
 brew "yaml-language-server"
 
 # Misc
-# brew "opencode"
 # brew "neovim"
-brew rime-wanxiang-updater
+# brew "opencode"
+# brew rime-wanxiang-updater
+brew snout
 
 # Casks
 cask "emacs-plus-app"
