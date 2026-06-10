@@ -1,6 +1,9 @@
+# Taps
 tap "buo/cask-upgrade"
 tap "d12frosted/emacs-plus"
+tap "tinypkg/tap"
 
+# Utilities
 brew "bat"
 brew "bottom"
 brew "btop"
@@ -30,6 +33,7 @@ brew "watchexec"
 brew "yazi"
 brew "zoxide"
 
+# LSP
 brew "bash-language-server"
 brew "dockerfile-language-server"
 brew "gopls"
@@ -39,9 +43,12 @@ brew "typescript-language-server"
 brew "vscode-langservers-extracted"
 brew "yaml-language-server"
 
-brew "opencode"
+# Misc
+# brew "opencode"
 # brew "neovim"
+brew rime-wanxiang-updater
 
+# Casks
 cask "emacs-plus-app"
 # cask "font-caskaydia-cove-nerd-font"
 cask "font-fira-code-nerd-font"
@@ -59,7 +66,7 @@ cask "keycastr"
 cask "licecap"
 cask "macgesture"
 cask "maczip"
-# cask "better-display"
+cask "better-display"
 # cask "monitorcontrol"
 cask "mos"
 # cask "musiver"
@@ -69,9 +76,3 @@ cask "upscayl"
 # cask "windows-app"
 cask "youdaodict"
 # cask "youdaonote"
-
-vscode "ecmel.vscode-html-css"
-vscode "golang.go"
-vscode "mattn.lisp"
-vscode "ms-python.python"
-vscode "tuttieee.emacs-mcx"
