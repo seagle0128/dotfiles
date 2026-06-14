@@ -229,7 +229,7 @@ function rgv () {
 if [[ $OSTYPE == darwin* ]]; then
     zinit snippet PZTM::osx
     if (( $+commands[brew] )); then
-        alias bu='brew upgrade'
+        alias bu='brew upgrade --yes'
         alias bcu='brew cu --all --yes'
         alias bua='bu; bcu; brew cleanup --prune=30'
     fi
