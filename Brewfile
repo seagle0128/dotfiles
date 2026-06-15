@@ -1,5 +1,5 @@
 # Taps
-tap "buo/cask-upgrade"
+# tap "buo/cask-upgrade"
 tap "d12frosted/emacs-plus"
 tap "tinypkg/tap"
 
