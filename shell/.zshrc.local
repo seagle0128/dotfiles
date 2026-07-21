@@ -35,18 +35,6 @@ fi
 if [ -n "$INSIDE_EMACS" ]; then
     DISABLE_AUTO_TITLE="true"
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#525252'
-
-    # Ghostel
-    if [[ "$INSIDE_EMACS" = 'ghostel' ]]; then
-        # Open a file in Emacs from the terminal
-        function e()   { ghostel_cmd find-file-other-window "$@"; }
-
-        # Open dired in another window
-        function dow() { ghostel_cmd dired-other-window "$@"; }
-
-        # Open magit for the current directory
-        function gst() { ghostel_cmd magit-status-setup-buffer "$(pwd)"; }
-    fi
 fi
 
 # Env
