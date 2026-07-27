@@ -12,7 +12,7 @@ setup_dotfiles() {
     # Create symlinks for configuration files
     ln -sf $DOTFILES/shell/.zshenv $HOME/.zshenv
     ln -sf $DOTFILES/shell/.zshrc $HOME/.zshrc
-    ln -sf $DOTFILES/Brewfile $HOME/.Brewfile
+    is_mac && ln -sf $DOTFILES/Brewfile $HOME/.Brewfile
     ln -sf $DOTFILES/config/.vimrc $HOME/.vimrc
     ln -sf $DOTFILES/config/.tmux.conf.local $HOME/.tmux.conf.local
     ln -sf $DOTFILES/config/.markdownlintrc $HOME/.markdownlintrc
