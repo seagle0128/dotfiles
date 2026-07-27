@@ -2,10 +2,10 @@
 
 # Common functions and variables for installation scripts
 
-DOTFILES="$HOME"/.dotfiles
-EMACSD="$HOME"/.emacs.d
-TMUX="$HOME"/.tmux
-ZSH="$HOME"/.local/share/zinit
+DOTFILES="$HOME/.dotfiles"
+EMACSD="$HOME/.emacs.d"
+TMUX="$HOME/.tmux"
+ZSH="$HOME/.local/share/zinit"
 
 # OS detection
 OS=$(uname -s)
