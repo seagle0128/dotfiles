@@ -50,8 +50,7 @@ if [[ $OSTYPE == darwin* ]]; then
     # For Apple Silicon CPU
     [[ $CPUTYPE == arm* ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    function set_homebrew_mirror()
-    {
+    function set_homebrew_mirror {
         # Mirrors: ustc, tuna, aliyun
         export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.ustc.edu.cn/brew.git"
         export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles"
