@@ -59,7 +59,7 @@ cask "font-lxgw-wenkai"
 cask "font-sf-mono"
 cask "font-symbols-only-nerd-font"
 
-cask "better-display"           # monitorcontrol
+cask "better-display"           # crisp, candela
 cask "fliqlo"                   # screensaver
 cask "foobar2000"
 cask "hiddenbar"
@@ -67,7 +67,7 @@ cask "karabiner-elements"
 cask "keycastr"
 cask "licecap"
 # cask "maccy"
-cask "macgesture"
+# cask "macgesture"
 cask "maczip"
 # cask "mos"
 # cask "musiver"
