@@ -1,5 +1,4 @@
 # Taps
-# tap "buo/cask-upgrade"
 tap "d12frosted/emacs-plus"
 tap "tinypkg/tap"
 
@@ -45,12 +44,9 @@ brew "yaml-language-server"
 
 # Misc
 # brew "neovim"
-# brew "opencode"
-# brew rime-wanxiang-updater
-brew snout
+brew snout                      # rime-wanxiang-updater
 
 # Casks
-cask "emacs-plus-app"
 # cask "font-caskaydia-cove-nerd-font"
 cask "font-fira-code-nerd-font"
 # cask "font-hack-nerd-font"
@@ -59,7 +55,8 @@ cask "font-lxgw-wenkai"
 cask "font-sf-mono"
 cask "font-symbols-only-nerd-font"
 
-cask "better-display"           # crisp, candela
+cask "crisp"                    # better-display
+cask "emacs-plus-app"
 cask "fliqlo"                   # screensaver
 cask "foobar2000"
 cask "hiddenbar"
@@ -72,8 +69,9 @@ cask "maczip"
 # cask "mos"
 # cask "musiver"
 # cask "paper"                    # wallpaper
-cask "upscayl"
+cask "raycast"
 cask "squirrel-app"
+cask "upscayl"
 # cask "windows-app"
 cask "youdaodict"
 # cask "youdaonote"
