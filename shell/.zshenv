@@ -21,6 +21,3 @@ export PATH=${GOPATH//://bin:}/bin:$PATH
 
 # Rust
 export PATH=$HOME/.cargo/bin:$PATH
-
-# pnpm
-export PATH=$HOME/Library/pnpm/bin:$PATH
